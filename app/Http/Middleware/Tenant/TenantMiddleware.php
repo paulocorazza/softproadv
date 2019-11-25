@@ -26,7 +26,6 @@ class TenantMiddleware
    {
        $piecesHost = explode('.',  request()->getHost());
        $tenant = $piecesHost[0];
-
        return $tenant;
    }
 

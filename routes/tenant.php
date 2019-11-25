@@ -1,7 +1,10 @@
 <?php
+Route::group(['namespace' => 'Tenant', 'middleware' => 'auth'], function () {
 
-Route::get('company/store', 'Tenant\CompanyController@store')->name('company.store');
+    Route::any('companies/search', 'CategoryController@search')->name('companies.search');
+    Route::resource('companies', 'CompanyController');
 
-Route::get('/', function () {
- return 'tenant';
+    Route::get('/', 'TenantController@index')->name('tenants');
 });
+
+

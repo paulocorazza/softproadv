@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Tenant;
 use App\Events\Tenant\CompanyCreated;
 use App\Events\Tenant\DatabaseCreated;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateCompanyFormRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use View;
 
 class CompanyController extends Controller
 {
     private $company;
+    private $totalPage = 15;
 
 
     public function __construct(Company $company)
@@ -20,13 +22,32 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $dataForm = $request->except('_token');
+
+            if (isset($dataForm['category_id']) || isset($dataForm['name']) || isset($dataForm['url']) ||
+                isset($dataForm['description']) || isset($dataForm['id'])) {
+                return $this->search($request);
+            }
+
+            $companies = $this->company
+                              ->orderBy('id')
+                              ->paginate($this->totalPage);
+
+            return View::make('tenants.companies.partials.table', compact('companies'))->render();
+        }
+
+        $companies = $this->company
+                          ->orderBy('id')
+                          ->paginate($this->totalPage);
+
+        return view('tenants.companies.index', compact('companies'));
     }
 
     /**
@@ -36,80 +57,102 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('tenants.companies.create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreUpdateCompanyFormRequest $request
+     * @return array|\Illuminate\Http\RedirectResponse|null
      */
-    public function store(Request $request)
+    public function store(StoreUpdateCompanyFormRequest $request)
     {
-        $randomName = Str::random(5);
+        $company = $this->company->create($request->all());
 
-        $company = $this->company->create([
-            'name' => 'Empresa x',
-            'subdomain' =>  $randomName .  '.softproadv.com.br',
-            'db_database' =>  $randomName . '-softpro-adv',
-            'db_host' => 'mysql',
-            'db_username' => 'root',
-            'db_password' => 'root'
-        ]);
+        if (!$company) {
+            return redirect()->route('companies.create');
+        }
+
+        //Caso o banco esteja em outro servidor, precisa chamar o método que alterna a conexão
+        //verifica deseja ou não criar a database
+        if ($request->has('create_database')) {
+            event(new CompanyCreated($company));
+        } else {
+            event(new DatabaseCreated($company));
+        }
 
 
-       //Caso o banco esteja em outro servidor, precisa chamar o método que alterna a conexão
-       //verifica deseja ou não criar a database
-        if (true)
-        return event(new CompanyCreated($company));
-
-       return event(new DatabaseCreated($company));
-
+        return redirect()->route('companies.index')
+                         ->with('success', 'Cadastro realizado com sucesso!');
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $company = $this->company->find($id);
+
+        if (!$company)
+            return redirect()->back();
+
+        return view('tenants.companies.show', compact('company'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $company = $this->company->find($id);
+
+        if (!$company)
+            return redirect()->back();
+
+        return view('tenants.companies.create', compact('company'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreUpdateCompanyFormRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateCompanyFormRequest $request, $id)
     {
-        //
+        if (!$company = $this->company->find($id))
+            return redirect()->back()->withInput();
+
+        $company->update($request->all());
+
+        return redirect()->route('companies.index')
+                         ->with('success', 'Cadastro atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        if (!$company = $this->company->find($id))
+             return redirect()->back();
+
+        $company->delete();
+
+        return redirect()->route('companies.index')
+                         ->withSucces('Deletado com sucesso');
+    }
+
+    public function search()
+    {
+
     }
 }
