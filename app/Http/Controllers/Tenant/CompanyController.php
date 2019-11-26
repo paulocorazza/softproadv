@@ -28,26 +28,14 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $dataForm = $request->except('_token');
-
-            if (isset($dataForm['category_id']) || isset($dataForm['name']) || isset($dataForm['url']) ||
-                isset($dataForm['description']) || isset($dataForm['id'])) {
-                return $this->search($request);
-            }
-
-            $companies = $this->company
-                              ->orderBy('id')
-                              ->paginate($this->totalPage);
-
-            return View::make('tenants.companies.partials.table', compact('companies'))->render();
+        if (request()->ajax()) {
+            return Datatables()->eloquent(Company::query())->addColumn('action', 'tenants.companies.partials.acoes')
+                                                           ->make(true);
         }
 
-        $companies = $this->company
-                          ->orderBy('id')
-                          ->paginate($this->totalPage);
 
-        return view('tenants.companies.index', compact('companies'));
+
+        return view('tenants.companies.index');
     }
 
     /**
@@ -82,7 +70,7 @@ class CompanyController extends Controller
 
 
         return redirect()->route('companies.index')
-                         ->with('success', 'Cadastro realizado com sucesso!');
+            ->with('success', 'Cadastro realizado com sucesso!');
     }
 
 
@@ -96,8 +84,9 @@ class CompanyController extends Controller
     {
         $company = $this->company->find($id);
 
-        if (!$company)
+        if (!$company) {
             return redirect()->back();
+        }
 
         return view('tenants.companies.show', compact('company'));
     }
@@ -112,8 +101,9 @@ class CompanyController extends Controller
     {
         $company = $this->company->find($id);
 
-        if (!$company)
+        if (!$company) {
             return redirect()->back();
+        }
 
         return view('tenants.companies.create', compact('company'));
     }
@@ -125,13 +115,14 @@ class CompanyController extends Controller
      */
     public function update(StoreUpdateCompanyFormRequest $request, $id)
     {
-        if (!$company = $this->company->find($id))
+        if (!$company = $this->company->find($id)) {
             return redirect()->back()->withInput();
+        }
 
         $company->update($request->all());
 
         return redirect()->route('companies.index')
-                         ->with('success', 'Cadastro atualizado com sucesso!');
+            ->with('success', 'Cadastro atualizado com sucesso!');
     }
 
     /**
@@ -142,17 +133,13 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        if (!$company = $this->company->find($id))
-             return redirect()->back();
+        if (!$company = $this->company->find($id)) {
+            return redirect()->back();
+        }
 
         $company->delete();
 
         return redirect()->route('companies.index')
-                         ->withSucces('Deletado com sucesso');
-    }
-
-    public function search()
-    {
-
+            ->withSucces('Deletado com sucesso');
     }
 }

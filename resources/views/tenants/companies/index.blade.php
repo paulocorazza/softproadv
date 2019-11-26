@@ -1,5 +1,10 @@
 @extends('adminlte::page')
 
+@section('adminlte_css')
+    <link rel="stylesheet" href={{ asset('vendor/datatables/css/jquery.dataTables.min.css') }} />
+    <link rel="stylesheet" href={{ asset('vendor/datatables/css/buttons.dataTables.min.css') }} />
+@stop
+
 @section('title', 'Listagem de Empresas')
 
 @section('content_header')
@@ -30,47 +35,23 @@
             </a>
         </p>
 
-        <!--FILTRO-->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Filtrar</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="card-body p-0">
-                {!! Form::open(['route' => ['companies.search'], 'class' => 'form form-inline form-search']) !!}
-
-                {!! Form::text('name', null, ['placeholder' => 'Nome', 'class' => 'form-control', 'id' => 'name']) !!}
-                {!! Form::text('subdomain', null, ['placeholder' => 'URL', 'class' => 'form-control', 'id' => 'subdomain']) !!}
-
-
-                {!! Form::submit('Filtrar', ['class' => 'btn btn-danger', 'id' => 'btnSearch']) !!}
-                {!! Form::close() !!}
-
-                <a id="search-true" style="display: none" href="{{ route('companies.index') }}">(x) Limpar resultados da
-                    pesquisa</a>
-            </div>
-        </div>
-        <!--FILTRO-->
-
-
         <!--TABELA -->
-        <div id="tabela">
             @include('tenants.companies.partials.table')
-        </div>
         <!--TABELA -->
     </div>
 @stop
 
 @section('js')
-
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/dataTables.buttons.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.flash.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.html5.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.print.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.colVis.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/jszip.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/pdfmake.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/vfs_fonts.js') }}></script>
+    <script type="text/javascript" src={{ asset('js/companies.js') }}></script>
 @stop
 
 
