@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'tenant'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,6 +54,18 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
+        //criar link simbólico
+        // php artisan storage:link
+        //conferir: ls -la public/
+
+        'tenant' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/tenants'),
+            'url' => env('APP_URL').'/storage/tenants',
+            'visibility' => 'public',
+        ],
+
 
         's3' => [
             'driver' => 's3',

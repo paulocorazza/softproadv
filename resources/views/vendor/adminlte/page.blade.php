@@ -91,6 +91,11 @@
                     </li>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            {{ session('company')['name'] ?? '' }}
+                        </a>
+                    </li>
                 </ul>
             @endif
                 <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">

@@ -7,21 +7,21 @@ use App\Tenant\ManagerTenant;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
-class TenantMigrations extends Command
+class TenantSeeder extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'tenants:migrations {id?} {--refresh}';
+    protected $signature = 'tenants:seed {id?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run Migrations Tenants';
+    protected $description = 'Run Seeder Tenants';
 
     private $tenant;
 
@@ -38,23 +38,16 @@ class TenantMigrations extends Command
 
     private function execCommand(Company $company) {
 
-        $command = $this->option('refresh') ? 'migrate:refresh' : 'migrate';
-
         $this->tenant->setConnection($company);
 
         $this->info("Connecting Company {$company->name}");
 
-        $run = Artisan::call($command, [
-            '--force' => true,
-            '--path' => '/database/migrations/tenant'
+        $run = Artisan::call('db:seed', [
+            '--class' => 'TenantsUserTableSeeder'
         ]);
 
         if ($run === 0) {
-            Artisan::call('db:seed', [
-                '--class' => 'TenantsUserTableSeeder'
-            ]);
-
-            $this->info("Migration Success {$company->name}");
+            $this->info("Success {$company->name}");
         }
 
         $this->info("End Connecting Company {$company->name}");

@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'SoftPro - Advogados')
+@section('title_postfix', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Home</h1>
 @stop
 
 @section('content')
-    <p>Você está logado!</p>
+    <p>{{ session('company')['name'] ?? '' }} Você está logado!</p>
 @stop

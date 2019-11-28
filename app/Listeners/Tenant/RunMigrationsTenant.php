@@ -33,11 +33,13 @@ class RunMigrationsTenant
             'id' => $company->id
         ]);
 
+        /*
         if ($migration === 0) {
             Artisan::call('db:seed', [
                 '--class' => 'TenantsUserTableSeeder'
             ]);
         }
+        */
 
         return $migration === 0;
     }

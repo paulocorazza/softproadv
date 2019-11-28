@@ -5,7 +5,7 @@
     <link rel="stylesheet" href={{ asset('vendor/datatables/css/buttons.dataTables.min.css') }} />
 @stop
 
-@section('title', 'Listagem de Empresas')
+@section('title_postfix', 'Empresas')
 
 @section('content_header')
         <div class="container-fluid">

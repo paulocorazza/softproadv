@@ -19,16 +19,21 @@ class TenantMiddleware
     private function getCompany($subdomain)
     {
         return Company::where('subdomain', '=', $subdomain)->first();
+
     }
 
 
-   private function subDomain()
-   {
-       $piecesHost = explode('.',  request()->getHost());
-       $tenant = $piecesHost[0];
-       return $tenant;
-   }
+    private function subDomain()
+    {
+        $piecesHost = explode('.', request()->getHost());
+        $tenant = $piecesHost[0];
+        return $tenant;
+    }
 
+    private function setSessionCompany($company)
+    {
+        session()->put('company', $company);
+    }
 
 
     public function handle($request, Closure $next)
@@ -47,6 +52,11 @@ class TenantMiddleware
 
         if ($request->url() != route('404.tenant')) {
             $manager->setConnection($company);
+
+            $this->setSessionCompany($company->only([
+                'name',
+                'uuid'
+            ]));
         }
 
 
