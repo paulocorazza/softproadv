@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Events\Tenant\CompanyCreated;
-use App\Events\Tenant\DatabaseCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCompanyFormRequest;
-use App\Models\Company;
+use App\Repositories\Contracts\CompanyRepositoryInterface;
 use Illuminate\Http\Request;
 use View;
 
 class CompanyController extends Controller
 {
-    private $company;
-    private $totalPage = 15;
+    private $repository;
 
 
-    public function __construct(Company $company)
+    public function __construct(CompanyRepositoryInterface $repository)
     {
-        $this->company = $company;
+        $this->repository = $repository;
     }
 
     /**
@@ -29,11 +26,8 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         if (request()->ajax()) {
-            return Datatables()->eloquent(Company::query())->addColumn('action', 'tenants.companies.partials.acoes')
-                                                           ->make(true);
+            return $this->repository->dataTables('action', 'tenants.companies.partials.acoes');
         }
-
-
 
         return view('tenants.companies.index');
     }
@@ -54,20 +48,12 @@ class CompanyController extends Controller
      */
     public function store(StoreUpdateCompanyFormRequest $request)
     {
-        $company = $this->company->create($request->all());
+        $company = $this->repository->create($request->all());
+
 
         if (!$company) {
             return redirect()->route('companies.create');
         }
-
-        //Caso o banco esteja em outro servidor, precisa chamar o método que alterna a conexão
-        //verifica deseja ou não criar a database
-        if ($request->has('create_database')) {
-            event(new CompanyCreated($company));
-        } else {
-            event(new DatabaseCreated($company));
-        }
-
 
         return redirect()->route('companies.index')
             ->with('success', 'Cadastro realizado com sucesso!');
@@ -82,9 +68,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company = $this->company->find($id);
-
-        if (!$company) {
+        if (!$company = $this->repository->find($id)) {
             return redirect()->back();
         }
 
@@ -99,9 +83,7 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = $this->company->find($id);
-
-        if (!$company) {
+        if (!$company = $this->repository->find($id)) {
             return redirect()->back();
         }
 
@@ -115,8 +97,9 @@ class CompanyController extends Controller
      */
     public function update(StoreUpdateCompanyFormRequest $request, $id)
     {
-        if (!$company = $this->company->find($id)) {
-            return redirect()->back()->withInput();
+        if (!$company = $this->repository->find($id)) {
+            return redirect()->back()
+                ->withInput();
         }
 
         $company->update($request->all());
@@ -133,13 +116,13 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        if (!$company = $this->company->find($id)) {
+        if (!$company = $this->repository->find($id)) {
             return redirect()->back();
         }
 
         $company->delete();
 
         return redirect()->route('companies.index')
-            ->withSucces('Deletado com sucesso');
+            ->with('success', 'Deletado com sucesso');
     }
 }

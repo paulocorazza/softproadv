@@ -43,6 +43,7 @@
 
 @section('js')
     <script type="text/javascript" src={{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}></script>
     <script type="text/javascript" src={{ asset('vendor/datatables/js/dataTables.buttons.min.js') }}></script>
     <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.flash.min.js') }}></script>
     <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.html5.min.js') }}></script>

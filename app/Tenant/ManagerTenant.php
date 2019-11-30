@@ -15,16 +15,21 @@ class ManagerTenant
 
     public function setConnection(Company $company)
     {
-        DB::purge('tenant');
+       try {
+           DB::purge('tenant');
 
-        $dbname = 'database.connections.tenant.';
-        config()->set($dbname . 'host', $company->db_host);
-        config()->set($dbname . 'database', $company->db_database);
-        config()->set($dbname . 'username', $company->db_username);
-        config()->set($dbname . 'password', $company->db_password);
+           $dbname = 'database.connections.tenant.';
+           config()->set($dbname . 'host', $company->db_host);
+           config()->set($dbname . 'database', $company->db_database);
+           config()->set($dbname . 'username', $company->db_username);
+           config()->set($dbname . 'password', $company->db_password);
 
-        DB::reconnect('tenant');
+           DB::reconnect('tenant');
 
-        Schema::connection('tenant')->getConnection()->reconnect();
+           Schema::connection('tenant')->getConnection()->reconnect();
+       } catch (\PDOException $exception) {
+           throw new \Exception('Falha ao conectar ao banco de dados: ' . $exception->getMessage());
+       }
+
     }
 }

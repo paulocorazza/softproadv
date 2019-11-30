@@ -22,7 +22,7 @@ class RunMigrationsTenant
     /**
      * Handle the event.
      *
-     * @param  DatabaseCreated  $event
+     * @param DatabaseCreated $event
      * @return void
      */
     public function handle(DatabaseCreated $event)
