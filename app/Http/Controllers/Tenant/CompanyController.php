@@ -56,7 +56,7 @@ class CompanyController extends Controller
         }
 
         return redirect()->route('companies.index')
-            ->with('success', 'Cadastro realizado com sucesso!');
+                         ->with('success', 'Cadastro realizado com sucesso!');
     }
 
 
@@ -99,13 +99,13 @@ class CompanyController extends Controller
     {
         if (!$company = $this->repository->find($id)) {
             return redirect()->back()
-                ->withInput();
+                             ->withInput();
         }
 
         $company->update($request->all());
 
         return redirect()->route('companies.index')
-            ->with('success', 'Cadastro atualizado com sucesso!');
+                         ->with('success', 'Cadastro atualizado com sucesso!');
     }
 
     /**
@@ -123,6 +123,26 @@ class CompanyController extends Controller
         $company->delete();
 
         return redirect()->route('companies.index')
-            ->with('success', 'Deletado com sucesso');
+                         ->with('success', 'Deletado com sucesso');
     }
+
+    public function register(StoreUpdateCompanyFormRequest $request)
+    {
+        $company = $this->repository->create($request->all());
+
+
+        if (!$company) {
+            return redirect()->route('/');
+        }
+
+        return view('congratulations', compact('company'));
+    }
+
+    public function verifyDomain(Request $request)
+    {
+        if (request()->ajax()) {
+            return response()->json($this->repository->subDomainExists($request->get('subdomain')));
+        }
+    }
+
 }

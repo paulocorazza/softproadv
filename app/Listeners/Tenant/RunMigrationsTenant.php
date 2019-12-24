@@ -3,9 +3,12 @@
 namespace App\Listeners\Tenant;
 
 use App\Events\Tenant\DatabaseCreated;
+use App\Mail\SendMailCompany;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 
 class RunMigrationsTenant
 {
@@ -33,13 +36,19 @@ class RunMigrationsTenant
             'id' => $company->id
         ]);
 
-        /*
+
         if ($migration === 0) {
-            Artisan::call('db:seed', [
-                '--class' => 'TenantsUserTableSeeder'
+            $senha = uniqid(date('YmdHis'));
+
+            User::create([
+                'name' => $company->name,
+                'email' => $company->email,
+                'password' => bcrypt($senha)
             ]);
+
+            Mail::to($company->email)->send(new SendMailCompany($company, $senha));
         }
-        */
+
 
         return $migration === 0;
     }

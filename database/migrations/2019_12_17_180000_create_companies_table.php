@@ -18,13 +18,30 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('uuid');
             $table->string('name');
-//            $table->string('domain');
+            $table->string('cellphone');
+            $table->string('cpf')->unique();
+            $table->string('oab');
+            $table->string('uf_oab');
+            $table->string('qtd_processes');
+            $table->string('email');
+            $table->enum('payment_status', ['testing', 'approved', 'canceled'])->default('testing');
+            $table->string('payment_id');
+            $table->string('identify');
+
+            $table->unsignedBigInteger('plan_id')->nullable();
+
             $table->string('subdomain')->unique();
             $table->string('db_database')->unique();
             $table->string('db_host');
             $table->string('db_username');
             $table->string('db_password');
             $table->timestamps();
+
+
+            $table->foreign('plan_id')
+                  ->references('id')
+                  ->on('plans');
+
         });
     }
 

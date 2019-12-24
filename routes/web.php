@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::view('/404-tenant', 'erros.404-tenant')->name('404.tenant');
 
 
@@ -36,5 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
+Route::get('plans/choosePlan', 'Tenant\PlanController@choosePlan')->middleware('not.domain.main')->name('plans.choosePlan');
 
+route::get('paypal/{companyUuid}/{planId}', 'Tenant\PayPalController@paypal')->name('paypal')->middleware('not.domain.main');
+route::get('return-paypal', 'Tenant\PayPalController@returnPayPal')->name('return.paypal');
+
+
+Route::post('register-company', 'IndexController@register')->name('register');
 Route::get('/', 'IndexController@index')->name('index');

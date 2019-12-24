@@ -8,7 +8,7 @@ use App\Models\Company;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+
 
 /**
  * .class [ TIPO ]
@@ -76,5 +76,12 @@ class EloquentCompanyRepository extends BaseEloquentRepository
         }
 
         return event(new DatabaseCreated($company));
+    }
+
+    public function subDomainExists($subDomain)
+    {
+       $domain = $this->whereFirst('subdomain', '=', $subDomain);
+
+       return ($domain) ? 'true' : 'false';
     }
 }

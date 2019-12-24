@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -36,4 +37,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function accesses()
+    {
+        return $this->hasMany(Access::class);
+    }
+
+
+    public function registerAccess()
+    {
+        return $this->accesses()->create([
+            'user_id'     => $this->id,
+            'datetime'    => date('YmdHis'),
+        ]);
+    }
 }

@@ -180,13 +180,23 @@ return [
         ],
 
 
+
+
         ['header' => 'Cadastros'],
+        [
+            'text' => 'Planos',
+            'url' => 'tenants/plans',
+            'icon' => 'fab fa-paypal',
+            'label_color' => 'success',
+        ],
+
         [
             'text' => 'Empresas',
             'url' => 'tenants/companies',
             'icon' => 'far fa-building',
             'label_color' => 'success',
         ],
+
 
 
         ['header' => 'account_settings'],

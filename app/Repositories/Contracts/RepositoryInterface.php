@@ -14,4 +14,5 @@ interface RepositoryInterface
     public function delete($id);
     public function orderBy($column, $order = 'DESC');
     public function dataTables($column, $view);
+    public function relationships(...$relationships);
 }

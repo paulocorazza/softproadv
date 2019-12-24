@@ -18,7 +18,7 @@
 @endif
 
 @if(session('error'))
-    <div class="alert alert-default-warning alert-dismissible">
+    <div class="alert alert-default-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4><i class="icon fa fa-exclamation"></i> Erro!</h4>
         {{ session('error') }}

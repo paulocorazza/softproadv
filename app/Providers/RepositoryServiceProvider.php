@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\CompanyRepositoryInterface;
+use App\Repositories\Contracts\PlanRepositoryInterface;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCompanyRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentPlanRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -28,6 +30,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             CompanyRepositoryInterface::class,
             EloquentCompanyRepository::class
+        );
+
+        $this->app->bind(
+            PlanRepositoryInterface::class,
+            EloquentPlanRepository::class
         );
     }
 }

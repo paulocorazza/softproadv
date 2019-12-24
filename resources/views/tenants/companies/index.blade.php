@@ -52,7 +52,7 @@
     <script type="text/javascript" src={{ asset('vendor/datatables/js/jszip.min.js') }}></script>
     <script type="text/javascript" src={{ asset('vendor/datatables/js/pdfmake.min.js') }}></script>
     <script type="text/javascript" src={{ asset('vendor/datatables/js/vfs_fonts.js') }}></script>
-    <script type="text/javascript" src={{ asset('js/companies.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/companies.js') }}></script>
 @stop
 
 
