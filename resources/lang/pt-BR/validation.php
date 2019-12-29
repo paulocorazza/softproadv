@@ -153,6 +153,7 @@ return [
         'date'                  => 'data',
         'day'                   => 'dia',
         'description'           => 'descrição',
+        'details'               => 'detalhes',
         'excerpt'               => 'resumo',
         'first_name'            => 'primeiro nome',
         'gender'                => 'gênero',
@@ -177,5 +178,6 @@ return [
         'year'                  => 'ano',
         'email'                 => 'e-mail',
         'remember'              => 'lembrar-me',
+
     ],
 ];

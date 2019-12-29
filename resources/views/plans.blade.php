@@ -26,6 +26,8 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">{{ session('company')['name'] }} </h5>
 </div>
 
+@include('tenants.includes.alerts')
+
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">ESCOLHA SEU PLANO</h1>
     <p class="lead">Nossos planos são flexíveis para se adequar a sua necessidade.</p>
@@ -50,7 +52,7 @@
         @foreach( $plans as $plan)
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ $plan->plan }}</h4>
+                    <h4 class="my-0 font-weight-normal">{{ $plan->description }}</h4>
                 </div>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">R$ {{ $plan->price }} <small
@@ -60,7 +62,7 @@
                             <li>{{$details->description}}</li>
                         @endforeach
                     </ul>
-                    <a href="{{ route('paypal', [session('company')['uuid'], $plan->id]) }}" class="btn btn-lg btn-block btn-primary">Assinar</a>
+                    <a href="{{ route('paypal.agreement', [session('company')['uuid'], $plan->key_paypal]) }}" class="btn btn-lg btn-block btn-primary">Assinar</a>
                 </div>
             </div>
         @endforeach

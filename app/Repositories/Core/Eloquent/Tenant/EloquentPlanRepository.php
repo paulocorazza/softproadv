@@ -3,6 +3,7 @@
 namespace App\Repositories\Core\Eloquent\Tenant;
 
 use App\Models\Plan;
+use App\Models\PlanDetail;
 use App\Repositories\Contracts\PlanRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 use Illuminate\Support\Facades\DB;
@@ -21,23 +22,25 @@ class EloquentPlanRepository extends BaseEloquentRepository implements PlanRepos
     /**
      * @param array $data
      * @param $plan
-     * @return array
+     * @return bool
      */
-    private function saveItems(array $data, $plan): array
+    private function saveItems(array $data, $plan)
     {
-        $plan->plan_details()->delete();
-
         $description = array();
 
         if (isset($data['details'])) {
             foreach ($data['details'] as $item) {
-                $description[]['description'] = $item;
+                $id = ($item['id'] > 0) ? $item['id'] : 0;
+
+                $description['description'] = $item['description'];
+
+                $plan->plan_details()->updateOrCreate(['id' => $id], $description);
             }
 
-            $description = $plan->plan_details()->createMany($description);
+            return true;
         }
 
-        return $description;
+        return false;
     }
 
 
@@ -126,4 +129,12 @@ class EloquentPlanRepository extends BaseEloquentRepository implements PlanRepos
 
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function destroyDetail($id)
+    {
+        return PlanDetail::find($id)->delete();
+    }
 }

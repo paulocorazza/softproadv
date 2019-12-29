@@ -11,6 +11,7 @@ $(document).ready(function() {
             {data: "id"},
             {data: "description"},
             {data: "price"},
+            {data: "state_paypal"},
             {
                 data: 'action',
                 orderable: false

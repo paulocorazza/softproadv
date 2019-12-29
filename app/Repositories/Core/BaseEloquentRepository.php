@@ -13,6 +13,7 @@ use App\Repositories\Exceptions\NotModelDefined;
 class BaseEloquentRepository implements RepositoryInterface
 {
     protected $model;
+    protected $with = [];
 
     /*     * ************************************************ */
     /*     * ************* METODOS PRIVADOS ***************** */
@@ -139,12 +140,14 @@ class BaseEloquentRepository implements RepositoryInterface
      * @param mixed ...$relationships
      * @return $this
      */
-    public function relationships(...$relationships)
+    public function relationships($relationships)
     {
         $this->model = $this->model->with($relationships);
 
         return $this;
     }
+
+
 
     /**
      * @param $column

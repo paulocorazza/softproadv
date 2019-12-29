@@ -24,8 +24,8 @@ class CreatePlansTable extends Migration
             $table->string('key_paypal')->nullable();
             $table->string('key_pagseguro')->nullable();
 
-            $table->enum('state_paypal', ['active', 'inactive'])->default('inactive');
-            $table->enum('state_pagseguro', ['active', 'inactive'])->default('inactive');
+            $table->enum('state_paypal', ['created', 'active', 'inactive'])->default('inactive');
+            $table->enum('state_pagseguro', ['created', 'active', 'inactive'])->default('inactive');
             $table->timestamps();
         });
     }

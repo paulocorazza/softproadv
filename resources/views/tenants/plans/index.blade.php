@@ -1,26 +1,14 @@
 @extends('adminlte::page')
 
-@section('adminlte_css')
-    <link rel="stylesheet" href={{ asset('vendor/datatables/css/jquery.dataTables.min.css') }} />
-    <link rel="stylesheet" href={{ asset('vendor/datatables/css/buttons.dataTables.min.css') }} />
-@stop
+@include('tenants.includes.dataTableCss')
 
 @section('title_postfix', 'Planos')
 
 @section('content_header')
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Planos</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('tenants') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('plans.index') }}" class="active">Planos</a></li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Planos',
+                                               'breadcrumbs' => [
+                                               'Planos', ]
+                                              ])
 @stop
 
 @section('content')
@@ -41,19 +29,14 @@
     </div>
 @stop
 
+
 @section('js')
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/dataTables.buttons.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.flash.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.html5.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.print.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/buttons.colVis.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/jszip.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/pdfmake.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('vendor/datatables/js/vfs_fonts.js') }}></script>
+    @include('tenants.includes.dataTableJs')
+
     <script type="text/javascript" src={{ asset('assets/js/plans/table.js') }}></script>
 @stop
+
+
 
 
 

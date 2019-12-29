@@ -2,22 +2,17 @@
 
 @section('title', 'Detalhes do Plano')
 
+@section('adminlte_css')
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
+@stop
+
 @section('content_header')
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Planos</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('tenants') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="{{ route('plans.show', $plan->id) }}" class="active">Detalhes</a>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Planos',
+                       'breadcrumbs' => [
+                       'Planos' => route('plans.index'),
+                       'Detalhes', ]
+                      ])
 @stop
 
 
@@ -30,13 +25,18 @@
             <p><strong>Descrição: </strong>{{  $plan->description }}</p>
             <p><strong>Preço: </strong>{{  $plan->price }}</p>
             <p><strong>PayPal: </strong>{{  $plan->key_paypal }}</p>
-            <p><strong>Status PayPal: </strong>{{  $plan->state_pagseguro }}</p>
+            <p><strong>Status PayPal: </strong>{{  $plan->state_paypal }}</p>
         </div>
     </div>
 
-    {!! Form::model($plan, ['route' => ['plans.destroy', $plan->id], 'class' => 'form', 'method' => 'delete' ]) !!}
-    {!! Form::submit('Deletar', ['class' => 'btn btn-danger']) !!}
+    {!! Form::model($plan, ['route' => ['plans.destroy', $plan->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
+    {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete', 'rel' => $plan->id ]) !!}
     {!! Form::close() !!}
+@stop
+
+@section('js')
+    <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/plans/script.js') }}></script>
 @stop
 
 

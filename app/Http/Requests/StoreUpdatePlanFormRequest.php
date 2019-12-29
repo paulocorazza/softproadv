@@ -17,6 +17,19 @@ class StoreUpdatePlanFormRequest extends FormRequest
         return true;
     }
 
+    public function attributes()
+    {
+        return [
+            'description'        => 'Descrição',
+            'price'              => 'Preço',
+            'frequency_interval' => 'Intervalo',
+            'cycles'             => 'Ciclos',
+            'frequency'          => 'Frequência',
+            'details'            => 'Detalhes',
+        ];
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,6 +44,7 @@ class StoreUpdatePlanFormRequest extends FormRequest
             'price'              => 'required',
             'frequency_interval' => 'required',
             'cycles'             => 'required',
+            'details'            => 'required',
 
             'frequency'       => [
                 'required',

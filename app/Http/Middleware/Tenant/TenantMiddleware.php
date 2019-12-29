@@ -22,6 +22,10 @@ class TenantMiddleware
         return Company::where('subdomain', '=', $subdomain)->first();
     }
 
+    /**
+     * @param Company $company
+     * @return bool
+     */
     private function testExpired(Company $company)
     {
         $value = Carbon::now()->diffInDays($company->created_at);
@@ -33,7 +37,9 @@ class TenantMiddleware
         return false;
     }
 
-
+    /**
+     * @return mixed
+     */
     private function subDomain()
     {
         $piecesHost = explode('.', request()->getHost());
@@ -41,15 +47,35 @@ class TenantMiddleware
         return $tenant;
     }
 
+    /**
+     * @param $company
+     */
     private function setSessionCompany($company)
     {
         session()->put('company', $company);
     }
 
-    private function getRoute($route) {
+    /**
+     * @param $route
+     * @return bool
+     */
+    private function getRoute($route)
+    {
         $piecesRoute = explode('/', request()->url());
 
         return in_array($route, $piecesRoute);
+    }
+
+
+    /**
+     * @param $manager
+     * @param $company
+     */
+    private function setConnection($manager, $company): void
+    {
+        if (!$this->getRoute('plans') && (!$this->getRoute('paypal'))) {
+            $manager->setConnection($company);
+        }
     }
 
 
@@ -73,23 +99,23 @@ class TenantMiddleware
 
             $this->setSessionCompany($company->only([
                 'name',
-                'uuid'
+                'uuid',
+                'subdomain',
             ]));
 
 
             if ($this->testExpired($company) && (!$this->getRoute('plans')) &&
-                (!$this->getRoute('paypal')) ) {
+                (!$this->getRoute('paypal'))) {
                 return redirect()->route('plans.choosePlan');
             }
 
-            if (!$this->getRoute('plans') && (!$this->getRoute('paypal')) ) {
-                $manager->setConnection($company);
-            }
-
+            $this->setConnection($manager, $company);
         }
 
 
         return $next($request);
     }
+
+
 
 }

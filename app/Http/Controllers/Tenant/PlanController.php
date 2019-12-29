@@ -50,12 +50,12 @@ class PlanController extends Controller
 
         if (!$return['status']) {
             return redirect()->back()
-                             ->withInput()
-                             ->withErrors($return['message']);
+                ->withInput()
+                ->withErrors($return['message']);
         }
 
         return redirect()->route('plans.index')
-                         ->with('success', 'Cadastro realizado com sucesso!');
+            ->with('success', 'Cadastro realizado com sucesso!');
     }
 
     /**
@@ -125,10 +125,32 @@ class PlanController extends Controller
                          ->with('success', 'Deletado com sucesso');
     }
 
+    public function destroyDetail()
+    {
+        if (request()->ajax()) {
+            $id = request()->get('id');
+
+            return $this->deleteDetail($id);
+        }
+    }
+
     public function choosePlan()
     {
-        $plans = $this->repository->relationships('plan_details')->get();
+        $plans = $this->repository
+                      ->relationships('plan_details')
+                      ->where('state_paypal', '=', 'active');
 
         return view('plans', compact('plans'));
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function deleteDetail($id): \Illuminate\Http\JsonResponse
+    {
+        if ($delete = $this->repository->destroyDetail($id)) {
+            return response()->json(['result' => 'true']);
+        }
     }
 }

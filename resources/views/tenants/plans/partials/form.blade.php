@@ -39,19 +39,23 @@
     </div>
 </div>
 
+@if(isset($plan))
+    <div class="row col-md-12">
+        {!! Form::label('key_paypal', 'PayPal Key', ['class' => 'control-label']); !!}
 
-<div class="row col-md-12">
-    {!! Form::label('key_paypal', 'PayPal Key', ['class' => 'control-label']); !!}
+        <div class="input-group">
+            {!! Form::text('key_paypal', null, ['class' => 'form-control', 'placeholder' => 'PayPal Key', 'id' => 'key_paypal',
+            'aria-label' =>"Key PayPal", 'aria-describedby' => "basic-addon2"]) !!}
 
-    <div class="input-group">
-        {!! Form::text('key_paypal', null, ['class' => 'form-control', 'placeholder' => 'PayPal Key',
-        'aria-label' =>"Recipient's username", 'aria-describedby' => "basic-addon2"]) !!}
-
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="btnKeyPayPal">Gerar Key-PayPal</button>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="btnKeyPayPal" data-id="{{ $plan->id }}">Gerar Key-PayPal</button>
+            </div>
+            @include('tenants.includes.load')
         </div>
     </div>
-</div>
+
+    <input type="hidden" name="state_paypal" id="state_paypal" value="{{$plan->state_paypal}}">
+@endif
 
 <br>
 
@@ -71,6 +75,8 @@
         </div>
 
         <div class="row">
+            @include('tenants.includes.load')
+
             <table class="table table-striped" id="details_table">
                 <thead>
                 <tr>
@@ -82,9 +88,10 @@
                 <tbody>
                 @if(isset($plan))
                     @forelse($plan->plan_details as $details)
-                        <tr>
+                        <tr data-plan="{{$plan->id}}" data-id="{{ $details->id }}">
                             <td>
-                                <input class="form-control" type="text" name="details[]"
+                                <input type="hidden" name="details[{{ $details->id }}][id]" value="{{ $details->id }}">
+                                <input class="form-control" type="text" name="details[{{ $details->id }}][description]"
                                        value="{{ $details->description }}">
                             </td>
                             <td><a class="btn btn-danger" href="javascript:;" onclick="removeDetail(this)">Excluir</a>
@@ -109,7 +116,5 @@
 
 <br/>
 
-@section('js')
-    <script type="text/javascript" src={{ asset('assets/js/plans/script.js') }}></script>
-@stop
+
 

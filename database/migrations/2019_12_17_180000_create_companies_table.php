@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('uf_oab');
             $table->string('qtd_processes');
             $table->string('email');
-            $table->enum('payment_status', ['testing', 'approved', 'canceled'])->default('testing');
+            $table->enum('payment_status', ['testing', 'active', 'canceled'])->default('testing');
             $table->string('payment_id');
             $table->string('identify');
 
