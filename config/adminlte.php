@@ -140,7 +140,7 @@ return [
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    'register_url' => 'false',
 
     'password_reset_url' => 'password/reset',
 
@@ -173,43 +173,136 @@ return [
     */
 
     'menu' => [
+        ['header' => 'Meu Painel'],
+
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Gerenciamento',
+            'icon' => 'fas fa-solar-panel',
+            'submenu' => [
+                [
+                    'text' => 'Planos',
+                    'url' => 'tenants/plans',
+                    'icon' => 'fab fa-paypal',
+                    'label_color' => 'success',
+                    'can' => 'plans'
+                ],
+
+                [
+                    'text' => 'Empresas',
+                    'url' => 'tenants/companies',
+                    'icon' => 'far fa-building',
+                    'label_color' => 'success',
+                    'can' => 'companies'
+                ],
+
+                [
+                    'text' => 'Pessoas',
+                    'url' => 'tenants/peoples',
+                    'icon' => 'fas fa-id-card',
+                    'label_color' => 'success',
+                    'can' => 'peoples'
+                ],
+
+
+                [
+                    'text' => 'Processos',
+                    'url' => 'tenants/process',
+                    'icon' => 'fas fa-folder',
+                    'label_color' => 'success',
+                    'can' => 'process'
+                ],
+
+                [
+                    'text' => 'Agenda',
+                    'url' => 'tenants/schedule',
+                    'icon' => 'fas fa-calendar-check',
+                    'label_color' => 'success',
+                    'can' => 'schedule'
+                ],
+
+                [
+                    'text' => 'Atividades',
+                    'url' => 'tenants/tasks',
+                    'icon' => 'fas fa-tasks',
+                    'label_color' => 'success',
+                    'can' => 'tasks'
+                ],
+
+                [
+                    'text' => 'Financeiro',
+                    'url' => 'tenants/financial',
+                    'icon' => 'fas fa-comment-dollar',
+                    'label_color' => 'success',
+                    'can' => 'financial'
+                ],
+
+
+            ],
         ],
 
 
 
 
-        ['header' => 'Cadastros'],
+
+        ['header' => 'Sistema'],
         [
-            'text' => 'Planos',
-            'url' => 'tenants/plans',
-            'icon' => 'fab fa-paypal',
-            'label_color' => 'success',
+            'text' => 'Configurações',
+            'icon' => 'fas fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
+
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
+            ],
         ],
 
         [
-            'text' => 'Empresas',
-            'url' => 'tenants/companies',
-            'icon' => 'far fa-building',
-            'label_color' => 'success',
-        ],
+            'text' => 'Segurança',
+            'icon' => 'fas fa-user-lock',
 
 
+            'submenu' => [
+                [
+                    'text' => 'Usuários',
+                    'url' => 'users',
+                    'icon' => 'fas fa-user-tie',
+                    'can' => 'users'
+                ],
 
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'password/reset',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'password/reset',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+                [
+                    'text' => 'Perfis',
+                    'url' => 'profiles',
+                    'icon' => 'fas fa-users',
+                    'can' => 'profiles'
+                ],
+
+
+                [
+                    'text' => 'Permissões',
+                    'url' => 'permissions',
+                    'icon' => 'fa fa-unlock-alt',
+                    'can' => 'permissions'
+                ],
+
+
+                [
+                    'text' => 'Minha Conta',
+                    'url' => 'profile',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+
+                [
+                    'text' => 'change_password',
+                    'url' => 'password/reset',
+                    'icon' => 'fas fa-fw fa-lock',
+                ]
+            ]
+        ]
 
 
     ],
