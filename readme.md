@@ -17,6 +17,11 @@
 ## Laravel Debugbar
 <p>composer require barryvdh/laravel-debugbar --dev</p>
 
+## Laravel Validator Docs
+composer require laravellegends/pt-br-validator:6.*,
+
+https://github.com/LaravelLegends/pt-br-validator
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">

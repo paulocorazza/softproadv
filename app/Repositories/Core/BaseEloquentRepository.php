@@ -5,6 +5,7 @@ namespace App\Repositories\Core;
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Exceptions\NotModelDefined;
 
+
 /**
  * .class [ TIPO ]
  *
@@ -18,6 +19,10 @@ class BaseEloquentRepository implements RepositoryInterface
     /*     * ************************************************ */
     /*     * ************* METODOS PRIVADOS ***************** */
     /*     * ************************************************ */
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|mixed
+     * @throws NotModelDefined
+     */
     private function resolveModel()
     {
         if (!method_exists($this, 'model')) {
@@ -48,38 +53,88 @@ class BaseEloquentRepository implements RepositoryInterface
         return $this->model->get();
     }
 
+
     /**
      * @param $id
+     * @param array $columns
      * @return mixed
      */
-    public function find($id)
+    public function find($id, $columns = ['*'])
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id, $columns);
+    }
 
+
+    /**
+     * @param $field
+     * @param null $value
+     * @param array $columns
+     * @return mixed
+     */
+    public function findByField($field, $value = null, $columns = ['*'])
+    {
+        return $this->model->where($field, '=', $value)->get($columns);
     }
 
     /**
-     * @param $column
+     * @param $field
+     * @param array $values
+     * @param array $columns
+     * @return mixed
+     */
+    public function WhereIn($field, array $values, $columns = ['*'])
+    {
+        return $this->model->whereIn($field, $values)->get($columns);
+    }
+
+
+    /**
+     * @param $field
+     * @param array $values
+     * @param array $columns
+     * @return mixed
+     */
+    public function WhereNotIn($field, array $values, $columns = ['*'])
+    {
+        return $this->model->whereNotIn($field, $values)->get($columns);
+    }
+
+
+    /**
+     * @param $field
+     * @param array $values
+     * @param array $columns
+     * @return mixed
+     */
+    public function WhereBetween($field, array $values, $columns = ['*'])
+    {
+        return $this->model->whereBetween($field, $values)->get($columns);
+    }
+
+    /**
+     * @param $field
+     * @param string $operator
+     * @param $value
+     * @param array $columns
+     * @return mixed
+     */
+    public function where($field, $operator = '=', $value, $columns = ['*'])
+    {
+        return $this->model->where($field, $operator, $value)
+            ->get($columns);
+    }
+
+
+    /**
+     * @param $field
      * @param string $operator
      * @param $value
      * @return mixed
      */
-    public function where($column, $operator = '=', $value)
+    public function whereFirst($field, $operator = '=', $value)
     {
-        return $this->model->where($column, $operator, $value)
-                           ->get();
-    }
-
-    /**
-     * @param $column
-     * @param string $operator
-     * @param $value
-     * @return mixed
-     */
-    public function whereFirst($column, $operator = '=', $value)
-    {
-        return $this->model->where($column, $operator, $value)
-                           ->first();
+        return $this->model->where($field, $operator, $value)
+            ->first();
     }
 
     /**
@@ -88,7 +143,7 @@ class BaseEloquentRepository implements RepositoryInterface
      */
     public function paginate($totalPage = 10)
     {
-       return $this->model->paginate($totalPage);
+        return $this->model->paginate($totalPage);
     }
 
 
@@ -111,6 +166,12 @@ class BaseEloquentRepository implements RepositoryInterface
         $model = $this->find($id);
 
         return $model->update($data);
+    }
+
+
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        return $this->model->updateOrCreate($attributes, $values);
     }
 
     /**
@@ -148,18 +209,38 @@ class BaseEloquentRepository implements RepositoryInterface
     }
 
 
-
     /**
      * @param $column
      * @param $view
+     * @param int $totalPage
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function dataTables($column, $view)
     {
-      return Datatables()->eloquent($this->model->query())->addColumn($column, $view)
-                                                          ->make(true);
+        return Datatables()->eloquent($this->model->query())->addColumn($column, $view)
+            ->make(true);
     }
 
+
+    /**
+     * @param $column
+     * @param null $key
+     * @return mixed
+     */
+    public function pluck($column, $key = null)
+    {
+        return $this->model->pluck($column, $key);
+    }
+
+
+    /**
+     * @param string $id
+     * @return mixed
+     */
+    public function rules($id = '')
+    {
+        return $this->model->rules($id);
+    }
 
 }

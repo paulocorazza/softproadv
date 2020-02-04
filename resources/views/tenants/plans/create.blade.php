@@ -4,7 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @stop
 
-@section('title', 'Cadastrar Novo Plano')
+@section('title_postfix', ' - Cadastrar Novo Plano')
 
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
@@ -25,10 +25,21 @@
 @section('content')
     @include('tenants.includes.alerts')
 
-    <div class="box box-success">
-        <div class="box-body">
+    <div class="card card-outline card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Identificação
+                <small>Plano</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
             @include('tenants.plans.partials.form')
         </div>
+        <!-- /.card-body -->
     </div>
 @stop
 

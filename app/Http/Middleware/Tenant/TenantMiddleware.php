@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Tenant;
 
+use App\Helpers\Helper;
 use App\Models\Company;
 use App\Tenant\ManagerTenant;
 use Carbon\Carbon;
@@ -55,17 +56,6 @@ class TenantMiddleware
         session()->put('company', $company);
     }
 
-    /**
-     * @param $route
-     * @return bool
-     */
-    private function getRoute($route)
-    {
-        $piecesRoute = explode('/', request()->url());
-
-        return in_array($route, $piecesRoute);
-    }
-
 
     /**
      * @param $manager
@@ -73,7 +63,7 @@ class TenantMiddleware
      */
     private function setConnection($manager, $company): void
     {
-        if (!$this->getRoute('plans') && (!$this->getRoute('paypal'))) {
+        if (!Helper::in_route('plans') && (!Helper::in_route('paypal'))) {
             $manager->setConnection($company);
         }
     }
@@ -104,8 +94,8 @@ class TenantMiddleware
             ]));
 
 
-            if ($this->testExpired($company) && (!$this->getRoute('plans')) &&
-                (!$this->getRoute('paypal'))) {
+            if ($this->testExpired($company) && (!Helper::in_route('plans')) &&
+                (!Helper::in_route('paypal'))) {
                 return redirect()->route('plans.choosePlan');
             }
 

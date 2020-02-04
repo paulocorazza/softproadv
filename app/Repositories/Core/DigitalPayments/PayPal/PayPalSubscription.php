@@ -1,7 +1,7 @@
 <?php
+namespace App\Repositories\Core\DigitalPayments\PayPal;
 
-namespace App\Models\PayPal;
-
+use App\Repositories\Contracts\SubscriptionRepositoryInterface;
 use PayPal\Api\ChargeModel;
 use PayPal\Api\Currency;
 use PayPal\Api\MerchantPreferences;
@@ -11,7 +11,12 @@ use PayPal\Api\PaymentDefinition;
 use PayPal\Api\Plan;
 use PayPal\Common\PayPalModel;
 
-class SubscriptionPlan extends PayPal
+/**
+ * .class [ TIPO ]
+ *
+ * @copyright (c) 2018, Carlos Junior
+ */
+class PayPalSubscription extends PayPal implements SubscriptionRepositoryInterface
 {
     protected $plano;
     protected $type;
@@ -58,7 +63,7 @@ class SubscriptionPlan extends PayPal
     {
         $chargeModel = new ChargeModel();
         $chargeModel->setType('SHIPPING')
-                    ->setAmount(new Currency(array('value' => 0, 'currency' => 'BRL')));
+            ->setAmount(new Currency(array('value' => 0, 'currency' => 'BRL')));
         return $chargeModel;
     }
 
@@ -69,7 +74,7 @@ class SubscriptionPlan extends PayPal
     {
         $merchantPreferences = new MerchantPreferences();
 
-        $baseRoute = route('return.paypal');
+        $baseRoute = route('paypal.return');
 
         $merchantPreferences->setReturnUrl("{$baseRoute}/?success=true")
             ->setCancelUrl("{$baseRoute}/?success=false")
@@ -122,12 +127,6 @@ class SubscriptionPlan extends PayPal
     /*     * ************************************************ */
     /*     * ************* METODOS PUBLICOS ***************** */
     /*     * ************************************************ */
-
-
-    /**
-     * @param $id
-     * @return Plan
-     */
     public function create($id)
     {
         $this->Plano($id);
@@ -135,7 +134,7 @@ class SubscriptionPlan extends PayPal
         $plan = $this->Plan();
 
         $paymentDefinition = $this->PaymentDefinition();
-       // $chargeModel = $this->ChargeModel();
+        // $chargeModel = $this->ChargeModel();
         //$paymentDefinition->setChargeModels(array($chargeModel));
         $merchantPreferences = $this->MerchantPreferences();
 
@@ -149,10 +148,6 @@ class SubscriptionPlan extends PayPal
         return $output;
     }
 
-
-    /**
-     * @return \PayPal\Api\PlanList
-     */
     public function listPlan()
     {
         $params = array('page_size' => '10');
@@ -162,10 +157,6 @@ class SubscriptionPlan extends PayPal
         return $planList;
     }
 
-    /**
-     * @param $id
-     * @return Plan
-     */
     public function planDetail($id)
     {
         $plan = Plan::get($id, $this->apiContext);
@@ -185,7 +176,11 @@ class SubscriptionPlan extends PayPal
         return $plan;
     }
 
+    public function createActivate($id)
+    {
+        $plan = $this->create($id);
+        $activate = $this->activate($plan->getId());
 
-
-
+        return $activate;
+    }
 }

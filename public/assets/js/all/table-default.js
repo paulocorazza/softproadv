@@ -1,27 +1,21 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $('#tabela').DataTable({
         "processing": true,
         "serverSide": true,
 
         "ajax": {
-            url: "/tenants/companies",
+            url: urlAjax,
         },
 
-        "columns": [
-            {data: "id"},
-            {data: "name"},
-            {data: "subdomain"},
-            {
-                data: 'action',
-                orderable: false
-            }
-        ],
+        "columns": columns,
 
 
         paging: true,
         searching: true,
         ordering: true,
-        dom: 'Bfrtip',
+        dom: 'lBfrtip',
+        "iDisplayLength": 10,
+        "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"] ],
         stateSave: true,
 
 
@@ -63,7 +57,7 @@ $(document).ready(function() {
 
         language: {
             sProcessing: "Processando...",
-            sLengthMenu: "Mostrar MENU registos",
+            sLengthMenu: "Mostrar _MENU_ registros   ",
             sZeroRecords: "Não foram encontrados resultados",
             sInfo: "Mostrando de _START_ até _END_ de _TOTAL_ registos",
             sInfoEmpty: "Mostrando de 0 até 0 de 0 registos",
@@ -87,4 +81,4 @@ $(document).ready(function() {
             }
         }
     })
-})
+});

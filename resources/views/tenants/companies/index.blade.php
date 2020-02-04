@@ -2,7 +2,7 @@
 
 @include('tenants.includes.dataTableCss')
 
-@section('title_postfix', 'Empresas')
+@section('title_postfix', ' - Empresas')
 
 @section('content_header')
 
@@ -33,7 +33,20 @@
 @section('js')
     @include('tenants.includes.dataTableJs')
 
-    <script type="text/javascript" src={{ asset('assets/js/companies.js') }}></script>
+    <script>
+        var urlAjax = '/tenants/companies';
+
+        var columns =   [
+            {data: "id"},
+            {data: "name"},
+            {data: "subdomain"},
+            {
+                data: 'action',
+                orderable: false
+            }
+        ]
+    </script>
+    <script type="text/javascript" src={{ asset('assets/js/all/table-default.js') }}></script>
 @stop
 
 

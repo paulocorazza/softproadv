@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastrar Nova Empresa')
+@section('title_postfix', ' - Cadastrar Nova Empresa')
 
 @section('content_header')
     <div class="container-fluid">
@@ -31,10 +31,21 @@
 @section('content')
     @include('tenants.includes.alerts')
 
-    <div class="box box-success">
-        <div class="box-body">
+    <div class="card card-outline card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Identificação
+                <small>Empresa</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
             @include('tenants.companies.partials.form')
         </div>
+        <!-- /.card-body -->
     </div>
 @stop
 

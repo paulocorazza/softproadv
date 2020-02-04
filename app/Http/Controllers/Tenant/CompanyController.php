@@ -50,7 +50,6 @@ class CompanyController extends Controller
     {
         $company = $this->repository->create($request->all());
 
-
         if (!$company) {
             return redirect()->route('companies.create');
         }

@@ -178,6 +178,7 @@ return [
         'year'                  => 'ano',
         'email'                 => 'e-mail',
         'remember'              => 'lembrar-me',
+        'type'                  => 'tipo'
 
     ],
 ];

@@ -5,8 +5,10 @@
  *
  * @copyright (c) 2018, Carlos Junior
  */
-namespace App\Models\PayPal;
+namespace App\Repositories\Core\DigitalPayments\PayPal;
 
+use App\Models\Company;
+use App\Repositories\Contracts\AgreementRepositoryInterface;
 use Carbon\Carbon;
 use PayPal\Api\Agreement;
 use PayPal\Api\Payer;
@@ -14,7 +16,7 @@ use PayPal\Api\Plan;
 use PayPal\Api\ShippingAddress;
 use PayPal\Exception\PayPalConnectionException;
 
-class PayPalAgreement extends PayPal
+class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
 {
     /*     * ************************************************ */
     /*     * ************* METODOS PRIVADOS ***************** */
@@ -79,6 +81,18 @@ class PayPalAgreement extends PayPal
     }
 
 
+    /**
+     * @param $company
+     * @param $payment_id
+     */
+    protected function activeCompany(Company $company, $payment_id)
+    {
+        $company->payment_status = 'active';
+        $company->payment_id = $payment_id;
+        $company->save();
+
+        session()->forget('company');
+    }
 
     /*     * ************************************************ */
     /*     * ************* METODOS PUBLICOS ***************** */
@@ -106,16 +120,28 @@ class PayPalAgreement extends PayPal
         }
     }
 
-    public function execute($token)
+    public function executeAgreement($token, Company $company)
     {
-        $agreement = new Agreement();
-        $agreement->execute($token, $this->apiContext);
+        try {
 
-        return [
-            'status'      => true,
-            'state'       =>  $agreement->getState(),
-            'payment_id'  =>  $agreement->getId(),
-        ];
+            $agreement = new Agreement();
+
+            $agreement->execute($token, $this->apiContext);
+
+            $this->activeCompany($company, $agreement->getId());
+
+            return [
+                'status'      => true,
+                'state'       =>  $agreement->getState(),
+            ];
+
+        } catch (PayPalConnectionException  $ex) {
+            return [
+                'status'      => false,
+                'message'   => $ex->getMessage()
+            ];
+
+        }
     }
 
     public function detailAgreement($id)
@@ -124,4 +150,19 @@ class PayPalAgreement extends PayPal
 
         return $agreement;
     }
+
+    public function updateCompany(Company $company, $id)
+    {
+        $plan = \App\Models\Plan::where('key_paypal', $id)->first();
+
+        $company->identify =  $this->identify;
+        $company->plan_id = $plan->id;
+        $company->save();
+
+        return [
+            'status' => true
+        ];
+    }
+
+
 }

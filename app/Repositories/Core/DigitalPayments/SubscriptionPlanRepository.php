@@ -9,7 +9,7 @@ use App\Repositories\Contracts\SubscriptionRepositoryInterface;
  *
  * @copyright (c) 2018, Carlos Junior
  */
-class SubscriptionPlan implements SubscriptionRepositoryInterface
+class SubscriptionPlanRepository implements SubscriptionRepositoryInterface
 {
     protected $subscription;
     /*     * ************************************************ */
@@ -21,7 +21,7 @@ class SubscriptionPlan implements SubscriptionRepositoryInterface
     /*     * ************* METODOS PUBLICOS ***************** */
     /*     * ************************************************ */
 
-    public function __construct(SubscriptionRepositoryInterface $subscription)
+    public function setSubscription(SubscriptionRepositoryInterface $subscription)
     {
         $this->subscription = $subscription;
     }

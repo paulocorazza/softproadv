@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalhes da Empresa')
+@section('title_postfix', ' - Detalhes da Empresa')
 
 @section('content_header')
     <div class="container-fluid">
@@ -24,14 +24,25 @@
 @section('content')
     @include('tenants.includes.alerts')
 
-    <div class="box box-success">
-        <div class="box-body">
+    <div class="card card-outline card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Identificação
+                <small>Empresa</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
             <p><strong>ID: </strong>{{  $company->id }}</p>
             <p><strong>Nome: </strong>{{  $company->name }}</p>
             <p><strong>SubDominio: </strong>{{  $company->subdomain }}</p>
             <p><strong>Host: </strong>{{  $company->db_host }}</p>
             <p><strong>User: </strong>{{  $company->db_username }}</p>
         </div>
+        <!-- /.card-body -->
     </div>
 
     {!! Form::model($company, ['route' => ['companies.destroy', $company->id], 'class' => 'form', 'method' => 'delete' ]) !!}

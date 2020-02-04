@@ -2,7 +2,7 @@
 
 @include('tenants.includes.dataTableCss')
 
-@section('title_postfix', 'Planos')
+@section('title_postfix', ' - Planos')
 
 @section('content_header')
     @include('tenants.includes.breadcrumbs',  ['title' => 'Planos',
@@ -33,7 +33,21 @@
 @section('js')
     @include('tenants.includes.dataTableJs')
 
-    <script type="text/javascript" src={{ asset('assets/js/plans/table.js') }}></script>
+    <script>
+        var urlAjax = '/tenants/plans';
+
+        var columns =  [
+            {data: "id"},
+            {data: "description"},
+            {data: "price"},
+            {data: "state_paypal"},
+            {
+                data: 'action',
+                orderable: false
+            }
+        ]
+    </script>
+    <script type="text/javascript" src={{ asset('assets/js/all/table-default.js') }}></script>
 @stop
 
 

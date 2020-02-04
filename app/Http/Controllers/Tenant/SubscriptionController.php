@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Core\DigitalPayments\PayPal\PayPalSubscriptionPlan;
-use App\Repositories\Core\DigitalPayments\SubscriptionPlan;
-use Session;
+use App\Repositories\Contracts\SubscriptionRepositoryInterface;
+use App\Repositories\Core\DigitalPayments\PayPal\PayPalSubscription;
 
 class SubscriptionController extends Controller
 {
     private $subscription;
 
 
-    public function __construct()
+    public function __construct(SubscriptionRepositoryInterface $subscription)
     {
-        $this->subscription = new SubscriptionPlan(new PayPalSubscriptionPlan());
+        $this->subscription = $subscription;
+
+        $this->subscription->setSubscription(new PayPalSubscription());
     }
 
 
@@ -25,12 +26,12 @@ class SubscriptionController extends Controller
 
     public function listPlan()
     {
-         dd($this->subscription->listPlan());
+        dd($this->subscription->listPlan());
     }
 
     public function showPlan($id)
     {
-          dd($this->subscription->planDetail($id));
+        dd($this->subscription->planDetail($id));
     }
 
     public function activatePlan($id)
