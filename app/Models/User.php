@@ -98,6 +98,7 @@ class User extends Authenticatable
         ];
     }
 
+    //Este método deveria traduzir o campo Type
     public function attributes()
     {
         return [
