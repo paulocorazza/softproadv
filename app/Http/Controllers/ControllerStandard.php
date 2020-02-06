@@ -104,7 +104,6 @@ class ControllerStandard extends BaseController
             $dataForm['password'] = bcrypt($dataForm['password']);
         }
 
-
         $insert = $this->model->create($dataForm);
 
         if (!$insert) {

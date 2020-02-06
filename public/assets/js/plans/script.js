@@ -110,7 +110,7 @@ $(document).ready(function () {
             '<tr data-id ="' + count + '">' +
             '<td>' +
             '<input type="hidden" name="details[' + count + '][id]"  value="' + count + '"> ' +
-            '<input class="form-control" type="text" name="details[' + count + '][description]" value="' + detalhe + '" >' +
+            '<input class="form-control" disabled type="text" name="details[' + count + '][description]" value="' + detalhe + '" >' +
             '</td>' +
 
             '<td>' +

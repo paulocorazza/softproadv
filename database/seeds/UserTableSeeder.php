@@ -14,7 +14,7 @@ class UserTableSeeder extends Seeder
     private function createProfile()
     {
         $this->profile = Profile::create([
-            'name' => 'Admin',
+            'name'  => 'Admin',
             'label' => 'Administrador'
         ]);
     }
@@ -22,9 +22,10 @@ class UserTableSeeder extends Seeder
     private function createUser()
     {
         $this->user = User::create([
-            'name' => 'Suporte',
-            'email' => 'suporte@theplace.com.br',
-            'password' => bcrypt('pl4c32k')
+            'name'      => 'Suporte',
+            'fantasy'   => 'Suporte',
+            'email'     => 'suporte@theplace.com.br',
+            'password'  => bcrypt('pl4c32k')
         ]);
     }
 

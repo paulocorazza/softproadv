@@ -75,13 +75,33 @@ class User extends Authenticatable
     {
         return [
             'name'      => 'required|min:3|max:100',
+            'fantasy'   => 'required|min:3|max:100',
             'email'     => "required|min:3|max:100|email|unique:users,email,{$id},id",
             'image'     => 'image',
             'cpf'       => 'cpf',
-            'cnpj'      => 'cnpj',
             'password'  => 'required|min:3|max:20|confirmed',
             'type'      => 'required|in:A,U',
             'oab'       => 'required_if:type,A',
+        ];
+    }
+
+    public function rulesUpdate($id = '')
+    {
+        return [
+            'name'      => 'required|min:3|max:100',
+            'fantasy'   => 'required|min:3|max:100',
+            'email'     => "required|min:3|max:100|email|unique:users,email,{$id},id",
+            'image'     => 'image',
+            'cpf'       => 'cpf',
+            'type'      => 'required|in:A,U',
+            'oab'       => 'required_if:type,A',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+          'type' => 'Tipo de Usuário'
         ];
     }
 
@@ -115,6 +135,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Profile::class, 'profile_user');
     }
+
+
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, 'addressble');
+    }
+
 
     /**
      * @param Permission $permission

@@ -50,4 +50,13 @@ class EloquentUserRepository extends BaseEloquentRepository
             $query->whereRaw("profile_user.user_id = {$user->id}");
         })->get();
     }
+
+    public function rules($id = '')
+    {
+        if (!empty($id) && isset($id)) {
+            return $this->model->rulesUpdate($id);
+        }
+
+        return $this->model->rules();
+    }
 }

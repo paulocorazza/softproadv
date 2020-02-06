@@ -14,12 +14,14 @@
     {!! Form::url('site', null, ['class' => 'form-control', 'placeholder' => 'Site:', 'id' => 'site']) !!}
 </div>
 
-<div class="form-group">
-    {!! Form::password('password',  ['class' => 'form-control', 'placeholder' => 'Senha:', 'id' => 'password']) !!}
-</div>
-<div class="form-group">
-    {!! Form::password('password_confirmation',  ['class' => 'form-control', 'placeholder' => 'Confirmar Senha:',  'id' => 'password_confirmation']) !!}
-</div>
+@if(!isset($data) )
+    <div class="form-group">
+        {!! Form::password('password',  ['class' => 'form-control', 'placeholder' => 'Senha:', 'id' => 'password']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::password('password_confirmation',  ['class' => 'form-control', 'placeholder' => 'Confirmar Senha:',  'id' => 'password_confirmation']) !!}
+    </div>
+@endif
 
 <div class="row">
     <div class="col-12 col-sm-4">
@@ -114,19 +116,19 @@
 <div class="row" id="journey">
     <div class="col-12 col-sm-4">
         <div class="form-group">
-            {!! Form::text('journey_start', null, ['class' => 'form-control', 'placeholder' => 'Início:', 'id' => 'journey_start']) !!}
+            {!! Form::time('journey_start', null, ['class' => 'form-control', 'placeholder' => 'Início:', 'id' => 'journey_start']) !!}
         </div>
     </div>
 
     <div class="col-12 col-sm-4">
         <div class="form-group">
-            {!! Form::text('journey_pause', null, ['class' => 'form-control', 'placeholder' => 'Intervalo:', 'id' => 'journey_pause']) !!}
+            {!! Form::time('journey_pause', null, ['class' => 'form-control', 'placeholder' => 'Intervalo:', 'id' => 'journey_pause']) !!}
         </div>
     </div>
 
     <div class="col-12 col-sm-4">
         <div class="form-group">
-            {!! Form::text('journey_end', null, ['class' => 'form-control', 'placeholder' => 'Término:', 'id' => 'journey_end']) !!}
+            {!! Form::time('journey_end', null, ['class' => 'form-control', 'placeholder' => 'Término:', 'id' => 'journey_end']) !!}
         </div>
     </div>
 </div>

@@ -55,7 +55,71 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-address">Adicionar</button>
+            <br>
+            <br>
 
+            <div class="modal fade modal-address" tabindex="-1" role="dialog" aria-labelledby="modalLarge" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalLarge">Endereço</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @include('tenants.users.partials.formAddress')
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @include('tenants.includes.load')
+
+                <table class="table table-striped" id="details_table">
+                    <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Rua</th>
+                        <th>Número</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>UF</th>
+                        <th>Cep</th>
+                        <th>Ação</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    @if(isset($data))
+                        @forelse($data->addresses as $address)
+                            <tr data-plan="{{$address->id}}" data-id="{{ $address->id }}">
+                                <td>
+                                    <input type="hidden" name="details[{{ $address->id }}][id]"
+                                           value="{{ $address->id }}">
+
+                                </td>
+                                <td><a class="btn btn-danger" href="javascript:;"
+                                       onclick="removeDetail(this)">Excluir</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td>Nenhum Endereço Adicionado</td>
+                            </tr>
+                        @endforelse
+                    @endif
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- /.card-body -->
     </div>
