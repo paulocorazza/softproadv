@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    protected $fillable = ['state_id'];
+    protected $fillable = ['state_id', 'ibge', 'name', 'siafi'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

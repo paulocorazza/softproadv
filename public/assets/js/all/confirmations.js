@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
 
-    jQuery('#tabela').on('click', '.j_link_delete', function (e) {
+    $('#tabela').on('click', '.j_link_delete', function (e) {
 
         e.preventDefault();
 

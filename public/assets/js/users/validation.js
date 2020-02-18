@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $("#cellphone").mask("(00) 0000-00009");
     $("#telephone").mask("(00) 0000-00009");
+    $("#cep").mask("00000-000");
     $("#cpf").mask('000.000.000-00', {reverse: true});
     $("#salary").mask('#.##0,00', {reverse: true});
 

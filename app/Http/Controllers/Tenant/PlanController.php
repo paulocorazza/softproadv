@@ -46,7 +46,7 @@ class PlanController extends Controller
      */
     public function store(StoreUpdatePlanFormRequest $request)
     {
-        $return = $this->repository->create($request->all());
+         $return = $this->repository->create($request->all());
 
         if (!$return['status']) {
             return redirect()->back()

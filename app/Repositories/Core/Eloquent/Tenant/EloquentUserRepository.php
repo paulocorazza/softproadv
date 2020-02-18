@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Support\Facades\DB;
 
 /**
  * .class [ TIPO ]
@@ -18,7 +19,33 @@ class EloquentUserRepository extends BaseEloquentRepository
     /*     * ************************************************ */
     /*     * ************* METODOS PRIVADOS ***************** */
     /*     * ************************************************ */
+    private function saveAddress(array $data, $user)
+    {
 
+        if (isset($data['address'])) {
+            foreach ($data['address'] as $item) {
+
+                $id = ($item['id'] > 0) ? $item['id'] : 0;
+
+                /* $address['type_address_id'] = $item['type_address_id'];
+                $address['street'] = $item['street'];
+                $address['number'] = $item['number'];
+                $address['district'] = $item['district'];
+                $address['complement'] = $item['complement'];
+                $address['cep'] = $item['cep'];
+                $address['country_id'] = $item['country_id'];
+                $address['state_id'] = $item['state_id'];
+                $address['city_id'] = $item['city_id'];*/
+
+
+                $user->addresses()->updateOrCreate(['id' => $id], $item);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 
     /*     * ************************************************ */
     /*     * ************* METODOS PUBLICOS ***************** */
@@ -26,6 +53,79 @@ class EloquentUserRepository extends BaseEloquentRepository
     public function model()
     {
         return User::class;
+    }
+
+    public function create(array $data)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = parent::create($data);
+
+            $addresses = $this->saveAddress($data, $user);
+
+            if (!$user || !$addresses) {
+                DB::rollBack();
+
+                return [
+                    'status' => false,
+                    'message' => 'Não foi possível salvar o registro'
+                ];
+            }
+
+            DB::commit();
+
+            return ['status' => true];
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'status' => false,
+                'message' => 'Não foi possível salvar o registro.' . $e->getMessage()
+            ];
+        }
+    }
+
+
+    public function update($id, array $data)
+    {
+        if (!$user = parent::find($id)) {
+            return [
+                'status' => false,
+                'message' => 'Registro não encontrado!'
+            ];
+        }
+
+        DB::beginTransaction();
+        try {
+            $user->update($data);
+
+            $description = $this->saveAddress($data, $user);
+
+            if (!$user || !$description) {
+                DB::rollBack();
+
+                return [
+                    'status' => false,
+                    'message' => 'Não foi possível atualizar o registro'
+                ];
+            }
+
+
+            DB::commit();
+
+            return ['status' => true];
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'status' => false,
+                'message' => 'Não foi possível atualizar o registro.' . $e->getMessage()
+            ];
+        }
+
     }
 
 

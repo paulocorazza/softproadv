@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\TypeAddress;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -26,6 +28,108 @@ class UserController extends ControllerStandard
         $this->middleware('can:view_user')->only(['show']);
         $this->middleware('can:delete_user')->only(['delete']);
         $this->middleware('can:view_user_profile')->only(['profiles']);
+    }
+
+
+    public function create()
+    {
+        $title = "Cadastrar {$this->title}";
+
+        $type_addresses = TypeAddress::all();
+        $countries = Country::all();
+
+        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries'));
+    }
+
+
+    public function edit($id)
+    {
+        $data = $this->model->relationships([
+            'addresses.type_address',
+            'addresses.city',
+            'addresses.state',
+        ])->find($id);
+
+
+        $title = "Editar {$this->title}: {$data->name}";
+
+        $type_addresses = TypeAddress::all();
+        $countries = Country::all();
+
+        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries'));
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, $this->model->rules());
+
+        $dataForm = $request->all();
+
+        if ($this->upload && $request->hasFile($this->upload['name'])) {
+            list($nameFile, $upload) = $this->upload($request);
+
+            if (!$upload) {
+                return redirect()->back()
+                    ->withErrors(['errors' => 'Falha no upload do arquivo'])
+                    ->withInput();
+            }
+
+            $dataForm[$this->upload['name']] = $nameFile;
+        }
+
+        if (isset($dataForm['password'])) {
+            $dataForm['password'] = bcrypt($dataForm['password']);
+        }
+
+        $insert = $this->model->create($dataForm);
+
+        if (!$insert['status']) {
+            return redirect()->back()
+                ->withErrors($insert['message'])
+                ->withInput();
+        }
+
+        return redirect()->route("{$this->route}.index")
+            ->with(['success' => 'Registro realizado com sucesso!']);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, $this->model->rules($id));
+
+        $dataForm = $request->all();
+
+        $data = $this->model->find($id);
+
+        if ($this->upload && $request->hasFile($this->upload['name'])) {
+            $file = $data->{$this->upload['name']};
+
+            list($nameFile, $upload) = $this->upload($request, $file);
+
+            if (!$upload) {
+                return redirect()->back()
+                    ->withErrors(['errors' => 'Falha no upload do arquivo'])
+                    ->withInput();
+            }
+
+            $dataForm[$this->upload['name']] = $nameFile;
+        }
+
+        if (isset($dataForm['password'])) {
+            $dataForm['password'] = bcrypt($dataForm['password']);
+        }
+
+        $update = $this->model->update($id, $dataForm);
+
+        if (!$update['status']) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($update['message']);
+        }
+
+        return redirect()->route("{$this->route}.index")
+            ->with(['success' => 'Registro alterado com sucesso!']);
     }
 
 
@@ -64,7 +168,7 @@ class UserController extends ControllerStandard
         unset($dataForm['email']);
         $dataForm['password'] = bcrypt($dataForm['password']);
 
-        $dataForm['salary']  =
+        $dataForm['salary'] =
 
 
         $update = $data->update($dataForm);
@@ -99,7 +203,7 @@ class UserController extends ControllerStandard
         $profiles = $user->profiles()->detach($profileId);
 
         return redirect()->route('users.profiles', $user->id)
-                         ->with('success', 'Perfil removido com sucesso!');
+            ->with('success', 'Perfil removido com sucesso!');
 
     }
 
