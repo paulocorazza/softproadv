@@ -59,6 +59,19 @@ class UserController extends ControllerStandard
         return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries'));
     }
 
+
+    public function destroyAddress()
+    {
+        if (request()->ajax()) {
+            $id = request()->get('id');
+
+           if  ($delete = $this->model->deleteAddress($id)) {
+               return response()->json(['result' => true]);
+           }
+
+        }
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, $this->model->rules());

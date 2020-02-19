@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
+use App\Models\Address;
 use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -159,4 +160,9 @@ class EloquentUserRepository extends BaseEloquentRepository
 
         return $this->model->rules();
     }
+
+   public function deleteAddress($id)
+   {
+      return Address::find($id)->delete();
+   }
 }

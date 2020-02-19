@@ -91,7 +91,40 @@ function removeDetail(obj) {
                 alertify.success('Registro excluído com sucesso!')
 
             } else if (id > 0) {
-                //  deletaAjax(obj, id);
+                  deletaAjax(obj, id);
+            }
+        }
+    })
+}
+
+
+function deletaAjax(obj, id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: deleteAddressAjax,
+        type: 'post',
+        dataType: 'json',
+        data: {
+            id: id
+        },
+
+        beforeSend: function () {
+            $('.form_load').css('display', 'flex');
+        },
+
+        success: function (json) {
+            $('.form_load').fadeOut(500);
+
+            if (json.result == true) {
+                $(obj).closest('tr').remove();
+                alertify.success('Registro excluído com sucesso!')
+            } else {
+                alertify.error('Falha ao excluir o registro!')
             }
         }
     })

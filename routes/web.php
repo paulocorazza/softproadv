@@ -107,10 +107,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('users/{id}/profile/register', 'UserController@listProfileAdd')->name('users.profiles.list');
     Route::post('users/{id}/profile/register', 'UserController@userAddProfile')->name('users.profiles.add');
+
+    Route::post('users/delete-address-user', 'UserController@destroyAddress')->name('delete_address_user');
     Route::resource('users', 'UserController');
 
     Route::get('profile', 'UserController@showProfile')->name('profile');
     Route::put('profile/{id}', 'UserController@updateProfile')->name('profile.update');
+
 
 
 
