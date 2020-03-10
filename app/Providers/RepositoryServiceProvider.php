@@ -11,6 +11,7 @@ use App\Repositories\Contracts\PlanRepositoryInterface;
 use App\Repositories\Contracts\ProfileRepositoryInterface;
 use App\Repositories\Contracts\StateRepositoryInterface;
 use App\Repositories\Contracts\SubscriptionRepositoryInterface;
+use App\Repositories\Contracts\TypeAddressRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 
 use App\Repositories\Core\DigitalPayments\AgreementPlanRepository;
@@ -23,6 +24,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentPermissionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPlanRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentProfileRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentStateRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentTypeAddressRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -95,6 +97,12 @@ class RepositoryServiceProvider extends ServiceProvider
             CountryRepositoryInterface::class,
             EloquentCountryRepository::class
         );
+
+        $this->app->bind(
+            TypeAddressRepositoryInterface::class,
+            EloquentTypeAddressRepository::class
+        );
+
 
     }
 }

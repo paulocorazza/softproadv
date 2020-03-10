@@ -250,8 +250,10 @@ return [
             'icon' => 'fas fa-cogs',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Tipos de endereço',
+                    'url' => 'type-address',
+                    'icon' => 'far fa-address-card',
+                    'can' => 'type_address'
                 ],
 
                 [

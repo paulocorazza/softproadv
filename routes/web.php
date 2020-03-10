@@ -98,6 +98,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('cities', 'CityController');
 
 
+    /*     * ************************************************ */
+    /*     * *************    TYPE ADDRESS  ***************** */
+    /*     * ************************************************ */
+    Route::resource('type-address', 'TypeAddressController');
+
+
 
     /*     * ************************************************ */
     /*     * *************      USERS      ***************** */

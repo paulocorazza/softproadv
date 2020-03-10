@@ -163,6 +163,47 @@ $(document).ready(function () {
         var country_id = $('#country_id').val();
 
 
+        if (type_address_id == '') {
+            alertify.error('Tipo de endereço de preenchimento obrigatório!')
+            return false
+        }
+
+        if (cep == '') {
+            alertify.error('Cep de preenchimento obrigatório!')
+            return false
+        }
+
+        if (street == '') {
+            alertify.error('Endereço de preenchimento obrigatório!')
+            return false
+        }
+
+        if (number == '') {
+            alertify.error('Número de preenchimento obrigatório!')
+            return false
+        }
+
+        if (district == '') {
+            alertify.error('Bairro de preenchimento obrigatório!')
+            return false
+        }
+
+        if (country_id == '') {
+            alertify.error('País de preenchimento obrigatório!')
+            return false
+        }
+
+        if (city_id == '') {
+            alertify.error('Cidade de preenchimento obrigatório!')
+            return false
+        }
+
+        if (state_id == '') {
+            alertify.error('UF de preenchimento obrigatório!')
+            return false
+        }
+
+
         var td =
             '<td>' +
             '<input type="hidden" name="address[' + countAddress + '][id]"  value="' + countAddress + '"> ' +

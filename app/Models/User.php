@@ -81,6 +81,7 @@ class User extends Authenticatable
             'cpf'       => 'cpf',
             'password'  => 'required|min:3|max:20|confirmed',
             'type'      => 'required|in:A,U',
+            'marital_status' => 'required|in:Solteiro,Casado,Separado,Divorciado,Viúvo',
             'oab'       => 'required_if:type,A',
         ];
     }
@@ -94,6 +95,7 @@ class User extends Authenticatable
             'image'     => 'image',
             'cpf'       => 'cpf',
             'type'      => 'required|in:A,U',
+            'marital_status' => 'required|in:Solteiro,Casado,Separado,Divorciado,Viúvo',
             'oab'       => 'required_if:type,A',
         ];
     }

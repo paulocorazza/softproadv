@@ -17,17 +17,12 @@ $(document).ready(function () {
     $('#formRegister').each(function () {
         $(this).validate({
             rules: {
-                name: {
+                description: {
                     required: true,
                     minlength: 3,
-                    maxlength: 60,
+                    maxlength: 100,
                 },
 
-                label: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 200,
-                },
 
             },
 
@@ -47,6 +42,8 @@ $(document).ready(function () {
                 $(element.form).find("label[for=" + element.id + "]")
                     .removeClass(errorClass);
             },
+
+
 
             submitHandler: function (form) {
                 form.submit();
