@@ -22,22 +22,15 @@ class CountryController extends ControllerStandard
         $this->middleware('can:delete_countries')->only(['delete']);
     }
 
-    public function states($id, Request $request)
+    public function getStatesByName($id, Request $request)
     {
-        $data = [];
+        $return = $this->model->getStatesByName($id, $request);
 
-        if($request->has('q')){
-            $search = $request->q;
-
-            $country = $this->model->relationships([
-                'states' => function ($query) use ($search) {
-                    $query->where('initials', 'LIKE', "%$search%");
-                }
-            ])->find($id);
-
-            $data = $country->states;
+        if (!$return['status']) {
+            return redirect()->back()
+                             ->withErrors($return['message']);
         }
 
-        return response()->json($data);
+        return response()->json($return['data']);
     }
 }

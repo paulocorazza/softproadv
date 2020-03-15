@@ -24,4 +24,17 @@ class Profile extends Model
     {
         return $this->belongsToMany(Permission::class, 'permission_profile');
     }
+
+
+    /**
+     * @param string $id
+     * @return array
+     */
+    public function rules($id = '')
+    {
+        return [
+            'name'  => "required|min:3|max:60|unique:profiles,name,{$id},id",
+            'label' => 'required|min:3|max:200',
+        ];
+    }
 }

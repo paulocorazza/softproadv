@@ -271,6 +271,7 @@ $(document).ready(function () {
     $('#type_address_id').select2({
         theme: "classic"
     });
+
     $('#country_id').select2({
         theme: "classic"
     });

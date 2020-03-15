@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Repositories\Contracts\StateRepositoryInterface;
 use Illuminate\Http\Request;
 
-class StateController extends Controller
+class StateController extends ControllerStandard
 {
     public function __construct(StateRepositoryInterface $state)
     {
@@ -22,24 +23,49 @@ class StateController extends Controller
         $this->middleware('can:delete_states')->only(['delete']);
     }
 
-    public function cities($id, Request $request)
+    public function index()
     {
-        $data = [];
 
-        if($request->has('q')){
-            $search = $request->q;
+        if (request()->ajax()) {
+            return $this->model
+                        ->dataTables('action',  $this->view . '.partials.acoes');
 
-            $state = $this->model->relationships([
-                'cities' => function ($query) use ($search) {
-                    $query->where('name', 'LIKE', "%$search%");
-                }
-            ])->find($id);
 
-            $data = $state->cities;
         }
 
-        return response()->json($data);
+        $title = "Gestão de {$this->title}s";
+        return view("{$this->view}.index", compact('title'));
+    }
+
+    public function create()
+    {
+        $countries = $this->model->getCountries();
+
+        $title = "Cadastrar {$this->title}";
+        return view("{$this->view}.create", compact('title', 'countries'));
+    }
+
+    public function edit($id)
+    {
+        $data = $this->model->find($id);
+
+        $countries = $this->model->getCountries();
+
+        $title = "Editar {$this->title}: {$data->name}";
+
+        return view("{$this->view}.create", compact('title', 'data', 'countries'));
+    }
 
 
+    public function getCitiesByName($id, Request $request)
+    {
+        $return = $this->model->getCitiesByName($id, $request);
+
+        if (!$return['status']) {
+            return redirect()->back()
+                             ->withErrors($return['message']);
+        }
+
+        return response()->json($return['data']);
     }
 }

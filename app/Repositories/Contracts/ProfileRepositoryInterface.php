@@ -8,5 +8,4 @@ interface ProfileRepositoryInterface
     public function getUserNotIn($profile);
     public function getPermissions($id);
     public function getPermissionNotInt($profile);
-    public function rules($id = '');
 }

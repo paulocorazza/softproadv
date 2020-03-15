@@ -82,14 +82,14 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * *************     COUNTRIES    ***************** */
     /*     * ************************************************ */
     Route::resource('countries', 'CountryController');
-    Route::get('countries/{id}/states', 'CountryController@states');
+    Route::get('countries/{id}/states', 'CountryController@getStatesByName');
 
 
     /*     * ************************************************ */
     /*     * *************       STATES     ***************** */
     /*     * ************************************************ */
     Route::resource('states', 'StateController');
-    Route::get('states/{id}/cities', 'StateController@cities');
+    Route::get('states/{id}/cities', 'StateController@getCitiesByName');
 
 
     /*     * ************************************************ */

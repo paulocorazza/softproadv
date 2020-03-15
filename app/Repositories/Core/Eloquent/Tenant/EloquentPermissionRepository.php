@@ -29,18 +29,6 @@ class EloquentPermissionRepository extends BaseEloquentRepository
     }
 
 
-    /**
-     * @param string $id
-     * @return array
-     */
-    public function rules($id = '')
-    {
-        return [
-            'name'  => "required|min:3|max:60|unique:permissions,name,{$id},id",
-            'label' => 'required|min:3|max:200',
-        ];
-    }
-
     public function getProfiles($id)
     {
         $permission = $this->relationships('profiles')->find($id);

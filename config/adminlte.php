@@ -250,15 +250,24 @@ return [
             'icon' => 'fas fa-cogs',
             'submenu' => [
                 [
-                    'text' => 'Tipos de endereço',
+                    'text' => 'Tipos de endereços',
                     'url' => 'type-address',
                     'icon' => 'far fa-address-card',
                     'can' => 'type_address'
                 ],
 
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Paises',
+                    'url' => 'countries',
+                    'icon' => 'fas fa-globe-americas',
+                    'can' => 'countries'
+                ],
+
+                [
+                    'text' => 'Estados',
+                    'url' => 'states',
+                    'icon' => 'fas fa-flag',
+                    'can' => 'states'
                 ],
             ],
         ],

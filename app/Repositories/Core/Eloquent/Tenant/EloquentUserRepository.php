@@ -28,17 +28,6 @@ class EloquentUserRepository extends BaseEloquentRepository
 
                 $id = ($item['id'] > 0) ? $item['id'] : 0;
 
-                /* $address['type_address_id'] = $item['type_address_id'];
-                $address['street'] = $item['street'];
-                $address['number'] = $item['number'];
-                $address['district'] = $item['district'];
-                $address['complement'] = $item['complement'];
-                $address['cep'] = $item['cep'];
-                $address['country_id'] = $item['country_id'];
-                $address['state_id'] = $item['state_id'];
-                $address['city_id'] = $item['city_id'];*/
-
-
                 $user->addresses()->updateOrCreate(['id' => $id], $item);
             }
 
