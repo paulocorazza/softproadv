@@ -269,6 +269,13 @@ return [
                     'icon' => 'fas fa-flag',
                     'can' => 'states'
                 ],
+
+                [
+                    'text' => 'Cidades',
+                    'url' => 'cities',
+                    'icon' => 'fa fa-map-signs',
+                    'can' => 'cities'
+                ],
             ],
         ],
 

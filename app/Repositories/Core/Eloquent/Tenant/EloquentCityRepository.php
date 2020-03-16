@@ -2,6 +2,7 @@
 namespace App\Repositories\Core\Eloquent\Tenant;
 
 use App\Models\City;
+use App\Models\State;
 use App\Repositories\Contracts\CityRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 
@@ -11,7 +12,7 @@ use App\Repositories\Core\BaseEloquentRepository;
  *
  * @copyright (c) 2018, Carlos Junior
  */
-class EloquentCityRepositoryRepository extends BaseEloquentRepository
+class EloquentCityRepository extends BaseEloquentRepository
     implements CityRepositoryInterface
 {
     /*     * ************************************************ */
@@ -27,4 +28,22 @@ class EloquentCityRepositoryRepository extends BaseEloquentRepository
         return City::class;
     }
 
+    public function dataTables($column, $view)
+    {
+        $model = $this->model
+            ->query()
+            ->with('state');
+
+
+        return Datatables()->eloquent($model)
+            ->addColumn($column, $view)
+            ->make(true);
+    }
+
+    public function getStates()
+    {
+        return State::orderBy('name', 'ASC')
+                     ->get()
+                     ->pluck('name', 'id');
+    }
 }

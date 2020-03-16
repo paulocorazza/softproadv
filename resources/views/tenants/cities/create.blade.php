@@ -1,0 +1,66 @@
+@extends('adminlte::page')
+
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <style type="text/css">
+        .table td, .table th {
+            padding: 0.30rem;
+        }
+    </style>
+@stop
+
+
+@section('title_postfix', ' - Cadastrar Cidade')
+
+@section('adminlte_css')
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
+@stop
+
+@section('content_header')
+    <div class="container-fluid">
+        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Cidades',
+                               'breadcrumbs' => [
+                               'Cidades' => route('cities.index'),
+                                isset($data->id) ? 'Editar' : 'Cadastrar', ]
+                              ])
+    </div><!-- /.container-fluid -->
+@stop
+
+
+@section('content')
+    @include('tenants.includes.alerts')
+
+    <div class="card card-outline card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Identificação
+                <small>Cidades</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
+            @include('tenants.cities.partials.form')
+        </div>
+        <!-- /.card-body -->
+    </div>
+@stop
+
+
+@section('js')
+    <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
+    <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
+    <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
+
+    <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/cities/validation.js') }}></script>
+@stop
+
+

@@ -15,4 +15,13 @@ class City extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    public function rules($id = '')
+    {
+        return [
+            'state_id'    => 'required|exists:states,id',
+            'ibge'          => "required|min:2|unique:cities,ibge,{$id},id",
+            'name'          => "required|min:3|max:100|unique:cities,name,{$id},id",
+        ];
+    }
 }

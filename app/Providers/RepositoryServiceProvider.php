@@ -17,7 +17,7 @@ use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Core\DigitalPayments\AgreementPlanRepository;
 use App\Repositories\Core\DigitalPayments\SubscriptionPlanRepository;
 
-use App\Repositories\Core\Eloquent\Tenant\EloquentCityRepositoryRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentCityRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCompanyRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCountryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPermissionRepository;
@@ -85,7 +85,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(
             CityRepositoryInterface::class,
-            EloquentCityRepositoryRepository::class
+            EloquentCityRepository::class
         );
 
         $this->app->bind(

@@ -23,19 +23,6 @@ class StateController extends ControllerStandard
         $this->middleware('can:delete_states')->only(['delete']);
     }
 
-    public function index()
-    {
-
-        if (request()->ajax()) {
-            return $this->model
-                        ->dataTables('action',  $this->view . '.partials.acoes');
-
-
-        }
-
-        $title = "Gestão de {$this->title}s";
-        return view("{$this->view}.index", compact('title'));
-    }
 
     public function create()
     {
@@ -63,7 +50,7 @@ class StateController extends ControllerStandard
 
         if (!$return['status']) {
             return redirect()->back()
-                             ->withErrors($return['message']);
+                ->withErrors($return['message']);
         }
 
         return response()->json($return['data']);

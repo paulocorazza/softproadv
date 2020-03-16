@@ -29,7 +29,7 @@ class State extends Model
     {
         return [
             'country_id'    => 'required|exists:countries,id',
-            'initials'      => "required|max:2|unique:states,id,{$id},id",
+            'initials'      => "required|max:2|unique:states,initials,{$id},id",
             'name'          => "required|min:3|max:100|unique:states,name,{$id},id",
         ];
     }
