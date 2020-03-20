@@ -22,6 +22,10 @@
                     </span>
         </div>
     </div>
+    <div class="jloadCep">
+        @include('tenants.includes.load')
+    </div>
+
 </div>
 </div>
 

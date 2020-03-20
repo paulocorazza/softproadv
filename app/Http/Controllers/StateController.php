@@ -17,10 +17,10 @@ class StateController extends ControllerStandard
 
         $this->middleware('can:states');
 
-        $this->middleware('can:create_states')->only(['create', 'store']);
-        $this->middleware('can:update_states')->only(['edit', 'update']);
-        $this->middleware('can:view_states')->only(['show']);
-        $this->middleware('can:delete_states')->only(['delete']);
+        $this->middleware('can:create_state')->only(['create', 'store']);
+        $this->middleware('can:update_state')->only(['edit', 'update']);
+        $this->middleware('can:view_state')->only(['show']);
+        $this->middleware('can:delete_state')->only(['delete']);
     }
 
 

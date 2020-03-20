@@ -140,9 +140,20 @@ class User extends Authenticatable
     }
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function addresses()
     {
         return $this->morphMany(Address::class, 'addressble');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function contacts()
+    {
+        return $this->morphMany(Contact::class, 'contactable');
     }
 
 

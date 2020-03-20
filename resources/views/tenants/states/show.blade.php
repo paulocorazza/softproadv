@@ -39,9 +39,11 @@
         <!-- /.card-body -->
     </div>
 
+    @can('delete_state')
     {!! Form::model($data, ['route' => ['states.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
     {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete', 'rel' => $data->id ]) !!}
     {!! Form::close() !!}
+    @endcan
 @stop
 
 @section('js')

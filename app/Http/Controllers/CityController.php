@@ -15,10 +15,10 @@ class CityController extends ControllerStandard
 
         $this->middleware('can:cities');
 
-        $this->middleware('can:create_cities')->only(['create', 'store']);
-        $this->middleware('can:update_cities')->only(['edit', 'update']);
-        $this->middleware('can:view_cities')->only(['show']);
-        $this->middleware('can:delete_cities')->only(['delete']);
+        $this->middleware('can:create_city')->only(['create', 'store']);
+        $this->middleware('can:update_city')->only(['edit', 'update']);
+        $this->middleware('can:view_city')->only(['show']);
+        $this->middleware('can:delete_city')->only(['delete']);
     }
 
     public function index()

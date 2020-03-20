@@ -29,7 +29,7 @@ function limparEndereco() {
 }
 
 
-function editDetail(obj) {
+function editAddress(obj) {
     limparEndereco()
 
     id = $(obj).closest('tr').attr('data-id');
@@ -79,7 +79,7 @@ function editDetail(obj) {
     $('#modalAddress').modal('show');
 }
 
-function removeDetail(obj) {
+function removeAddress(obj) {
     reset();
 
     alertify.confirm("Deseja excluir o registro selecionado?", function (e) {
@@ -131,10 +131,72 @@ function deletaAjax(obj, id) {
 }
 
 
+function searchAdrress(cep) {
+    $.ajax({
+        url: '/search/' + cep + '/address',
+        type: 'get',
+        dataType: 'json',
+
+        beforeSend: function () {
+            $('.jloadCep').find('.form_load').css('display', 'flex');
+        },
+
+        success: function (json) {
+            $('.jloadCep').find('.form_load').fadeOut(500);
+
+            if (json.result == true) {
+
+                $('#street').val( json.data.original.logradouro );
+                $('#district').val( json.data.original.bairro);
+                $('#complement').val( json.data.original.complemento);
+
+                $('#country_id').val(1058);
+                $('#country_id').trigger('change');
+
+                var dataState = {
+                    id: json.data.original.ibge.substring(0,2),
+                    text: json.data.original.uf.toUpperCase()
+                };
+
+                var newOption = new Option(dataState.text, dataState.id, false, false);
+                $('#state_id').append(newOption).trigger('change');
+
+                var dataCity = {
+                    id: json.data.original.ibge,
+                    text:  json.data.original.localidade
+                };
+
+
+                var newOption = new Option(dataCity.text, dataCity.id, false, false);
+                $('#city_id').append(newOption).trigger('change');
+
+                 if (json.data.original.logradouro == '') {
+                     $('#street').focus()
+                 } else {
+                     $('#number').focus()
+                 }
+
+            } else {
+                alertify.error(json.data.message)
+            }
+        }
+    })
+}
+
+
 $(document).ready(function () {
     $('#btnEndereco').on('click', function () {
         id = ''
         limparEndereco();
+    })
+
+
+    $('#search_cep').on('click', function () {
+        var cep = $('#cep').val();
+
+        if (cep != '') {
+            searchAdrress(cep);
+        }
     })
 
 
@@ -164,42 +226,42 @@ $(document).ready(function () {
 
 
         if (type_address_id == '') {
-            alertify.error('Tipo de endereço de preenchimento obrigatório!')
+            alertify.error('Tipo de endereço é de preenchimento obrigatório!')
             return false
         }
 
         if (cep == '') {
-            alertify.error('Cep de preenchimento obrigatório!')
+            alertify.error('Cep é de preenchimento obrigatório!')
             return false
         }
 
         if (street == '') {
-            alertify.error('Endereço de preenchimento obrigatório!')
+            alertify.error('Endereço é de preenchimento obrigatório!')
             return false
         }
 
         if (number == '') {
-            alertify.error('Número de preenchimento obrigatório!')
+            alertify.error('Número é de preenchimento obrigatório!')
             return false
         }
 
         if (district == '') {
-            alertify.error('Bairro de preenchimento obrigatório!')
+            alertify.error('Bairro é de preenchimento obrigatório!')
             return false
         }
 
         if (country_id == '') {
-            alertify.error('País de preenchimento obrigatório!')
+            alertify.error('Pais é de preenchimento obrigatório!')
             return false
         }
 
         if (city_id == '') {
-            alertify.error('Cidade de preenchimento obrigatório!')
+            alertify.error('Cidade é de preenchimento obrigatório!')
             return false
         }
 
         if (state_id == '') {
-            alertify.error('UF de preenchimento obrigatório!')
+            alertify.error('UF é de preenchimento obrigatório!')
             return false
         }
 
@@ -249,15 +311,15 @@ $(document).ready(function () {
 
 
             '<td>' +
-            '<a rel="' + countAddress + '" class="badge bg-yellow" href="javascript:;" onclick="editDetail(this)" >Editar</a>' +
+            '<a rel="' + countAddress + '" class="badge bg-yellow" href="javascript:;" onclick="editAddress(this)" >Editar</a>' +
 
-            '<a rel="' + countAddress + '" class="badge bg-danger" href="javascript:;" onclick="removeDetail(this)">Excluir</a>' +
+            '<a rel="' + countAddress + '" class="badge bg-danger" href="javascript:;" onclick="removeAddress(this)">Excluir</a>' +
             '</td>';
 
         if (id != '') {
             $('#address_table').find('.j_list').find('#address' + id).html(td);
         } else if (id == '') {
-            var novo = '<tr id="#address' + countAddress + '" data-id ="' + countAddress + '">' + td + '</tr>'
+            var novo = '<tr id="address' + countAddress + '" data-id ="' + countAddress + '">' + td + '</tr>'
 
             $('#address_table').append(novo);
 

@@ -88,7 +88,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                @include('tenants.all.partials.addressForm')
+                                @include('tenants.all.partials.address.addressForm')
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -101,13 +101,63 @@
 
             <div class="row">
                 @include('tenants.includes.load')
-                @include('tenants.all.partials.table-address')
+                @include('tenants.all.partials.address.table-address')
             </div>
         </div>
         <!-- /.card-body -->
     </div>
     <!-- /.Endereços -->
 
+
+    <!-- /.Contatos -->
+    <div class="card card-outline card-blue">
+        <div class="card-header">
+            <h3 class="card-title">
+                Contatos
+                <small>Outros Contatos</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
+            <button id="btnContact" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target=".modal-contact">Adicionar
+            </button>
+            <br>
+            <br>
+
+            <div id="modalContact" class="modal fade modal-contact" tabindex="-1" role="dialog"
+                 aria-labelledby="modalLarge" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalLarge">Contato</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @include('tenants.all.partials.contact.contactForm')
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                            <button id="btnSaveUpdateContact" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @include('tenants.includes.load')
+                @include('tenants.all.partials.contact.table-contact')
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.Contatos -->
 
     <!-- /.Outros Dados -->
     <div class="card card-outline card-gray">
@@ -129,7 +179,6 @@
     <!-- /.Outros Dados -->
 
 
-
     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
@@ -138,7 +187,8 @@
 
 @section('js')
     <script>
-       var deleteAddressAjax = '/users/delete-address-user';
+       var deleteAddressAjax = "{{ route('delete_address_user') }}";
+       var deleteContactAjax = "{{ route('delete_contact_user') }}";
     </script>
 
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
@@ -148,6 +198,7 @@
     <script src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script src={{ asset('assets/js/users/validation.js') }}></script>
     <script src={{ asset('assets/js/all/address.js') }}></script>
+    <script src={{ asset('assets/js/all/contact.js') }}></script>
 @stop
 
 

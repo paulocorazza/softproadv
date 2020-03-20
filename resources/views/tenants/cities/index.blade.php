@@ -16,16 +16,18 @@
     @include('tenants.includes.alerts')
 
     <div class="content">
-        <p>
-            <a href="{{route('cities.create')}}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-plus"></span>
-                Adicionar
-            </a>
-        </p>
+        @can('create_city')
+            <p>
+                <a href="{{route('cities.create')}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Adicionar
+                </a>
+            </p>
+        @endcan
 
-        <!--TABELA -->
-            @include('tenants.cities.partials.table')
-        <!--TABELA -->
+    <!--TABELA -->
+    @include('tenants.cities.partials.table')
+    <!--TABELA -->
     </div>
 @stop
 
@@ -36,11 +38,11 @@
     <script>
         var urlAjax = '/cities';
 
-        var columns =  [
-            {data: "id", name : 'id'},
-            {data: "ibge", name : 'ibge'},
-            {data: "name", name : 'name'},
-            {data: "state.initials", name : 'state.initials' },
+        var columns = [
+            {data: "id", name: 'id'},
+            {data: "ibge", name: 'ibge'},
+            {data: "name", name: 'name'},
+            {data: "state.initials", name: 'state.initials'},
             {
                 data: 'action',
                 orderable: false

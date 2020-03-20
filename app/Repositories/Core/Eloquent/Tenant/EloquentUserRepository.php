@@ -3,6 +3,7 @@
 namespace App\Repositories\Core\Eloquent\Tenant;
 
 use App\Models\Address;
+use App\Models\Contact;
 use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -15,26 +16,59 @@ use Illuminate\Support\Facades\DB;
  * @copyright (c) 2018, Carlos Junior
  */
 class EloquentUserRepository extends BaseEloquentRepository
-                             implements UserRepositoryInterface
+    implements UserRepositoryInterface
 {
     /*     * ************************************************ */
     /*     * ************* METODOS PRIVADOS ***************** */
     /*     * ************************************************ */
+    /**
+     * @param array $data
+     * @param $user
+     * @return bool
+     */
     private function saveAddress(array $data, $user)
     {
-
         if (isset($data['address'])) {
             foreach ($data['address'] as $item) {
 
                 $id = ($item['id'] > 0) ? $item['id'] : 0;
 
-                $user->addresses()->updateOrCreate(['id' => $id], $item);
+                $insert = $user->addresses()->updateOrCreate(['id' => $id], $item);
+
+                if (!$insert) {
+                    return false;
+                }
             }
 
             return true;
         }
 
-        return false;
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @param $user
+     * @return bool
+     */
+    private function saveContacts(array $data, $user)
+    {
+        if (isset($data['contacts'])) {
+            foreach ($data['contacts'] as $item) {
+
+                $id = ($item['id'] > 0) ? $item['id'] : 0;
+
+                $insert = $user->contacts()->updateOrCreate(['id' => $id], $item);
+
+                if (!$insert) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return true;
     }
 
     /*     * ************************************************ */
@@ -45,6 +79,11 @@ class EloquentUserRepository extends BaseEloquentRepository
         return User::class;
     }
 
+
+    /**
+     * @param array $data
+     * @return array|mixed
+     */
     public function create(array $data)
     {
         DB::beginTransaction();
@@ -53,14 +92,17 @@ class EloquentUserRepository extends BaseEloquentRepository
             $user = parent::create($data);
 
             $addresses = $this->saveAddress($data, $user);
+            $contacts = $this->saveContacts($data, $user);
 
-            if (!$user || !$addresses) {
+
+            if (!$user || !$addresses || !$contacts) {
                 DB::rollBack();
 
                 return [
                     'status' => false,
                     'message' => 'Não foi possível salvar o registro'
                 ];
+
             }
 
             DB::commit();
@@ -77,7 +119,11 @@ class EloquentUserRepository extends BaseEloquentRepository
         }
     }
 
-
+    /**
+     * @param $id
+     * @param array $data
+     * @return array|mixed
+     */
     public function update($id, array $data)
     {
         if (!$user = parent::find($id)) {
@@ -91,9 +137,10 @@ class EloquentUserRepository extends BaseEloquentRepository
         try {
             $user->update($data);
 
-            $description = $this->saveAddress($data, $user);
+            $addresses = $this->saveAddress($data, $user);
+            $contacts = $this->saveContacts($data, $user);
 
-            if (!$user || !$description) {
+            if (!$user || !$addresses || !$contacts) {
                 DB::rollBack();
 
                 return [
@@ -118,7 +165,10 @@ class EloquentUserRepository extends BaseEloquentRepository
 
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getProfiles($id)
     {
         $user = $this->relationships('profiles')->find($id);
@@ -132,6 +182,10 @@ class EloquentUserRepository extends BaseEloquentRepository
             ->make(true);
     }
 
+    /**
+     * @param $user
+     * @return mixed
+     */
     public function getProfilesNotIn($user)
     {
         return Profile::WhereNotIn('id', function ($query) use ($user) {
@@ -141,6 +195,10 @@ class EloquentUserRepository extends BaseEloquentRepository
         })->get();
     }
 
+    /**
+     * @param string $id
+     * @return mixed
+     */
     public function rules($id = '')
     {
         if (!empty($id) && isset($id)) {
@@ -150,8 +208,21 @@ class EloquentUserRepository extends BaseEloquentRepository
         return $this->model->rules();
     }
 
-   public function deleteAddress($id)
-   {
-      return Address::find($id)->delete();
-   }
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteAddress($id)
+    {
+        return Address::find($id)->delete();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteContact($id)
+    {
+        return Contact::find($id)->delete();
+    }
 }

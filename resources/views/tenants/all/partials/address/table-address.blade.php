@@ -1,4 +1,4 @@
-<table class="table table-responsive table-hover" id="address_table">
+<table class="table table-hover" id="address_table">
     <thead>
     <tr>
         <th width="12%">Tipo</th>
@@ -7,7 +7,7 @@
         <th width="16%">Bairro</th>
         <th width="20%">Cidade</th>
         <th width="8%">UF</th>
-        <th width="11%">Cep</th>
+        <th width="20%" scope="col">Cep</th>
         <th>Ação</th>
     </tr>
     </thead>
@@ -89,10 +89,10 @@
 
                 <td>
                     <a rel="{{ $address->id }}" class="badge bg-yellow" href="javascript:;"
-                       onclick="editDetail(this)">Editar</a>
+                       onclick="editAddress(this)">Editar</a>
 
                     <a rel="{{ $address->id }}" class="badge bg-danger" href="javascript:;"
-                       onclick="removeDetail(this)">Excluir</a>
+                       onclick="removeAddress(this)">Excluir</a>
                 </td>
             </tr>
         @empty

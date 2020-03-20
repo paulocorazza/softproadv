@@ -16,10 +16,10 @@ class CountryController extends ControllerStandard
 
         $this->middleware('can:countries');
 
-        $this->middleware('can:create_countries')->only(['create', 'store']);
-        $this->middleware('can:update_countries')->only(['edit', 'update']);
-        $this->middleware('can:view_countries')->only(['show']);
-        $this->middleware('can:delete_countries')->only(['delete']);
+        $this->middleware('can:create_country')->only(['create', 'store']);
+        $this->middleware('can:update_country')->only(['edit', 'update']);
+        $this->middleware('can:view_country')->only(['show']);
+        $this->middleware('can:delete_country')->only(['delete']);
     }
 
     public function getStatesByName($id, Request $request)

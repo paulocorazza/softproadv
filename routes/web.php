@@ -104,6 +104,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('type-address', 'TypeAddressController');
 
 
+    /*     * ************************************************ */
+    /*     * *************  SEARCH ADDRESS  ***************** */
+    /*     * ************************************************ */
+     Route::get('search/{cep}/address', 'SearchAddressController@search')->name('search.address');
+
 
     /*     * ************************************************ */
     /*     * *************      USERS      ***************** */
@@ -115,6 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{id}/profile/register', 'UserController@userAddProfile')->name('users.profiles.add');
 
     Route::post('users/delete-address-user', 'UserController@destroyAddress')->name('delete_address_user');
+    Route::post('users/delete-contact-user', 'UserController@destroyContact')->name('delete_contact_user');
     Route::resource('users', 'UserController');
 
     Route::get('profile', 'UserController@showProfile')->name('profile');

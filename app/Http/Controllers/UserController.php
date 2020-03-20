@@ -48,6 +48,7 @@ class UserController extends ControllerStandard
             'addresses.type_address',
             'addresses.city',
             'addresses.state',
+            'contacts'
         ])->find($id);
 
 
@@ -68,6 +69,18 @@ class UserController extends ControllerStandard
            if  ($delete = $this->model->deleteAddress($id)) {
                return response()->json(['result' => true]);
            }
+
+        }
+    }
+
+    public function destroyContact()
+    {
+        if (request()->ajax()) {
+            $id = request()->get('id');
+
+            if  ($delete = $this->model->deleteContact($id)) {
+                return response()->json(['result' => true]);
+            }
 
         }
     }

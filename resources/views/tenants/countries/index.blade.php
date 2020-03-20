@@ -16,16 +16,18 @@
     @include('tenants.includes.alerts')
 
     <div class="content">
-        <p>
-            <a href="{{route('countries.create')}}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-plus"></span>
-                Adicionar
-            </a>
-        </p>
+        @can('create_country')
+            <p>
+                <a href="{{route('countries.create')}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Adicionar
+                </a>
+            </p>
+        @endcan
 
-        <!--TABELA -->
-            @include('tenants.countries.partials.table')
-        <!--TABELA -->
+    <!--TABELA -->
+    @include('tenants.countries.partials.table')
+    <!--TABELA -->
     </div>
 @stop
 
@@ -36,7 +38,7 @@
     <script>
         var urlAjax = '/countries';
 
-        var columns =  [
+        var columns = [
             {data: "id"},
             {data: "name"},
             {

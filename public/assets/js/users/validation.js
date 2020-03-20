@@ -76,4 +76,13 @@ $(document).ready(function () {
 
     });
 
+
+    $('#type').select2({
+        theme: "classic"
+    });
+
+    $('#marital_status').select2({
+        theme: "classic"
+    });
+
 });

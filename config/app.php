@@ -176,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        Canducci\Cep\Providers\CepServiceProvider::class
 
     ],
 
@@ -228,6 +229,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Cep' => Canducci\Cep\Facades\Cep::class,
+        'Endereco' => Canducci\Cep\Facades\Endereco::class
 
     ],
 

@@ -38,9 +38,11 @@
         <!-- /.card-body -->
     </div>
 
-    {!! Form::model($data, ['route' => ['cities.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
-    {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete', 'rel' => $data->id ]) !!}
-    {!! Form::close() !!}
+    @can('delete_city')
+        {!! Form::model($data, ['route' => ['cities.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
+        {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete', 'rel' => $data->id ]) !!}
+        {!! Form::close() !!}
+    @endcan
 @stop
 
 @section('js')
