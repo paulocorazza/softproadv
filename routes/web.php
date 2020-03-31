@@ -81,15 +81,15 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************     COUNTRIES    ***************** */
     /*     * ************************************************ */
-    Route::resource('countries', 'CountryController');
     Route::get('countries/{id}/states', 'CountryController@getStatesByName');
+    Route::resource('countries', 'CountryController');
 
 
     /*     * ************************************************ */
     /*     * *************       STATES     ***************** */
     /*     * ************************************************ */
-    Route::resource('states', 'StateController');
     Route::get('states/{id}/cities', 'StateController@getCitiesByName');
+    Route::resource('states', 'StateController');
 
 
     /*     * ************************************************ */
@@ -158,6 +158,43 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+
+    /*     * ************************************************ */
+    /*     * *************      ORIGIN      ***************** */
+    /*     * ************************************************ */
+    Route::resource('origins', 'OriginController');
+
+
+
+
+    /*     * ************************************************ */
+    /*     * *************       PERSON     ***************** */
+    /*     * ************************************************ */
+    Route::post('people/delete-address-person', 'PersonController@destroyAddress')->name('delete_address_person');
+    Route::post('people/delete-contact-person', 'PersonController@destroyContact')->name('delete_contact_person');
+
+    Route::resource('people', 'PersonController');
+
+
+    /*     * ************************************************ */
+    /*     * *************       FORUM      ***************** */
+    /*     * ************************************************ */
+    Route::resource('forums', 'ForumController');
+
+
+    /*     * ************************************************ */
+    /*     * *************       VARAS      ***************** */
+    /*     * ************************************************ */
+    Route::resource('sticks', 'StickController');
+
+
+    /*     * ************************************************ */
+    /*     * *************     COMARCAS     ***************** */
+    /*     * ************************************************ */
+    Route::resource('districts', 'DistrictController');
 });
+
+
 
 Route::get('/', 'IndexController@index')->name('index');

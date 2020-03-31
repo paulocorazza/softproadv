@@ -197,7 +197,7 @@ return [
 
                 [
                     'text' => 'Pessoas',
-                    'url' => 'tenants/peoples',
+                    'url' => 'people',
                     'icon' => 'fas fa-id-card',
                     'label_color' => 'success',
                     'can' => 'peoples'
@@ -206,15 +206,15 @@ return [
 
                 [
                     'text' => 'Processos',
-                    'url' => 'tenants/process',
-                    'icon' => 'fas fa-folder',
+                    'url' => 'process',
+                    'icon' => 'fas fa-balance-scale',
                     'label_color' => 'success',
                     'can' => 'process'
                 ],
 
                 [
                     'text' => 'Agenda',
-                    'url' => 'tenants/schedule',
+                    'url' => 'schedule',
                     'icon' => 'fas fa-calendar-check',
                     'label_color' => 'success',
                     'can' => 'schedule'
@@ -222,7 +222,7 @@ return [
 
                 [
                     'text' => 'Atividades',
-                    'url' => 'tenants/tasks',
+                    'url' => 'tasks',
                     'icon' => 'fas fa-tasks',
                     'label_color' => 'success',
                     'can' => 'tasks'
@@ -230,7 +230,7 @@ return [
 
                 [
                     'text' => 'Financeiro',
-                    'url' => 'tenants/financial',
+                    'url' => 'financial',
                     'icon' => 'fas fa-comment-dollar',
                     'label_color' => 'success',
                     'can' => 'financial'
@@ -273,8 +273,36 @@ return [
                 [
                     'text' => 'Cidades',
                     'url' => 'cities',
-                    'icon' => 'fa fa-map-signs',
+                    'icon' => 'fas fa-city',
                     'can' => 'cities'
+                ],
+
+                [
+                    'text' => 'Origem das Pessoas',
+                    'url' => 'origins',
+                    'icon' => 'fas fa-id-card-alt',
+                    'can' => 'origins'
+                ],
+
+                [
+                    'text' => 'Foruns',
+                    'url' => 'forums',
+                    'icon' => 'fas fa-archway',
+                    'can' => 'forums'
+                ],
+
+                [
+                    'text' => 'Varas',
+                    'url' => 'sticks',
+                    'icon' => 'fas fa-sitemap',
+                    'can' => 'sticks'
+                ],
+
+                [
+                    'text' => 'Comarcas',
+                    'url' => 'districts',
+                    'icon' => 'fa fa-map-signs',
+                    'can' => 'districts'
                 ],
             ],
         ],

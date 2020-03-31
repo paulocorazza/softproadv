@@ -31,7 +31,8 @@ class IndexController extends Controller
 
 
         if (!$company) {
-            return redirect()->route('/');
+            //return redirect()->route('/');
+            return redirect()->route('index');
         }
 
         return view('congratulations', compact('company'));

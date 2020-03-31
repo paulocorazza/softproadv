@@ -156,6 +156,14 @@ class User extends Authenticatable
         return $this->morphMany(Contact::class, 'contactable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function people()
+    {
+        return $this->hasMany(Person::class);
+    }
+
 
     /**
      * @param Permission $permission
