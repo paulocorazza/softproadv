@@ -250,6 +250,44 @@ return [
             'icon' => 'fas fa-cogs',
             'submenu' => [
                 [
+                    'text' => 'Grupo de Ações',
+                    'url' => 'group-actions',
+                    'icon' => 'fas fa-archway',
+                    'can' => 'group_actions'
+                ],
+
+                [
+                    'text' => 'Tipos de Ações',
+                    'url' => 'type-actions',
+                    'icon' => 'fas fa-archway',
+                    'can' => 'type_actions'
+                ],
+
+
+                [
+                    'text' => 'Foruns',
+                    'url' => 'forums',
+                    'icon' => 'fas fa-archway',
+                    'can' => 'forums'
+                ],
+
+                [
+                    'text' => 'Varas',
+                    'url' => 'sticks',
+                    'icon' => 'fas fa-sitemap',
+                    'can' => 'sticks'
+                ],
+
+                [
+                    'text' => 'Comarcas',
+                    'url' => 'districts',
+                    'icon' => 'fa fa-map-signs',
+                    'can' => 'districts'
+                ],
+
+
+
+                [
                     'text' => 'Tipos de endereços',
                     'url' => 'type-address',
                     'icon' => 'far fa-address-card',
@@ -284,26 +322,7 @@ return [
                     'can' => 'origins'
                 ],
 
-                [
-                    'text' => 'Foruns',
-                    'url' => 'forums',
-                    'icon' => 'fas fa-archway',
-                    'can' => 'forums'
-                ],
 
-                [
-                    'text' => 'Varas',
-                    'url' => 'sticks',
-                    'icon' => 'fas fa-sitemap',
-                    'can' => 'sticks'
-                ],
-
-                [
-                    'text' => 'Comarcas',
-                    'url' => 'districts',
-                    'icon' => 'fa fa-map-signs',
-                    'can' => 'districts'
-                ],
             ],
         ],
 

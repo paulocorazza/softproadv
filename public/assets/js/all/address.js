@@ -268,45 +268,45 @@ $(document).ready(function () {
 
         var td =
             '<td>' +
-            '<input type="hidden" name="address[' + countAddress + '][id]"  value="' + countAddress + '"> ' +
-            '<input type="hidden" name="address[' + countAddress + '][complement]"  value="' + complement + '"> ' +
-            '<input type="hidden" name="address[' + countAddress + '][country_id]"  value="' + country_id + '"> ' +
+            '<input type="hidden" name="addresses[' + countAddress + '][id]"  value="' + countAddress + '"> ' +
+            '<input type="hidden" name="addresses[' + countAddress + '][complement]"  value="' + complement + '"> ' +
+            '<input type="hidden" name="addresses[' + countAddress + '][country_id]"  value="' + country_id + '"> ' +
 
 
-            '<select class="form-control" readonly name="address[' + countAddress + '][type_address_id]">' +
+            '<select class="form-control" readonly name="addresses[' + countAddress + '][type_address_id]">' +
             '<option value="' + type_address_id + '">' + type_address + '</option>' +
             '</select>' +
             '</td>' +
 
 
             '<td>' +
-            '<input class="form-control" type="text" readonly name="address[' + countAddress + '][street]"  value="' + street + '"> ' +
+            '<input class="form-control" type="text" readonly name="addresses[' + countAddress + '][street]"  value="' + street + '"> ' +
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="text" readonly name="address[' + countAddress + '][number]"  value="' + number + '"> ' +
+            '<input class="form-control" type="text" readonly name="addresses[' + countAddress + '][number]"  value="' + number + '"> ' +
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="text" readonly name="address[' + countAddress + '][district]"  value="' + district + '"> ' +
+            '<input class="form-control" type="text" readonly name="addresses[' + countAddress + '][district]"  value="' + district + '"> ' +
             '</td>' +
 
 
             '<td>' +
-            '<select class="form-control" readonly name="address[' + countAddress + '][city_id]">' +
+            '<select class="form-control" readonly name="addresses[' + countAddress + '][city_id]">' +
             '<option value="' + city_id + '">' + city + '</option>' +
             '</select>' +
             '</td>' +
 
             '<td>' +
-            '<select class="form-control" readonly name="address[' + countAddress + '][state_id]">' +
+            '<select class="form-control" readonly name="addresses[' + countAddress + '][state_id]">' +
             '<option value="' + state_id + '">' + state + '</option>' +
             '</select>' +
             '</td>' +
 
 
             '<td>' +
-            '<input class="form-control" type="text" readonly name="address[' + countAddress + '][cep]"  value="' + cep + '"> ' +
+            '<input class="form-control" type="text" readonly name="addresses[' + countAddress + '][cep]"  value="' + cep + '"> ' +
             '</td>' +
 
 
@@ -317,9 +317,9 @@ $(document).ready(function () {
             '</td>';
 
         if (id != '') {
-            $('#address_table').find('.j_list').find('#address' + id).html(td);
+            $('#address_table').find('.j_list').find('#addresses' + id).html(td);
         } else if (id == '') {
-            var novo = '<tr id="address' + countAddress + '" data-id ="' + countAddress + '">' + td + '</tr>'
+            var novo = '<tr id="addresses' + countAddress + '" data-id ="' + countAddress + '">' + td + '</tr>'
 
             $('#address_table').append(novo);
 

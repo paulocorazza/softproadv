@@ -17,6 +17,16 @@ class Helper
     /*     * ************************************************ */
 
     /**
+     * @param array $array
+     * @return mixed
+     */
+    public static function arrayToObject(Array $array)
+    {
+       return json_decode(json_encode((object) $array), FALSE);
+    }
+
+
+    /**
      * @return bool
      */
     public static function domainIsMain()

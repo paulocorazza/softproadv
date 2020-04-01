@@ -17,3 +17,22 @@
     </div>
 @endif
 
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible hide-msg">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Erro!</h4>
+        {{ session('error') }}
+    </div>
+@endif
+
+
+
+@if(session('alert'))
+    <div class="alert alert-info alert-dismissible hide-msg">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Alerta!</h4>
+        {{ session('alert') }}
+    </div>
+@endif
+

@@ -33,6 +33,22 @@ class CreateAddressesTable extends Migration
                 ->references('id')
                 ->on('type_addresses')
                 ->onDelete('cascade');
+
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('cascade');
+
+            $table->foreign('state_id')
+                ->references('id')
+                ->on('states')
+                ->onDelete('cascade');
+
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities')
+                ->onDelete('cascade');
+
         });
     }
 

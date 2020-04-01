@@ -31,6 +31,7 @@
 @stop
 
 @section('content')
+
     @include('tenants.includes.alerts')
 
     @if( isset($data) )
@@ -38,6 +39,7 @@
     @else
         {!! Form::open(['route' => 'people.store', 'class' => 'form', 'id' => 'formRegister', 'files' => true]) !!}
     @endif
+
 
     <!-- /.Identificação -->
     <div class="card card-outline card-info">

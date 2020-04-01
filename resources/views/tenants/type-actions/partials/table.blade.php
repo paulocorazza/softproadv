@@ -4,8 +4,8 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Estado</th>
+                <th scope="col">Tipo de Ação</th>
+                <th scope="col">Grupo de Ação</th>
                 <th width="150px" scope="col">Ações</th>
             </tr>
             </thead>

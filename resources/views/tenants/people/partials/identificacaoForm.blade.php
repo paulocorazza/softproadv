@@ -9,6 +9,15 @@
     {!! Form::label('fantasy', 'Fantasia', ['class' => 'control-label']); !!}
 </div>
 
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            {!! Form::label('origin_id', 'Origem', ['class' => 'control-label']); !!}
+            {!! Form::select('origin_id', $origins ,  null, ['class' => 'form-control', 'id' => 'origin_id']) !!}
+        </div>
+    </div>
+</div>
+
 <div class="form-group label-float">
     {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'email']) !!}
     {!! Form::label('email', 'E-mail', ['class' => 'control-label']); !!}
@@ -19,6 +28,10 @@
     {!! Form::label('site', 'Site', ['class' => 'control-label']); !!}
 </div>
 
+<div class="form-group">
+    {!! Form::label('type', 'Tipo', ['class' => 'control-label']); !!}
+    {!! Form::select('type', ['F' => 'Física', 'J' => 'Jurídica'] ,  null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'type']) !!}
+</div>
 
 <div class="row">
     <div class="col-12 col-sm-4">
@@ -41,11 +54,6 @@
             {!! Form::label('rg', 'RG', ['class' => 'control-label']); !!}
         </div>
     </div>
-</div>
-
-<div class="form-group">
-    {!! Form::label('type', 'Tipo', ['class' => 'control-label']); !!}
-    {!! Form::select('type', ['F' => 'Física', 'J' => 'Jurídica'] ,  null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'type']) !!}
 </div>
 
 
@@ -84,4 +92,11 @@
 <div class="form-group label-float">
     {!! Form::file('image',  ['class' => 'form-control', 'placeholder' => ' ']) !!}
     {!! Form::label('image', 'Foto', ['class' => 'control-label']); !!}
+</div>
+
+<div class="form-group">
+    <label>
+        {!! Form::checkbox('status',null) !!}
+        Inativo ?
+    </label>
 </div>

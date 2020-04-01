@@ -30,6 +30,12 @@
     </div>
 @endif
 
+
+<div class="form-group">
+    {!! Form::label('type', 'Tipo', ['class' => 'control-label']); !!}
+    {!! Form::select('type', ['A' => 'Advogado', 'U' => 'Usuário'] ,  null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'type']) !!}
+</div>
+
 <div class="row">
     <div class="col-12 col-sm-4">
         <div class="form-group label-float">
@@ -53,24 +59,18 @@
     </div>
 </div>
 
-<div class="form-group">
-    {!! Form::label('type', 'Tipo', ['class' => 'control-label']); !!}
-    {!! Form::select('type', ['A' => 'Advogado', 'U' => 'Usuário'] ,  null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'type']) !!}
-</div>
-
-
 <div class="row">
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">
-            {!! Form::text('ctps', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'ctps']) !!}
-            {!! Form::label('ctps', 'CTPS', ['class' => 'control-label']); !!}
+            {!! Form::text('oab', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'oab']) !!}
+            {!! Form::label('oab', 'OAB', ['class' => 'control-label']); !!}
         </div>
     </div>
 
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">
-            {!! Form::text('oab', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'oab']) !!}
-            {!! Form::label('oab', 'OAB', ['class' => 'control-label']); !!}
+            {!! Form::text('ctps', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'ctps']) !!}
+            {!! Form::label('ctps', 'CTPS', ['class' => 'control-label']); !!}
         </div>
     </div>
 </div>

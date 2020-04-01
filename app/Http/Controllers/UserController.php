@@ -56,8 +56,11 @@ class UserController extends ControllerStandard
 
         $type_addresses = TypeAddress::all();
         $countries = Country::all();
+        $contacts = $data->contacts;
+        $addresses = $data->addresses;
 
-        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries'));
+
+        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'contacts', 'addresses'));
     }
 
 
@@ -81,7 +84,6 @@ class UserController extends ControllerStandard
             if  ($delete = $this->model->deleteContact($id)) {
                 return response()->json(['result' => true]);
             }
-
         }
     }
 
@@ -96,7 +98,7 @@ class UserController extends ControllerStandard
 
             if (!$upload) {
                 return redirect()->back()
-                    ->withErrors(['errors' => 'Falha no upload do arquivo'])
+                    ->with('error',  'Falha no upload do arquivo')
                     ->withInput();
             }
 
@@ -111,12 +113,12 @@ class UserController extends ControllerStandard
 
         if (!$insert['status']) {
             return redirect()->back()
-                ->withErrors($insert['message'])
+                ->with('error', $insert['message'])
                 ->withInput();
         }
 
         return redirect()->route("{$this->route}.index")
-            ->with(['success' => 'Registro realizado com sucesso!']);
+            ->with('success', 'Registro realizado com sucesso!');
     }
 
 

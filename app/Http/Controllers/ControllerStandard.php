@@ -93,7 +93,7 @@ class ControllerStandard extends BaseController
 
             if (!$upload) {
                 return redirect()->back()
-                                 ->withErrors(['errors' => 'Falha no upload do arquivo'])
+                                 ->with('error', 'Falha no upload do arquivo')
                                  ->withInput();
             }
 
@@ -108,12 +108,12 @@ class ControllerStandard extends BaseController
 
         if (!$insert) {
             return redirect()->back()
-                             ->withErrors(['errors' => 'Falha ao cadastrar'])
+                             ->with('error', 'Falha ao cadastrar')
                              ->withInput();
         }
 
         return redirect()->route("{$this->route}.index")
-                         ->with(['success' => 'Registro realizado com sucesso!']);
+                         ->with('success', 'Registro realizado com sucesso!');
     }
 
     /**
@@ -167,7 +167,7 @@ class ControllerStandard extends BaseController
 
             if (!$upload) {
                 return redirect()->back()
-                                 ->withErrors(['errors' => 'Falha no upload do arquivo'])
+                                 ->with('error', 'Falha no upload do arquivo')
                                  ->withInput();
             }
 
@@ -182,12 +182,12 @@ class ControllerStandard extends BaseController
 
         if (!$update) {
             return redirect()->back()
-                             ->withErrors(['errors' => 'Falha ao atualizar'])
+                             ->with('error', 'Falha ao atualizar')
                              ->withInput();
         }
 
         return redirect()->route("{$this->route}.index")
-                         ->with(['success' => 'Registro alterado com sucesso!']);
+                         ->with('success', 'Registro alterado com sucesso!');
     }
 
     /**
@@ -204,7 +204,7 @@ class ControllerStandard extends BaseController
 
         if (!$delete) {
             return redirect()->back()
-                             ->withErrors(['errors' => 'Falha ao deletar']);
+                             ->with('error', 'Falha ao deletar');
         }
 
         if ($this->upload) {
@@ -212,7 +212,7 @@ class ControllerStandard extends BaseController
         }
 
         return redirect()->route("{$this->route}.index")
-                         ->with(['success' => 'Registro deletado com sucesso!']);
+                         ->with('success', 'Registro deletado com sucesso!');
     }
 
     public function search(Request $request)

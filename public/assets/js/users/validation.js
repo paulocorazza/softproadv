@@ -1,3 +1,28 @@
+jQuery.validator.addMethod("requiredCpfIf", function (value, element) {
+    var type = $("#type").val()
+    if (type == 'U' && value != '') {
+        return true
+    } else if (type == 'U' && value == '')  {
+        return false
+    } else {
+        return true
+    }
+
+}, "Este campo é requerido se Tipo for Usuário")
+
+jQuery.validator.addMethod("requiredOABIf", function (value, element) {
+    var type = $("#type").val()
+    if (type == 'A' && value != '') {
+        return true
+    } else if (type == 'A' && value == '')  {
+        return false
+    } else {
+        return true
+    }
+
+}, "Este campo é requerido se Tipo for Advogado")
+
+
 $(document).ready(function () {
     $("#cellphone").mask("(00) 0000-00009");
     $("#telephone").mask("(00) 0000-00009");
@@ -15,18 +40,26 @@ $(document).ready(function () {
                     maxlength: 100,
                 },
 
-                cpf: {
+                fantasy: {
                     required: true,
-                    cpfBR: true
+                    minlength: 3,
+                    maxlength: 100,
                 },
 
-                cnpj: {
-                      cnpjBR: true
+                type: {
+                    required: true
                 },
+
+                cpf: {
+                    cpfBR: true,
+                    requiredCpfIf: true
+                },
+
 
                 oab: {
                     maxlength: 8,
-                    number: true
+                    number: true,
+                    requiredOABIf : true
                 },
 
                 email: {
@@ -34,6 +67,10 @@ $(document).ready(function () {
                     email: true,
                     minlength: 3,
                     maxlength: 100
+                },
+
+                marital_status: {
+                    required: true
                 },
 
                 password: {

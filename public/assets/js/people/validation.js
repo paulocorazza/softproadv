@@ -1,3 +1,27 @@
+jQuery.validator.addMethod("requiredCpfIf", function (value, element) {
+    var type = $("#type").val()
+    if (type == 'F' && value != '') {
+        return true
+    } else if (type == 'F' && value == '')  {
+        return false
+    } else {
+            return true
+    }
+
+}, "Este campo é requerido se Tipo for Pessoa Física")
+
+jQuery.validator.addMethod("requiredCnpjIf", function (value, element) {
+    var type = $("#type").val()
+    if (type == 'J' && value != '') {
+        return true
+    } else if (type == 'J' && value == '')  {
+        return false
+    } else {
+        return true
+    }
+
+}, "Este campo é requerido se Tipo for Pessoa Jurídica")
+
 $(document).ready(function () {
     $("#cellphone").mask("(00) 0000-00009");
     $("#telephone").mask("(00) 0000-00009");
@@ -14,15 +38,31 @@ $(document).ready(function () {
                     maxlength: 100,
                 },
 
-                cpf: {
+                fantasy: {
                     required: true,
-                    cpfBR: true
+                    minlength: 3,
+                    maxlength: 100,
+                },
+
+                type: {
+                    required: true
+                },
+
+
+                cpf: {
+                    cpfBR: true,
+                    requiredCpfIf: true
                 },
 
                 cnpj: {
-                      cnpjBR: true
+                    cnpjBR: true,
+                    requiredCnpjIf : true
                 },
 
+
+                marital_status: {
+                    required: true
+                },
 
                 email: {
                     required: true,
@@ -33,18 +73,18 @@ $(document).ready(function () {
             },
 
 
-            errorPlacement: function(error, element) {
-                    error.insertBefore(element);
+            errorPlacement: function (error, element) {
+                error.insertBefore(element);
             },
 
 
-            highlight: function(element, errorClass, validClass) {
+            highlight: function (element, errorClass, validClass) {
                 $(element).addClass(errorClass).removeClass(validClass);
                 $(element.form).find("label[for=" + element.id + "]")
                     .addClass(errorClass);
             },
 
-            unhighlight: function(element, errorClass, validClass) {
+            unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass(errorClass).addClass(validClass);
                 $(element.form).find("label[for=" + element.id + "]")
                     .removeClass(errorClass);
@@ -60,10 +100,20 @@ $(document).ready(function () {
 
 
     $('#type').select2({
+        placeholder: "Selecione o tipo da pessoa",
+        allowClear: true,
         theme: "classic"
     });
 
     $('#marital_status').select2({
+        placeholder: "Selecione o estado civil",
+        allowClear: true,
+        theme: "classic"
+    });
+
+    $('#origin_id').select2({
+        placeholder: "Selecione uma origem",
+        allowClear: true,
         theme: "classic"
     });
 

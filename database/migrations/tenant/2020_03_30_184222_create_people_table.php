@@ -47,7 +47,7 @@ class CreatePeopleTable extends Migration
 
 
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('origin_id')->unsigned();
+            $table->bigInteger('origin_id')->unsigned()->nullable();
 
 
             $table->foreign('user_id')

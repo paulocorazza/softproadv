@@ -10,8 +10,8 @@
 </div>
 
 <div class="form-group label-float">
-    {!! Form::text('ibge', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'ibge']) !!}
-    {!! Form::label('ibge', 'IBGE', ['class' => 'control-label']); !!}
+    {!! Form::text('id', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'id']) !!}
+    {!! Form::label('id', 'IBGE', ['class' => 'control-label']); !!}
 </div>
 
 <div class="form-group label-float">
