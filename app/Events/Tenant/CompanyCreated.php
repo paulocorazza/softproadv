@@ -20,7 +20,7 @@ class CompanyCreated
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Company $company
      */
     public function __construct(Company $company)
     {
