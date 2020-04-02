@@ -5,10 +5,6 @@
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
 @stop
 
-@section('meta')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@stop
-
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <style type="text/css">
@@ -187,8 +183,8 @@
 
 @section('js')
     <script>
-       var deleteAddressAjax = "{{ route('delete_address_user') }}";
-       var deleteContactAjax = "{{ route('delete_contact_user') }}";
+       var deleteAddressAjax = "{{ route('delete_address') }}";
+       var deleteContactAjax = "{{ route('delete_contact') }}";
     </script>
 
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>

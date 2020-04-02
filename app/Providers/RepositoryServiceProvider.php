@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\AddressRepositoryInterface;
 use App\Repositories\Contracts\AgreementRepositoryInterface;
 use App\Repositories\Contracts\CityRepositoryInterface;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
+use App\Repositories\Contracts\ContactRepositoryInterface;
 use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
@@ -24,8 +26,10 @@ use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Core\DigitalPayments\AgreementPlanRepository;
 use App\Repositories\Core\DigitalPayments\SubscriptionPlanRepository;
 
+use App\Repositories\Core\Eloquent\Tenant\EloquentAddressRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCityRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCompanyRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentContactRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCountryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentDistrictRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentForumRepository;
@@ -150,6 +154,16 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             TypeActionRepositoryInterface::class,
             EloquentTypeActionRepository::class
+        );
+
+        $this->app->bind(
+            AddressRepositoryInterface::class,
+            EloquentAddressRepository::class
+        );
+
+        $this->app->bind(
+            ContactRepositoryInterface::class,
+            EloquentContactRepository::class
         );
 
 

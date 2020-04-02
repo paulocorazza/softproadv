@@ -1,9 +1,5 @@
 @extends('adminlte::page')
 
-@section('meta')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@stop
-
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <style type="text/css">

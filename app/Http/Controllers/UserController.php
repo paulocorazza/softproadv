@@ -64,29 +64,6 @@ class UserController extends ControllerStandard
     }
 
 
-    public function destroyAddress()
-    {
-        if (request()->ajax()) {
-            $id = request()->get('id');
-
-           if  ($delete = $this->model->deleteAddress($id)) {
-               return response()->json(['result' => true]);
-           }
-
-        }
-    }
-
-    public function destroyContact()
-    {
-        if (request()->ajax()) {
-            $id = request()->get('id');
-
-            if  ($delete = $this->model->deleteContact($id)) {
-                return response()->json(['result' => true]);
-            }
-        }
-    }
-
     public function store(Request $request)
     {
         $this->validate($request, $this->model->rules());

@@ -1,9 +1,5 @@
 @extends('adminlte::page')
 
-@section('meta')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@stop
-
 @section('title_postfix', ' - Cadastrar Novo Plano')
 
 @section('adminlte_css')

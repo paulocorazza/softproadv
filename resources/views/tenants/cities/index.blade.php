@@ -36,7 +36,7 @@
     @include('tenants.includes.dataTableJs')
 
     <script>
-        var urlAjax = '/cities';
+        var urlAjax = '{{ route('cities.index') }}';
 
         var columns = [
             {data: "id", name: 'id'},

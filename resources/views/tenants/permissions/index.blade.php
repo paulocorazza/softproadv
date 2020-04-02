@@ -38,7 +38,7 @@
     @include('tenants.includes.dataTableJs')
 
     <script>
-        var urlAjax = '/permissions';
+        var urlAjax = '{{ route('permissions.index') }}';
 
         var columns = [
             {data: "id"},

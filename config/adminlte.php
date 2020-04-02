@@ -252,17 +252,23 @@ return [
                 [
                     'text' => 'Grupo de Ações',
                     'url' => 'group-actions',
-                    'icon' => 'fas fa-archway',
+                    'icon' => 'fas fa-th',
                     'can' => 'group_actions'
                 ],
 
                 [
                     'text' => 'Tipos de Ações',
                     'url' => 'type-actions',
-                    'icon' => 'fas fa-archway',
+                    'icon' => 'fas fa-boxes',
                     'can' => 'type_actions'
                 ],
 
+                [
+                    'text' => 'Origem das Pessoas',
+                    'url' => 'origins',
+                    'icon' => 'fas fa-id-card-alt',
+                    'can' => 'origins'
+                ],
 
                 [
                     'text' => 'Foruns',
@@ -284,8 +290,6 @@ return [
                     'icon' => 'fa fa-map-signs',
                     'can' => 'districts'
                 ],
-
-
 
                 [
                     'text' => 'Tipos de endereços',
@@ -315,21 +319,12 @@ return [
                     'can' => 'cities'
                 ],
 
-                [
-                    'text' => 'Origem das Pessoas',
-                    'url' => 'origins',
-                    'icon' => 'fas fa-id-card-alt',
-                    'can' => 'origins'
-                ],
-
-
             ],
         ],
 
         [
             'text' => 'Segurança',
             'icon' => 'fas fa-user-lock',
-
 
             'submenu' => [
                 [

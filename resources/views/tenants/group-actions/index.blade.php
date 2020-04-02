@@ -39,7 +39,7 @@
     @include('tenants.includes.dataTableJs')
 
     <script>
-        var urlAjax = '/group-actions';
+        var urlAjax = '{{ route('group-actions.index') }}';
 
         var columns = [
             {data: "id"},

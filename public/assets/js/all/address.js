@@ -91,14 +91,14 @@ function removeAddress(obj) {
                 alertify.success('Registro excluído com sucesso!')
 
             } else if (id > 0) {
-                  deletaAjax(obj, id);
+                deletaAjaxAddress(obj, id);
             }
         }
     })
 }
 
 
-function deletaAjax(obj, id) {
+function deletaAjaxAddress(obj, id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -52,14 +52,14 @@ function removeDetail(obj) {
                 alertify.success('Registro excluído com sucesso!')
 
             } else if (id > 0) {
-                  deletaAjax(obj, id);
+                deletaContactAjax(obj, id);
             }
         }
     })
 }
 
 
-function deletaAjax(obj, id) {
+function deletaContactAjax(obj, id) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

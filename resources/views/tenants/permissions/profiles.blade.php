@@ -40,7 +40,7 @@
 
 
     <script>
-        var urlAjax = '/permissions/' + {{ $permission->id }} +'/profile';
+        var urlAjax = '{{ route('permissions.profiles', $permission->id)  }}' ;
 
         var columns = [
             {data: "id"},
