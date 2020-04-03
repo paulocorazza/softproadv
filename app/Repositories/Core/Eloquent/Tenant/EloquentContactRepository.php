@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Core\Eloquent\Tenant;
 
+use App\Models\Contact;
 use App\Repositories\Contracts\ContactRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 
@@ -22,6 +23,6 @@ class EloquentContactRepository extends BaseEloquentRepository
     /*     * ************************************************ */
     public function model()
     {
-        return ContactRepositoryInterface::class;
+        return Contact::class;
     }
 }

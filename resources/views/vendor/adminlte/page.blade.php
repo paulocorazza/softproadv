@@ -235,7 +235,10 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    <script>setTimeout("$('.hide-msg').fadeOut();", 5000)</script>
+    <script>
+        setTimeout("$('.hide-msg').fadeOut();", 5000)
+        var url_base = "{{ url('/') }}"
+    </script>
     @stack('js')
     @yield('js')
 @stop

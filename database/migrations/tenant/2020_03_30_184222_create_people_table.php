@@ -18,7 +18,7 @@ class CreatePeopleTable extends Migration
             $table->string('name');
             $table->string('fantasy');
             $table->string('site')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
 
             $table->string('image')->nullable();
 

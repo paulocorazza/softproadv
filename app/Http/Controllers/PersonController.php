@@ -7,6 +7,7 @@ use App\Models\Origin;
 use App\Models\TypeAddress;
 use App\Repositories\Contracts\PersonRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 class PersonController extends ControllerStandard
@@ -45,17 +46,19 @@ class PersonController extends ControllerStandard
 
     public function store(Request $request)
     {
-        $this->validate($request, $this->model->rules());
-
         $dataForm = $request->all();
+
+        $validate = Validator::make($request->all(),  $this->model->rules());
+
+        if ($validate->fails()) {
+            return implode($validate->messages()->all("<p>:message</p>"));
+        }
 
         if ($this->upload && $request->hasFile($this->upload['name'])) {
             list($nameFile, $upload) = $this->upload($request);
 
             if (!$upload) {
-                return redirect()->back()
-                    ->with('error', 'Falha no upload do arquivo')
-                    ->withInput();
+                 return 'Falha no upload do arquivo';
             }
 
             $dataForm[$this->upload['name']] = $nameFile;
@@ -64,13 +67,12 @@ class PersonController extends ControllerStandard
         $insert = $this->model->create($dataForm);
 
         if (!$insert['status']) {
-            return redirect()->back()
-                ->with('error', $insert['message'])
-                ->withInput();
+          return $insert['message'];
         }
 
-        return redirect()->route("{$this->route}.index")
-            ->with('success', 'Registro realizado com sucesso!');
+        session()->flash('success', 'Registro realizado com sucesso!');
+
+        return '1';
     }
 
 
@@ -98,9 +100,13 @@ class PersonController extends ControllerStandard
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->model->rules($id));
-
         $dataForm = $request->all();
+
+        $validate = Validator::make($request->all(),  $this->model->rules());
+
+        if ($validate->fails()) {
+            return implode($validate->messages()->all("<p>:message</p>"));
+        }
 
         $data = $this->model->find($id);
 
@@ -110,9 +116,7 @@ class PersonController extends ControllerStandard
             list($nameFile, $upload) = $this->upload($request, $file);
 
             if (!$upload) {
-                return redirect()->back()
-                    ->withErrors(['errors' => 'Falha no upload do arquivo'])
-                    ->withInput();
+                return 'Falha no upload do arquivo';
             }
 
             $dataForm[$this->upload['name']] = $nameFile;
@@ -121,13 +125,12 @@ class PersonController extends ControllerStandard
         $update = $this->model->update($id, $dataForm);
 
         if (!$update['status']) {
-            return redirect()->back()
-                ->withInput()
-                ->withErrors($update['message']);
+            return $update['message'];
         }
 
-        return redirect()->route("{$this->route}.index")
-            ->with(['success' => 'Registro alterado com sucesso!']);
+        session()->flash('success', 'Registro alterado com sucesso!');
+
+        return '1';
     }
 
 

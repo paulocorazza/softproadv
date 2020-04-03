@@ -2,10 +2,10 @@ jQuery.validator.addMethod("requiredCpfIf", function (value, element) {
     var type = $("#type").val()
     if (type == 'F' && value != '') {
         return true
-    } else if (type == 'F' && value == '')  {
+    } else if (type == 'F' && value == '') {
         return false
     } else {
-            return true
+        return true
     }
 
 }, "Este campo é requerido se Tipo for Pessoa Física")
@@ -14,7 +14,7 @@ jQuery.validator.addMethod("requiredCnpjIf", function (value, element) {
     var type = $("#type").val()
     if (type == 'J' && value != '') {
         return true
-    } else if (type == 'J' && value == '')  {
+    } else if (type == 'J' && value == '') {
         return false
     } else {
         return true
@@ -56,7 +56,7 @@ $(document).ready(function () {
 
                 cnpj: {
                     cnpjBR: true,
-                    requiredCnpjIf : true
+                    requiredCnpjIf: true
                 },
 
 
@@ -65,7 +65,6 @@ $(document).ready(function () {
                 },
 
                 email: {
-                    required: true,
                     email: true,
                     minlength: 3,
                     maxlength: 100
@@ -92,11 +91,59 @@ $(document).ready(function () {
 
 
             submitHandler: function (form) {
-                form.submit();
+                var dados   = $(form).serialize();
+                var _method = $('#formRegister').find('input[name="_method"]').val()
+
+                if (_method == undefined) {
+                    ajaxSumit(dados, submitAjax)
+                } else if (_method == 'PUT') {
+                    ajaxSumit(dados, submitAjaxPut)
+                }
+
+                return false
             }
         })
-
     });
+
+    function ajaxSumit(dados, urlAjax) {
+        console.log(urlAjax)
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: 'POST',
+            url: urlAjax,
+            data: dados,
+            beforeSend: startPreloader()
+         }).done(function (data) {
+            if (data == 1) {
+                window.location.href = "/people"
+                endPreloader()
+            } else {
+                $('.alert-warning').fadeIn();
+                $('#warning').html(data);
+                $('html,body').scrollTop(0);
+                endPreloader()
+            }
+
+        }).fail(function () {
+            alertify.alert('Ocorreu um erro na requisição.');
+            endPreloader()
+        });
+    }
+
+    function startPreloader() {
+         $('.preload .form_load').fadeIn()
+    }
+
+    function endPreloader() {
+        $('.preload .form_load').fadeOut();
+    }
+
 
 
     $('#type').select2({

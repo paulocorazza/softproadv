@@ -96,7 +96,6 @@ $(document).ready(function () {
     $("#contact_telephone").mask("(00) 0000-00009");
     $("#contact_cellphone").mask("(00) 0000-00009");
 
-
     $('#btnContact').on('click', function () {
         id = ''
         limparContato();

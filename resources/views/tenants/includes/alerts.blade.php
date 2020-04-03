@@ -29,7 +29,7 @@
 
 
 @if(session('alert'))
-    <div class="alert alert-info alert-dismissible hide-msg">
+    <div class="alert alert-info alert-dismissible hide-msg ">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4><i class="icon fa fa-check"></i> Alerta!</h4>
         {{ session('alert') }}

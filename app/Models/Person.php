@@ -37,7 +37,7 @@ class Person extends Model
         return [
             'name'      => 'required|min:3|max:100',
             'fantasy'   => 'required|min:3|max:100',
-            'email'     => "required|min:3|max:100|email|unique:people,email,{$id},id",
+            'email'     => "nullable|min:3|max:100|email",
             'image'     => 'image',
             'type'      => 'required|in:F,J',
             'cpf'       => 'nullable|cpf|required_if:type,F',

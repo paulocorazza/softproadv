@@ -30,6 +30,12 @@
 
     @include('tenants.includes.alerts')
 
+    <div class="alert alert-warning" style="display: none">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-exclamation"></i> Atenção!</h4>
+        <div id="warning"></div>
+    </div>
+
     @if( isset($data) )
         {!! Form::model($data, ['route' => ['people.update', $data->id], 'class' => 'form', 'method' => 'put', 'id' => 'formRegister', 'files' => true ]) !!}
     @else
@@ -178,6 +184,9 @@
 
 
     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+    <div class="preload">
+        @include('tenants.includes.load')
+    </div>
     {!! Form::close() !!}
 
 
@@ -185,8 +194,10 @@
 
 @section('js')
     <script>
-       var deleteAddressAjax = "{{ route('delete_address') }}";
-       var deleteContactAjax = "{{ route('delete_contact') }}";
+        var submitAjaxPut = "{{ route('people.update', isset($data->id) ? $data->id : 0 ) }}"
+        var submitAjax = "{{ route('people.store') }}";
+        var deleteAddressAjax = "{{ route('delete_address') }}";
+        var deleteContactAjax = "{{ route('delete_contact') }}";
     </script>
 
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
