@@ -168,13 +168,6 @@
                 {!! Form::close() !!}
             </div>
         </div>
-
-        <div class="call col-md-7">
-            <div class="call__container">
-                <h1 class="call__title">Uma experiência única para advogados</h1>
-                <h2 class="call__subtitle call__subtitle--register">Faça seu cadastro gratuitamente</h2>
-            </div>
-        </div>
     </div>
 </div>
 
