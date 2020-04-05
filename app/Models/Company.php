@@ -31,8 +31,9 @@ class Company extends Model
             if (Empty($model->db_database))
                 $model->db_database = $model->subdomain . '-adv';
 
-            if (Empty($model->db_host))
-                $model->db_host = env('DB_HOST');
+            if (Empty($model->db_host)) {
+                 $model->db_host = env('DB_HOST');
+            }
 
             if (Empty($model->db_username))
                 $model->db_username = env('DB_USERNAME');

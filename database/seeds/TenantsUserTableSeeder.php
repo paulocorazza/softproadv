@@ -66,7 +66,7 @@ class TenantsUserTableSeeder extends Seeder
         $this->createUser();
         $this->sync();
 
-       // $this->createPermissions();
+        $this->createPermissions();
 
         // Habilitas as FKs
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

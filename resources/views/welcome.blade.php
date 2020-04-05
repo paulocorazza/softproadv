@@ -87,7 +87,7 @@
 
                 @include('tenants.includes.alerts')
 
-                {!! Form::open(['route' => 'register', 'class' => 'form', 'id' => 'formRegister']) !!}
+                {!! Form::open(['route' => 'register.company', 'class' => 'form', 'id' => 'formRegister']) !!}
 
                 <div class="form-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome Completo Advogado(a)']) !!}

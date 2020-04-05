@@ -69,7 +69,7 @@ Route::group(['namespace' => 'Tenant', 'middleware' => 'auth'], function () {
 /*     * ************************************************ */
 /*     * *************      REGISTER      ***************** */
 /*     * ************************************************ */
-    Route::post('register-company', 'IndexController@register')->name('register');
+    Route::post('register-company', 'IndexController@register')->name('register.company');
 
 
 /*     * ************************************************ */
