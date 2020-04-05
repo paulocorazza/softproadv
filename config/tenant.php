@@ -1,5 +1,5 @@
 <?php
 return [
-    'domain_main' => 'www.softproadv.com.br'
+    'domain_main' => env('APP_DOMAIN')
 ];
 
