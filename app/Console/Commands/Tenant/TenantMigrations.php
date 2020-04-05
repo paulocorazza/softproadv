@@ -51,6 +51,8 @@ class TenantMigrations extends Command
 
         if ($run === 0) {
             Artisan::call('db:seed', [
+                //adicionei --force
+                '--force' => true,
                 '--class' => 'TenantsUserTableSeeder'
             ]);
 

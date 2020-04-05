@@ -43,6 +43,8 @@ class TenantSeeder extends Command
         $this->info("Connecting Company {$company->name}");
 
         $run = Artisan::call('db:seed', [
+            //adicionado --force
+            '--force' => true,
             '--class' => 'TenantsUserTableSeeder'
         ]);
 
