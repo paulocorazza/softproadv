@@ -25,10 +25,10 @@
 /*     * ************************************************ */
 /*     * *************  PASSWORD RESET  ***************** */
 /*     * ************************************************ */
-    Route::post('password/email', 'auth\forgotpasswordcontroller@sendresetlinkemail')->name('password.email');
-    Route::get('password/reset', 'auth\forgotpasswordcontroller@showlinkrequestform')->name('password.request');
-    Route::post('password/reset', 'auth\resetpasswordcontroller@reset')->name('password.reseting');
-    Route::get('password/reset/{token}', 'auth\resetpasswordcontroller@showresetform')->name('password.reset');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendresetlinkemail')->name('password.email');
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showlinkrequestform')->name('password.request');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.reseting');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showresetform')->name('password.reset');
 
 
 /*     * ************************************************ */
