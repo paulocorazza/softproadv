@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title_postfix', ' - Detalhes da Vara')
+@section('title_postfix', ' - Detalhes da Fase')
 
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
@@ -9,9 +9,9 @@
 
 @section('content_header')
     <div class="container-fluid">
-        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Varas',
+        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Fases do Processo',
                                'breadcrumbs' => [
-                               'Varas' => route('sticks.index'),
+                               'Fases' => route('phases.index'),
                                'Detalhes', ]
                               ])
     </div><!-- /.container-fluid -->
@@ -25,7 +25,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 Identificação
-                <small>Vara</small>
+                <small>Fase</small>
             </h3>
             <!-- tools box -->
         @include('tenants.includes.toolsBox')
@@ -39,8 +39,8 @@
         <!-- /.card-body -->
     </div>
 
-    @can('delete_stick')
-        {!! Form::model($data, ['route' => ['sticks.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
+    @can('delete_phase')
+        {!! Form::model($data, ['route' => ['phases.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
         {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete']) !!}
         {!! Form::close() !!}
     @endcan

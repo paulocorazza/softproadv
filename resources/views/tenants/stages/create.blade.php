@@ -1,6 +1,16 @@
 @extends('adminlte::page')
 
-@section('title_postfix', ' - Detalhes da Vara')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <style type="text/css">
+        .table td, .table th {
+            padding: 0.30rem;
+        }
+    </style>
+@stop
+
+
+@section('title_postfix', ' - Cadastrar Etapas da ação')
 
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
@@ -9,10 +19,10 @@
 
 @section('content_header')
     <div class="container-fluid">
-        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Varas',
+        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Etapas das Ações',
                                'breadcrumbs' => [
-                               'Varas' => route('sticks.index'),
-                               'Detalhes', ]
+                               'Etapas' => route('stages.index'),
+                                isset($data->id) ? 'Editar' : 'Cadastrar', ]
                               ])
     </div><!-- /.container-fluid -->
 @stop
@@ -25,7 +35,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 Identificação
-                <small>Vara</small>
+                <small>Etapa da Ação</small>
             </h3>
             <!-- tools box -->
         @include('tenants.includes.toolsBox')
@@ -33,21 +43,20 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
-            <p><strong>ID: </strong>{{  $data->id }}</p>
-            <p><strong>Nome: </strong>{{  $data->name }}</p>
+            @include('tenants.stages.partials.form')
         </div>
         <!-- /.card-body -->
     </div>
-
-    @can('delete_stick')
-        {!! Form::model($data, ['route' => ['sticks.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
-        {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete']) !!}
-        {!! Form::close() !!}
-    @endcan
 @stop
+
 
 @section('js')
+    <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
+    <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
+    <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
+
     <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
-    <script type="text/javascript" src={{ asset('assets/js/all/confirmations.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/stages/validation.js') }}></script>
 @stop
+
 

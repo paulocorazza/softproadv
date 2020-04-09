@@ -15,7 +15,7 @@ class CreateTypeActionsTable extends Migration
     {
         Schema::create('type_actions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->bigInteger('group_action_id')->unsigned();
 
             $table->foreign('group_action_id')

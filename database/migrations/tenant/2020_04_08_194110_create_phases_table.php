@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOriginsTable extends Migration
+class CreatePhasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOriginsTable extends Migration
      */
     public function up()
     {
-        Schema::create('origins', function (Blueprint $table) {
+        Schema::create('phases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateOriginsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('origins');
+        Schema::dropIfExists('phases');
     }
 }

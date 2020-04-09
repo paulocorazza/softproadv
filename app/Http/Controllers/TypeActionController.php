@@ -21,18 +21,6 @@ class TypeActionController extends ControllerStandard
         $this->middleware('can:delete_type_action')->only(['delete']);
     }
 
-    public function index()
-    {
-        if (request()->ajax()) {
-            return $this->model
-                ->dataTables('action', $this->view . '.partials.acoes');
-        }
-
-        $title = "Gestão de {$this->title}s";
-        return view("{$this->view}.index", compact('title'));
-    }
-
-
     public function create()
     {
         $groups = $this->model->getGroupActions();

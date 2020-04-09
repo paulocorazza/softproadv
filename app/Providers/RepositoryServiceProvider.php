@@ -14,8 +14,10 @@ use App\Repositories\Contracts\GroupActionRepositoryInterface;
 use App\Repositories\Contracts\OriginRepositoryInterface;
 use App\Repositories\Contracts\PermissionRepositoryInterface;
 use App\Repositories\Contracts\PersonRepositoryInterface;
+use App\Repositories\Contracts\PhaseRepositoryInterface;
 use App\Repositories\Contracts\PlanRepositoryInterface;
 use App\Repositories\Contracts\ProfileRepositoryInterface;
+use App\Repositories\Contracts\StageRepositoryInterface;
 use App\Repositories\Contracts\StateRepositoryInterface;
 use App\Repositories\Contracts\StickRepositoryInterface;
 use App\Repositories\Contracts\SubscriptionRepositoryInterface;
@@ -37,8 +39,10 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentGroupActionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentOriginRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPermissionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPersonRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentPhaseRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPlanRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentProfileRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentStageRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentStateRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentStickRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentTypeActionRepository;
@@ -165,6 +169,14 @@ class RepositoryServiceProvider extends ServiceProvider
             ContactRepositoryInterface::class,
             EloquentContactRepository::class
         );
+
+        $this->app->bind(
+            PhaseRepositoryInterface::class,
+            EloquentPhaseRepository::class
+        );
+
+        $this->app->bind(StageRepositoryInterface::class,
+                        EloquentStageRepository::class);
 
 
     }

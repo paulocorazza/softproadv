@@ -241,12 +241,9 @@ return [
         ],
 
 
-
-
-
         ['header' => 'Sistema'],
         [
-            'text' => 'Configurações',
+            'text' => 'Cadastros',
             'icon' => 'fas fa-cogs',
             'submenu' => [
                 [
@@ -261,6 +258,20 @@ return [
                     'url' => 'type-actions',
                     'icon' => 'fas fa-boxes',
                     'can' => 'type_actions'
+                ],
+
+                [
+                    'text' => 'Fases do Processo',
+                    'url' => 'phases',
+                    'icon' => 'fas fa-coins',
+                    'can' => 'phases'
+                ],
+
+                [
+                    'text' => 'Etapas do Processo',
+                    'url' => 'stages',
+                    'icon' => 'fas fa-list',
+                    'can' => 'stages'
                 ],
 
                 [

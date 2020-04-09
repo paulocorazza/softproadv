@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title_postfix', ' - Detalhes da Vara')
+@section('title_postfix', ' - Etapas das Ações')
 
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
@@ -8,13 +8,11 @@
 @stop
 
 @section('content_header')
-    <div class="container-fluid">
-        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Varas',
-                               'breadcrumbs' => [
-                               'Varas' => route('sticks.index'),
-                               'Detalhes', ]
-                              ])
-    </div><!-- /.container-fluid -->
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Etapas das Ações',
+                           'breadcrumbs' => [
+                           'Etapas' => route('stages.index'),
+                            isset($data->id) ? 'Editar' : 'Cadastrar', ]
+                          ])
 @stop
 
 
@@ -25,7 +23,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 Identificação
-                <small>Vara</small>
+                <small>Tipo de Ação</small>
             </h3>
             <!-- tools box -->
         @include('tenants.includes.toolsBox')
@@ -34,15 +32,18 @@
         <!-- /.card-header -->
         <div class="card-body pad">
             <p><strong>ID: </strong>{{  $data->id }}</p>
-            <p><strong>Nome: </strong>{{  $data->name }}</p>
+            <p><strong>Etapa da Ação: </strong>{{  $data->name }}</p>
+            <p><strong>Fase da Ação: </strong>{{  $data->phase->name }}</p>
+
+
         </div>
         <!-- /.card-body -->
     </div>
 
-    @can('delete_stick')
-        {!! Form::model($data, ['route' => ['sticks.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
-        {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete']) !!}
-        {!! Form::close() !!}
+    @can('delete_stage')
+    {!! Form::model($data, ['route' => ['stages.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
+    {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete', 'rel' => $data->id ]) !!}
+    {!! Form::close() !!}
     @endcan
 @stop
 
@@ -50,4 +51,6 @@
     <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/all/confirmations.js') }}></script>
 @stop
+
+
 
