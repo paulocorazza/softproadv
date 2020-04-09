@@ -22,6 +22,7 @@ class SearchViaCep implements SearchAddressInterface
     /*     * ************************************************ */
     public function search($cep)
     {
+
         $cepResponse = Cep::find($cep);
 
         if (!$cepResponse->isOk()) {

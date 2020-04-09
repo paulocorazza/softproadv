@@ -77,14 +77,20 @@
 
     <div class="col-12 col-sm-2">
         <div class="form-group">
-            <select id="state_id" class="js-example-responsive" style="width:100%"></select>
+            <select id="state_id" style="width:100%"></select>
+        </div>
+        <div class="jloadState">
+            @include('tenants.includes.load')
         </div>
     </div>
 
 
     <div class="col-12 col-sm-6">
         <div class="form-group">
-            <select id="city_id" class="js-example-responsive" style="width:100%"></select>
+            <select id="city_id"  style="width:100%"></select>
+        </div>
+        <div class="jloadCity">
+            @include('tenants.includes.load')
         </div>
     </div>
 </div>

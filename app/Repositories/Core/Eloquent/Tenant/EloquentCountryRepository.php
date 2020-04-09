@@ -29,14 +29,12 @@ class EloquentCountryRepository extends BaseEloquentRepository
         return Country::class;
     }
 
-    public function getStatesByName($id, Request $request)
+    public function getStates($id)
     {
-        if ($request->has('q')) {
-            $search = $request->q;
-
+        if ($id) {
             $country = $this->relationships([
-                'states' => function ($query) use ($search) {
-                    $query->where('initials', 'LIKE', "%$search%");
+                'states' => function ($query)  {
+                    $query->orderBy('initials');
                 }
             ])->find($id);
 

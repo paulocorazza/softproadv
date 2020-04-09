@@ -44,9 +44,9 @@ class StateController extends ControllerStandard
     }
 
 
-    public function getCitiesByName($id, Request $request)
+    public function getCities($id)
     {
-        $return = $this->model->getCitiesByName($id, $request);
+        $return = $this->model->getCities($id);
 
         if (!$return['status']) {
             return redirect()->back()

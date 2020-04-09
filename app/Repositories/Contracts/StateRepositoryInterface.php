@@ -6,6 +6,6 @@ use Illuminate\Http\Request;
 
 interface StateRepositoryInterface
 {
-    public function getCitiesByName($id, Request $request);
+    public function getCities($id);
     public function getCountries();
 }

@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 interface CountryRepositoryInterface
 {
-   public function getStatesByName($id, Request $request);
+   public function getStates($id);
 }

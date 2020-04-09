@@ -48,14 +48,13 @@ class EloquentStateRepository extends BaseEloquentRepository
     }
 
 
-    public function getCitiesByName($id, Request $request)
+    public function getCities($id)
     {
-        if ($request->has('q')) {
-            $search = $request->q;
+        if ($id) {
 
             $state = $this->relationships([
-                'cities' => function ($query) use ($search) {
-                    $query->where('name', 'LIKE', "%$search%");
+                'cities' => function ($query) {
+                    $query->orderBy('name');
                 }
             ])->find($id);
 

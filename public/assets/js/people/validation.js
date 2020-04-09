@@ -91,16 +91,19 @@ $(document).ready(function () {
 
 
             submitHandler: function (form) {
-                var dados   = $(form).serialize();
-                var _method = $('#formRegister').find('input[name="_method"]').val()
+                if ($('.modal.show').length == 0) {
+                    var dados = $(form).serialize();
+                    var _method = $('#formRegister').find('input[name="_method"]').val()
 
-                if (_method == undefined) {
-                    ajaxSumit(dados, submitAjax)
-                } else if (_method == 'PUT') {
-                    ajaxSumit(dados, submitAjaxPut)
+                    if (_method == undefined) {
+                        ajaxSumit(dados, submitAjax)
+                    } else if (_method == 'PUT') {
+                        ajaxSumit(dados, submitAjaxPut)
+                    }
+
+                    return false
                 }
 
-                return false
             }
         })
     });
@@ -119,7 +122,7 @@ $(document).ready(function () {
             url: urlAjax,
             data: dados,
             beforeSend: startPreloader()
-         }).done(function (data) {
+        }).done(function (data) {
             if (data == 1) {
                 window.location.href = "/people"
                 endPreloader()
@@ -137,13 +140,12 @@ $(document).ready(function () {
     }
 
     function startPreloader() {
-         $('.preload .form_load').fadeIn()
+        $('.preload .form_load').fadeIn()
     }
 
     function endPreloader() {
         $('.preload .form_load').fadeOut();
     }
-
 
 
     $('#type').select2({

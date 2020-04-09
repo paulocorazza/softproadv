@@ -81,14 +81,14 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************     COUNTRIES    ***************** */
     /*     * ************************************************ */
-    Route::get('countries/{id}/states', 'CountryController@getStatesByName');
+    Route::get('countries/{id}/states', 'CountryController@getStates');
     Route::resource('countries', 'CountryController');
 
 
     /*     * ************************************************ */
     /*     * *************       STATES     ***************** */
     /*     * ************************************************ */
-    Route::get('states/{id}/cities', 'StateController@getCitiesByName');
+    Route::get('states/{id}/cities', 'StateController@getCities');
     Route::resource('states', 'StateController');
 
 
@@ -115,7 +115,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('address/delete', 'ExtraAction\AddressDestroy')->name('delete_address');
 
     /*     * ************************************************ */
-    /*     * *************       ADDRESS    ***************** */
+    /*     * *************       CONTACT    ***************** */
     /*     * ************************************************ */
     Route::post('contact/delete', 'ExtraAction\ContactDestroy')->name('delete_contact');
 

@@ -22,9 +22,10 @@ class CountryController extends ControllerStandard
         $this->middleware('can:delete_country')->only(['delete']);
     }
 
-    public function getStatesByName($id, Request $request)
+    public function getStates($id)
     {
-        $return = $this->model->getStatesByName($id, $request);
+
+        $return = $this->model->getStates($id);
 
         if (!$return['status']) {
             return redirect()->back()

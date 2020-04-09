@@ -33,17 +33,17 @@ function editAddress(obj) {
     limparEndereco()
 
     id = $(obj).closest('tr').attr('data-id');
-    var cep = $('input[type=text][name="address[' + id + '][cep]"]').val();
-    var number = $('input[type=text][name="address[' + id + '][number]"]').val();
-    var street = $('input[type=text][name="address[' + id + '][street]"]').val();
-    var district = $('input[type=text][name="address[' + id + '][district]"]').val();
-    var complement = $('input[type=hidden][name="address[' + id + '][complement]"]').val();
-    var type_address_id = $('select[name="address[' + id + '][type_address_id]"]').val();
-    var country_id = $('input[type=hidden][name="address[' + id + '][country_id]"]').val();
-    var state_id = $('select[name="address[' + id + '][state_id]"]').val();
-    var state = $('select[name="address[' + id + '][state_id]"] option:selected').text().trim()
-    var city_id = $('select[name="address[' + id + '][city_id]"]').val();
-    var city = $('select[name="address[' + id + '][city_id]"] option:selected').text().trim()
+    var cep = $('input[type=text][name="addresses[' + id + '][cep]"]').val();
+    var number = $('input[type=text][name="addresses[' + id + '][number]"]').val();
+    var street = $('input[type=text][name="addresses[' + id + '][street]"]').val();
+    var district = $('input[type=text][name="addresses[' + id + '][district]"]').val();
+    var complement = $('input[type=hidden][name="addresses[' + id + '][complement]"]').val();
+    var type_address_id = $('select[name="addresses[' + id + '][type_address_id]"]').val();
+    var country_id = $('input[type=hidden][name="addresses[' + id + '][country_id]"]').val();
+    var state_id = $('select[name="addresses[' + id + '][state_id]"]').val();
+    var state = $('select[name="addresses[' + id + '][state_id]"] option:selected').text().trim()
+    var city_id = $('select[name="addresses[' + id + '][city_id]"]').val();
+    var city = $('select[name="addresses[' + id + '][city_id]"] option:selected').text().trim()
 
 
     $('#cep').val(cep);
@@ -146,15 +146,15 @@ function searchAdrress(cep) {
 
             if (json.result == true) {
 
-                $('#street').val( json.data.original.logradouro );
-                $('#district').val( json.data.original.bairro);
-                $('#complement').val( json.data.original.complemento);
+                $('#street').val(json.data.original.logradouro);
+                $('#district').val(json.data.original.bairro);
+                $('#complement').val(json.data.original.complemento);
 
                 $('#country_id').val(1058);
                 $('#country_id').trigger('change');
 
                 var dataState = {
-                    id: json.data.original.ibge.substring(0,2),
+                    id: json.data.original.ibge.substring(0, 2),
                     text: json.data.original.uf.toUpperCase()
                 };
 
@@ -163,21 +163,22 @@ function searchAdrress(cep) {
 
                 var dataCity = {
                     id: json.data.original.ibge,
-                    text:  json.data.original.localidade
+                    text: json.data.original.localidade
                 };
 
 
                 var newOption = new Option(dataCity.text, dataCity.id, false, false);
                 $('#city_id').append(newOption).trigger('change');
 
-                 if (json.data.original.logradouro == '') {
-                     $('#street').focus()
-                 } else {
-                     $('#number').focus()
-                 }
+                if (json.data.original.logradouro == '') {
+                    $('#street').focus()
+                } else {
+                    $('#number').focus()
+                }
 
             } else {
-                alertify.error(json.data.message)
+                $('.jloadCep').find('.form_load').fadeOut(500);
+                alertify.error(json.message)
             }
         }
     })
@@ -338,56 +339,130 @@ $(document).ready(function () {
         theme: "classic"
     });
 
+    $('#country_id').on("change", function (e) {
+        var id = $(this).val();
+
+        if (id != null) {
+
+            $('#state_id').val(null).trigger('change');
+            $("#state_id").empty();
+
+            $.ajax({
+                url: '/countries/' + id + '/states',
+                type: 'GET',
+                dataType: 'json',
+
+                beforeSend: function () {
+                    $('.jloadState').find('.form_load').css('display', 'flex')
+                },
+
+                success: function (data) {
+                    $('.jloadState').find('.form_load').fadeOut(500);
+                    var states = $.map(data, function (item) {
+                        return new Option(item.initials, item.id, false, false)
+
+                    })
+
+                    $('#state_id').append(states);
+                    $('#state_id').trigger('change');
+                }
+            });
+        }
+    });
 
     $('#state_id').select2({
-        theme: "classic",
-        placeholder: 'Selecione um estado',
-        ajax: {
-            delay: 250,
-            type: 'get',
-            url: function () {
-                var id = $("#country_id").val()
-                return '/countries/' + id + '/states'
-            },
+        theme: "classic"
+    });
 
-            dataType: 'json',
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.initials,
-                            id: item.id
-                        }
+
+    $('#state_id').on("change", function (e) {
+        var id = $(this).val();
+
+        if (id != null) {
+
+            $('#city_id').val(null).trigger('change');
+            $("#city_id").empty();
+
+            $.ajax({
+                url: '/states/' + id + '/cities',
+                type: 'GET',
+                dataType: 'json',
+
+                beforeSend: function () {
+                    $('.jloadCity').find('.form_load').css('display', 'flex')
+                },
+
+                success: function (data) {
+                    $('.jloadCity').find('.form_load').fadeOut(500);
+                    var cities = $.map(data, function (item) {
+                        return new Option(item.name, item.id, false, false)
+
                     })
-                };
-            },
-            cache: true
+
+
+                    $('#city_id').append(cities);
+                }
+            });
         }
     });
+
 
     $('#city_id').select2({
-        theme: "classic",
-        placeholder: 'Selecione uma cidade',
-        ajax: {
-            delay: 250,
-            type: 'get',
-            url: function () {
-                var id = $("#state_id").val()
-                return '/states/' + id + '/cities';
-            },
-
-            dataType: 'json',
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
+        theme: "classic"
     });
+
+    /*$('#city_id').select2({
+       theme: "classic",
+       placeholder: 'Selecione uma cidade',
+       ajax: {
+           delay: 250,
+           type: 'get',
+           url: function () {
+               var id = $("#state_id").val()
+               return '/states/' + id + '/cities';
+           },
+
+           dataType: 'json',
+           processResults: function (data) {
+               return {
+                   results: $.map(data, function (item) {
+                       return {
+                           text: item.name,
+                           id: item.id
+                       }
+                   })
+               };
+           },
+           cache: true
+       }
+   });    */
+
+
+    /* $('#state_id').select2({
+         theme: "classic",
+         placeholder: 'Selecione um estado',
+         ajax: {
+             delay: 250,
+             type: 'get',
+             url: function () {
+                 var id = $("#country_id").val()
+                 return '/countries/' + id + '/states'
+             },
+
+             dataType: 'json',
+             processResults: function (data) {
+                 return {
+                     results: $.map(data, function (item) {
+                         return {
+                             text: item.initials,
+                             id: item.id
+                         }
+                     })
+                 };
+             },
+             cache: true
+         }
+     });*/
+
+
 })
