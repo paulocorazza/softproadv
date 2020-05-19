@@ -54,5 +54,3 @@ INSERT INTO states (initials, name, id, country_id)
              VALUES ('SP', 'SÃO PAULO', 35,1058);
 INSERT INTO states (initials, name, id, country_id)
              VALUES ('TO', 'TOCANTINAS', 17,1058);
-
-COMMIT WORK;

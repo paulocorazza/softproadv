@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\CityRepositoryInterface;
+use App\Repositories\Contracts\StateRepositoryInterface;
 
 class CityController extends ControllerStandard
 {
-    public function __construct(CityRepositoryInterface $city)
+    private $states;
+
+    public function __construct(CityRepositoryInterface $city,
+                                StateRepositoryInterface $states)
     {
         $this->model = $city;
+        $this->states = $states;
         $this->title = 'Cidade';
         $this->view = 'tenants.cities';
         $this->route = 'cities';
@@ -35,7 +40,7 @@ class CityController extends ControllerStandard
 
     public function create()
     {
-        $states = $this->model->getStates();
+        $states = $this->states->getStates();
 
         $title = "Cadastrar {$this->title}";
         return view("{$this->view}.create", compact('title', 'states'));
@@ -46,7 +51,7 @@ class CityController extends ControllerStandard
     {
         $data = $this->model->find($id);
 
-        $states = $this->model->getStates();
+        $states = $this->states->getStates();
 
         $title = "Editar {$this->title}: {$data->name}";
 

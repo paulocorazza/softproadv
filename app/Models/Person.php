@@ -77,6 +77,9 @@ class Person extends Model
         return $this->belongsTo(Origin::class);
     }
 
-
+    public function scopeStateActive($query)
+    {
+        return $query->where('status', '=', 'A');
+    }
 
 }

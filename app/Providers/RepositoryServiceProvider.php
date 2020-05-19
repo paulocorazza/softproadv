@@ -16,6 +16,7 @@ use App\Repositories\Contracts\PermissionRepositoryInterface;
 use App\Repositories\Contracts\PersonRepositoryInterface;
 use App\Repositories\Contracts\PhaseRepositoryInterface;
 use App\Repositories\Contracts\PlanRepositoryInterface;
+use App\Repositories\Contracts\ProcessRepositoryInterface;
 use App\Repositories\Contracts\ProfileRepositoryInterface;
 use App\Repositories\Contracts\StageRepositoryInterface;
 use App\Repositories\Contracts\StateRepositoryInterface;
@@ -41,6 +42,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentPermissionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPersonRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPhaseRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPlanRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentProcessRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentProfileRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentStageRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentStateRepository;
@@ -178,6 +180,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(StageRepositoryInterface::class,
                         EloquentStageRepository::class);
 
-
+        $this->app->bind(ProcessRepositoryInterface::class,
+            EloquentProcessRepository::class);
     }
 }

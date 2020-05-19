@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Contracts\PhaseRepositoryInterface;
 use App\Repositories\Contracts\StageRepositoryInterface;
 
 
 class StageController extends ControllerStandard
 {
-    public function __construct(StageRepositoryInterface $stage)
+    private $phases;
+
+    public function __construct(StageRepositoryInterface $stage,
+                                PhaseRepositoryInterface $phases)
     {
         $this->model = $stage;
+        $this->phases = $phases;
         $this->title = 'Etapa';
         $this->view = 'tenants.stages';
         $this->route = 'stages';
@@ -24,7 +29,7 @@ class StageController extends ControllerStandard
 
     public function create()
     {
-        $phases = $this->model->getPhases();
+        $phases = $this->phases->getPhases();
 
         $title = "Cadastrar {$this->title}";
         return view("{$this->view}.create", compact('title', 'phases'));
@@ -34,7 +39,7 @@ class StageController extends ControllerStandard
     {
         $data = $this->model->find($id);
 
-        $phases = $this->model->getPhases();
+        $phases = $this->phases->getPhases();
 
         $title = "Editar {$this->title}: {$data->name}";
 

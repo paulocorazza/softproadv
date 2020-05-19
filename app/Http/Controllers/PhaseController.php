@@ -20,4 +20,18 @@ class PhaseController extends ControllerStandard
         $this->middleware('can:view_phase')->only(['show']);
         $this->middleware('can:delete_phase')->only(['delete']);
     }
+
+    public function stagesSelect($id)
+    {
+        if (request()->ajax()) {
+
+            $return = $this->model->getStagesSelect($id);
+
+            if (!$return['status']) {
+                return  response()->json($return['message']);
+            }
+
+            return response()->json($return['data']);
+        }
+    }
 }

@@ -2,13 +2,13 @@ $(document).ready(function () {
     $('#tabela').DataTable({
         "processing": true,
         "serverSide": true,
+        "deferRender": true,
 
         "ajax": {
             url: urlAjax,
         },
 
         "columns": columns,
-
 
         paging: true,
         searching: true,

@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Contracts\StateRepositoryInterface;
 use Illuminate\Http\Request;
 
 class StateController extends ControllerStandard
 {
-    public function __construct(StateRepositoryInterface $state)
+    private $country;
+
+    public function __construct(StateRepositoryInterface $state,
+                                CountryRepositoryInterface $country)
     {
         $this->model = $state;
+        $this->country = $country;
         $this->title = 'Estado';
         $this->view = 'tenants.states';
         $this->route = 'states';
@@ -26,7 +31,7 @@ class StateController extends ControllerStandard
 
     public function create()
     {
-        $countries = $this->model->getCountries();
+        $countries = $this->country->getCountries();
 
         $title = "Cadastrar {$this->title}";
         return view("{$this->view}.create", compact('title', 'countries'));
@@ -36,7 +41,7 @@ class StateController extends ControllerStandard
     {
         $data = $this->model->find($id);
 
-        $countries = $this->model->getCountries();
+        $countries = $this->country->getCountries();
 
         $title = "Editar {$this->title}: {$data->name}";
 

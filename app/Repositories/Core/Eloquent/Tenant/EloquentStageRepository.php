@@ -1,7 +1,6 @@
 <?php
 namespace App\Repositories\Core\Eloquent\Tenant;
 
-use App\Models\Phase;
 use App\Models\Stage;
 use App\Repositories\Contracts\StageRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
@@ -39,12 +38,4 @@ class EloquentStageRepository extends BaseEloquentRepository
             ->addColumn($column, $view)
             ->make(true);
     }
-
-    public function getPhases()
-    {
-        return Phase::orderBy('name', 'ASC')
-            ->get()
-            ->pluck('name', 'id');
-    }
-
 }

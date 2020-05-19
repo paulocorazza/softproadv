@@ -24,4 +24,17 @@ class Stage extends Model
     {
         return $this->belongsTo(Phase::class);
     }
+
+    public function processesOwner()
+    {
+        return $this->hasMany(Process::class);
+    }
+
+
+    public function processes()
+    {
+        return $this->belongsToMany(Process::class, 'process_stage')
+                    ->withPivot('user_id')
+                    ->withTimestamps();
+    }
 }

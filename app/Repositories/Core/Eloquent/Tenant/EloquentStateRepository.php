@@ -2,11 +2,9 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
-use App\Models\Country;
 use App\Models\State;
 use App\Repositories\Contracts\StateRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
-use Illuminate\Http\Request;
 
 
 /**
@@ -70,8 +68,10 @@ class EloquentStateRepository extends BaseEloquentRepository
         ];
     }
 
-    public function getCountries()
+    public function getStates()
     {
-        return Country::get()->pluck('name', 'id');
+        return $this->model->orderBy('name', 'ASC')
+            ->get()
+            ->pluck('name', 'id');
     }
 }

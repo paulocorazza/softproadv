@@ -1,12 +1,9 @@
 <?php
 namespace App\Repositories\Core\Eloquent\Tenant;
 
-
-
 use App\Models\Address;
 use App\Repositories\Contracts\AddressRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
-
 
 /**
  * .class [ TIPO ]

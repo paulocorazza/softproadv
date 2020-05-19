@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
-use App\Models\Contact;
 use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -205,5 +204,12 @@ class EloquentUserRepository extends BaseEloquentRepository
         }
 
         return $this->model->rules();
+    }
+
+    public function getAdvogados()
+    {
+        return $this->model->Advogados()
+                           ->get()
+                           ->pluck('name', 'id');
     }
 }

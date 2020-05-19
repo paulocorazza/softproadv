@@ -7,4 +7,6 @@ use Illuminate\Http\Request;
 interface CountryRepositoryInterface
 {
    public function getStates($id);
+   public function getCountries();
+
 }

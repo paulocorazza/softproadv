@@ -2,19 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
-use App\Models\Origin;
-use App\Models\TypeAddress;
+use App\Repositories\Contracts\CountryRepositoryInterface;
+use App\Repositories\Contracts\OriginRepositoryInterface;
 use App\Repositories\Contracts\PersonRepositoryInterface;
+use App\Repositories\Contracts\TypeAddressRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
 class PersonController extends ControllerStandard
 {
-    public function __construct(PersonRepositoryInterface $person)
+    private $typeAddress;
+    private $country;
+    private $origin;
+
+    public function __construct(PersonRepositoryInterface $person,
+                                TypeAddressRepositoryInterface $typeAddress,
+                                CountryRepositoryInterface $country,
+                                OriginRepositoryInterface $origin)
     {
         $this->model = $person;
+        $this->typeAddress = $typeAddress;
+        $this->country = $country;
+        $this->origin = $origin;
+
         $this->title = 'Pessoa';
         $this->view = 'tenants.people';
         $this->route = 'people';
@@ -35,9 +46,9 @@ class PersonController extends ControllerStandard
     {
         $title = "Cadastrar {$this->title}";
 
-        $type_addresses = TypeAddress::all();
-        $countries = Country::all();
-        $origins = Origin::get()->pluck('name', 'id');
+        $type_addresses = $this->typeAddress->get();
+        $countries = $this->country->get();
+        $origins = $this->origin->getOrigins();
 
 
         return view("{$this->view}.create", compact('title', 'type_addresses', 'countries', 'origins'));
@@ -88,9 +99,9 @@ class PersonController extends ControllerStandard
 
         $title = "Editar {$this->title}: {$data->name}";
 
-        $origins = Origin::get()->pluck('name', 'id');
-        $type_addresses = TypeAddress::all();
-        $countries = Country::all();
+        $type_addresses = $this->typeAddress->get();
+        $countries = $this->country->get();
+        $origins = $this->origin->getOrigins();
         $contacts = $data->contacts;
         $addresses = $data->addresses;
 

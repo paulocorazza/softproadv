@@ -27,4 +27,8 @@ class EloquentOriginRepository extends BaseEloquentRepository
         return  Origin::class;
     }
 
+    public function getOrigins()
+    {
+        return $this->model->get()->pluck('name', 'id');
+    }
 }

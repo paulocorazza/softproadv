@@ -164,6 +164,24 @@ class User extends Authenticatable
         return $this->hasMany(Person::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function processesOwner()
+    {
+        return $this->hasMany(Process::class);
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function processes()
+    {
+        return $this->belongsToMany(Process::class, 'process_user')
+            ->withTimestamps();
+    }
+
 
     /**
      * @param Permission $permission
@@ -197,5 +215,11 @@ class User extends Authenticatable
     public function getSalaryAttribute($value)
     {
         return Helper::formatDecimal($value);
+    }
+
+
+    public function scopeAdvogados($query)
+    {
+        return $query->where('type', '=', 'A');
     }
 }

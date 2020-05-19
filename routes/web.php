@@ -89,6 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * *************       STATES     ***************** */
     /*     * ************************************************ */
     Route::get('states/{id}/cities', 'StateController@getCities');
+
     Route::resource('states', 'StateController');
 
 
@@ -176,6 +177,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************       PERSON     ***************** */
     /*     * ************************************************ */
+    Route::post('people/search', 'ExtraAction\People');
     Route::resource('people', 'PersonController');
 
 
@@ -199,24 +201,41 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************   GROUP ACTION   ***************** */
     /*     * ************************************************ */
+    Route::get('/group-actions/{id}/type-actions', 'ExtraAction\GroupTypeActions');
     Route::resource('group-actions', 'GroupActionController');
 
 
     /*     * ************************************************ */
     /*     * *************   TYPE ACTION   ***************** */
     /*     * ************************************************ */
+    Route::get('type-actions/{id}/phases', 'TypeActionController@phases')->name('type-actions.phases');
+
+    Route::get('type-actions/{id}/phasesSelect', 'TypeActionController@phasesSelect')->name('type-actions.phasesSelect');
+
+    Route::get('type-actions/{id}/phase/register', 'TypeActionController@listPhaseAdd')->name('type-actions.phases.list');
+
+    Route::get('type-actions/{id}/phase/{phaseId}/delete', 'TypeActionController@typeActionDeletePhase')->name('type-actions.phase.delete');
+
+    Route::post('type-actions/{id}/phase/register', 'TypeActionController@typeActionAddPhase')->name('type-actions.phase.add');
+
     Route::resource('type-actions', 'TypeActionController');
 
 
     /*     * ************************************************ */
     /*     * *************        PHASE     ***************** */
     /*     * ************************************************ */
+    Route::get('phases/{id}/stagesSelect', 'PhaseController@stagesSelect')->name('stages.stageSelect');
     Route::resource('phases', 'PhaseController');
 
     /*     * ************************************************ */
     /*     * *************        STAGE     ***************** */
     /*     * ************************************************ */
     Route::resource('stages', 'StageController');
+
+    /*     * ************************************************ */
+    /*     * *************      PROCESS     ***************** */
+    /*     * ************************************************ */
+    Route::resource('processes', 'ProcessController');
 
 });
 

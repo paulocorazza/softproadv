@@ -44,7 +44,7 @@
 }() );
 
 /**
- * This is used in the United States to process payments, deposits,
+ * This is used in the United States to processes payments, deposits,
  * or transfers using the Automated Clearing House (ACH) or Fedwire
  * systems. A very common use case would be to validate a form for
  * an ACH bill payment.

@@ -27,4 +27,10 @@ class EloquentStickRepository extends BaseEloquentRepository
         return  Stick::class;
     }
 
+    public function getSticks()
+    {
+        return $this->model->orderBy('name')
+            ->get()
+            ->pluck('name', 'id');
+    }
 }

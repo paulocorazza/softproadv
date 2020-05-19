@@ -27,4 +27,10 @@ class EloquentDistrictRepository extends BaseEloquentRepository
         return District::class;
     }
 
+    public function getDistricts()
+    {
+        return $this->model->orderBy('name')
+                           ->get()
+                           ->pluck('name', 'id');
+    }
 }

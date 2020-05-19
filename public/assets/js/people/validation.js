@@ -23,7 +23,7 @@ jQuery.validator.addMethod("requiredCnpjIf", function (value, element) {
 }, "Este campo é requerido se Tipo for Pessoa Jurídica")
 
 $(document).ready(function () {
-    $("#cellphone").mask("(00) 0000-00009");
+    $("#cellphone").mask("(00) 0 0000-0009");
     $("#telephone").mask("(00) 0000-00009");
     $("#cep").mask("00000-000");
     $("#cpf").mask('000.000.000-00', {reverse: true});
@@ -109,8 +109,6 @@ $(document).ready(function () {
     });
 
     function ajaxSumit(dados, urlAjax) {
-        console.log(urlAjax)
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

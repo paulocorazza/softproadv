@@ -206,10 +206,10 @@ return [
 
                 [
                     'text' => 'Processos',
-                    'url' => 'process',
+                    'url' => 'processes',
                     'icon' => 'fas fa-balance-scale',
                     'label_color' => 'success',
-                    'can' => 'process'
+                    'can' => 'processes'
                 ],
 
                 [

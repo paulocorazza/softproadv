@@ -28,4 +28,12 @@ class TypeAction extends Model
         return $this->belongsTo(GroupAction::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function phases()
+    {
+        return $this->belongsToMany(Phase::class, 'phase_type_action');
+    }
+
 }

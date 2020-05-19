@@ -179,6 +179,7 @@
                             @endif
                         </div>
                         <div class="info">
+
                             <a href="{{ route('profile') }}" class="d-block">{{ auth()->user()->name }}</a>
                         </div>
                     </div>

@@ -5,7 +5,6 @@ namespace App\Repositories\Core\Eloquent\Tenant;
 use App\Models\Country;
 use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
-use Illuminate\Http\Request;
 
 
 /**
@@ -33,7 +32,7 @@ class EloquentCountryRepository extends BaseEloquentRepository
     {
         if ($id) {
             $country = $this->relationships([
-                'states' => function ($query)  {
+                'states' => function ($query) {
                     $query->orderBy('initials');
                 }
             ])->find($id);
@@ -48,5 +47,11 @@ class EloquentCountryRepository extends BaseEloquentRepository
             'status' => false,
             'message' => 'Não foi possível realizar a pesquisa.'
         ];
+    }
+
+
+    public function getCountries()
+    {
+        return $this->model->get()->pluck('name', 'id');
     }
 }

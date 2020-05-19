@@ -1,7 +1,6 @@
 <?php
 namespace App\Repositories\Core\Eloquent\Tenant;
 
-
 use App\Models\Permission;
 use App\Models\Profile;
 use App\Repositories\Contracts\PermissionRepositoryInterface;
