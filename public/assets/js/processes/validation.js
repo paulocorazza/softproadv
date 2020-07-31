@@ -55,8 +55,6 @@ $(document).ready(function () {
 
                 number_process: {
                     required: true,
-                    min: 3,
-                    max: 100
                 },
 
                 users: {
@@ -78,8 +76,10 @@ $(document).ready(function () {
 
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass(errorClass).addClass(validClass);
+
                 $(element.form).find("label[for=" + element.id + "]")
                     .removeClass(errorClass);
+
             },
 
             submitHandler: function (form) {

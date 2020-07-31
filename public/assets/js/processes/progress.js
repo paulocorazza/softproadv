@@ -15,7 +15,7 @@ function reset() {
 }
 
 function limparAndamento() {
-    $('#progress_created_at').val('');
+    $('#progress_date').val('');
     $('#progress_description').val('');
     $('#progress_date_term').val('');
     $('#progress_publication').val('');
@@ -27,14 +27,14 @@ function editDetail(obj) {
     limparAndamento()
 
     id = $(obj).closest('tr').attr('data-id');
-    var created = $('input[type=date][name="progresses[' + id + '][created_at]"]').val();
+    var created = $('input[type=date][name="progresses[' + id + '][date]"]').val();
     var description = $('input[type=text][name="progresses[' + id + '][description]"]').val();
-    var dateTerm = $('input[type=text][name="progresses[' + id + '][date_term]"]').val();
+    var dateTerm = $('input[type=date][name="progresses[' + id + '][date_term]"]').val();
     var publication = $('textarea[name="progresses[' + id + '][publication]"]').val();
     var pending = $('input[type=checkbox][name="progresses[' + id + '][pending]"]').val();
 
 
-    $('#progress_created_at').val(created);
+    $('#progress_date').val(created);
     $('#progress_description').val(description);
     $('#progress_date_term').val(dateTerm);
     $('#progress_publication').val(publication);
@@ -108,13 +108,16 @@ $(document).ready(function () {
     $('#btnSaveUpdateProgress').on('click', function (e) {
         e.preventDefault();
 
+
         if (id != '')
             count = id
 
-        var created_at = $('#progress_created_at').val();
+       // var date = $('#progress_date').val();
+        var date = $('#progress_date').val();
         var description = $('#progress_description').val();
         var date_term = $('#progress_date_term').val();
         var publication = $('#progress_publication').val();
+        var pending = ($("#progress_pending").prop('checked') == true) ? "checked" : '';
 
 
 
@@ -123,26 +126,25 @@ $(document).ready(function () {
             return false
         }*/
 
-        console.log(pending)
         var td =
             '<td>' +
-            '<input type="hidden" name="progresses[' + count + '][id]"  value="' + count + '"> ' +
+            '<input type="hidden" id="id' + count + '" name="progresses[' + count + '][id]"  value="' + count + '"> ' +
 
-            '<input type="hidden" name="progresses[' + count + '][publication]"  value="' + publication + '"> ' +
+            '<input type="hidden" id="publication' + count + '" name="progresses[' + count + '][publication]"  value="' + publication + '"> ' +
 
-            '<input class="form-control" type="date" readonly name="progresses[' + count + '][name]"  value="' + created_at + '"> ' +
+            '<input class="form-control" type="date" readonly id="date' + count + '" name="progresses[' + count + '][date]"  value="' + date + '"> ' +
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="text" readonly name="progresses[' + count + '][description]"  value="' + description + '"> ' +
+            '<input class="form-control" type="text" readonly id="description' + count + '" name="progresses[' + count + '][description]"  value="' + description + '"> ' +
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="text" readonly name="progresses[' + count + '][date_term]"  value="' + date_term + '"> ' +
+            '<input class="form-control" type="date" readonly  id="term' + count + '" name="progresses[' + count + '][date_term]"  value="' + date_term + '"> ' +
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="checkbox"  name="progresses[' + count + '][pending]"' +  ($("#progress_pending").prop('checked') == true)   ? "checked" : "" + '>' +
+            '<input class="form-control" type="checkbox" id="pending' + count + '" name="progresses[' + count + '][pending]"' +  pending +' >' +
             '</td>' +
 
             '<td>' +
@@ -151,8 +153,9 @@ $(document).ready(function () {
             '<a rel="' + count + '" class="badge bg-danger" href="javascript:;" onclick="removeDetail(this)">Excluir</a>' +
             '</td>';
 
+
         if (id != '') {
-            $('#progress_table').find('.j_list').find('#contacts' + id).html(td);
+            $('#progress_table').find('.j_list').find('#progresses' + id).html(td);
 
         } else if (id == '') {
             var novo = '<tr id="progresses' + count + '" data-id ="' + count + '">' + td + '</tr>'

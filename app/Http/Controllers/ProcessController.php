@@ -60,4 +60,25 @@ class ProcessController extends ControllerStandard
         return view("{$this->view}.create", compact('title', 'person', 'counterpart', 'forums', 'sticks', 'districts', 'groupActions', 'typeActions', 'users', 'phases', 'stages'));
     }
 
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+
+        $this->validate($request, $this->model->rules());
+
+        $dataForm = $request->all();
+
+        $insert = $this->model->create($dataForm);
+
+        if (!$insert) {
+            return redirect()->back()
+                ->with('error', 'Falha ao cadastrar')
+                ->withInput();
+        }
+
+        return redirect()->route("{$this->route}.index")
+            ->with('success', 'Registro realizado com sucesso!');
+    }
+
 }

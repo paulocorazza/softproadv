@@ -120,5 +120,13 @@ class Process extends Model
                     ->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function progresses()
+    {
+        return $this->hasMany(ProcessProgress::class);
+    }
+
 
 }

@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-12 col-sm-3">
         <div class="form-group label-float">
-            <input id="progress_created_at" name="progress_created_at" class="form-control" type="date"
+            <input id="progress_date" name="progress_date" class="form-control" type="date"
                    class="form-control" placeholder=" " autofocus>
-            <label for="name">Data</label>
+            <label for="progress_date">Data</label>
         </div>
     </div>
 
@@ -12,16 +12,15 @@
         <div class="form-group label-float">
             <input id="progress_description" name="progress_description" class="form-control" type="text"
                    class="form-control" placeholder=" ">
-            <label for="contact_email">Descrição</label>
+            <label for="progress_description">Descrição</label>
         </div>
     </div>
 
 
     <div class="col-12 col-sm-3">
         <div class="form-group label-float">
-            <input id="progress_date_term" name="progress_date_term" class="form-control" type="date"
-                   class="form-control" placeholder=" " autofocus>
-            <label for="name">Prazo</label>
+            <input id="progress_date_term" name="progress_date_term" class="form-control" type="date" class="form-control" placeholder=" " autofocus>
+            <label for="progress_date_term">Prazo</label>
         </div>
     </div>
 </div>

@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>Data</th>
-        <th>Descrição</th>
+        <th>Publicação</th>
         <th>Prazo</th>
         <th>Pendente</th>
         <th width="50px" scope="col">Ação</th>
@@ -18,32 +18,38 @@
                 <td>
                     <input type="hidden"
                            name="progresses[{{ $progress['id']  }}][id]"
+                           id="progresses[{{ $progress['id']  }}][id]"
                            value="{{ $progress['id'] }}">
 
                     <input type="hidden"
                            name="progresses[{{ $progress['id']  }}][publication]"
+                           id="progresses[{{ $progress['id']  }}][publication]"
                            value="{{ $progress['publication'] }}">
 
                     <input class="form-control" readonly type="text"
-                           name="progresses[{{ $progress['id']  }}][created_at]"
-                           value="{{ $progress['created_at']  }}">
+                           name="progresses[{{ $progress['id']  }}][date]"
+                           id="progresses[{{ $progress['id']  }}][date]"
+                           value="{{ $progress['date']  }}">
                 </td>
 
                 <td>
                     <input class="form-control" readonly type="text"
                            name="progresses[{{ $progress['id']  }}][description]"
+                           id="progresses[{{ $progress['id']  }}][description]"
                            value="{{ $progress['description'] }}">
                 </td>
 
                 <td>
                     <input class="form-control" readonly type="text"
                            name="progresses[{{ $progress['id'] }}][date_term]"
+                           id="progresses[{{ $progress['id'] }}][date_term]"
                            value="{{ $progress['date_term'] }}">
                 </td>
 
                 <td>
                     <input class="form-control" readonly type="text"
                            name="progresses[{{ $progress['id'] }}][pending]"
+                           id="progresses[{{ $progress['id'] }}][pending]"
                            value="{{ $progress['pending'] }}">
                 </td>
 
