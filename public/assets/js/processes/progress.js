@@ -30,15 +30,21 @@ function editDetail(obj) {
     var created = $('input[type=date][name="progresses[' + id + '][date]"]').val();
     var description = $('input[type=text][name="progresses[' + id + '][description]"]').val();
     var dateTerm = $('input[type=date][name="progresses[' + id + '][date_term]"]').val();
-    var publication = $('textarea[name="progresses[' + id + '][publication]"]').val();
-    var pending = $('input[type=checkbox][name="progresses[' + id + '][pending]"]').val();
+
+    var publication = $('input[type=hidden][name="progresses[' + id + '][publication]"]').val();
+
+
+
+    var pending = ($('input[type=checkbox][name="progresses[' + id + '][pending]"]').prop('checked') == true) ? true : false;
+
 
 
     $('#progress_date').val(created);
     $('#progress_description').val(description);
     $('#progress_date_term').val(dateTerm);
     $('#progress_publication').val(publication);
-    $('#progress_pending').val(pending);
+
+    $('#progress_pending').prop("checked", pending);
 
     $('#modalProgress').modal('show');
 }
@@ -120,11 +126,26 @@ $(document).ready(function () {
         var pending = ($("#progress_pending").prop('checked') == true) ? "checked" : '';
 
 
-
-       /* if (contact_name == '') {
-            alertify.error('Nome de preenchimento obrigatório!')
+        if (date == '') {
+            alertify.error('Data é de preenchimento obrigatório!')
             return false
-        }*/
+        }
+
+        if (description == '') {
+            alertify.error('Descrição é de preenchimento obrigatório!')
+            return false
+        }
+
+
+        if (date_term == '') {
+            alertify.error('Prazo é de preenchimento obrigatório!')
+            return false
+        }
+
+        if (publication == '') {
+            alertify.error('Publicação é de preenchimento obrigatório!')
+            return false
+        }
 
         var td =
             '<td>' +

@@ -14,16 +14,23 @@ class Process extends Model
     public function rules($id = '')
     {
         return [
-            'person_id'         => "required|exists:people,id",
-            'counterpart_id'    => "required|exists:people,id",
-            'forum_id'          => "required|exists:forums,id",
-            'stick_id'          => "required|exists:sticks,id",
-            'district_id'       => "required|exists:districts,id",
-            'group_action_id'   => "required|exists:group_actions,id",
-            'type_action_id'    => "required|exists:type_actions,id",
-            'phase_id'          => "required|exists:phases,id",
-            'stage_id'          => "required|exists:stages,id",
-            'number_process'    => 'required|min:3',
+            'person_id'             => "required|exists:people,id",
+            'counterpart_id'        => "required|exists:people,id",
+            'forum_id'              => "required|exists:forums,id",
+            'stick_id'              => "required|exists:sticks,id",
+            'district_id'           => "required|exists:districts,id",
+            'group_action_id'       => "required|exists:group_actions,id",
+            'type_action_id'        => "required|exists:type_actions,id",
+            'phase_id'              => "required|exists:phases,id",
+            'stage_id'              => "required|exists:stages,id",
+            'number_process'        => 'required|min:3',
+
+            'users'                 => 'required',
+
+            'progresses.*.date'          => 'required',
+            'progresses.*.description'   => 'required',
+            'progresses.*.date_term'     => 'required',
+            'progresses.*.publication'   => 'required',
         ];
     }
 

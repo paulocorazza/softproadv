@@ -26,15 +26,11 @@ class EloquentPlanRepository extends BaseEloquentRepository implements PlanRepos
      */
     private function saveItems(array $data, $plan)
     {
-        $description = array();
-
         if (isset($data['details'])) {
             foreach ($data['details'] as $item) {
                 $id = ($item['id'] > 0) ? $item['id'] : 0;
 
-                $description['description'] = $item['description'];
-
-                $plan->plan_details()->updateOrCreate(['id' => $id], $description);
+                $plan->plan_details()->updateOrCreate(['id' => $id], $item);
             }
 
             return true;

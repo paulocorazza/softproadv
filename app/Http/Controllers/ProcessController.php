@@ -63,18 +63,17 @@ class ProcessController extends ControllerStandard
 
     public function store(Request $request)
     {
-        dd($request->all());
 
         $this->validate($request, $this->model->rules());
 
         $dataForm = $request->all();
 
-        $insert = $this->model->create($dataForm);
+        $return = $this->model->create($dataForm);
 
-        if (!$insert) {
+        if (!$return['status']) {
             return redirect()->back()
-                ->with('error', 'Falha ao cadastrar')
-                ->withInput();
+                ->withInput()
+                ->withErrors($return['message']);
         }
 
         return redirect()->route("{$this->route}.index")

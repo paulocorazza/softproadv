@@ -131,6 +131,26 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+        'users' => [
+          'required' => 'O campo advogados é obrigatório'
+        ],
+
+        'progresses.*.date' => [
+            'required' => 'O campo data do andamento é obrigatório'
+        ],
+
+        'progresses.*.description' => [
+            'required' => 'O campo descrição do andamento é obrigatório'
+        ],
+
+        'progresses.*.date_term' => [
+            'required' => 'O campo prazo do andamento é obrigatório'
+        ],
+
+        'progresses.*.publication' => [
+            'required' => 'O campo publicação do andamento é obrigatório'
+        ],
     ],
 
     /*

@@ -57,7 +57,7 @@
     <div class="col-12">
         {!! Form::label('users', 'Advogados', ['class' => 'control-label']); !!}
         <div class="form-group">
-            {!! Form::select('users[]', $users, null, ['class' => 'form-control',  'multiple' => 'multiple',  'id' => 'users']) !!}
+            {!! Form::select('users[]', $users, null, ['class' => 'form-control',  'multiple' => 'multiple',  'id' => 'users', 'name' => 'users']) !!}
         </div>
     </div>
 </div>
