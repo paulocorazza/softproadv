@@ -28,12 +28,16 @@ class CreateUsersTable extends Migration
             $table->string('cnpj')->nullable();
             $table->string('rg')->nullable();
             $table->date('date_birth')->nullable();
+            $table->date('date_admission')->nullable();
+            $table->date('date_resignation')->nullable();
+
             $table->string('ctps')->nullable();
             $table->string('oab')->nullable();
             $table->string('cellphone')->nullable();
             $table->string('telephone')->nullable();
+
             $table->string('partner')->nullable();
-            $table->string('marital_status')->nullable();
+            $table->enum('marital_status', ['Solteiro', 'Casado', 'Separado', 'Divorciado', 'Viúvo'])->nullable();
             $table->string('father')->nullable();
             $table->string('mother')->nullable();
             $table->string('naturalness')->nullable();
@@ -43,8 +47,7 @@ class CreateUsersTable extends Migration
             $table->time('journey_pause')->nullable();
             $table->time('journey_end')->nullable();
             $table->decimal('salary', 18, 2);
-            $table->date('date_admission')->nullable();
-            $table->date('date_resignation')->nullable();
+
             $table->text('observation')->nullable();
             $table->enum('status', ['A', 'I'])->default('A')->comment('A -> Ativo, I -> Inativo');
 

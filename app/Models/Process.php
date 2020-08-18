@@ -31,6 +31,7 @@ class Process extends Model
             'progresses.*.description'   => 'required',
             'progresses.*.date_term'     => 'required',
             'progresses.*.publication'   => 'required',
+
         ];
     }
 
@@ -135,5 +136,10 @@ class Process extends Model
         return $this->hasMany(ProcessProgress::class);
     }
 
+
+    public function files()
+    {
+        return $this->hasMany(ProcessFiles::class);
+    }
 
 }

@@ -235,6 +235,15 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************      PROCESS     ***************** */
     /*     * ************************************************ */
+
+    Route::get('process/file/{id}/download', 'ExtraAction\ProcessFileDownload')->name('fileDownload');
+
+    Route::get('process/file/{id}', 'ExtraAction\ProcessFileView')->name('fileView');
+
+    Route::post('process/file/delete', 'ExtraAction\ProcessFileDestroy')->name('fileDelete');
+
+    Route::post('process/progress/delete', 'ExtraAction\ProcessProgressDestroy')->name('progressDelete');
+
     Route::resource('processes', 'ProcessController');
 
 });

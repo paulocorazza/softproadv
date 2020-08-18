@@ -85,4 +85,25 @@ class EloquentTypeActionRepository extends BaseEloquentRepository
             'message' => 'Não foi possível realizar a pesquisa.'
         ];
     }
+
+    public function getTypeActionByGroupId($groupId)
+    {
+        return  $this->model->where('group_action_id', $groupId)
+                            ->get()
+                            ->pluck('name', 'id');
+
+
+    }
+
+    public function getPhasesByTypeAction($id)
+    {
+        $typeAction = $this->relationships('phases')->find($id);
+
+
+        return $typeAction->phases()
+                          ->get()
+                          ->pluck('name', 'id');
+
+
+    }
 }

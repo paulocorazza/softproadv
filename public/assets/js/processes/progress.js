@@ -83,13 +83,7 @@ function deletaProgressAjax(obj, id) {
             id: id
         },
 
-        beforeSend: function () {
-            $('.form_load').css('display', 'flex');
-        },
-
         success: function (json) {
-            $('.form_load').fadeOut(500);
-
             if (json.result == true) {
                 $(obj).closest('tr').remove();
                 alertify.success('Registro excluído com sucesso!')

@@ -56,4 +56,14 @@ class EloquentPhaseRepository extends BaseEloquentRepository
             'message' => 'Não foi possível realizar a pesquisa.'
         ];
     }
+
+
+    public function getStagesByPhase($phase_id)
+    {
+        $phase = $this->relationships('stages')->find($phase_id);
+
+        return $phase->stages()
+            ->get()
+            ->pluck('name', 'id');
+    }
 }

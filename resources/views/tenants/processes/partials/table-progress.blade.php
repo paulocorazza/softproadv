@@ -9,7 +9,7 @@
     </tr>
     </thead>
 
-    <tbody class="j_list">
+    <tbody class="j_lits">
     <!-- /foreach progresses -->
 
     @if(isset($progresses))
@@ -47,10 +47,9 @@
                 </td>
 
                 <td>
-                    <input class="form-control" readonly type="text"
+                    <input class="form-control" readonly type="checkbox"
                            name="progresses[{{ $progress['id'] }}][pending]"
-                           id="progresses[{{ $progress['id'] }}][pending]"
-                           value="{{ $progress['pending'] }}">
+                           id="progresses[{{ $progress['id'] }}][pending]" {{ $progress['pending'] ? 'checked' : '' }} >
                 </td>
 
 

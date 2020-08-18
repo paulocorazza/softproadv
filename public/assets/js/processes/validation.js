@@ -1,3 +1,25 @@
+
+/*$.validator.addMethod("mytst", function (value, element) {
+    console.log('teste')
+    var flag = true;
+
+    $("[name^=files]").each(function (i, j) {
+        console.log(i)
+        $(this).parent('div').find('label.error').remove();
+        $(this).parent('div').find('label.error').remove();
+        if ($.trim($(this).val()) == '') {
+            flag = false;
+
+            $(this).parent('div').append('<label  id="id_ct'+i+'-error" class="error">This field is required.</label>');
+        }
+    });
+
+
+    return flag;
+
+
+}, "");*/
+
 $(document).ready(function () {
     function reset() {
         $("#toggleCSS").attr("href", "alertify.default.css");
@@ -12,6 +34,23 @@ $(document).ready(function () {
             buttonFocus: "ok"
         });
     }
+
+    /*function validateFiles() {
+        var flag = true;
+        $("[name^=files]").each(function (i, j) {
+            $(this).parent('div').find('label.error').remove();
+            $(this).parent('div').find('label.error').remove();
+
+            if ($.trim($(this).val()) == '') {
+                $(this).parent('div').append('<label  id="id_ct' + i + '-error" class="error">This field is required.</label>');
+
+                flag = false
+            }
+        })
+
+        return flag
+    }*/
+
 
     $('#formRegister').each(function () {
         $(this).validate({
@@ -59,7 +98,11 @@ $(document).ready(function () {
 
                 users: {
                     required: true
-                }
+                },
+
+            //    "files[][description]": {
+            //        mytst:true
+            //    }
             },
 
 
@@ -83,7 +126,28 @@ $(document).ready(function () {
             },
 
             submitHandler: function (form) {
-                form.submit();
+                //if (validateFiles()) {
+               //     form.submit();
+               // }
+
+
+                if ($('.modal.show').length == 0) {
+                   // var dados = $(form).serialize();
+                     var dados = new FormData(form);
+
+
+                    var _method = $('#formRegister').find('input[name="_method"]').val()
+
+                    if (_method == undefined) {
+                        ajaxSumit(dados, submitAjax)
+                    } else if (_method == 'PUT') {
+                       ajaxSumit(dados, submitAjaxPut)
+                    }
+
+                    return false
+                }
+
+
             }
         })
 
@@ -94,6 +158,46 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
+    function ajaxSumit(dados, urlAjax) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: 'POST',
+            processData: false,
+            contentType: false,
+            url: urlAjax,
+            data: dados,
+            beforeSend: startPreloader()
+        }).done(function (data) {
+            if (data == 1) {
+                window.location.href = "/processes"
+                endPreloader()
+            } else {
+                $('.alert-warning').fadeIn();
+                $('#warning').html(data);
+                $('html,body').scrollTop(0);
+                endPreloader()
+            }
+
+        }).fail(function () {
+            alertify.alert('Ocorreu um erro na requisição.');
+            endPreloader()
+        });
+    }
+
+    function startPreloader() {
+        $('.preload .form_load').fadeIn()
+    }
+
+    function endPreloader() {
+        $('.preload .form_load').fadeOut();
+    }
 
     $('#person_id').select2({
         theme: "classic",
