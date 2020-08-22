@@ -246,6 +246,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('processes', 'ProcessController');
 
+
+
+    /*     * ************************************************ */
+    /*     * *************   FULL CALENDAR   **************** */
+    /*     * ************************************************ */
+    Route::get('calendar', 'FullCalendarController@index')->name('calendar.index');
+    Route::get('calendar/events', 'EventController@loadEvents')->name('routeLoadEvents');
+    Route::put('calendar/event-update', 'EventController@update')->name('routeEventUpdate');
+
 });
 
 

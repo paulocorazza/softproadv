@@ -74,13 +74,11 @@
                                     <div class="post">
                                         <div class="user-block">
                                             @if ($progress->pending)
-                                                <img src="{{ asset('assets/images/uncheck.png') }}" class="img-circle img-bordered-sm"
-                                                     alt="user image">
+                                                <img src="{{ asset('assets/images/uncheck.png') }}" class="img-circle img-bordered-sm" alt="pending">
 
                                             @else
 
-                                                <img src="{{ asset('assets/images/check.png') }}" class="img-circle img-bordered-sm"
-                                                     alt="user image">
+                                                <img src="{{ asset('assets/images/check.png') }}" class="img-circle img-bordered-sm" alt="active">
 
                                             @endif
 
@@ -179,10 +177,10 @@
                         <br>
                         <div class="text-muted">
                             <p class="text-sm">Cliente
-                                <b class="d-block">{{ $data->person->name }}</b>
+                                <b class="d-block"><a href="{{ route('people.show', $data->person_id) }}">{{ $data->person->name }}</a></b>
                             </p>
                             <p class="text-sm">Parte Contrária
-                                <b class="d-block">{{ $data->counterPart->name }}</b>
+                                <b class="d-block"><a href="{{ route('people.show', $data->counterpart_id) }}">{{ $data->counterPart->name }}</a> </b>
                             </p>
                         </div>
 
@@ -192,6 +190,30 @@
                                 <li>
                                     <a href="{{ route('fileDownload', $file->id) }}" class="btn-link text-secondary"><i
                                             class="far fa-fw fa-file-word"></i> {{ $file->description }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+
+
+                        <h5 class="mt-5 text-muted">Advogados</h5>
+                        <ul class="list-unstyled">
+                            @foreach($data->users as $user)
+                                <li>
+                                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                                        <div class="image">
+                                            @if( !empty($user->image) )
+                                                <img src="{{ asset('storage/tenants/users/' . $user->image) }}" alt="{{ $user->name }}" class="user-dashboard img-circle">
+                                            @else
+                                                <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro" class="user-dashboard img-circle">
+                                            @endif
+                                        </div>
+                                        <div class="info">
+
+                                            <a href="{{ route('users.show', $user->id) }}" class="d-block">{{ $user->name }}</a>
+                                        </div>
+                                    </div>
+
+                                   {{ $user->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
