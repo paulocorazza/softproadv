@@ -39,19 +39,20 @@
             {!! Form::label('start', 'Data Início', ['class' => 'control-label']); !!}
             <br>
             <input type="datetime-local" class="form-control" name="start" id="start"
-                   value="{{ old('start', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', @$data->start)->format('Y-m-d\TH:i:s') ) }}">
+                   value="{{ old('start', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->start) ? $data->start : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
         </div>
     </div>
-
 
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">
             {!! Form::label('end', 'Data Fim', ['class' => 'control-label']); !!}
             <br>
             <input type="datetime-local" class="form-control" name="end" id="end"
-                   value="{{ old('end', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', @$data->end)->format('Y-m-d\TH:i:s') ) }}">
+                   value="{{ old('end', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->end) ? $data->end : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
         </div>
     </div>
+
+
 </div>
 
 <div class="row">
@@ -93,6 +94,10 @@
 
 {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
 {!! Form::close() !!}
+
+<div class="preload">
+    @include('tenants.includes.load')
+</div>
 
 <br/>
 

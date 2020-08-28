@@ -198,6 +198,10 @@
 
     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
+
+    <div class="preload">
+        @include('tenants.includes.load')
+    </div>
 @stop
 
 
