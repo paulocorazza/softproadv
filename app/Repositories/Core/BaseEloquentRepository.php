@@ -120,8 +120,19 @@ class BaseEloquentRepository implements RepositoryInterface
      */
     public function where($field, $operator = '=', $value, $columns = ['*'])
     {
-        return $this->model->where($field, $operator, $value)
-            ->get($columns);
+        return $this->model->where($field, $operator, $value);
+    }
+
+    /**
+     * @param $field
+     * @param string $operator
+     * @param $value
+     * @param array $columns
+     * @return mixed
+     */
+    public function orWhere($field, $operator = '=', $value, $columns = ['*'])
+    {
+        return $this->model->orWhere($field, $operator, $value);
     }
 
 

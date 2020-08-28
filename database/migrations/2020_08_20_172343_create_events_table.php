@@ -15,13 +15,33 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('process_id')->nullable();
+            $table->unsignedBigInteger('user_id');
+
             $table->string('title');
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('color', 7);
-            $table->longText('description')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('schedule');
+            $table->boolean('allday');
+            $table->dateTime('finish')->nullable();
+            $table->string('file')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('process_id')
+                ->references('id')
+                ->on('processes')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
         });
     }
 

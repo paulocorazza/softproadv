@@ -169,7 +169,7 @@ class ProcessController extends ControllerStandard
     {
         $dataForm = $request->all();
 
-        $validate = Validator::make($request->all(),  $this->model->rules());
+          $validate = Validator::make($request->all(),  $this->model->rules($id));
 
         if ($validate->fails()) {
             return implode($validate->messages()->all("<p>:message</p>"));

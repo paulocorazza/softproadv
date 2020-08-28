@@ -193,7 +193,7 @@ class Helper
      * @param string $format
      * @return mixed
      */
-    public static function formatDateTime($value, $format = 'd/m/Y')
+    public static function formatDateTime($value, $format = 'd/m/Y H:i:s')
     {
         return Carbon::parse($value)->format($format);
     }
@@ -205,7 +205,7 @@ class Helper
      */
     public static function formatDecimal($value, $decimals = 2)
     {
-        return number_format($value, $decimals,'.',',');
+        return number_format($value, $decimals,',','.');
     }
 
     /**

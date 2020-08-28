@@ -182,6 +182,16 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function eventsOwner()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_users');
+    }
+
 
     /**
      * @param Permission $permission
@@ -222,4 +232,6 @@ class User extends Authenticatable
     {
         return $query->where('type', '=', 'A');
     }
+
+
 }

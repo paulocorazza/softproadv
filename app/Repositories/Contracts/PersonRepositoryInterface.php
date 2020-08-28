@@ -6,6 +6,6 @@ use Illuminate\Http\Request;
 
 interface PersonRepositoryInterface
 {
-
+    public function getPersonProcesses(Request $request);
 }
 

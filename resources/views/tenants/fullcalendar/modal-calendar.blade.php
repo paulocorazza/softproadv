@@ -9,6 +9,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div id="message"></div>
+
                 <form action="" id="formEvent">
                     <input type="hidden" id="id" name="id">
 
@@ -16,7 +18,6 @@
                         <label for="title" class="col-sm-4 col-form-label">Titulo</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="title" name="title">
-
                         </div>
                     </div>
 

@@ -6,6 +6,7 @@ use App\Models\Process;
 use App\Models\Stage;
 use App\Repositories\Contracts\ProcessRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
@@ -36,10 +37,11 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
                 $progress['pending'] = (isset($progress['pending'])) ? true : false;
 
-               $insert =  $process->progresses()->updateOrCreate(['id' => $id], $progress);
+                $insert = $process->progresses()->updateOrCreate(['id' => $id], $progress);
 
-               if (!$insert)
-                   throw new \Exception('Falha ao inserir o andamento');
+                if (!$insert) {
+                    throw new \Exception('Falha ao inserir o andamento');
+                }
             }
         }
 
@@ -61,8 +63,8 @@ class EloquentProcessRepository extends BaseEloquentRepository
     {
         $files = $data['files'];
 
-        if ($files)   {
-             $filesUploaded = [];
+        if ($files) {
+            $filesUploaded = [];
 
             foreach ($files as $file) {
 
@@ -75,7 +77,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
                     $filesUploaded['description'] = $file['description'];
                     $filesUploaded['ext'] = $ext;
                     $filesUploaded['file'] = $path;
-
 
 
                     $insert = $process->files()->create($filesUploaded);
@@ -118,13 +119,11 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $users = $model->users()->get();
                 return view('tenants.processes.partials.listAdv', compact('users'));
             })
-
             ->addColumn('progress', ' ')
             ->editColumn('progress', function ($model) {
                 $percent = $this->getPercentProgress($model);
                 return view('tenants.processes.partials.progress', compact('percent'));
             })
-
             ->addColumn($column, $view)
             ->make(true);
     }
@@ -184,7 +183,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
             $data['user_id'] = auth()->user()->id;
 
             $process->update($data);
-            $users =  $this->saveUsers($data, $process);
+            $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
             $files = $this->saveFiles($data, $process);
 
@@ -213,4 +212,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
             ];
         }
     }
+
+
 }

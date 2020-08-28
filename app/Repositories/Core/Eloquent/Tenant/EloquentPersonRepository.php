@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Repositories\Core\Eloquent\Tenant;
 
 use App\Models\Person;
 use App\Repositories\Contracts\PersonRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -77,7 +79,7 @@ class EloquentPersonRepository extends BaseEloquentRepository
     /*     * ************************************************ */
     public function model()
     {
-        return  Person::class;
+        return Person::class;
     }
 
 
@@ -87,7 +89,7 @@ class EloquentPersonRepository extends BaseEloquentRepository
 
         try {
 
-            $data['state']   = (isset($data['state']) ? 'I' : 'A');
+            $data['state'] = (isset($data['state']) ? 'I' : 'A');
             $data['user_id'] = Auth::user()->id;
 
             $person = parent::create($data);
@@ -162,4 +164,47 @@ class EloquentPersonRepository extends BaseEloquentRepository
 
     }
 
-   }
+
+    public function getPersonProcesses(Request $request)
+    {
+        $data = [];
+
+        if ($request->has('q') && !empty($request->q)) {
+
+            $search = $request->q;
+
+            $data = $this->relationships('processes')
+                ->Where('name', 'LIKE', "%$search%")
+                ->orWhere('cpf', 'LIKE', "%$search%")
+                ->get();
+
+            $processes = $this->getProcesses($data);
+
+            return [
+                'status' => true,
+                'data' => $processes,
+            ];
+        }
+    }
+
+    /**
+     * @param $data
+     * @return array
+     */
+    private function getProcesses($data): array
+    {
+        $processes = [];
+
+        foreach ($data as $person) {
+            foreach ($person->processes as $process) {
+                $processes[] = [
+                    'id' => $process->id,
+                    'process' => $process->number_process . ' - ' . $person->name,
+                    ];
+            }
+        }
+
+        return $processes;
+    }
+
+}

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     /* initialize the external events
     -----------------------------------------------------------------*/
 
-    var containerEl = document.getElementById('external-events-list');
+ /*   var containerEl = document.getElementById('external-events-list');
     new FullCalendar.Draggable(containerEl, {
         itemSelector: '.fc-event',
         eventData: function (eventEl) {
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: eventEl.innerText.trim()
             }
         }
-    });
+    });*/
 
 
     /* initialize the calendar
@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
         selectable: true,
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar
-        drop: function (arg) {
+   /*     drop: function (element) {
             // is the "remove after drop" checkbox checked?
             if (document.getElementById('drop-remove').checked) {
                 // if so, remove the element from the "Draggable Events" list
-                arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                element.draggedEl.parentNode.removeChild(element.draggedEl);
             }
-        },
+        },*/
 
         //arrastar de uma celula para outra
         eventDrop: function (element) {
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let newEvent = {
                 _method: 'PUT',
                 id: element.event.id,
+                title: element.event.title,
                 start: start,
                 end: end
             };
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //retornar outros campos
             //console.log(element.event.extendedProps.created_at)
 
+            clearMessage('#message')
             resetForm('#formEvent');
 
             $('#modalCalendar').modal('show')
@@ -90,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let newEvent = {
                 _method: 'PUT',
                 id: element.event.id,
+                title: element.event.title,
                 start: start,
                 end: end
             };
@@ -99,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //ao selecionar uma celula
         select: function (element) {
+            clearMessage('#message')
             resetForm('#formEvent');
 
             $('#modalCalendar').modal('show')
@@ -118,9 +122,15 @@ document.addEventListener('DOMContentLoaded', function () {
             calendar.unselect()
         },
 
+     /*   eventReceive: function(element) {
+          element.event.remove()
+        },*/
+
         //listar os eventos no calendario
         events: routeEvents('routeLoadEvents')
     });
+
+    objCalendar = calendar;
     calendar.render();
 });
 

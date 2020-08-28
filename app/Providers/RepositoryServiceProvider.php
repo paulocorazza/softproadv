@@ -9,6 +9,7 @@ use App\Repositories\Contracts\CompanyRepositoryInterface;
 use App\Repositories\Contracts\ContactRepositoryInterface;
 use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
+use App\Repositories\Contracts\EventRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
 use App\Repositories\Contracts\OriginRepositoryInterface;
@@ -35,6 +36,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentCompanyRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentContactRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCountryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentDistrictRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentEventRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentForumRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentGroupActionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentOriginRepository;
@@ -99,7 +101,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(
             ProfileRepositoryInterface::class,
-                EloquentProfileRepository::class
+            EloquentProfileRepository::class
         );
 
         $this->app->bind(
@@ -128,7 +130,7 @@ class RepositoryServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-             OriginRepositoryInterface::class,
+            OriginRepositoryInterface::class,
             EloquentOriginRepository::class
         );
 
@@ -148,8 +150,8 @@ class RepositoryServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-          PersonRepositoryInterface::class,
-          EloquentPersonRepository::class
+            PersonRepositoryInterface::class,
+            EloquentPersonRepository::class
         );
 
         $this->app->bind(
@@ -178,9 +180,13 @@ class RepositoryServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(StageRepositoryInterface::class,
-                        EloquentStageRepository::class);
+            EloquentStageRepository::class);
 
         $this->app->bind(ProcessRepositoryInterface::class,
             EloquentProcessRepository::class);
+
+        $this->app->bind(EventRepositoryInterface::class,
+            EloquentEventRepository::class);
+
     }
 }

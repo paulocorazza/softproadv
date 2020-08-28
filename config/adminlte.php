@@ -222,10 +222,10 @@ return [
 
                 [
                     'text' => 'Atividades',
-                    'url' => 'tasks',
+                    'url' => 'events',
                     'icon' => 'fas fa-tasks',
                     'label_color' => 'success',
-                    'can' => 'tasks'
+                    'can' => 'events'
                 ],
 
                 [

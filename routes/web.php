@@ -236,6 +236,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * *************      PROCESS     ***************** */
     /*     * ************************************************ */
 
+    Route::get('process/processSelect', 'ExtraAction\Process')->name('processes.select');
     Route::get('process/file/{id}/download', 'ExtraAction\ProcessFileDownload')->name('fileDownload');
 
     Route::get('process/file/{id}', 'ExtraAction\ProcessFileView')->name('fileView');
@@ -249,11 +250,21 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     /*     * ************************************************ */
+    /*     * *************     EVENTS     ***************** */
+    /*     * ************************************************ */
+    Route::get('events/file/{id}/download', 'ExtraAction\EventFileDownload')->name('events.fileDownload');
+    Route::resource('events', 'EventController');
+
+
+
+    /*     * ************************************************ */
     /*     * *************   FULL CALENDAR   **************** */
     /*     * ************************************************ */
-    Route::get('calendar', 'FullCalendarController@index')->name('calendar.index');
-    Route::get('calendar/events', 'EventController@loadEvents')->name('routeLoadEvents');
-    Route::put('calendar/event-update', 'EventController@update')->name('routeEventUpdate');
+    Route::get('schedule', 'FullCalendarController@index')->name('calendar.index');
+    Route::get('schedule/events', 'ScheduleController@loadEvents')->name('routeLoadEvents');
+    Route::post('schedule/event-store', 'ScheduleController@store')->name('routeEventStore');
+    Route::put('schedule/event-update', 'ScheduleController@update')->name('routeEventUpdate');
+    Route::delete('schedule/event-destroy', 'ScheduleController@destroy')->name('routeEventDelete');
 
 });
 

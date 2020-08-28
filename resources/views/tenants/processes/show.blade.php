@@ -5,6 +5,7 @@
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
+    <link rel="stylesheet" href={{ asset('assets/css/process/process.css') }} />
 @stop
 
 @section('content_header')
@@ -74,11 +75,13 @@
                                     <div class="post">
                                         <div class="user-block">
                                             @if ($progress->pending)
-                                                <img src="{{ asset('assets/images/uncheck.png') }}" class="img-circle img-bordered-sm" alt="pending">
+                                                <img src="{{ asset('assets/images/uncheck.png') }}"
+                                                     class="img-circle img-bordered-sm" alt="pending">
 
                                             @else
 
-                                                <img src="{{ asset('assets/images/check.png') }}" class="img-circle img-bordered-sm" alt="active">
+                                                <img src="{{ asset('assets/images/check.png') }}"
+                                                     class="img-circle img-bordered-sm" alt="active">
 
                                             @endif
 
@@ -100,87 +103,80 @@
 
                         </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>Atividades Recentes</h4>
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
-                                             alt="user image">
-                                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                                        <span class="description">Shared publicly - 7:45 PM today</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
+                        @if(isset($data->events))
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>Atividades Recentes</h4>
+                                    @foreach($data->events as $event)
+                                        <div class="post">
+                                            <div class="user-block">
 
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo
-                                            File 1 v2</a>
-                                    </p>
-                                </div>
+                                                @foreach($event->users as $user)
+                                                    @if( !empty($user->image) )
+                                                        <div class="img-post">
+                                                            <img
+                                                                src="{{ asset('storage/tenants/users/' . $user->image) }}"
+                                                                alt="{{ $user->name }}"
+                                                                class="user-dashboard img-circle">
+                                                        </div>
+                                                    @else
+                                                        <div class="img-post">
+                                                            <img src="{{ url('assets/images/no-image.png') }}"
+                                                                 alt="SoftPro"
+                                                                 class="user-dashboard img-circle">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
 
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg"
-                                             alt="User Image">
-                                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                        </span>
-                                        <span class="description">Sent you a message - 3 days ago</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo
-                                            File 2</a>
-                                    </p>
-                                </div>
 
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
-                                             alt="user image">
-                                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                                        <span class="description">Shared publicly - 5 days ago</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore.
-                                    </p>
+                                                <span class="username">
+                                                    <a href="{{ route('events.show', $event->id) }}">{{ $event->title }}</a>
+                                                </span>
 
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo
-                                            File 1 v1</a>
-                                    </p>
+                                                <span
+                                                    class="description">Início: {{ $event->start }} - Fim: {{ $event->end }}</span>
+                                                <span
+                                                    class="description">{{ !empty($event->finish) ? 'Finalizado' : 'Pendente' }}</span>
+                                            </div>
+                                            <!-- /.user-block -->
+
+                                            <p>
+                                                {{ $event->description }}
+                                            </p>
+
+
+                                            @if(!empty($event->file))
+                                                <p>
+                                                    <a href="{{ route('events.fileDownload', $event->id) }}"
+                                                       class="link-black text-sm"><i class="fas fa-link mr-1"></i>Anexo</a>
+                                                </p>
+                                            @endif
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+
+                        @endif
+
+
                     </div>
+
+
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                        <h3 class="text-primary"><i class="fas fa-paint-brush"></i> Processo {{ $data->number_process }}
+                        <h3 class="text-primary"><i class="fas fa-paint-brush"></i>
+                            Processo {{ $data->number_process }}
                         </h3>
                         <p class="text-muted">{{ $data->description}}</p>
                         <br>
                         <div class="text-muted">
                             <p class="text-sm">Cliente
-                                <b class="d-block"><a href="{{ route('people.show', $data->person_id) }}">{{ $data->person->name }}</a></b>
+                                <b class="d-block"><a
+                                        href="{{ route('people.show', $data->person_id) }}">{{ $data->person->name }}</a></b>
                             </p>
                             <p class="text-sm">Parte Contrária
-                                <b class="d-block"><a href="{{ route('people.show', $data->counterpart_id) }}">{{ $data->counterPart->name }}</a> </b>
+                                <b class="d-block"><a
+                                        href="{{ route('people.show', $data->counterpart_id) }}">{{ $data->counterPart->name }}</a>
+                                </b>
                             </p>
                         </div>
 
@@ -188,7 +184,8 @@
                         <ul class="list-unstyled">
                             @foreach($data->files as $file)
                                 <li>
-                                    <a href="{{ route('fileDownload', $file->id) }}" class="btn-link text-secondary"><i
+                                    <a href="{{ route('fileDownload', $file->id) }}"
+                                       class="btn-link text-secondary"><i
                                             class="far fa-fw fa-file-word"></i> {{ $file->description }}</a>
                                 </li>
                             @endforeach
@@ -202,18 +199,19 @@
                                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                         <div class="image">
                                             @if( !empty($user->image) )
-                                                <img src="{{ asset('storage/tenants/users/' . $user->image) }}" alt="{{ $user->name }}" class="user-dashboard img-circle">
+                                                <img src="{{ asset('storage/tenants/users/' . $user->image) }}"
+                                                     alt="{{ $user->name }}" class="user-dashboard img-circle">
                                             @else
-                                                <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro" class="user-dashboard img-circle">
+                                                <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro"
+                                                     class="user-dashboard img-circle">
                                             @endif
                                         </div>
                                         <div class="info">
 
-                                            <a href="{{ route('users.show', $user->id) }}" class="d-block">{{ $user->name }}</a>
+                                            <a href="{{ route('users.show', $user->id) }}"
+                                               class="d-block">{{ $user->name }}</a>
                                         </div>
                                     </div>
-
-                                   {{ $user->name }}</a>
                                 </li>
                             @endforeach
                         </ul>

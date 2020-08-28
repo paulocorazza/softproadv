@@ -77,6 +77,11 @@ class Person extends Model
         return $this->belongsTo(Origin::class);
     }
 
+    public function processes()
+    {
+        return $this->hasMany(Process::class);
+    }
+
     public function scopeStateActive($query)
     {
         return $query->where('status', '=', 'A');

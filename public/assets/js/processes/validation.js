@@ -21,6 +21,9 @@
 }, "");*/
 
 $(document).ready(function () {
+    $('.money').mask('#.##0,00', {reverse: true});
+
+
     function reset() {
         $("#toggleCSS").attr("href", "alertify.default.css");
 

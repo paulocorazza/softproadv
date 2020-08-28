@@ -11,6 +11,7 @@ interface RepositoryInterface
     public function WhereNotIn($field, array $values, $columns = ['*']);
     public function WhereBetween($field, array $values, $columns = ['*']);
     public function where($field, $operator = '=', $value, $columns = ['*']);
+    public function orWhere($field, $operator = '=', $value, $columns = ['*']);
     public function whereFirst($field,  $operator = '=', $value);
     public function paginate($totalPage = 10);
     public function create(array $data);

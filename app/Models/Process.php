@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
 
 class Process extends Model
@@ -10,6 +11,9 @@ class Process extends Model
         'stick_id','district_id', 'group_action_id', 'type_action_id', 'phase_id',
         'stage_id','number_process', 'protocol', 'folder', 'date_request', 'expectancy',
         'price','percent_fees', 'description'];
+
+
+    protected $appends = ['process_person'];
 
     public function rules($id = '')
     {
@@ -23,8 +27,7 @@ class Process extends Model
             'type_action_id'        => "required|exists:type_actions,id",
             'phase_id'              => "required|exists:phases,id",
             'stage_id'              => "required|exists:stages,id",
-            'number_process'        => 'required|min:3',
-
+            'number_process'        => 'required|min:3|unique:processes,id,{$id},id',
             'users'                 => 'required',
 
             'progresses.*.date'          => 'required',
@@ -142,4 +145,36 @@ class Process extends Model
         return $this->hasMany(ProcessFiles::class);
     }
 
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+
+    public function getProcessPersonAttribute()
+    {
+        return $this->number_process . ' - ' . $this->person()->first()->name;
+    }
+
+    public function setExpectancyAttribute($value)
+    {
+        $this->attributes['expectancy'] = Helper::replaceDecimal($value);
+    }
+
+    public function getExpectancyAttribute($value)
+    {
+        return Helper::formatDecimal($value, 2);
+    }
+
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = Helper::replaceDecimal($value);
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return Helper::formatDecimal($value, 2);
+    }
 }

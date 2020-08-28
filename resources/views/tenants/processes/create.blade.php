@@ -213,6 +213,7 @@
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
+    <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
 
     <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/processes/progress.js') }}></script>

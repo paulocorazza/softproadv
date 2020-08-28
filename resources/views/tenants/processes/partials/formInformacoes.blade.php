@@ -35,14 +35,14 @@
 <div class="row">
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">
-            {!! Form::text('expectancy', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'expectancy']) !!}
+            {!! Form::text('expectancy', null, ['class' => 'form-control money', 'placeholder' => ' ', 'id' => 'expectancy']) !!}
             {!! Form::label('expectancy', 'Expectativa/Valor da causa', ['class' => 'control-label']); !!}
         </div>
     </div>
 
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">
-            {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'price']) !!}
+            {!! Form::text('price', null, ['class' => 'form-control money', 'placeholder' => ' ', 'id' => 'price']) !!}
             {!! Form::label('price', 'Valor dos honorários', ['class' => 'control-label']); !!}
         </div>
     </div>
