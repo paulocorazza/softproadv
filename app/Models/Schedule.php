@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Helpers\Helper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Event extends Model
+class Schedule extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'events';
 
     protected $fillable = [
         'user_id',
@@ -25,7 +26,7 @@ class Event extends Model
     ];
 
 
-   /* public function getStartAttribute($value)
+    public function getStartAttribute($value)
     {
         $dataStart = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d');
         $timeStart = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i:s');
@@ -40,16 +41,8 @@ class Event extends Model
 
         return $this->end = ($timeEnd == '00:00:00') ? $dateEnd : $value;
     }
-*/
-    public function getStartAttribute($value)
-    {
-        return Helper::formatDateTime($value, 'd/m/Y H:i:s');
-    }
 
-    public function getEndAttribute($value)
-    {
-        return Helper::formatDateTime($value, 'd/m/Y H:i:s');
-    }
+
 
 
     public function process()
@@ -65,19 +58,9 @@ class Event extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'event_users');
+        return $this->belongsToMany(User::class, 'event_users','event_id', 'user_id');
     }
 
-    public function rules()
-    {
-        return [
-            'user_id'       => 'required|exists:users,id',
-            'title'         => 'required|min:3',
-            'start'         => 'date|before:end',
-            'end'           => 'date|after:start',
-            'process_id'    => 'nullable|exists:processes,id'
-        ];
-    }
 
     public function scopeSchedule($query)
     {

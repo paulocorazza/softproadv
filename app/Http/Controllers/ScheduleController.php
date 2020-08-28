@@ -3,28 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ScheduleRequest;
-use App\Models\Event;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
     public function loadEvents(Request $request)
     {
-        $returnedColumns = ['id', 'title', 'start', 'end', 'color', 'description'];
-
         $start = (!empty($request->start) ? ($request->start) : (''));
         $end = (!empty($request->end) ? ($request->end) : (''));
 
-        $events = Event::whereBetween('start', [$start, $end])
+        $events = Schedule::with(['users', 'process'])
+                         ->whereBetween('start', [$start, $end])
                          ->schedule()
-                         ->get($returnedColumns);
+                         ->get();
 
         return response()->json($events);
     }
 
     public function store(ScheduleRequest $request)
     {
-        $event = Event::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        $data['schedule'] = true;
+
+        $event = Schedule::create($data);
+
+        if (isset($data['users'])) {
+            $event->users()->sync($data['users']);
+        }
+
 
         if ($event) {
             return response()->json(true);
@@ -33,9 +41,15 @@ class ScheduleController extends Controller
 
     public function update(ScheduleRequest $request)
     {
-        $event = Event::find($request->id);
+        $event = Schedule::find($request->id);
 
-        $update = $event->update($request->all());
+        $data = $request->all();
+
+        $update = $event->update($data);
+
+        if (isset($data['users'])) {
+            $event->users()->sync($data['users']);
+        }
 
         if ($update) {
             return response()->json(true);
@@ -44,7 +58,7 @@ class ScheduleController extends Controller
 
     public function destroy(Request $request)
     {
-       $delete =  Event::find($request->id)->delete();
+       $delete =  Schedule::find($request->id)->delete();
 
         if ($delete) {
             return response()->json(true);

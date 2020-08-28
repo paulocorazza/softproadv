@@ -6,6 +6,11 @@
 
 @section('title_postfix', ' - Cadastrar Nova Atividade')
 
+@section('adminlte_css')
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
+@stop
+
 @section('content_header')
     <div class="container-fluid">
         @include('tenants.includes.breadcrumbs',  ['title' => $title,
@@ -55,6 +60,7 @@
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
+    <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/events/validation.js') }}></script>
 @stop
 

@@ -27,13 +27,18 @@ $(function () {
         let end = moment($('#modalCalendar #end').val(), "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
         let color =  $('#modalCalendar #color').val()
         let description =  $('#modalCalendar #description').val()
+        let process_id = $('#modalCalendar #process_id').val()
+        let users = $('#modalCalendar #users').val()
+
 
         let Event = {
             title: title,
             start: start,
             end: end,
             color: color,
-            description: description
+            description: description,
+            process_id: process_id,
+            users: users
         }
 
         let route;
@@ -88,6 +93,7 @@ function clearMessage(element) {
 }
 
 function resetForm(form) {
+    $('.select').prop('selectedIndex',-1).trigger( "change" );
     return $(form)[0].reset();
 }
 
@@ -103,4 +109,42 @@ function loadErrors(response) {
     return boxAlert.replace(',', '<br>')
 }
 
+$('#users').select2({
+    allowClear: true,
+    theme: "classic",
+})
+
+
+
+$('#process_id').select2({
+    theme: "classic",
+    allowClear: true,
+    placeholder: 'Pesquisar por Nome ou CPF do cliente',
+
+    ajax: {
+        delay: 250,
+        type: 'get',
+        url: routeEvents('routeEventProcess'),
+
+        data: function (params) {
+            return {
+                q: $.trim(params.term)
+            };
+        },
+
+        dataType: 'json',
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+
+                    return {
+                        text: item.process,
+                        id: item.id
+                    }
+                })
+            };
+        },
+        cache: true
+    }
+});
 

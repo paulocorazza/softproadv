@@ -25,7 +25,6 @@ class CreateEventsTable extends Migration
             $table->string('color', 7);
             $table->text('description')->nullable();
             $table->boolean('schedule');
-            $table->boolean('allday');
             $table->dateTime('finish')->nullable();
             $table->string('file')->nullable();
 

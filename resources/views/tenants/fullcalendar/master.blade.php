@@ -33,6 +33,7 @@
                 data-route-event-update="{{ route('routeEventUpdate') }}"
                 data-route-event-store="{{ route('routeEventStore') }}"
                 data-route-event-delete="{{ route('routeEventDelete') }}"
+                data-route-event-process="{{ route('processes.select') }}"
             >
 
             </div>

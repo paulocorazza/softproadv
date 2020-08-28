@@ -42,13 +42,18 @@ document.addEventListener('DOMContentLoaded', function () {
         eventDrop: function (element) {
             let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
             let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-            let newEvent = {
+
+             let newEvent = {
                 _method: 'PUT',
                 id: element.event.id,
                 title: element.event.title,
                 start: start,
-                end: end
+                end: end,
+                process_id: element.event.extendedProps.process_id,
+                user_id: element.event.extendedProps.user_id,
+                schedule: element.event.extendedProps.schedule
             };
+
 
             sendEvent(routeEvents('routeEventUpdate'), newEvent);
 
@@ -68,6 +73,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let id = element.event.id;
             $('#modalCalendar #id').val(id)
+
+            let users = element.event.extendedProps.users;
+            var arr = []
+            $.each(users, function(i, obj) {
+                arr.push(obj.id)
+            });
+            $('#modalCalendar #users').val(arr);
+            $('#modalCalendar #users').trigger('change');
+
+
+            let process_id = element.event.extendedProps.process.id
+            let process_person = element.event.extendedProps.process.process_person
+
+            let process = {
+                id: process_id,
+                text: process_person
+            };
+
+            var newOption = new Option(process.text, process.id, false, false);
+            $('#process_id').append(newOption).trigger('change');
 
             let title = element.event.title;
             $('#modalCalendar #title').val(title)
@@ -89,12 +114,17 @@ document.addEventListener('DOMContentLoaded', function () {
         eventResize: function (element) {
             let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
             let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
+
+
             let newEvent = {
                 _method: 'PUT',
                 id: element.event.id,
                 title: element.event.title,
                 start: start,
-                end: end
+                end: end,
+                process_id: element.event.extendedProps.process_id,
+                user_id: element.event.extendedProps.user_id,
+                schedule: element.event.extendedProps.schedule
             };
 
             sendEvent(routeEvents('routeEventUpdate'), newEvent);

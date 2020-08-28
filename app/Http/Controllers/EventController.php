@@ -136,7 +136,6 @@ class EventController extends ControllerStandard
     {
         $request['user_id'] = auth()->user()->id;
         $request['schedule'] = (isset($request['schedule'])) ? true :false;
-        $request['allday'] = (isset($request['allday'])) ? true : false;
         return $request;
     }
 

@@ -15,6 +15,25 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group row">
+                        <label for="users" class="col-sm-4 col-form-label">Advogados</label>
+                        <div class="col-sm-8">
+                            <select id="users" multiple class="select" style="width:100%" name="users">
+                                @foreach($users as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="process_id" class="col-sm-4 col-form-label">Processo</label>
+                        <div class="col-sm-8">
+                            <select id="process_id" class="select" style="width:100%" name="process_id">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="title" class="col-sm-4 col-form-label">Titulo</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="title" name="title">

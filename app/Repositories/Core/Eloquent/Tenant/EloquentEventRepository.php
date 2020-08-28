@@ -27,11 +27,7 @@ class EloquentEventRepository extends BaseEloquentRepository
 
         try {
 
-            $event = parent::create($data);
-
-            $users = $this->saveUsers($data, $event);
-
-            if (!$event  || !$users ) {
+            if (!$this->createEvent($data) ) {
                 DB::rollBack();
 
                 return [
@@ -57,25 +53,14 @@ class EloquentEventRepository extends BaseEloquentRepository
 
   public function update($id, array $data)
   {
-      if (!$event = parent::find($id)) {
-          return [
-              'status' => false,
-              'message' => 'Registro não encontrado!'
-          ];
-      }
-
-
       DB::beginTransaction();
 
+
       try {
+          $event = parent::find($id);
 
-          $data = $this->finish($data, $event);
+          if (!$this->updateEvent($data, $event) ) {
 
-          $event->update($data);
-
-          $users = $this->saveUsers($data, $event);
-
-          if (!$event  || !$users ) {
               DB::rollBack();
 
               return [
@@ -93,7 +78,7 @@ class EloquentEventRepository extends BaseEloquentRepository
 
           return [
               'status' => false,
-              'message' => 'Não foi possível salvar o registro.' . $e->getMessage()
+              'message' => 'Não foi possível salvar o registro. ' . $e->getMessage()
           ];
       }
   }
@@ -108,8 +93,6 @@ class EloquentEventRepository extends BaseEloquentRepository
         if ($this->hasUsers($data)) {
             $event->users()->sync($data['users']);
         }
-
-        return true;
     }
 
     /**
@@ -119,7 +102,7 @@ class EloquentEventRepository extends BaseEloquentRepository
      */
     private function finish(array $data, $event): array
     {
-        if ($this->isFinish($event) && $this->hasFinish($data)) {
+        if (!$this->isFinish($event) && $this->hasFinish($data)) {
             return $this->setDateFinish($data);
         }
 
@@ -132,7 +115,7 @@ class EloquentEventRepository extends BaseEloquentRepository
      */
     private function isFinish($event): bool
     {
-        return empty($event->finish);
+        return !empty($event->finish);
     }
 
     /**
@@ -173,6 +156,33 @@ class EloquentEventRepository extends BaseEloquentRepository
         $data['finish'] = date('Y-m-d H:i:s');
 
         return $data;
+    }
+
+    /**
+     * @param array $data
+     * @param $event
+     * @return bool
+     */
+    private function updateEvent(array $data, $event): bool
+    {
+        $data = $this->finish($data, $event);
+        $event->update($data);
+        $this->saveUsers($data, $event);
+
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    private function createEvent(array $data): mixed
+    {
+        $event = parent::create($data);
+
+        $this->saveUsers($data, $event);
+
+        return $event;
     }
 
 }
