@@ -25,7 +25,7 @@ class CreateProcessesTable extends Migration
             $table->bigInteger('type_action_id')->unsigned();
             $table->bigInteger('phase_id')->unsigned();
             $table->bigInteger('stage_id')->unsigned();
-            $table->string('number_process');
+            $table->string('number_process')->unique();
             $table->string('protocol')->nullable();
             $table->string('folder')->nullable();
             $table->date('date_request')->nullable();
