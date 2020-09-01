@@ -152,12 +152,30 @@ document.addEventListener('DOMContentLoaded', function () {
             calendar.unselect()
         },
 
+
      /*   eventReceive: function(element) {
           element.event.remove()
         },*/
 
         //listar os eventos no calendario
-        events: routeEvents('routeLoadEvents')
+       // events: routeEvents('routeLoadEvents')
+      //  events:  url_base + '/schedule/events/?user_id=' + userSelect()
+
+        /*eventSources: [
+
+            // your event source
+            {
+                url: routeEvents('routeLoadEvents'),
+                method: 'GET',
+                extraParams: {
+                    user_id: userSelect(),
+                }
+            }]*/
+
+
+        events: events
+
+
     });
 
     objCalendar = calendar;

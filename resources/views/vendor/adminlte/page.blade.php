@@ -178,9 +178,9 @@
                                 <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro" class="user-dashboard img-circle">
                             @endif
                         </div>
-                        <div class="info">
 
-                            <a href="{{ route('profile') }}" class="d-block">{{ auth()->user()->name }}</a>
+                        <div class="info">
+                            <a href="{{ route('profile') }}"  class="d-block" >{{ auth()->user()->name }}</a>
                         </div>
                     </div>
 

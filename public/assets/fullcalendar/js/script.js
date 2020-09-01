@@ -63,7 +63,6 @@ function routeEvents(dataset) {
     return $('#calendar').data(dataset)
 }
 
-
 function sendEvent(route, data_) {
     $.ajax({
        url: route,
@@ -109,7 +108,88 @@ function loadErrors(response) {
     return boxAlert.replace(',', '<br>')
 }
 
-$('#users').select2({
+/*$('#user-select').change(function(){
+  // objCalendar.removeEvents ;//remove os eventos anteriores
+
+    var user_id=$('#user-select option:selected').val();//Pega o id do option
+
+    var data_ = {
+        'user_id' : user_id,
+        'start' : objCalendar.da
+   }
+
+   console.log(data_)
+
+    $.ajax({
+        type:"GET",
+        dataType: 'json',
+        data : data_,
+
+        url: routeEvents('routeLoadEvents'),
+
+        success: function(data){
+            console.log(data)
+            $.each(data,function(index,value){//Para cada valor do data, compara se o campo é igual ao filtro selecionado. Se for igual, renderiza.
+            console.log(value)
+                if(value.user_id ==user_id){
+                   // $("#calendar").fullCalendar('renderEvent', value, true);
+                    objCalendar.refetchEvents()
+                }
+            })
+        }
+    });
+});*/
+
+
+
+/*$('#user-select').change(function() {
+
+    objCalendar.extraParams  = {
+        'user_id' : userSelect()
+    }
+
+    objCalendar.refetchEvents()
+
+})*/
+
+
+/*$('#btnSubmit').click(function (e) {
+    e.preventDefault();
+
+
+    let user_id = $('#userselect option:selected').val();
+
+    let data_ = {
+        'user_id' : user_id,
+        'start' : objCalendar.getDate()
+    }
+
+    console.log(data_)
+
+
+
+    $.ajax({
+        type:"GET",
+        dataType: 'json',
+        data : data_,
+
+        url: routeEvents('routeLoadEvents'),
+
+        success: function(data){
+            console.log(data)
+            events = data
+        }
+    });
+
+})*/
+
+function userSelect() {
+    return $('#user-select option:selected').val();
+}
+
+
+
+$('.select').select2({
     allowClear: true,
     theme: "classic",
 })

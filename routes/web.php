@@ -260,8 +260,8 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************   FULL CALENDAR   **************** */
     /*     * ************************************************ */
-    Route::get('schedule', 'FullCalendarController@index')->name('calendar.index');
-    Route::get('schedule/events', 'ScheduleController@loadEvents')->name('routeLoadEvents');
+    Route::get('schedule', 'ScheduleController@index')->name('calendar.index');
+ //   Route::get('schedule/events', 'ScheduleController@loadEvents')->name('routeLoadEvents');
     Route::post('schedule/event-store', 'ScheduleController@store')->name('routeEventStore');
     Route::put('schedule/event-update', 'ScheduleController@update')->name('routeEventUpdate');
     Route::delete('schedule/event-destroy', 'ScheduleController@destroy')->name('routeEventDelete');
