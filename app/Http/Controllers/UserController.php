@@ -46,17 +46,24 @@ class UserController extends ControllerStandard
         $type_addresses = $this->typeAction->get();
         $countries = $this->country->get();
 
-        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries'));
+        $user_id = auth()->user()->id;
+        $users = $this->model->getUsersViewNotIn($user_id);
+
+        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries', 'users'));
     }
 
 
     public function edit($id)
     {
+        $userViews = $this->model->getUsersViewNotIn($id);
+
+
         $data = $this->model->relationships([
             'addresses.type_address',
             'addresses.city',
             'addresses.state',
-            'contacts'
+            'contacts',
+            'userViews.userView'
         ])->find($id);
 
 
@@ -68,7 +75,7 @@ class UserController extends ControllerStandard
         $addresses = $data->addresses;
 
 
-        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'contacts', 'addresses'));
+        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'contacts', 'addresses', 'userViews'));
     }
 
 

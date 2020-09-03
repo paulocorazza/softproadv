@@ -173,12 +173,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }]*/
 
 
-        events: events
+        events: routeEvents('routeLoadEvents')
 
 
     });
 
     objCalendar = calendar;
+
+//    console.log(moment(calendar.currentData).format("YYYY-MM-DD HH:mm:ss"));
+//    console.log(moment(calendar.currentData).endOf('month').format("YYYY-MM-DD HH:mm:ss"));
+
+
     calendar.render();
 });
 

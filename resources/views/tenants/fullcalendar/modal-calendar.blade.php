@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div id="message"></div>
 
-                <form action="" id="formEvent">
+                <form id="formEvent">
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group row">

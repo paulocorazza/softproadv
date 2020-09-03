@@ -172,17 +172,18 @@ class EloquentEventRepository extends BaseEloquentRepository
         return true;
     }
 
+
     /**
      * @param array $data
-     * @return mixed
+     * @return bool
      */
-    private function createEvent(array $data): mixed
+    private function createEvent(array $data)
     {
         $event = parent::create($data);
 
         $this->saveUsers($data, $event);
 
-        return $event;
+        return true;
     }
 
 }

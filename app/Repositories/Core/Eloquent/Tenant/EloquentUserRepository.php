@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -69,6 +70,23 @@ class EloquentUserRepository extends BaseEloquentRepository
         return true;
     }
 
+
+    /**
+     * @param array $data
+     * @param $user
+     * @return bool
+     */
+    private function saveUsers(array $data, $user)
+    {
+        if (isset($data['userViews'])) {
+            $user->userViews()->sync($data['userViews']);
+        }
+
+        return true;
+    }
+
+
+
     /*     * ************************************************ */
     /*     * ************* METODOS PUBLICOS ***************** */
     /*     * ************************************************ */
@@ -91,9 +109,10 @@ class EloquentUserRepository extends BaseEloquentRepository
 
             $addresses = $this->saveAddress($data, $user);
             $contacts = $this->saveContacts($data, $user);
+            $users = $this->saveUsers($data, $user);
 
 
-            if (!$user || !$addresses || !$contacts) {
+            if (!$user || !$addresses || !$contacts || $users) {
                 DB::rollBack();
 
                 return [
@@ -137,8 +156,9 @@ class EloquentUserRepository extends BaseEloquentRepository
 
             $addresses = $this->saveAddress($data, $user);
             $contacts = $this->saveContacts($data, $user);
+            $users = $this->saveUsers($data, $user);
 
-            if (!$user || !$addresses || !$contacts) {
+            if (!$user || !$addresses || !$contacts || $users) {
                 DB::rollBack();
 
                 return [
@@ -209,6 +229,24 @@ class EloquentUserRepository extends BaseEloquentRepository
     public function getAdvogados()
     {
         return $this->model->Advogados()
+                           ->get()
+                           ->pluck('name', 'id');
+    }
+
+    public function getUsersView($id)
+    {
+        $user = $this->relationships('userViews.userView')->find($id);
+
+        $user_views = $user->userViews()->get()->pluck('userView.name', 'userView.id');
+
+        $user_views = Arr::add($user_views, $user->id, $user->name);
+
+        return $user_views;
+    }
+
+    public function getUsersViewNotIn($id)
+    {
+        return $this->model->where('id', '<>', $id)
                            ->get()
                            ->pluck('name', 'id');
     }

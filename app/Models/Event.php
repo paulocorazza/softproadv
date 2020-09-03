@@ -25,22 +25,6 @@ class Event extends Model
     ];
 
 
-   /* public function getStartAttribute($value)
-    {
-        $dataStart = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d');
-        $timeStart = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i:s');
-
-        return $this->start = ($timeStart == '00:00:00') ? $dataStart : $value;
-    }
-
-    public function getEndAttribute($value)
-    {
-        $dateEnd = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d');
-        $timeEnd = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i:s');
-
-        return $this->end = ($timeEnd == '00:00:00') ? $dateEnd : $value;
-    }
-*/
     public function getStartAttribute($value)
     {
         return Helper::formatDateTime($value, 'd/m/Y H:i:s');

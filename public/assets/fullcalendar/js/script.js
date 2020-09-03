@@ -54,7 +54,6 @@ $(function () {
         sendEvent(route, Event);
     })
 
-
 })
 
 
@@ -92,7 +91,6 @@ function clearMessage(element) {
 }
 
 function resetForm(form) {
-    $('.select').prop('selectedIndex',-1).trigger( "change" );
     return $(form)[0].reset();
 }
 
@@ -108,86 +106,40 @@ function loadErrors(response) {
     return boxAlert.replace(',', '<br>')
 }
 
-/*$('#user-select').change(function(){
-  // objCalendar.removeEvents ;//remove os eventos anteriores
 
-    var user_id=$('#user-select option:selected').val();//Pega o id do option
-
-    var data_ = {
-        'user_id' : user_id,
-        'start' : objCalendar.da
-   }
-
-   console.log(data_)
-
-    $.ajax({
-        type:"GET",
-        dataType: 'json',
-        data : data_,
-
-        url: routeEvents('routeLoadEvents'),
-
-        success: function(data){
-            console.log(data)
-            $.each(data,function(index,value){//Para cada valor do data, compara se o campo é igual ao filtro selecionado. Se for igual, renderiza.
-            console.log(value)
-                if(value.user_id ==user_id){
-                   // $("#calendar").fullCalendar('renderEvent', value, true);
-                    objCalendar.refetchEvents()
-                }
-            })
-        }
-    });
-});*/
-
-
-
-/*$('#user-select').change(function() {
-
-    objCalendar.extraParams  = {
-        'user_id' : userSelect()
-    }
-
-    objCalendar.refetchEvents()
-
-})*/
-
-
-/*$('#btnSubmit').click(function (e) {
-    e.preventDefault();
-
+$('#userselect').change(function() {
 
     let user_id = $('#userselect option:selected').val();
 
     let data_ = {
-        'user_id' : user_id,
-        'start' : objCalendar.getDate()
+        'user_id' : user_id
     }
 
-    console.log(data_)
-
-
-
     $.ajax({
+
+        url: routeEvents('routeLoadUser'),
         type:"GET",
         dataType: 'json',
         data : data_,
 
-        url: routeEvents('routeLoadEvents'),
+        beforeSend: function () {
+            startPreloader()
+        },
 
         success: function(data){
-            console.log(data)
-            events = data
+            objCalendar.refetchEvents()
+            endPreloader()
         }
     });
+})
 
-})*/
-
-function userSelect() {
-    return $('#user-select option:selected').val();
+function startPreloader() {
+    $('.preload .form_load').fadeIn()
 }
 
-
+function endPreloader() {
+    $('.preload .form_load').fadeOut();
+}
 
 $('.select').select2({
     allowClear: true,

@@ -193,6 +193,11 @@ class User extends Authenticatable
     }
 
 
+    public function userViews()
+    {
+        return $this->hasMany(UserView::class, 'user_id', 'id');
+    }
+
     /**
      * @param Permission $permission
      * @return bool

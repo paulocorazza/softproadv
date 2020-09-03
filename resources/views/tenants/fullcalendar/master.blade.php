@@ -33,22 +33,26 @@
         <div class="card-body">
             <div id='wrap'>
                 <div id='calendar-wrap'>
-                    <form action="{{ route('calendar.index') }}"  method="GET" class="form-inline" name="formFilter">
+                    <form class="form-inline" name="formFilter" id="formFilter">
                         <div class="form-group mx-sm-3 mb-2">
                             <label for="userselect" class="sr-only">Advogados</label>
                             <select name="userselect" id="userselect" class="form-control select">
-                                <option value="0">Todos Advogados</option>
+                                <option value="0">Filtrar Advogado</option>
                                 @foreach($users as $key => $value)
                                     <option value="{{ $key }}"
-                                            @if (request('userselect') == $key) selected @endif>{{ $value }}</option>
+                                            @if (\Illuminate\Support\Facades\Auth::user()->id == $key) selected @endif>{{ $value }}</option>
                                 @endforeach
                             </select>
+                            <div class="preload">
+                                @include('tenants.includes.load')
+                            </div>
                         </div>
-                        <button type="submit" id="btnSubmit" class="btn btn-primary mb-2">Filtrar</button>
                     </form>
 
                     <div
                         id='calendar'
+                        data-route-load-events="{{ route('routeLoadEvents') }}"
+                        data-route-load-user="{{ route('routeLoadUser') }}"
                         data-route-event-update="{{ route('routeEventUpdate') }}"
                         data-route-event-store="{{ route('routeEventStore') }}"
                         data-route-event-delete="{{ route('routeEventDelete') }}"
@@ -75,8 +79,7 @@
 
     <script>
         let objCalendar;
-        events={!! json_encode($events) !!};
-    </script>
+     </script>
     <script src='{{ asset('assets/fullcalendar/js/script.js') }}'></script>
     <script src='{{ asset('assets/fullcalendar/js/calendar.js') }}'></script>
 

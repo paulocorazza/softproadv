@@ -124,4 +124,8 @@ $(document).ready(function () {
         theme: "classic"
     });
 
+    $('#userViews').select2({
+        theme: "classic"
+    });
+
 });

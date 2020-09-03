@@ -43,8 +43,6 @@ class Schedule extends Model
     }
 
 
-
-
     public function process()
     {
         return $this->belongsTo(Process::class);
