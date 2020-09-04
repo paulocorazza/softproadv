@@ -100,6 +100,20 @@ class User extends Authenticatable
         ];
     }
 
+
+    public function rulesProfile($id = '')
+    {
+        return [
+            'name'      => 'required|min:3|max:100',
+            'fantasy'   => 'required|min:3|max:100',
+            'email'     => "required|min:3|max:100|email|unique:users,email,{$id},id",
+            'image'     => 'image',
+            'cpf'       => 'nullable|cpf|required_if:type,U',
+            'type'      => 'required|in:A,U',
+            'oab'       => 'required_if:type,A',
+        ];
+    }
+
     //Este método deveria traduzir o campo Type
     public function attributes()
     {

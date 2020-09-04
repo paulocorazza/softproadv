@@ -267,6 +267,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('schedule/event-update', 'ScheduleController@update')->name('routeEventUpdate');
     Route::delete('schedule/event-destroy', 'ScheduleController@destroy')->name('routeEventDelete');
 
+
+
+    /*     * ************************************************ */
+    /*     * ***********  FINANCIAL CATEGORY  *************** */
+    /*     * ************************************************ */
+    Route::resource('financial-category', 'FinancialCategoryController');
+
 });
 
 

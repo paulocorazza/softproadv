@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Process extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['user_id', 'person_id', 'counterpart_id', 'forum_id',
         'stick_id','district_id', 'group_action_id', 'type_action_id', 'phase_id',
         'stage_id','number_process', 'protocol', 'folder', 'date_request', 'expectancy',

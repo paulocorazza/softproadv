@@ -33,15 +33,12 @@
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome:', 'id' => 'name']) !!}
             </div>
 
-            <div class="form-group">
-                {!! Form::hidden('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
+            <div class="form-group ">
+                {!! Form::text('fantasy', null, ['class' => 'form-control', 'placeholder' => 'Fantasia:', 'id' => 'fantasy']) !!}
             </div>
 
             <div class="form-group">
-                {!! Form::password('password',  ['class' => 'form-control', 'placeholder' => 'Senha:', 'id' => 'password']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::password('password_confirmation',  ['class' => 'form-control', 'placeholder' => 'Confirmar Senha:']) !!}
+                {!! Form::hidden('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
             </div>
 
             <div class="row">
@@ -151,6 +148,6 @@
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
-    <script type="text/javascript" src={{ asset('assets/js/users/validation.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/users/validationProfile.js') }}></script>
 @stop
 

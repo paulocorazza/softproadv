@@ -10,6 +10,7 @@ use App\Repositories\Contracts\ContactRepositoryInterface;
 use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\EventRepositoryInterface;
+use App\Repositories\Contracts\FinancialCategoryRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
 use App\Repositories\Contracts\OriginRepositoryInterface;
@@ -37,6 +38,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentContactRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCountryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentDistrictRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentEventRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentFinancialCategoryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentForumRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentGroupActionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentOriginRepository;
@@ -187,6 +189,9 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(EventRepositoryInterface::class,
             EloquentEventRepository::class);
+
+        $this->app->bind(FinancialCategoryRepositoryInterface::class,
+            EloquentFinancialCategoryRepository::class);
 
     }
 }

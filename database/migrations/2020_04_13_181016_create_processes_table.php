@@ -35,6 +35,7 @@ class CreateProcessesTable extends Migration
             $table->text('description')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')

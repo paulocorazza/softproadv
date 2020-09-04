@@ -226,6 +226,16 @@ class EloquentUserRepository extends BaseEloquentRepository
         return $this->model->rules();
     }
 
+    public function rulesProfile($id = '')
+    {
+        if (!empty($id) && isset($id)) {
+            return $this->model->rulesProfile($id);
+        }
+
+        return $this->model->rules();
+    }
+
+
     public function getAdvogados()
     {
         return $this->model->Advogados()

@@ -228,155 +228,173 @@ return [
                     'can' => 'events'
                 ],
 
+
+            ],
+        ],
+
+
+        [
+            'text' => 'Financeiro',
+            'icon' => 'fas fa-comment-dollar',
+            'submenu' => [
                 [
-                    'text' => 'Financeiro',
+                    'text' => 'Categoria Financeira',
+                    'url' => 'financial-category',
+                    'icon' => 'fas fa-search-dollar',
+                    'can' => 'financial-category'
+                ],
+
+                [
+                    'text' => 'A Pagar / Receber',
                     'url' => 'financial',
-                    'icon' => 'fas fa-comment-dollar',
-                    'label_color' => 'success',
+                    'icon' => 'fas fa-hand-holding-usd',
                     'can' => 'financial'
                 ],
 
 
             ],
+
         ],
 
 
-        ['header' => 'Sistema'],
-        [
-            'text' => 'Cadastros',
-            'icon' => 'fas fa-cogs',
-            'submenu' => [
-                [
-                    'text' => 'Grupo de Ações',
-                    'url' => 'group-actions',
-                    'icon' => 'fas fa-th',
-                    'can' => 'group_actions'
-                ],
-
-                [
-                    'text' => 'Tipos de Ações',
-                    'url' => 'type-actions',
-                    'icon' => 'fas fa-boxes',
-                    'can' => 'type_actions'
-                ],
-
-                [
-                    'text' => 'Fases do Processo',
-                    'url' => 'phases',
-                    'icon' => 'fas fa-coins',
-                    'can' => 'phases'
-                ],
-
-                [
-                    'text' => 'Etapas do Processo',
-                    'url' => 'stages',
-                    'icon' => 'fas fa-list',
-                    'can' => 'stages'
-                ],
-
-                [
-                    'text' => 'Origem das Pessoas',
-                    'url' => 'origins',
-                    'icon' => 'fas fa-id-card-alt',
-                    'can' => 'origins'
-                ],
-
-                [
-                    'text' => 'Foruns',
-                    'url' => 'forums',
-                    'icon' => 'fas fa-archway',
-                    'can' => 'forums'
-                ],
-
-                [
-                    'text' => 'Varas',
-                    'url' => 'sticks',
-                    'icon' => 'fas fa-sitemap',
-                    'can' => 'sticks'
-                ],
-
-                [
-                    'text' => 'Comarcas',
-                    'url' => 'districts',
-                    'icon' => 'fa fa-map-signs',
-                    'can' => 'districts'
-                ],
-
-                [
-                    'text' => 'Tipos de endereços',
-                    'url' => 'type-address',
-                    'icon' => 'far fa-address-card',
-                    'can' => 'type_address'
-                ],
-
-                [
-                    'text' => 'Paises',
-                    'url' => 'countries',
-                    'icon' => 'fas fa-globe-americas',
-                    'can' => 'countries'
-                ],
-
-                [
-                    'text' => 'Estados',
-                    'url' => 'states',
-                    'icon' => 'fas fa-flag',
-                    'can' => 'states'
-                ],
-
-                [
-                    'text' => 'Cidades',
-                    'url' => 'cities',
-                    'icon' => 'fas fa-city',
-                    'can' => 'cities'
-                ],
-
+        ['header' => 'Sistema'
+    ],
+    [
+        'text' => 'Cadastros',
+        'icon' => 'fas fa-cogs',
+        'submenu' => [
+            [
+                'text' => 'Grupo de Ações',
+                'url' => 'group-actions',
+                'icon' => 'fas fa-th',
+                'can' => 'group_actions'
             ],
+
+            [
+                'text' => 'Tipos de Ações',
+                'url' => 'type-actions',
+                'icon' => 'fas fa-boxes',
+                'can' => 'type_actions'
+            ],
+
+            [
+                'text' => 'Fases do Processo',
+                'url' => 'phases',
+                'icon' => 'fas fa-coins',
+                'can' => 'phases'
+            ],
+
+            [
+                'text' => 'Etapas do Processo',
+                'url' => 'stages',
+                'icon' => 'fas fa-list',
+                'can' => 'stages'
+            ],
+
+            [
+                'text' => 'Origem das Pessoas',
+                'url' => 'origins',
+                'icon' => 'fas fa-id-card-alt',
+                'can' => 'origins'
+            ],
+
+            [
+                'text' => 'Foruns',
+                'url' => 'forums',
+                'icon' => 'fas fa-archway',
+                'can' => 'forums'
+            ],
+
+            [
+                'text' => 'Varas',
+                'url' => 'sticks',
+                'icon' => 'fas fa-sitemap',
+                'can' => 'sticks'
+            ],
+
+            [
+                'text' => 'Comarcas',
+                'url' => 'districts',
+                'icon' => 'fa fa-map-signs',
+                'can' => 'districts'
+            ],
+
+
+            [
+                'text' => 'Tipos de endereços',
+                'url' => 'type-address',
+                'icon' => 'far fa-address-card',
+                'can' => 'type_address'
+            ],
+
+            [
+                'text' => 'Paises',
+                'url' => 'countries',
+                'icon' => 'fas fa-globe-americas',
+                'can' => 'countries'
+            ],
+
+            [
+                'text' => 'Estados',
+                'url' => 'states',
+                'icon' => 'fas fa-flag',
+                'can' => 'states'
+            ],
+
+            [
+                'text' => 'Cidades',
+                'url' => 'cities',
+                'icon' => 'fas fa-city',
+                'can' => 'cities'
+            ],
+
         ],
+    ],
 
-        [
-            'text' => 'Segurança',
-            'icon' => 'fas fa-user-lock',
+    [
+        'text' => 'Segurança',
+        'icon' => 'fas fa-user-lock',
 
-            'submenu' => [
-                [
-                    'text' => 'Usuários',
-                    'url' => 'users',
-                    'icon' => 'fas fa-user-tie',
-                    'can' => 'users'
-                ],
+        'submenu' => [
+            [
+                'text' => 'Usuários',
+                'url' => 'users',
+                'icon' => 'fas fa-user-tie',
+                'can' => 'users'
+            ],
 
-                [
-                    'text' => 'Perfis',
-                    'url' => 'profiles',
-                    'icon' => 'fas fa-users',
-                    'can' => 'profiles'
-                ],
-
-
-                [
-                    'text' => 'Permissões',
-                    'url' => 'permissions',
-                    'icon' => 'fa fa-unlock-alt',
-                    'can' => 'permissions'
-                ],
+            [
+                'text' => 'Perfis',
+                'url' => 'profiles',
+                'icon' => 'fas fa-users',
+                'can' => 'profiles'
+            ],
 
 
-                [
-                    'text' => 'Minha Conta',
-                    'url' => 'profile',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
+            [
+                'text' => 'Permissões',
+                'url' => 'permissions',
+                'icon' => 'fa fa-unlock-alt',
+                'can' => 'permissions'
+            ],
 
-                [
-                    'text' => 'change_password',
-                    'url' => 'password/reset',
-                    'icon' => 'fas fa-fw fa-lock',
-                ]
+
+            [
+                'text' => 'Minha Conta',
+                'url' => 'profile',
+                'icon' => 'fas fa-fw fa-user',
+            ],
+
+            [
+                'text' => 'change_password',
+                'url' => 'password/reset',
+                'icon' => 'fas fa-fw fa-lock',
             ]
         ]
+    ]
 
 
-    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -391,14 +409,14 @@ return [
     */
 
     'filters' => [
-        JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
-    ],
+    JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
+    JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
+    JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
+    JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+    JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
+    JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+    JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -413,75 +431,75 @@ return [
     */
 
     'plugins' => [
-        [
-            'name' => 'Datatables',
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css',
-                ],
+    [
+        'name' => 'Datatables',
+        'active' => false,
+        'files' => [
+            [
+                'type' => 'js',
+                'asset' => false,
+                'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js',
             ],
-        ],
-        [
-            'name' => 'Select2',
-            'active' => true,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
-                ],
-            ],
-        ],
-        [
-            'name' => 'Chartjs',
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
-                ],
-            ],
-        ],
-        [
-            'name' => 'Sweetalert2',
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
-                ],
-            ],
-        ],
-        [
-            'name' => 'Pace',
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
-                ],
+            [
+                'type' => 'css',
+                'asset' => false,
+                'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css',
             ],
         ],
     ],
+    [
+        'name' => 'Select2',
+        'active' => true,
+        'files' => [
+            [
+                'type' => 'js',
+                'asset' => true,
+                'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+            ],
+            [
+                'type' => 'css',
+                'asset' => true,
+                'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+            ],
+        ],
+    ],
+    [
+        'name' => 'Chartjs',
+        'active' => false,
+        'files' => [
+            [
+                'type' => 'js',
+                'asset' => false,
+                'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+            ],
+        ],
+    ],
+    [
+        'name' => 'Sweetalert2',
+        'active' => false,
+        'files' => [
+            [
+                'type' => 'js',
+                'asset' => false,
+                'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+            ],
+        ],
+    ],
+    [
+        'name' => 'Pace',
+        'active' => false,
+        'files' => [
+            [
+                'type' => 'css',
+                'asset' => false,
+                'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+            ],
+            [
+                'type' => 'js',
+                'asset' => false,
+                'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+            ],
+        ],
+    ],
+],
 ];

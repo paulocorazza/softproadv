@@ -165,7 +165,7 @@ class UserController extends ControllerStandard
 
     public function updateProfile(Request $request, $id)
     {
-        $request->validate($this->model->rules($id));
+        $request->validate($this->model->rulesProfile($id));
 
         $dataForm = $request->all();
 
@@ -186,9 +186,6 @@ class UserController extends ControllerStandard
         }
 
         unset($dataForm['email']);
-        $dataForm['password'] = bcrypt($dataForm['password']);
-
-        $dataForm['salary'] =
 
 
         $update = $data->update($dataForm);
