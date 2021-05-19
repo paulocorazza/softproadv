@@ -19,7 +19,7 @@
 
 @section('content_header')
     <div class="container-fluid">
-        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Pais',
+        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Países',
                                'breadcrumbs' => [
                                'Pais' => route('countries.index'),
                                 isset($data->id) ? 'Editar' : 'Cadastrar', ]

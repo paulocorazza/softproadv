@@ -6,7 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forum extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'street',
+        'number',
+        'district',
+        'complement',
+        'cep',
+        'uf',
+        'city',
+        'telephone',
+        'site'
+    ];
 
     public function rules($id = '')
     {

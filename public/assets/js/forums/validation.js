@@ -1,5 +1,6 @@
 $(document).ready(function () {
-
+    $("#telephone").mask("(00) 0000-00009");
+    $("#cep").mask("00000-000");
     $('#formRegister').each(function () {
         $(this).validate({
             rules: {
@@ -33,6 +34,10 @@ $(document).ready(function () {
             }
         })
 
+    });
+
+    $('#estado').select2({
+        theme: "classic"
     });
 
 });

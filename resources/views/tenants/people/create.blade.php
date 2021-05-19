@@ -200,7 +200,6 @@
         var deleteAddressAjax = "{{ route('delete_address') }}";
         var deleteContactAjax = "{{ route('delete_contact') }}";
     </script>
-
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
@@ -209,6 +208,7 @@
     <script src={{ asset('assets/js/people/validation.js') }}></script>
     <script src={{ asset('assets/js/all/address.js') }}></script>
     <script src={{ asset('assets/js/all/contact.js') }}></script>
+    <script src={{ asset('assets/js/all/datapicker.js') }}></script>
 @stop
 
 

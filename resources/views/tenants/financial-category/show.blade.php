@@ -40,7 +40,7 @@
         <!-- /.card-body -->
     </div>
 
-    @can('delete_financial_category1')
+    @can('delete_financial_category')
         {!! Form::model($data, ['route' => ['financial-category.destroy', $data->id], 'class' => 'form', 'method' => 'delete', 'id' => 'formDelete']) !!}
         {!! Form::submit('Deletar', ['class' => 'btn btn-danger j_delete']) !!}
         {!! Form::close() !!}

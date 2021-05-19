@@ -34,14 +34,24 @@
         <div class="card-body pad">
             {!! Form::open(['route' => ['profiles.permissions.add', $profile->id], 'class' => 'form form-search form-ds']) !!}
 
+            <div class="form-group">
+                <button class="btn btn-primary" id="checkAll">
+                    <i class="fas fa-check"></i>
+                    Selecionar todos
+                </button>
+                <button class="btn btn-danger" id="UnCheckAll">
+                    <i class="fas fa-square"></i>
+                    Desmarcar todos
+                </button>
+            </div>
+
             @foreach($permissions as $permission)
                 <div class="form-group">
                     <label>
                         {!! Form::checkbox('permissions[]', $permission->id) !!}
-                        {{ $permission->name }}
+                        {{ $permission->label }}
                     </label>
                 </div>
-
             @endforeach
 
 
@@ -59,6 +69,7 @@
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
+    <script src="{{ url('assets/js/all/checkbox.js') }}"></script>
 @stop
 
 

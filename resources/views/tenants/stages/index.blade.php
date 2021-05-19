@@ -2,10 +2,10 @@
 
 @include('tenants.includes.dataTableCss')
 
-@section('title_postfix', ' - Etapas das Ações')
+@section('title_postfix', ' - Etapas do Processo')
 
 @section('content_header')
-    @include('tenants.includes.breadcrumbs',  ['title' => 'Etapas das Ações',
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Etapas do Processo',
                                                'breadcrumbs' => [
                                                'Etapas', ]
                                               ])

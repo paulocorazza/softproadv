@@ -5,9 +5,9 @@
 @section('title_postfix', ' - Planos')
 
 @section('content_header')
-    @include('tenants.includes.breadcrumbs',  ['title' => 'Tipos de Endereço',
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Tipos de Endereços',
                                                'breadcrumbs' => [
-                                               'Tipos de Endereço', ]
+                                               'Tipos de Endereços', ]
                                               ])
 @stop
 

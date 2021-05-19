@@ -9,7 +9,7 @@
 
 @section('content_header')
     <div class="container-fluid">
-        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Foruns',
+        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Fóruns',
                                'breadcrumbs' => [
                                'Foruns' => route('forums.index'),
                                'Detalhes', ]

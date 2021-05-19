@@ -2,13 +2,13 @@
 
 @include('tenants.includes.dataTableCss')
 
-@section('title_postfix', ' - Foruns')
+@section('title_postfix', ' - Fóruns')
 
 @section('content_header')
 
-    @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Foruns',
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Fóruns',
                                                'breadcrumbs' => [
-                                               'Foruns', ]
+                                               'Fóruns', ]
                                               ])
 @stop
 

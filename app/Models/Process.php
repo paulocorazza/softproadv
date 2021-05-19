@@ -10,10 +10,26 @@ class Process extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'person_id', 'counterpart_id', 'forum_id',
-        'stick_id','district_id', 'group_action_id', 'type_action_id', 'phase_id',
-        'stage_id','number_process', 'protocol', 'folder', 'date_request', 'expectancy',
-        'price','percent_fees', 'description'];
+    protected $fillable = [
+        'user_id',
+        'person_id',
+        'counterpart_id',
+        'forum_id',
+        'stick_id',
+        'district_id',
+        'group_action_id',
+        'type_action_id',
+        'phase_id',
+        'stage_id',
+        'number_process',
+        'protocol',
+        'folder',
+        'date_request',
+        'expectancy',
+        'price',
+        'percent_fees',
+        'description'
+    ];
 
 
     protected $appends = ['process_person'];
@@ -21,22 +37,22 @@ class Process extends Model
     public function rules($id = '')
     {
         return [
-            'person_id'             => "required|exists:people,id",
-            'counterpart_id'        => "required|exists:people,id",
-            'forum_id'              => "required|exists:forums,id",
-            'stick_id'              => "required|exists:sticks,id",
-            'district_id'           => "required|exists:districts,id",
-            'group_action_id'       => "required|exists:group_actions,id",
-            'type_action_id'        => "required|exists:type_actions,id",
-            'phase_id'              => "required|exists:phases,id",
-            'stage_id'              => "required|exists:stages,id",
-            'number_process'        => 'required|min:3|unique:processes,id,{$id},id',
-            'users'                 => 'required',
+            'person_id' => "required|exists:people,id",
+            'counterpart_id' => "required|exists:people,id",
+            'forum_id' => "required|exists:forums,id",
+            'stick_id' => "required|exists:sticks,id",
+            'district_id' => "required|exists:districts,id",
+            'group_action_id' => "required|exists:group_actions,id",
+            'type_action_id' => "required|exists:type_actions,id",
+            'phase_id' => "required|exists:phases,id",
+            'stage_id' => "required|exists:stages,id",
+            'number_process' => 'required|min:3|unique:processes,id,{$id},id',
+            'users' => 'required',
 
-            'progresses.*.date'          => 'required',
-            'progresses.*.description'   => 'required',
-            'progresses.*.date_term'     => 'required',
-            'progresses.*.publication'   => 'required',
+            'progresses.*.date' => 'required',
+            'progresses.*.description' => 'required',
+            'progresses.*.date_term' => 'required',
+            'progresses.*.publication' => 'required',
 
         ];
     }
@@ -131,7 +147,7 @@ class Process extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'process_user')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 
     /**

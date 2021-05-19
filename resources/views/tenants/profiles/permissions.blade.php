@@ -31,10 +31,8 @@
         </p>
 
         <!--TABELA -->
-    @include('tenants.profiles.partials.table')
-
-
-    <!--TABELA -->
+        @include('tenants.profiles.partials.tablePermission')
+        <!--TABELA -->
     </div>
 @stop
 
@@ -49,7 +47,6 @@
 
         var columns = [
             {data: "id"},
-            {data: "name"},
             {data: "label"},
             {
                 data: 'action',

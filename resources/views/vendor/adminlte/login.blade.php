@@ -2,6 +2,28 @@
 
 @section('adminlte_css_pre')
     <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        .bg_fundo {
+            background-image: url('/assets/images/adv.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .login-form {
+            position: absolute;
+            opacity:0.7;
+
+        }
+    </style>
 @stop
 
 @section('adminlte_css')
@@ -29,9 +51,15 @@
 @endif
 
 @section('body')
-    <div class="login-box">
+    <div
+        id="particles-js"
+        class="bg_fundo"
+    ></div>
+    <div class="login-box login-form">
         <div class="login-logo">
-            <a href="{{ $dashboard_url }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
+            <div class="text-center">
+                <img src="{{ url('assets/images/logo-the-place.png') }}">
+            </div>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
@@ -83,13 +111,6 @@
                         {{ __('adminlte::adminlte.i_forgot_my_password') }}
                     </a>
                 </p>
-                @if ($register_url)
-                    <p class="mb-0">
-                        <a href="{{ $register_url }}">
-                            {{ __('adminlte::adminlte.register_a_new_membership') }}
-                        </a>
-                    </p>
-                @endif
             </div>
         </div>
     </div>

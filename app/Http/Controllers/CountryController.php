@@ -24,7 +24,6 @@ class CountryController extends ControllerStandard
 
     public function getStates($id)
     {
-
         $return = $this->model->getStates($id);
 
         if (!$return['status']) {

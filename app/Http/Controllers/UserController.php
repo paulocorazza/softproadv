@@ -30,7 +30,6 @@ class UserController extends ControllerStandard
         ];
 
         $this->middleware('can:users');
-
         $this->middleware('can:create_user')->only(['create', 'store']);
         $this->middleware('can:update_user')->only(['edit', 'update']);
         $this->middleware('can:view_user')->only(['show']);

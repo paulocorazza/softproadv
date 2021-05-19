@@ -3611,7 +3611,7 @@ jQuery.extend( {
 											args = [ returned ];
 										}
 
-										// Process the value(s)
+										// PersonProcess the value(s)
 										// Default processes is resolve
 										( special || deferred.resolveWith )( that, args );
 									}

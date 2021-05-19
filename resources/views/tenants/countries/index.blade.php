@@ -5,9 +5,9 @@
 @section('title_postfix', ' - Pais')
 
 @section('content_header')
-    @include('tenants.includes.breadcrumbs',  ['title' => 'Pais',
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Países',
                                                'breadcrumbs' => [
-                                               'Pais', ]
+                                               'Países', ]
                                               ])
 @stop
 

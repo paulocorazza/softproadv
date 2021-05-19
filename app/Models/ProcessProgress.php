@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProcessProgress extends Model
 {
+    protected $table = 'process_progresses';
+
     protected $fillable = [
         'date',
         'date_term',

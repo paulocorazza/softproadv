@@ -245,6 +245,13 @@ return [
                 ],
 
                 [
+                    'text' => 'Conta Financeira',
+                    'url' => 'financial-account',
+                    'icon' => 'fas fa-search-dollar',
+                    'can' => 'financial-account'
+                ],
+
+                [
                     'text' => 'A Pagar / Receber',
                     'url' => 'financial',
                     'icon' => 'fas fa-hand-holding-usd',
@@ -299,10 +306,10 @@ return [
             ],
 
             [
-                'text' => 'Foruns',
-                'url' => 'forums',
-                'icon' => 'fas fa-archway',
-                'can' => 'forums'
+                'text' => 'Comarcas',
+                'url' => 'districts',
+                'icon' => 'fa fa-map-signs',
+                'can' => 'districts'
             ],
 
             [
@@ -313,10 +320,10 @@ return [
             ],
 
             [
-                'text' => 'Comarcas',
-                'url' => 'districts',
-                'icon' => 'fa fa-map-signs',
-                'can' => 'districts'
+                'text' => 'Foruns',
+                'url' => 'forums',
+                'icon' => 'fas fa-archway',
+                'can' => 'forums'
             ],
 
 
@@ -328,7 +335,7 @@ return [
             ],
 
             [
-                'text' => 'Paises',
+                'text' => 'Países',
                 'url' => 'countries',
                 'icon' => 'fas fa-globe-americas',
                 'can' => 'countries'
@@ -412,7 +419,7 @@ return [
     JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
     JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
     JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-    JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+    //JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
     JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
     JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
     JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,

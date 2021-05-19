@@ -8,9 +8,9 @@
 @stop
 
 @section('content_header')
-    @include('tenants.includes.breadcrumbs',  ['title' => 'Pais',
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Países',
                        'breadcrumbs' => [
-                       'Pais' => route('countries.index'),
+                       'País' => route('countries.index'),
                        'Detalhes', ]
                       ])
 @stop

@@ -196,6 +196,12 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************     DISTRICT     ***************** */
     /*     * ************************************************ */
+    Route::get('districts/{id}/sticks', 'DistrictController@sticks')->name('districts.sticks');
+    Route::get('districts/{id}/sticks/register', 'DistrictController@listSticks')->name('districts.sticks.list');
+
+    Route::post('districts/{id}/sticks/register', 'DistrictController@AddSticks')->name('districts.sticks.add');
+    Route::get('districts/{id}/sticks/{stickId}/delete', 'DistrictController@deleteStick')->name('districts.sticks.delete');
+
     Route::resource('districts', 'DistrictController');
 
     /*     * ************************************************ */
@@ -236,7 +242,8 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * *************      PROCESS     ***************** */
     /*     * ************************************************ */
 
-    Route::get('process/processSelect', 'ExtraAction\Process')->name('processes.select');
+    Route::get('process/processSelect', 'ExtraAction\PersonProcess')->name('processes.select');
+    Route::get('process/search', 'ExtraAction\Process');
     Route::get('process/file/{id}/download', 'ExtraAction\ProcessFileDownload')->name('fileDownload');
 
     Route::get('process/file/{id}', 'ExtraAction\ProcessFileView')->name('fileView');
@@ -272,7 +279,20 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * ***********  FINANCIAL CATEGORY  *************** */
     /*     * ************************************************ */
+    Route::post('financial-category/search', 'ExtraAction\FinancialCategory');
     Route::resource('financial-category', 'FinancialCategoryController');
+
+    /*     * ************************************************ */
+    /*     * ***********  FINANCIAL ACCOUNT   *************** */
+    /*     * ************************************************ */
+    Route::post('financial-account/search', 'ExtraAction\FinancialAccount');
+    Route::resource('financial-account', 'FinancialAccountController');
+
+
+    /*     * ************************************************ */
+    /*     * ***********       FINANCIAL      *************** */
+    /*     * ************************************************ */
+    Route::resource('financial', 'FinancialController');
 
 });
 

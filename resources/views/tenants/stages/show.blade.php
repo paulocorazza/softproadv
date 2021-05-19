@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title_postfix', ' - Etapas das Ações')
+@section('title_postfix', ' - Etapas dos Processos')
 
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
@@ -8,7 +8,7 @@
 @stop
 
 @section('content_header')
-    @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Etapas das Ações',
+    @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Etapas dos Processos',
                            'breadcrumbs' => [
                            'Etapas' => route('stages.index'),
                             isset($data->id) ? 'Editar' : 'Cadastrar', ]

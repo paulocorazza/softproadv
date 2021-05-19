@@ -10,7 +10,7 @@
 @stop
 
 
-@section('title_postfix', ' - Cadastrar Etapas da ação')
+@section('title_postfix', ' - Cadastrar Etapas do Processo')
 
 @section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
@@ -19,7 +19,7 @@
 
 @section('content_header')
     <div class="container-fluid">
-        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Etapas das Ações',
+        @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Etapas dos Processos',
                                'breadcrumbs' => [
                                'Etapas' => route('stages.index'),
                                 isset($data->id) ? 'Editar' : 'Cadastrar', ]

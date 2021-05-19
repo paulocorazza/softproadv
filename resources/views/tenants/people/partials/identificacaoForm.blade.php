@@ -1,4 +1,3 @@
-
 <div class="form-group label-float">
     {!! Form::text('name', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'name']) !!}
     {!! Form::label('name', 'Nome', ['class' => 'control-label']); !!}
@@ -82,21 +81,27 @@
     </div>
 </div>
 
-
-<div class="form-group label-float">
-    {!! Form::text('office', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'office']) !!}
-    {!! Form::label('office', 'Cargo', ['class' => 'control-label']); !!}
+<div class="row">
+    <div class="col-12">
+        <div class="form-group label-float">
+            {!! Form::text('office', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'office']) !!}
+            {!! Form::label('office', 'Cargo', ['class' => 'control-label']); !!}
+        </div>
+    </div>
 </div>
 
-
-<div class="form-group label-float">
-    {!! Form::file('image',  ['class' => 'form-control', 'placeholder' => ' ']) !!}
-    {!! Form::label('image', 'Foto', ['class' => 'control-label']); !!}
+<div class="row">
+    <div class="col-12">
+        <div class="form-group label-float">
+            {!! Form::file('image',  ['class' => 'form-control', 'placeholder' => ' ']) !!}
+            {!! Form::label('image', 'Foto', ['class' => 'control-label']); !!}
+        </div>
+    </div>
 </div>
 
 <div class="form-group">
     <label>
-        {!! Form::checkbox('status',null) !!}
+        {!! Form::checkbox('status', null, @$data->status == 'I') !!}
         Inativo ?
     </label>
 </div>

@@ -75,6 +75,7 @@ class PersonController extends ControllerStandard
             $dataForm[$this->upload['name']] = $nameFile;
         }
 
+        $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
         $insert = $this->model->create($dataForm);
 
         if (!$insert['status']) {
@@ -133,6 +134,7 @@ class PersonController extends ControllerStandard
             $dataForm[$this->upload['name']] = $nameFile;
         }
 
+        $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
         $update = $this->model->update($id, $dataForm);
 
         if (!$update['status']) {

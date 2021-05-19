@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Financial;
+use App\Observers\FinancialObserver;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -38,5 +40,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('tenantmain', function () {
             return (request()->getHost() == config('tenant.domain_main'));
         });
+
+
+        Financial::observe(FinancialObserver::class);
     }
 }

@@ -14,4 +14,9 @@ class Stick extends Model
             'name' => "required|min:3|max:100|unique:sticks,name,{$id},id",
         ];
     }
+
+    public function districts()
+    {
+        return $this->belongsToMany(District::class, 'district_stick');
+    }
 }

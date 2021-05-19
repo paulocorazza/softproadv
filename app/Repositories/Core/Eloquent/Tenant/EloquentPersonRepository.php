@@ -174,7 +174,7 @@ class EloquentPersonRepository extends BaseEloquentRepository
             $search = $request->q;
 
             $data = $this->relationships('processes')
-                ->Where('name', 'LIKE', "%$search%")
+                ->orWhere('name', 'LIKE', "%$search%")
                 ->orWhere('cpf', 'LIKE', "%$search%")
                 ->get();
 

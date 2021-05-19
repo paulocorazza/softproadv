@@ -3,29 +3,28 @@
 namespace App\Http\Controllers\ExtraAction;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\PersonRepositoryInterface;
 use Illuminate\Http\Request;
 
 class Process extends Controller
 {
-    /**
-     * @param PersonRepositoryInterface $person
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+    public function __invoke(\App\Models\Process $people, Request $request)
+    {
+        if (request()->ajax()) {
 
-    public function __invoke(PersonRepositoryInterface $person, Request $request)
-     {
-         if (request()->ajax()) {
+            $data = [];
 
-             $return = $person->getPersonProcesses($request);
+            if ($request->has('person_id') && !empty($request->person_id)) {
 
-             if (!$return['status']) {
-                 return  response()->json($return['message']);
-             }
+                $search = $request->q;
+                $person_id = $request->person_id;
 
-             return response()->json($return['data']);
-         }
+                $data = $people->Where('person_id',  $person_id)
+                               ->orWhere('id', $search)
+                               ->orWhere('number_process', 'LIKE', "%$search%")
+                               ->get();
+            }
 
-     }
+            return response()->json($data);
+        }
+    }
 }

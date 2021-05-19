@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\FinancialAccount;
 use App\Repositories\Contracts\AddressRepositoryInterface;
 use App\Repositories\Contracts\AgreementRepositoryInterface;
 use App\Repositories\Contracts\CityRepositoryInterface;
@@ -10,7 +11,9 @@ use App\Repositories\Contracts\ContactRepositoryInterface;
 use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\EventRepositoryInterface;
+use App\Repositories\Contracts\FinancialAccountRepositoryInterface;
 use App\Repositories\Contracts\FinancialCategoryRepositoryInterface;
+use App\Repositories\Contracts\FinancialRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
 use App\Repositories\Contracts\OriginRepositoryInterface;
@@ -38,7 +41,9 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentContactRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCountryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentDistrictRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentEventRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentFinancialAccountRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentFinancialCategoryRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentFinancialRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentForumRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentGroupActionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentOriginRepository;
@@ -192,6 +197,12 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(FinancialCategoryRepositoryInterface::class,
             EloquentFinancialCategoryRepository::class);
+
+        $this->app->bind(FinancialAccountRepositoryInterface::class,
+            EloquentFinancialAccountRepository::class);
+
+        $this->app->bind(FinancialRepositoryInterface::class,
+        EloquentFinancialRepository::class);
 
     }
 }

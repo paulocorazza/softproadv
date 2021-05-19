@@ -23,7 +23,6 @@
         <div class="card-header">
             <h3 class="card-title">
                 Identificação
-                <small>Plano</small>
             </h3>
             <!-- tools box -->
         @include('tenants.includes.toolsBox')

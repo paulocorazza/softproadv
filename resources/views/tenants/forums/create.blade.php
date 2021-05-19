@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
 @stop
 
-@section('title_postfix', ' - Cadastrar Novo Forum')
+@section('title_postfix', ' - Cadastrar Novo Fórum')
 
 @section('content_header')
     <div class="container-fluid">

@@ -14,7 +14,7 @@ class FinancialCategoryController extends ControllerStandard
         $this->view = 'tenants.financial-category';
         $this->route = 'financial-category';
 
-        $this->middleware('can:financialCategory');
+        $this->middleware('can:financial-category');
 
         $this->middleware('can:create_financial_category')->only(['create', 'store']);
         $this->middleware('can:update_financial_category')->only(['edit', 'update']);

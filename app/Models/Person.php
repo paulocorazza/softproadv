@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
@@ -86,5 +87,4 @@ class Person extends Model
     {
         return $query->where('status', '=', 'A');
     }
-
 }
