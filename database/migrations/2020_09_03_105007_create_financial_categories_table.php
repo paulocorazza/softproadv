@@ -14,7 +14,7 @@ class CreateFinancialCategoriesTable extends Migration
     public function up()
     {
         Schema::create('financial_categories', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->enum('type', ['Despesa', 'Receita']);
             $table->timestamps();
