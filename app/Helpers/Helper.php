@@ -205,7 +205,7 @@ class Helper
      */
     public static function formatDecimal($value, $decimals = 2)
     {
-        return number_format($value, $decimals,',','.');
+        return number_format((float) $value, $decimals,',','.');
     }
 
     /**

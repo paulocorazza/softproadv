@@ -21,7 +21,7 @@
     <div class="container-fluid">
         @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Países',
                                'breadcrumbs' => [
-                               'Pais' => route('countries.index'),
+                               'Países' => route('countries.index'),
                                 isset($data->id) ? 'Editar' : 'Cadastrar', ]
                               ])
     </div><!-- /.container-fluid -->

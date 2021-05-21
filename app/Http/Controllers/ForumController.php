@@ -9,7 +9,7 @@ class ForumController extends ControllerStandard
     public function __construct(ForumRepositoryInterface $forum)
     {
         $this->model = $forum;
-        $this->title = 'Forum';
+        $this->title = 'Fórum';
         $this->view = 'tenants.forums';
         $this->route = 'forums';
 

@@ -10,7 +10,7 @@
     <div class="container-fluid">
         @include('tenants.includes.breadcrumbs',  ['title' => $title,
                                'breadcrumbs' => [
-                               'Foruns' => route('forums.index'),
+                               'Fóruns' => route('forums.index'),
                                 isset($data->id) ? 'Editar' : 'Cadastrar', ]
                               ])
     </div><!-- /.container-fluid -->
@@ -24,7 +24,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 Identificação
-                <small>Forum</small>
+                <small>Fórum</small>
             </h3>
             <!-- tools box -->
         @include('tenants.includes.toolsBox')

@@ -46,9 +46,9 @@ class UserController extends ControllerStandard
         $countries = $this->country->get();
 
         $user_id = auth()->user()->id;
-        $users = $this->model->getUsersViewNotIn($user_id);
+        $userViews = $this->model->getUsersViewNotIn($user_id);
 
-        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries', 'users'));
+        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries', 'userViews'));
     }
 
 

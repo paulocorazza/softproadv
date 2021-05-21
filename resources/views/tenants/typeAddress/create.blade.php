@@ -21,7 +21,7 @@
     <div class="container-fluid">
         @include('tenants.includes.breadcrumbs',  ['title' => 'Gestão de Tipos de Endereço',
                                'breadcrumbs' => [
-                               'Tipos de Endereço' => route('type-address.index'),
+                               'Tipos de Endereços' => route('type-address.index'),
                                 isset($data->id) ? 'Editar' : 'Cadastrar', ]
                               ])
     </div><!-- /.container-fluid -->

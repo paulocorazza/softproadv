@@ -267,7 +267,7 @@ $(document).ready(function () {
     });
 
     $('#forum_id').select2({
-        placeholder: "Selecione o Forum",
+        placeholder: "Selecione o Fórum",
         allowClear: true,
         theme: "classic",
     })

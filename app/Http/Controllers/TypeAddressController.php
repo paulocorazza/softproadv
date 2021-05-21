@@ -9,7 +9,7 @@ class TypeAddressController extends ControllerStandard
     public function __construct(TypeAddressRepositoryInterface $typeAddress)
     {
         $this->model = $typeAddress;
-        $this->title = 'Tipos de Endereço';
+        $this->title = 'Tipos de Endereços';
         $this->view = 'tenants.typeAddress';
         $this->route = 'type-address';
 

@@ -320,7 +320,7 @@ return [
             ],
 
             [
-                'text' => 'Foruns',
+                'text' => 'Fóruns',
                 'url' => 'forums',
                 'icon' => 'fas fa-archway',
                 'can' => 'forums'

@@ -10,7 +10,7 @@
 @section('content_header')
     @include('tenants.includes.breadcrumbs',  ['title' => 'Países',
                        'breadcrumbs' => [
-                       'País' => route('countries.index'),
+                       'Países' => route('countries.index'),
                        'Detalhes', ]
                       ])
 @stop

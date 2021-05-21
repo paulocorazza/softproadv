@@ -42,7 +42,6 @@
 
         var columns = [
             {data: "id"},
-            {data: "name"},
             {data: "label"},
             {
                 data: 'action',

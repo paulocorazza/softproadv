@@ -23,7 +23,7 @@
 </div>
 
 <div class="form-group label-float">
-    {!! Form::url('site', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'site']) !!}
+    {!! Form::text('site', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'site']) !!}
     {!! Form::label('site', 'Site', ['class' => 'control-label']); !!}
 </div>
 

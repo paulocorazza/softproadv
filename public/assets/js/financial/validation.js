@@ -214,13 +214,13 @@ $(document).ready(function () {
 
         ajax: {
             delay: 250,
-            type: 'post',
+            type: 'get',
             url: url_base + '/process/search',
 
             data: function (params) {
                 return {
                     q: $.trim(params.term),
-                    person_id: $('$person_id').val()
+                    person_id: $('#person_id').val()
                 };
             },
 

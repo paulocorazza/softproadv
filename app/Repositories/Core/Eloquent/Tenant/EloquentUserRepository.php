@@ -112,7 +112,7 @@ class EloquentUserRepository extends BaseEloquentRepository
             $users = $this->saveUsers($data, $user);
 
 
-            if (!$user || !$addresses || !$contacts || $users) {
+            if (!$user || !$addresses || !$contacts || !$users) {
                 DB::rollBack();
 
                 return [
@@ -158,7 +158,7 @@ class EloquentUserRepository extends BaseEloquentRepository
             $contacts = $this->saveContacts($data, $user);
             $users = $this->saveUsers($data, $user);
 
-            if (!$user || !$addresses || !$contacts || $users) {
+            if (!$user || !$addresses || !$contacts || !$users) {
                 DB::rollBack();
 
                 return [
