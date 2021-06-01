@@ -28,8 +28,7 @@ class ScheduleRequest extends FormRequest
             'title' => 'required|min:3',
             'start' => 'date_format:Y-m-d H:i:s|before:end',
             'end' => 'date_format:Y-m-d H:i:s|after:start',
-            'process_id' => 'nullable|exists:processes,id'
+            'process_id' => 'nullable|exists:processes,id',
         ];
     }
-
 }

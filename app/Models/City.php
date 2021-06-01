@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    protected $fillable = ['state_id',  'name', 'siafi'];
+    protected $fillable = ['state_id',  'title', 'iso', 'iso_ddd', 'status', 'slug', 'population', 'lat', 'long', 'income_per_capita'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -20,7 +20,7 @@ class City extends Model
     {
         return [
             'state_id'      => 'required|exists:states,id',
-            'name'          => "required|min:3|max:100|unique:cities,name,{$id},id",
+            'title'         => "required|min:3|max:100",
         ];
     }
 }

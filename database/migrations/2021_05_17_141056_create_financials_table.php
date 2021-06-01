@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFinancialsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -31,6 +32,7 @@ class CreateFinancialsTable extends Migration
             $table->date('competence');
             $table->date('due_date');
             $table->date('payday')->nullable();
+            $table->enum('honorary', ['S', 'N'])->default('N')->comment('S -> Sim, N -> Não');
 
 
             $table->timestamps();

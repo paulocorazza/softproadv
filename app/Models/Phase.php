@@ -22,4 +22,9 @@ class Phase extends Model
     {
         return $this->hasMany(Stage::class);
     }
+
+    public function typeAction()
+    {
+        return $this->belongsToMany(TypeAction::class, 'phase_type_action');
+    }
 }

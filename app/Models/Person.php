@@ -7,8 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
+    public const TYPE_PERSON = [
+        'Contato' => 'Contato',
+        'Cliente' => 'Cliente',
+        'Fornecedor' => 'Fornecedor',
+        'Parte Contrária' => 'Parte Contrária'
+    ];
+
+
     protected $fillable = [
         'name',
+        'type_person',
         'fantasy',
         'site',
         'email',
@@ -36,6 +45,7 @@ class Person extends Model
     public function rules($id = '')
     {
         return [
+            'type_person' => 'required',
             'name'      => 'required|min:3|max:100',
             'fantasy'   => 'required|min:3|max:100',
             'email'     => "nullable|min:3|max:100|email",
@@ -83,7 +93,12 @@ class Person extends Model
         return $this->hasMany(Process::class);
     }
 
-    public function scopeStateActive($query)
+    public function financials()
+    {
+        return $this->hasMany(Financial::class);
+    }
+
+    public function scopeActive($query)
     {
         return $query->where('status', '=', 'A');
     }

@@ -6,7 +6,7 @@ use App\Models\Process;
 use App\Models\Stage;
 use App\Repositories\Contracts\ProcessRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -23,9 +23,20 @@ class EloquentProcessRepository extends BaseEloquentRepository
     /*     * ************************************************ */
     private function getPercentProgress($model)
     {
-        $countStages = Stage::count();
-        $countPivot = $model->stages()->count();
-        return ($countPivot / $countStages) * 100;
+        $process_id = $model->id;
+
+        $countStages = Stage::whereHas('phase.typeAction.processes', function ($subQuery) use ($process_id) {
+            $subQuery->where('id', $process_id);
+        })->count();
+
+        $countEvents = $model->events->count();
+
+
+        $countPivot = $model->stages->count();
+        $countEventsFinish = $model->events()->finish()->count();
+
+
+        return (($countPivot + $countEventsFinish) / ($countStages + $countEvents)) * 100;
     }
 
 
@@ -37,11 +48,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
                 $progress['pending'] = (isset($progress['pending'])) ? true : false;
 
-                $insert = $process->progresses()->updateOrCreate(['id' => $id], $progress);
-
-                if (!$insert) {
-                    throw new \Exception('Falha ao inserir o andamento');
-                }
+                $process->progresses()->updateOrCreate(['id' => $id], $progress);
             }
         }
 
@@ -109,7 +116,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 'phase',
                 'stage',
                 'stages',
-                'users'
+                'users',
             ]);
 
 
@@ -141,7 +148,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
             $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
             $files = $this->saveFiles($data, $process);
-
 
             if (!$process || !$progresses || !$files || !$users) {
                 DB::rollBack();
@@ -182,13 +188,16 @@ class EloquentProcessRepository extends BaseEloquentRepository
         try {
             $data['user_id'] = auth()->user()->id;
 
+            $state = $this->saveStage($process, $data);
+
             $process->update($data);
             $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
             $files = $this->saveFiles($data, $process);
 
 
-            if (!$process || !$progresses || !$files || !$users) {
+
+            if (!$process || !$progresses || !$files || !$users || !$state) {
                 DB::rollBack();
 
                 return [
@@ -213,5 +222,25 @@ class EloquentProcessRepository extends BaseEloquentRepository
         }
     }
 
+    private function saveStage(Process $process, array $data)
+    {
+        if ($this->isUpdateStage($process, $data['stage_id'])) {
+            $process->stages()->attach([
+                $process->stage_id => ['user_id' => Auth::user()->id]
+            ]);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param Process $process
+     * @param $stage_id
+     * @return bool
+     */
+    private function isUpdateStage(Process $process, $stage_id): bool
+    {
+        return isset($process->stage_id) && !$process->stages()->find($process->stage_id) && $process->stage_id != $stage_id;
+    }
 
 }

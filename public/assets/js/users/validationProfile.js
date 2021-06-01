@@ -97,6 +97,47 @@ $(document).ready(function () {
 
     });
 
+    $('#formRegisterPassword').each(function () {
+        $(this).validate({
+            rules: {
+                password: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20,
+                },
+
+
+                password_confirmation: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20,
+                },
+            },
+
+            errorPlacement: function(error, element) {
+                error.insertBefore(element);
+            },
+
+
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass(errorClass).removeClass(validClass);
+                $(element.form).find("label[for=" + element.id + "]")
+                    .addClass(errorClass);
+            },
+
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass(errorClass).addClass(validClass);
+                $(element.form).find("label[for=" + element.id + "]")
+                    .removeClass(errorClass);
+            },
+
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        })
+
+    });
 
     $('#type').select2({
         theme: "classic"

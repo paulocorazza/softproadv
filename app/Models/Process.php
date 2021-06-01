@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Process extends Model
 {
+    public const STATUS = [
+      'Em Andamento' => 'Em Andamento',
+      'Concluído'   => 'Concluído',
+      'Cancelado'   => 'Cancelado'
+    ];
+
     use SoftDeletes;
 
     protected $fillable = [
@@ -28,7 +34,8 @@ class Process extends Model
         'expectancy',
         'price',
         'percent_fees',
-        'description'
+        'description',
+        'status'
     ];
 
 
@@ -64,6 +71,11 @@ class Process extends Model
     public function person()
     {
         return $this->belongsTo(Person::class);
+    }
+
+    public function financials()
+    {
+        return $this->hasMany(Financial::class);
     }
 
     /**
@@ -195,5 +207,10 @@ class Process extends Model
     public function getPriceAttribute($value)
     {
         return Helper::formatDecimal($value, 2);
+    }
+
+    public function scopeInProgress($query)
+    {
+        return $query->where('status', 'Em Andamento');
     }
 }

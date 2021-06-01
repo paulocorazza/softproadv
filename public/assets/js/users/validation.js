@@ -108,8 +108,10 @@ $(document).ready(function () {
 
 
             submitHandler: function (form) {
-                if ($('.modal.show').length == 0)
+                if ($('.modal.show').length == 0) {
                     form.submit();
+                    $('input[type=submit]').prop('disabled', true);
+                }
             }
         })
 

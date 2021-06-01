@@ -10,13 +10,13 @@
 </div>
 
 <div class="form-group label-float">
-    {!! Form::text('initials', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'initials']) !!}
-    {!! Form::label('initials', 'Inicial', ['class' => 'control-label']); !!}
+    {!! Form::text('letter', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'letter']) !!}
+    {!! Form::label('letter', 'Inicial', ['class' => 'control-label']); !!}
 </div>
 
 <div class="form-group label-float">
-    {!! Form::text('name', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'name']) !!}
-    {!! Form::label('name', 'Nome', ['class' => 'control-label']); !!}
+    {!! Form::text('title', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'title']) !!}
+    {!! Form::label('title', 'Nome', ['class' => 'control-label']); !!}
 </div>
 
 

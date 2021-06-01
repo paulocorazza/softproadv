@@ -83,16 +83,19 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#modalCalendar #users').trigger('change');
 
 
-            let process_id = element.event.extendedProps.process.id
-            let process_person = element.event.extendedProps.process.process_person
 
-            let process = {
-                id: process_id,
-                text: process_person
-            };
+            if (element.event.extendedProps.process !== null) {
+                let process_id = element.event.extendedProps.process.id
+                let process_person = element.event.extendedProps.process.process_person
 
-            var newOption = new Option(process.text, process.id, false, false);
-            $('#process_id').append(newOption).trigger('change');
+                let process = {
+                    id: process_id,
+                    text: process_person
+                };
+
+                var newOption = new Option(process.text, process.id, false, false);
+                $('#process_id').append(newOption).trigger('change');
+            }
 
             let title = element.event.title;
             $('#modalCalendar #title').val(title)
@@ -138,7 +141,10 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#modalCalendar').modal('show')
             $('#modalCalendar #titleModal').text('Adicionar Evento');
             $('#modalCalendar button.deleteEvent').css("display", 'none');
+            $('#modalCalendar #id').val('')
 
+            $("#modalCalendar #users").val(null).trigger('change');
+            $("#modalCalendar #process_id").val(null).trigger('change');
 
             let start = moment(element.start).format("DD/MM/YYYY HH:mm:ss")
             $('#modalCalendar #start').val(start)

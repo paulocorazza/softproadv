@@ -21,7 +21,7 @@ class UserController extends ControllerStandard
         $this->typeAction = $typeAction;
         $this->country = $country;
 
-        $this->title = 'Usuario';
+        $this->title = 'Usuário';
         $this->view = 'tenants.users';
         $this->route = 'users';
         $this->upload = [
@@ -56,7 +56,6 @@ class UserController extends ControllerStandard
     {
         $userViews = $this->model->getUsersViewNotIn($id);
 
-
         $data = $this->model->relationships([
             'addresses.type_address',
             'addresses.city',
@@ -65,6 +64,7 @@ class UserController extends ControllerStandard
             'userViews.userView'
         ])->find($id);
 
+        $usersSelected = $data->userViews->pluck('userView.id');
 
         $title = "Editar {$this->title}: {$data->name}";
 
@@ -73,8 +73,7 @@ class UserController extends ControllerStandard
         $contacts = $data->contacts;
         $addresses = $data->addresses;
 
-
-        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'contacts', 'addresses', 'userViews'));
+        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'contacts', 'addresses', 'userViews', 'usersSelected'));
     }
 
 
@@ -186,7 +185,6 @@ class UserController extends ControllerStandard
 
         unset($dataForm['email']);
 
-
         $update = $data->update($dataForm);
 
         if (!$update) {
@@ -197,6 +195,34 @@ class UserController extends ControllerStandard
 
         return redirect()->route("profile")
             ->with(['success' => 'Perfil alterado com sucesso!']);
+    }
+
+    public function resetPassword(Request $request, $id)
+    {
+        $rules = [
+            'password'  => 'required|min:3|max:20|confirmed',
+        ];
+
+        $this->validate($request, $rules);
+
+        $dataForm = $request->all();
+
+        $data = $this->model->find($id);
+
+        if (isset($dataForm['password'])) {
+            $dataForm['password'] = bcrypt($dataForm['password']);
+        }
+
+        $update = $data->update($dataForm);
+
+        if (!$update) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($update['message']);
+        }
+
+        return redirect()->back()
+            ->with(['success' => 'Registro alterado com sucesso!']);
     }
 
     public function profiles($id)

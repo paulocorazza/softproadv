@@ -41,8 +41,8 @@
         var columns =  [
             {data: "id", name : 'states.id'},
             {data: "country.name", name : 'country.name' },
-            {data: "initials", name : 'states.initials'},
-            {data: "name", name : 'states.name'},
+            {data: "letter", name : 'states.letter'},
+            {data: "title", name : 'states.title'},
             {
                 data: 'action',
                 orderable: false

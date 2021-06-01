@@ -126,7 +126,16 @@ class EventController extends ControllerStandard
         return '1';
     }
 
+    public function finish(Request $request)
+    {
+         $id = $request->get('event');
 
+         $event = $this->model->find($id);
+
+         $event->finish = is_null($event->finish) ? date('Y-m-d h:i:s') : null;
+
+         $event->save();
+    }
 
     /**
      * @param Request $request

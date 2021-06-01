@@ -30,7 +30,7 @@
             </a>
         </p>
 
-    <!--TABELA -->
+        <!--TABELA -->
     @include('tenants.permissions.partials.table')
     <!--TABELA -->
     </div>
@@ -47,20 +47,16 @@
         var columns = [
             {data: "id"},
             {data: "name"},
-            {data: "label"},
             {
                 data: 'action',
                 orderable: false
             }
         ]
     </script>
-
     <script type="text/javascript" src={{ asset('assets/js/all/table-default.js') }}></script>
-
     <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/all/confirmations.js') }}></script>
 @stop
-
 
 
 

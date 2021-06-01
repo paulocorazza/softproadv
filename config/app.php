@@ -176,7 +176,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        Canducci\Cep\Providers\CepServiceProvider::class
+        Canducci\Cep\Providers\CepServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class
 
     ],
 
@@ -230,7 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Cep' => Canducci\Cep\Facades\Cep::class,
-        'Endereco' => Canducci\Cep\Facades\Endereco::class
+        'Endereco' => Canducci\Cep\Facades\Endereco::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class
 
     ],
 

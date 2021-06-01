@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-    protected $fillable = ['country_id', 'initials', 'name'];
+    protected $fillable = ['id', 'country_id', 'title', 'letter', 'iso', 'slug', 'icms', 'population'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -28,9 +28,9 @@ class State extends Model
     public function rules($id = '')
     {
         return [
-            'country_id'    => 'required|exists:countries,id',
-            'initials'      => "required|max:2|unique:states,initials,{$id},id",
-            'name'          => "required|min:3|max:100|unique:states,name,{$id},id",
+            'country_id' => 'required|exists:countries,id',
+            'letter' => "required|max:2|unique:states,letter,{$id},id",
+            'title' => "required|min:3|max:100|unique:states,title,{$id},id",
         ];
     }
 }

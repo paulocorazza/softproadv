@@ -24,7 +24,7 @@ class TypeActionController extends ControllerStandard
         $this->middleware('can:create_type_action')->only(['create', 'store']);
         $this->middleware('can:update_type_action')->only(['edit', 'update']);
         $this->middleware('can:view_type_action')->only(['show']);
-        $this->middleware('can:view_type_action_phases')->only(['delete']);
+        $this->middleware('can:view_type_action_phases')->only(['phases']);
         $this->middleware('can:delete_type_action')->only(['delete']);
 
     }

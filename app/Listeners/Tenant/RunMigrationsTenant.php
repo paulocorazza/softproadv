@@ -4,6 +4,7 @@ namespace App\Listeners\Tenant;
 
 use App\Events\Tenant\DatabaseCreated;
 use App\Mail\SendMailCompany;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -40,16 +41,45 @@ class RunMigrationsTenant
         if ($migration === 0) {
             $senha = uniqid(date('YmdHis'));
 
-            User::create([
-                'name' => $company->name,
-                'email' => $company->email,
-                'password' => bcrypt($senha)
-            ]);
+            $this->createUser($company, $senha);
+
+            $this->createLocations();
 
             Mail::to($company->email)->send(new SendMailCompany($company, $senha));
         }
 
 
         return $migration === 0;
+    }
+
+    /**
+     * @param Company $company
+     * @param string $senha
+     */
+    private function createUser(Company $company, string $senha): void
+    {
+        User::create([
+            'name' => $company->name,
+            'email' => $company->email,
+            'password' => bcrypt($senha)
+        ]);
+    }
+
+    private function createLocations(): void
+    {
+        Artisan::call('db:seed', [
+            '--force' => true,
+            '--class' => 'CountryTableSeeder'
+        ]);
+
+        Artisan::call('db:seed', [
+            '--force' => true,
+            '--class' => 'StateTableSeeder'
+        ]);
+
+        Artisan::call('db:seed', [
+            '--force' => true,
+            '--class' => 'CityTableSeeder'
+        ]);
     }
 }

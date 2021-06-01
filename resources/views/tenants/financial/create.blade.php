@@ -68,7 +68,6 @@
         <!-- /.card-body -->
     </div>
 
-
     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 

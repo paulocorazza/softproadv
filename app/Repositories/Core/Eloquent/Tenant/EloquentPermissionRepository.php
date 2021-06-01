@@ -36,7 +36,7 @@ class EloquentPermissionRepository extends BaseEloquentRepository
 
 
         return Datatables()->collection($profiles)->addColumn('action', function ($profiles) use ($id) {
-            return '<a href="/permissions/' . $id . '/profile/' . $profiles->id . '/delete"' . 'class="badge bg-danger j_delete">Deletar</a>';
+            return '<a href="/permissions/' . $id . '/profile/' . $profiles->id . '/delete"' . 'class="badge bg-danger j_link_delete">Deletar</a>';
         })
             ->make(true);
     }

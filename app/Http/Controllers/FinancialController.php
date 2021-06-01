@@ -15,7 +15,7 @@ class FinancialController extends ControllerStandard
         $this->view = 'tenants.financial';
         $this->route = 'financial';
 
-        $this->middleware('can:financial');
+        $this->middleware('can:financials');
 
         $this->middleware('can:create_financial')->only(['create', 'store']);
         $this->middleware('can:update_financial')->only(['edit', 'update']);

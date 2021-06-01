@@ -39,7 +39,7 @@
             {!! Form::label('start', 'Data Início', ['class' => 'control-label']); !!}
             <br>
             <input type="datetime-local" class="form-control" name="start" id="start"
-                   value="{{ old('start', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->start) ? $data->start : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
+                   value="{{ old('start', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->start_br) ? $data->start_br : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
         </div>
     </div>
 
@@ -48,7 +48,7 @@
             {!! Form::label('end', 'Data Fim', ['class' => 'control-label']); !!}
             <br>
             <input type="datetime-local" class="form-control" name="end" id="end"
-                   value="{{ old('end', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->end) ? $data->end : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
+                   value="{{ old('end', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->end_br) ? $data->end_br : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
         </div>
     </div>
 

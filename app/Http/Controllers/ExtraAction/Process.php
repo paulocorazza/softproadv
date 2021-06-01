@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Process extends Controller
 {
-    public function __invoke(\App\Models\Process $people, Request $request)
+    public function __invoke(\App\Models\Process $process, Request $request)
     {
         if (request()->ajax()) {
 
@@ -18,10 +18,14 @@ class Process extends Controller
                 $search = $request->q;
                 $person_id = $request->person_id;
 
-                $data = $people->Where('person_id',  $person_id)
-                               ->orWhere('id', $search)
-                               ->orWhere('number_process', 'LIKE', "%$search%")
-                               ->get();
+                $data = $process->where(function ($query) use ($person_id, $search) {
+                    $query->where('person_id', $person_id);
+
+                    if ($search) {
+                        $query->orWhere('id', $search)
+                              ->orWhere('number_process', 'LIKE', "%$search%");
+                    }
+                })->get();
             }
 
             return response()->json($data);

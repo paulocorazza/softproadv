@@ -75,6 +75,8 @@ class PersonController extends ControllerStandard
             $dataForm[$this->upload['name']] = $nameFile;
         }
 
+
+        $dataForm['type_person'] = serialize($dataForm['type_person']);
         $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
         $insert = $this->model->create($dataForm);
 
@@ -96,6 +98,9 @@ class PersonController extends ControllerStandard
             'addresses.state',
             'contacts'
         ])->find($id);
+
+
+        $data->type_person = unserialize($data->type_person);
 
 
         $title = "Editar {$this->title}: {$data->name}";
@@ -134,6 +139,7 @@ class PersonController extends ControllerStandard
             $dataForm[$this->upload['name']] = $nameFile;
         }
 
+        $dataForm['type_person'] = serialize($dataForm['type_person']);
         $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
         $update = $this->model->update($id, $dataForm);
 

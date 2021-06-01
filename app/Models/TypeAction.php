@@ -36,4 +36,11 @@ class TypeAction extends Model
         return $this->belongsToMany(Phase::class, 'phase_type_action');
     }
 
+    public function processes()
+    {
+        return $this->hasMany(Process::class);
+    }
+
+
+
 }

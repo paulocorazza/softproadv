@@ -10,19 +10,13 @@
 </div>
 
 <div class="form-group label-float">
-    {!! Form::text('id', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'id']) !!}
-    {!! Form::label('id', 'IBGE', ['class' => 'control-label']); !!}
+    {!! Form::text('iso', null, ['class' => 'form-control',  'placeholder' => ' ', 'iso' => 'iso']) !!}
+    {!! Form::label('iso', 'IBGE', ['class' => 'control-label']); !!}
 </div>
 
 <div class="form-group label-float">
-    {!! Form::text('name', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'name']) !!}
-    {!! Form::label('name', 'Nome', ['class' => 'control-label']); !!}
-</div>
-
-
-<div class="form-group label-float">
-    {!! Form::text('siafi', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'siafi']) !!}
-    {!! Form::label('siafi', 'Siafi', ['class' => 'control-label']); !!}
+    {!! Form::text('title', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'title']) !!}
+    {!! Form::label('title', 'Nome', ['class' => 'control-label']); !!}
 </div>
 
 

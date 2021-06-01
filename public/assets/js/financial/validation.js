@@ -108,10 +108,12 @@ $(document).ready(function () {
     }
 
     function startPreloader() {
+        $('input[type=submit]').prop('disabled', true);
         $('.preload .form_load').fadeIn()
     }
 
     function endPreloader() {
+        $('input[type=submit]').prop('disabled', false);
         $('.preload .form_load').fadeOut();
     }
 

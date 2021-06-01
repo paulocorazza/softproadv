@@ -195,7 +195,7 @@ class Helper
      */
     public static function formatDateTime($value, $format = 'd/m/Y H:i:s')
     {
-        return Carbon::parse($value)->format($format);
+        return $value ? Carbon::parse($value)->format($format) : null;
     }
 
     /**

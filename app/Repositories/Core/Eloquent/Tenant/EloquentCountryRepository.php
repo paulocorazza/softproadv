@@ -33,7 +33,7 @@ class EloquentCountryRepository extends BaseEloquentRepository
         if ($id) {
             $country = $this->relationships([
                 'states' => function ($query) {
-                    $query->orderBy('initials');
+                    $query->orderBy('letter');
                 }
             ])->find($id);
 

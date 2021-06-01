@@ -43,9 +43,8 @@
     </div>
 </div>
 
-<div class="form-group label-float">
-    {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'description']) !!}
-    {!! Form::label('description', 'Descrição', ['class' => 'control-label']); !!}
+<div class="form-group">
+    {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Descrição', 'id' => 'description']) !!}
 </div>
 
 

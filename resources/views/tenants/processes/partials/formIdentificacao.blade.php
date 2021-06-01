@@ -70,3 +70,13 @@
         </div>
     </div>
 </div>
+
+
+<div class="row">
+    <div class="col-12">
+        {!! Form::label('status', 'Status do Processo', ['class' => 'control-label']); !!}
+        <div class="form-group">
+            {!! Form::select('status', \App\Models\Process::STATUS, 'Em Andamento', ['placeholder' => 'Selecione o Status', 'class' => 'form-control', 'id' => 'status']) !!}
+        </div>
+    </div>
+</div>

@@ -27,9 +27,14 @@ $(document).ready(function () {
                   number : true,
                 },
 
-                initials: {
+                letter: {
                     required: true,
                     maxlength: 2,
+                },
+
+
+                title: {
+                    required: true,
                 },
 
 
@@ -56,6 +61,7 @@ $(document).ready(function () {
 
             submitHandler: function (form) {
                 form.submit();
+                $('input[type=submit]').prop('disabled', true);
             }
         })
 

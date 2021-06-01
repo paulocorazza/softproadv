@@ -65,7 +65,7 @@
                             readonly
                             name="addresses[{{ $address['id'] }}][city_id]">
                         <option
-                            value="{{ $address['city_id'] }}"> {{ $address['city']['name'] }}</option>
+                            value="{{ $address['city_id'] }}"> {{ $address['city']['title'] }}</option>
                     </select>
                 </td>
 
@@ -74,7 +74,7 @@
                             readonly
                             name="addresses[{{ $address['id'] }}][state_id]">
                         <option
-                            value="{{ $address['state_id'] }}"> {{ $address['state']['initials'] }}</option>
+                            value="{{ $address['state_id'] }}"> {{ $address['state']['letter'] }}</option>
                     </select>
                 </td>
 

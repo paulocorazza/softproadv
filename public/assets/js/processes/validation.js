@@ -1,29 +1,4 @@
-
-/*$.validator.addMethod("mytst", function (value, element) {
-    console.log('teste')
-    var flag = true;
-
-    $("[name^=files]").each(function (i, j) {
-        console.log(i)
-        $(this).parent('div').find('label.error').remove();
-        $(this).parent('div').find('label.error').remove();
-        if ($.trim($(this).val()) == '') {
-            flag = false;
-
-            $(this).parent('div').append('<label  id="id_ct'+i+'-error" class="error">This field is required.</label>');
-        }
-    });
-
-
-    return flag;
-
-
-}, "");*/
-
 $(document).ready(function () {
-    $('.money').mask('#.##0,00', {reverse: true});
-
-
     function reset() {
         $("#toggleCSS").attr("href", "alertify.default.css");
 
@@ -38,22 +13,7 @@ $(document).ready(function () {
         });
     }
 
-    /*function validateFiles() {
-        var flag = true;
-        $("[name^=files]").each(function (i, j) {
-            $(this).parent('div').find('label.error').remove();
-            $(this).parent('div').find('label.error').remove();
-
-            if ($.trim($(this).val()) == '') {
-                $(this).parent('div').append('<label  id="id_ct' + i + '-error" class="error">This field is required.</label>');
-
-                flag = false
-            }
-        })
-
-        return flag
-    }*/
-
+    $('.money').mask('#.##0,00', {reverse: true});
 
     $('#formRegister').each(function () {
         $(this).validate({
@@ -102,10 +62,6 @@ $(document).ready(function () {
                 users: {
                     required: true
                 },
-
-            //    "files[][description]": {
-            //        mytst:true
-            //    }
             },
 
 
@@ -140,6 +96,7 @@ $(document).ready(function () {
 
 
                     var _method = $('#formRegister').find('input[name="_method"]').val()
+
 
                     if (_method == undefined) {
                         ajaxSumit(dados, submitAjax)
@@ -195,43 +152,15 @@ $(document).ready(function () {
     }
 
     function startPreloader() {
+        $('input[type=submit]').prop('disabled', true);
         $('.preload .form_load').fadeIn()
     }
 
     function endPreloader() {
+        $('input[type=submit]').prop('disabled', false);
         $('.preload .form_load').fadeOut();
     }
 
-    $('#person_id').select2({
-        theme: "classic",
-        allowClear: true,
-        placeholder: 'Selecione o Cliente',
-
-        ajax: {
-            delay: 250,
-            type: 'post',
-            url: url_base + '/people/search',
-
-            data: function (params) {
-                return {
-                    q: $.trim(params.term)
-                };
-            },
-
-            dataType: 'json',
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
 
 
     $('#counterpart_id').select2({
@@ -419,6 +348,11 @@ $(document).ready(function () {
     })
 
     $('#users').select2({
+        allowClear: true,
+        theme: "classic",
+    })
+
+    $('#status').select2({
         allowClear: true,
         theme: "classic",
     })

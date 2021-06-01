@@ -14,9 +14,6 @@
 
     @include('tenants.includes.alerts')
 
-
-    {!! Form::model($data, ['route' => ['profile.update', $data->id], 'class' => 'form form-search form-ds', 'files' => true, 'method' => 'put', 'id' => 'formRegister']) !!}
-
     <div class="card card-outline card-info">
         <div class="card-header">
             <h3 class="card-title">
@@ -29,6 +26,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
+            {!! Form::model($data, ['route' => ['profile.update', $data->id], 'class' => 'form form-search form-ds', 'files' => true, 'method' => 'put', 'id' => 'formRegister']) !!}
             <div class="form-group">
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome:', 'id' => 'name']) !!}
             </div>
@@ -128,19 +126,45 @@
                 {!! Form::file('image',  ['class' => 'form-control']) !!}
             </div>
 
+            <div class="form-group">
+                {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+            </div>
+
+            {!! Form::close() !!}
+
         </div>
         <!-- /.card-body -->
     </div>
+    <div class="card card-outline card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Usuário
+                <small>Alterar Senha</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
+            {!! Form::model($data, ['route' => ['profile.password', $data->id], 'class' => 'form', 'method' => 'put', 'id' => 'formRegisterPassword']) !!}
 
-    <div class="form-group">
-        {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+            <div class="form-group label-float">
+                {!! Form::password('password',  ['class' => 'form-control', 'placeholder' => 'Nova Senha', 'id' => 'password']) !!}
+            </div>
+            <div class="form-group label-float">
+                {!! Form::password('password_confirmation',  ['class' => 'form-control', 'placeholder' => 'Confirmação da Senha',  'id' => 'password_confirmation']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::submit('Alterar Senha', ['class' => 'btn btn-danger']) !!}
+            </div>
+
+            {!! Form::close() !!}
+
+        </div>
+        <!-- /.card-body -->
     </div>
-
-    {!! Form::close() !!}
-
-
-
-
 @stop
 
 @section('js')

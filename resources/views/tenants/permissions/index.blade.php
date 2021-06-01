@@ -17,15 +17,6 @@
     @include('tenants.includes.alerts')
 
     <div class="content">
-       @can('create_permission')
-        <p>
-            <a href="{{route('permissions.create')}}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-plus"></span>
-                Adicionar
-            </a>
-        </p>
-        @endcan
-
         <!--TABELA -->
     @include('tenants.permissions.partials.table')
     <!--TABELA -->

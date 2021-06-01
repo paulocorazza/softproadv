@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Reports\FinancialProcessController;
+use App\Http\Controllers\Reports\HonoraryController;
 
 Route::view('/404-tenant', 'erros.404-tenant')->name('404.tenant');
 
@@ -135,6 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('profile', 'UserController@showProfile')->name('profile');
     Route::put('profile/{id}', 'UserController@updateProfile')->name('profile.update');
+    Route::put('profile/{id}/reset', 'UserController@resetPassword')->name('profile.password');
 
 
     /*     * ************************************************ */
@@ -259,6 +262,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************     EVENTS     ***************** */
     /*     * ************************************************ */
+    Route::post('events/finish', 'EventController@finish');
     Route::get('events/file/{id}/download', 'ExtraAction\EventFileDownload')->name('events.fileDownload');
     Route::resource('events', 'EventController');
 
@@ -294,8 +298,33 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     Route::resource('financial', 'FinancialController');
 
+
+    /*     * ************************************************ */
+    /*     * ***********       REPORTS      *************** */
+    /*     * ************************************************ */
+    Route::get('reports/honorary', [HonoraryController::class, 'index']);
+    Route::post('reports/honorary/pdf', [HonoraryController::class, 'report'])->name('honorary.report');
+
+    Route::get('reports/financial-process', [FinancialProcessController::class, 'index']);
+    Route::post('reports/financial-process/pdf', [FinancialProcessController::class, 'report'])->name('financial.process.report');
+
+
+    Route::get('reports/financial', [\App\Http\Controllers\Reports\FinancialController::class, 'index']);
+    Route::post('reports/financial', [\App\Http\Controllers\Reports\FinancialController::class, 'report'])->name('financial.report');
+
+    Route::get('reports/people', [\App\Http\Controllers\Reports\PeopleController::class, 'report'])->name('people.report');
+
+
+
+
 });
 
 
 
 Route::get('/', 'IndexController@index')->name('index');
+Route::get('/teste', function () {
+    $financial = \App\Models\Financial::with(['process.person'])->get();
+
+   dd($financial->groupBy(['person_id', 'process_id']));
+
+});

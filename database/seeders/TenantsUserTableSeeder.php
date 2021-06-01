@@ -5,6 +5,7 @@ use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 
@@ -33,15 +34,16 @@ class TenantsUserTableSeeder extends Seeder
 
     private function createPermissions()
     {
-        $path =  storage_path('app/public/files_sql/permissions.sql');
-        DB::unprepared(file_get_contents($path));
+        Artisan::call('db:seed', [
+            '--force' => true,
+            '--class' => 'PermissionsTableSeeder'
+        ]);
     }
 
 
     private function sync()
     {
         $admin = $this->user->where('name', 'Suporte')->first();
-
         $admin->profiles()->save($this->profile);
     }
 

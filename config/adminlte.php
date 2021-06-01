@@ -232,7 +232,6 @@ return [
             ],
         ],
 
-
         [
             'text' => 'Financeiro',
             'icon' => 'fas fa-comment-dollar',
@@ -247,7 +246,7 @@ return [
                 [
                     'text' => 'Conta Financeira',
                     'url' => 'financial-account',
-                    'icon' => 'fas fa-search-dollar',
+                    'icon' => 'fas fa-university',
                     'can' => 'financial-account'
                 ],
 
@@ -255,12 +254,36 @@ return [
                     'text' => 'A Pagar / Receber',
                     'url' => 'financial',
                     'icon' => 'fas fa-hand-holding-usd',
-                    'can' => 'financial'
+                    'can' => 'financials'
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Relatórios',
+            'icon' => 'fas fa-flag',
+            'submenu' => [
+                [
+                    'text' => 'Honorários',
+                    'url' => 'reports/honorary',
+                    'icon' => 'far fa-circle',
+                    'can' => 'rel-honorary'
                 ],
 
+                [
+                    'text' => 'Ficha Financeira',
+                    'url' => 'reports/financial-process',
+                    'icon' => 'far fa-circle',
+                    'can' => 'rel-financial-process'
+                ],
 
+                [
+                    'text' => 'Contas a Pagar / Receber',
+                    'url' => 'reports/financial',
+                    'icon' => 'far fa-circle',
+                    'can' => 'rel-financial'
+                ],
             ],
-
         ],
 
 
@@ -391,12 +414,6 @@ return [
                 'url' => 'profile',
                 'icon' => 'fas fa-fw fa-user',
             ],
-
-            [
-                'text' => 'change_password',
-                'url' => 'password/reset',
-                'icon' => 'fas fa-fw fa-lock',
-            ]
         ]
     ]
 

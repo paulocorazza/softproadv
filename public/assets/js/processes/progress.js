@@ -27,21 +27,18 @@ function editDetail(obj) {
     limparAndamento()
 
     id = $(obj).closest('tr').attr('data-id');
-    var created = $('input[type=date][name="progresses[' + id + '][date]"]').val();
+    var created = $('input[type=text][name="progresses[' + id + '][date]"]').val();
     var description = $('input[type=text][name="progresses[' + id + '][description]"]').val();
-    var dateTerm = $('input[type=date][name="progresses[' + id + '][date_term]"]').val();
-
+    var dateTerm = $('input[type=text][name="progresses[' + id + '][date_term]"]').val();
     var publication = $('input[type=hidden][name="progresses[' + id + '][publication]"]').val();
-
 
 
     var pending = ($('input[type=checkbox][name="progresses[' + id + '][pending]"]').prop('checked') == true) ? true : false;
 
 
-
-    $('#progress_date').val(created);
+    $('#progress_date').val(moment(created, "DD/MM/YYYY").format("YYYY-MM-DD"));
     $('#progress_description').val(description);
-    $('#progress_date_term').val(dateTerm);
+    $('#progress_date_term').val(moment(dateTerm, "DD/MM/YYYY").format("YYYY-MM-DD"));
     $('#progress_publication').val(publication);
 
     $('#progress_pending').prop("checked", pending);
@@ -113,9 +110,11 @@ $(document).ready(function () {
             count = id
 
        // var date = $('#progress_date').val();
-        var date = $('#progress_date').val();
+
+
+        var date =  moment($('#progress_date').val()).format("DD/MM/YYYY")
         var description = $('#progress_description').val();
-        var date_term = $('#progress_date_term').val();
+        var date_term =  moment($('#progress_date_term').val()).format("DD/MM/YYYY")
         var publication = $('#progress_publication').val();
         var pending = ($("#progress_pending").prop('checked') == true) ? "checked" : '';
 
@@ -147,7 +146,7 @@ $(document).ready(function () {
 
             '<input type="hidden" id="publication' + count + '" name="progresses[' + count + '][publication]"  value="' + publication + '"> ' +
 
-            '<input class="form-control" type="date" readonly id="date' + count + '" name="progresses[' + count + '][date]"  value="' + date + '"> ' +
+            '<input class="form-control" type="text" readonly id="date' + count + '" name="progresses[' + count + '][date]"  value="' + date + '"> ' +
             '</td>' +
 
             '<td>' +
@@ -155,7 +154,7 @@ $(document).ready(function () {
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="date" readonly  id="term' + count + '" name="progresses[' + count + '][date_term]"  value="' + date_term + '"> ' +
+            '<input class="form-control" type="text" readonly  id="term' + count + '" name="progresses[' + count + '][date_term]"  value="' + date_term + '"> ' +
             '</td>' +
 
             '<td>' +

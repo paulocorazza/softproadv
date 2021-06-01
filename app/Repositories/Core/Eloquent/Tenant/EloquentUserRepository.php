@@ -78,8 +78,13 @@ class EloquentUserRepository extends BaseEloquentRepository
      */
     private function saveUsers(array $data, $user)
     {
-        if (isset($data['userViews'])) {
-            $user->userViews()->sync($data['userViews']);
+         if (isset($data['userViews'])) {
+
+           foreach ($data['userViews'] as $userView)
+            $user->userViews()->updateOrCreate(['user_id_view' => $userView], [
+                'user_id' => $user->id,
+                'user_id_view' => $userView
+            ]);
         }
 
         return true;

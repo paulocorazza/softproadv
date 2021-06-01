@@ -1,4 +1,7 @@
 var id = '';
+var state_id = '';
+var city_id = '';
+
 
 function reset() {
     $("#toggleCSS").attr("href", "alertify.default.css");
@@ -21,7 +24,7 @@ function limparEndereco() {
     $('#district').val('');
     $('#complement').val('');
     $('#type_address_id').val("");
-    $('#country_id').val("");
+    $('#country_id').val("").trigger('change');
     $('#state_id').val(null).trigger('change');
     $("#state_id").empty();
     $('#city_id').val(null).trigger('change');
@@ -40,10 +43,10 @@ function editAddress(obj) {
     var complement = $('input[type=hidden][name="addresses[' + id + '][complement]"]').val();
     var type_address_id = $('select[name="addresses[' + id + '][type_address_id]"]').val();
     var country_id = $('input[type=hidden][name="addresses[' + id + '][country_id]"]').val();
-    var state_id = $('select[name="addresses[' + id + '][state_id]"]').val();
-    var state = $('select[name="addresses[' + id + '][state_id]"] option:selected').text().trim()
-    var city_id = $('select[name="addresses[' + id + '][city_id]"]').val();
-    var city = $('select[name="addresses[' + id + '][city_id]"] option:selected').text().trim()
+    state_id = $('select[name="addresses[' + id + '][state_id]"]').val();
+   // var state = $('select[name="addresses[' + id + '][state_id]"] option:selected').text().trim()
+    city_id = $('select[name="addresses[' + id + '][city_id]"]').val();
+   // var city = $('select[name="addresses[' + id + '][city_id]"] option:selected').text().trim()
 
 
     $('#cep').val(cep);
@@ -53,11 +56,12 @@ function editAddress(obj) {
     $('#complement').val(complement);
     $('#type_address_id').val(type_address_id);
     $('#type_address_id').trigger('change');
+
     $('#country_id').val(country_id);
     $('#country_id').trigger('change');
 
 
-    var dataState = {
+   /* var dataState = {
         id: state_id,
         text: state
     };
@@ -73,7 +77,7 @@ function editAddress(obj) {
 
 
     var newOption = new Option(dataCity.text, dataCity.id, false, false);
-    $('#city_id').append(newOption).trigger('change');
+    $('#city_id').append(newOption).trigger('change');*/
 
 
     $('#modalAddress').modal('show');
@@ -342,7 +346,8 @@ $(document).ready(function () {
     $('#country_id').on("change", function (e) {
         var id = $(this).val();
 
-        if (id != null) {
+
+        if (id !== '') {
 
             $('#state_id').val(null).trigger('change');
             $("#state_id").empty();
@@ -359,12 +364,21 @@ $(document).ready(function () {
                 success: function (data) {
                     $('.jloadState').find('.form_load').fadeOut(500);
                     var states = $.map(data, function (item) {
-                        return new Option(item.initials, item.id, false, false)
+                        return new Option(item.letter, item.id, false, false)
 
                     })
 
+                    $('#state_id').val(null)
+                    $("#state_id").empty();
+
                     $('#state_id').append(states);
+
+                    if (state_id !== '') {
+                        $('#state_id').val(state_id);
+                    }
+
                     $('#state_id').trigger('change');
+
                 }
             });
         }
@@ -395,12 +409,18 @@ $(document).ready(function () {
                 success: function (data) {
                     $('.jloadCity').find('.form_load').fadeOut(500);
                     var cities = $.map(data, function (item) {
-                        return new Option(item.name, item.id, false, false)
+                        return new Option(item.title, item.id, false, false)
 
                     })
 
+                    $('#city_id').val(null)
+                    $("#city_id").empty();
 
                     $('#city_id').append(cities);
+
+                   if (city_id !== '') {
+                       $('#city_id').val(city_id);
+                   }
                 }
             });
         }

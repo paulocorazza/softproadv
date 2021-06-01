@@ -41,7 +41,7 @@ class UserTableSeeder extends Seeder
     private function createPermissions()
     {
         $path =  storage_path('app/public/files_sql/permissions.sql');
-          DB::unprepared(file_get_contents($path));
+         DB::unprepared(file_get_contents($path));
     }
 
 
@@ -68,7 +68,7 @@ class UserTableSeeder extends Seeder
         $this->createUser();
         $this->sync();
 
-        $this->createPermissions();
+      //  $this->createPermissions();
 
         // Habilitas as FKs
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

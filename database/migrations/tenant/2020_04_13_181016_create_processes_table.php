@@ -33,8 +33,10 @@ class CreateProcessesTable extends Migration
             $table->double('price', 15,2)->nullable();
             $table->double('percent_fees', 15,2)->nullable();
             $table->text('description')->nullable();
+            $table->enum('status', ['Em Andamento', 'Concluído', 'Cancelado']);
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')

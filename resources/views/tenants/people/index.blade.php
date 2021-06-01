@@ -17,14 +17,23 @@
     @include('tenants.includes.alerts')
 
     <div class="content">
+      <div class="row justify-content-between">
         @can('create_person')
-            <p>
-                <a href="{{route('people.create')}}" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Adicionar
-                </a>
-            </p>
-         @endcan
+            <a style="margin-left: 10px;" href="{{route('people.create')}}" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                Adicionar
+            </a>
+        @endcan
+
+
+        @can('report_person')
+            <a style="margin-right: 10px;" href="{{route('people.report')}}" class="btn btn-dark">
+                <span class="fas fa-print"></span>
+                Imprimir
+            </a>
+        @endcan
+      </div>
+      <br>
 
     <!--TABELA -->
     @include('tenants.people.partials.table')
@@ -38,7 +47,7 @@
     @include('tenants.includes.dataTableJs')
 
     <script>
-        var urlAjax ='{{ route('people.index') }}';
+        var urlAjax = '{{ route('people.index') }}';
 
         var columns = [
             {data: "id"},

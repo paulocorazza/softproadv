@@ -15,16 +15,13 @@ class CreateStatesTable extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('country_id')->unsigned();
-            $table->string('initials', 2);
-            $table->string('name');
-            $table->timestamps();
-
-
-            $table->foreign('country_id')
-                ->references('id')
-                ->on('countries')
-                ->onDelete('cascade');
+            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
+            $table->string('title')->unique();
+            $table->string('letter')->unique();
+            $table->integer('iso')->unique();
+            $table->string('slug')->unique();
+            $table->decimal('icms', 12, 2)->nullable();
+            $table->integer('population')->nullable();
         });
     }
 

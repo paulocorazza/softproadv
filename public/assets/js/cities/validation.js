@@ -22,12 +22,12 @@ $(document).ready(function () {
                     required: true,
                 },
 
-                ibge: {
+                id: {
                   required: true,
                   number : true,
                 },
 
-                name: {
+                title: {
                     required: true,
                     minlength: 3,
                     maxlength: 100,

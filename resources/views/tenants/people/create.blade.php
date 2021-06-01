@@ -208,7 +208,6 @@
     <script src={{ asset('assets/js/people/validation.js') }}></script>
     <script src={{ asset('assets/js/all/address.js') }}></script>
     <script src={{ asset('assets/js/all/contact.js') }}></script>
-    <script src={{ asset('assets/js/all/datapicker.js') }}></script>
 @stop
 
 

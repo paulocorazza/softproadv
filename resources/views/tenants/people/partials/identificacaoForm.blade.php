@@ -1,3 +1,12 @@
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            {!! Form::label('type_person', 'Tipo de Pessoa', ['class' => 'control-label']); !!}
+            {!! Form::select('type_person', \App\Models\Person::TYPE_PERSON ,  null, ['class' => 'form-control', 'multiple' => 'multiple', 'id' => 'type_person', 'name' => 'type_person[]']) !!}
+        </div>
+    </div>
+</div>
+
 <div class="form-group label-float">
     {!! Form::text('name', null, ['class' => 'form-control',  'placeholder' => ' ', 'id' => 'name']) !!}
     {!! Form::label('name', 'Nome', ['class' => 'control-label']); !!}
@@ -102,6 +111,6 @@
 <div class="form-group">
     <label>
         {!! Form::checkbox('status', null, @$data->status == 'I') !!}
-        Inativo ?
+        Inativo
     </label>
 </div>

@@ -66,8 +66,15 @@
             {!! Form::label('payment', 'Valor Líquido', ['class' => 'control-label']); !!}
         </div>
     </div>
+</div>
 
-
+<div class="row">
+    <div class="form-group">
+        <label>
+            {!! Form::checkbox('honorary', null, @$data->honorary == 'S') !!}
+            Honorário
+        </label>
+    </div>
 </div>
 
 

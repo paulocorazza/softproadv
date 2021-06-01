@@ -5,6 +5,8 @@
 @section('css')
     <link href='{{ asset('assets/fullcalendar/lib/main.min.css') }}' rel='stylesheet'/>
     <link href='{{ asset('assets/fullcalendar/css/style.css') }}' rel='stylesheet'/>
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
 @stop
 
 
@@ -72,6 +74,7 @@
 
 
 @section('js')
+    <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script src='{{ asset('assets/fullcalendar/lib/main.min.js') }}'></script>

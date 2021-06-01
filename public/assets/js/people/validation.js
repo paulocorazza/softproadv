@@ -33,6 +33,10 @@ $(document).ready(function () {
     $('#formRegister').each(function () {
         $(this).validate({
             rules: {
+                type_person: {
+                  required: true
+                },
+
                 name: {
                     required: true,
                     minlength: 3,
@@ -96,6 +100,8 @@ $(document).ready(function () {
                     var dados = $(form).serialize();
                     var _method = $('#formRegister').find('input[name="_method"]').val()
 
+
+
                     if (_method == undefined) {
                         ajaxSumit(dados, submitAjax)
                     } else if (_method == 'PUT') {
@@ -139,13 +145,19 @@ $(document).ready(function () {
     }
 
     function startPreloader() {
+        $('input[type=submit]').prop('disabled', true);
         $('.preload .form_load').fadeIn()
     }
 
     function endPreloader() {
+        $('input[type=submit]').prop('disabled', false);
         $('.preload .form_load').fadeOut();
     }
 
+    $('#type_person').select2({
+        allowClear: true,
+        theme: "classic",
+    })
 
     $('#type').select2({
         placeholder: "Selecione o tipo da pessoa",

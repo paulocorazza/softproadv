@@ -52,7 +52,7 @@ class EloquentStateRepository extends BaseEloquentRepository
 
             $state = $this->relationships([
                 'cities' => function ($query) {
-                    $query->orderBy('name');
+                    $query->orderBy('title');
                 }
             ])->find($id);
 
@@ -70,8 +70,8 @@ class EloquentStateRepository extends BaseEloquentRepository
 
     public function getStates()
     {
-        return $this->model->orderBy('name', 'ASC')
+        return $this->model->orderBy('title', 'ASC')
             ->get()
-            ->pluck('name', 'id');
+            ->pluck('title', 'id');
     }
 }

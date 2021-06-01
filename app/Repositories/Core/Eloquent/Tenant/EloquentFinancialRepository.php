@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Financial;
 use App\Repositories\Contracts\FinancialRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use function PHPUnit\Framework\isNull;
 
@@ -39,8 +40,6 @@ class EloquentFinancialRepository extends BaseEloquentRepository
                 return isset($model->payday) ?  Helper::formatDateTime($model->payday, 'd/m/Y') : null;
             })
             ->make(true);
-
-
     }
 
     public function create(array $data)
@@ -90,6 +89,8 @@ class EloquentFinancialRepository extends BaseEloquentRepository
         DB::beginTransaction();
 
         try {
+            $data = $this->replaceValues($data);
+
             $financial->update($data);
 
             if (!$financial) {
@@ -123,12 +124,56 @@ class EloquentFinancialRepository extends BaseEloquentRepository
      */
     private function replaceValues(array $data): array
     {
+        $data['honorary'] = isset($data['honorary']) ? 'S' : 'N';
         $data['original'] = Helper::replaceDecimal($data['original']);
         $data['discount'] = Helper::replaceDecimal($data['discount']);
         $data['fine'] = Helper::replaceDecimal($data['fine']);
         $data['rate'] = Helper::replaceDecimal($data['rate']);
         $data['payment'] = Helper::replaceDecimal($data['payment']);
         return $data;
+    }
+
+
+    public function honorarys(Request $request)
+    {
+        $filtro = $request->all();
+
+        return $this->model::where(function ($query) use ($filtro) {
+            $query->whereBetween($filtro['date_for'], array($filtro['data_inicial'], $filtro['data_final']));
+            $query->where('honorary', 'S');
+
+            if ($filtro['person_id']) {
+                $query->where('person_id', $filtro['person_id']);
+            }
+        })->get();
+    }
+
+    public function financial(Request $request)
+    {
+        $filtro = $request->all();
+
+        $status = $filtro['status'] == 'baixado' ?  $filtro['status'] : null;
+
+        $data = $this->model::with('person')->where(function ($query) use ($filtro, $status) {
+            $query->whereBetween($filtro['date_for'], array($filtro['data_inicial'], $filtro['data_final']));
+
+            if ($filtro['person_id']) {
+                $query->where('person_id', $filtro['person_id']);
+            }
+
+            if ($filtro['type']) {
+                $query->where('type', $filtro['type']);
+            }
+
+            if ($status) {
+                $query->whereNotNull('payday');
+            }
+
+
+        })->latest($filtro['date_for'])->get();
+
+
+        return $data->groupBy('type');
     }
 
 }

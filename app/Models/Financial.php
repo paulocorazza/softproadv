@@ -15,6 +15,15 @@ class Financial extends Model
         'Receber' => 'Receber'
     ];
 
+    protected $appends = ['value'];
+
+    protected $cast = [
+        'value' => 'decimal',
+        'due_date_br' => 'date',
+        'payday_br' => 'date',
+        'created_at_br' => 'date'
+    ];
+
     protected $fillable = [
         'type',
         'financial_category_id',
@@ -31,7 +40,8 @@ class Financial extends Model
         'payment',
         'competence',
         'due_date',
-        'payday'
+        'payday',
+        'honorary'
     ];
 
     public function rules($id = '')
@@ -70,9 +80,9 @@ class Financial extends Model
         return $this->belongsTo(FinancialAccount::class);
     }
 
-    public function getOriginalAttribute($value)
+   public function getOriginalAttribute()
     {
-        return Helper::formatDecimal($value, 2);
+        return Helper::formatDecimal($this->attributes['original'], 2);
     }
 
     public function getDiscountAttribute($value)
@@ -93,6 +103,26 @@ class Financial extends Model
     public function getPaymentAttribute($value)
     {
         return Helper::formatDecimal($value, 2);
+    }
+
+    public function getValueAttribute()
+    {
+        return $this->attributes['payment'];
+    }
+
+    public function getDueDateBrAttribute()
+    {
+        return Helper::formatDateTime($this->attributes['due_date'], 'd/m/Y');
+    }
+
+    public function getPayDayBrAttribute()
+    {
+          return Helper::formatDateTime($this->attributes['payday'], 'd/m/Y');
+    }
+
+    public function getCreatedAtBrAttribute()
+    {
+        return Helper::formatDateTime($this->attributes['created_at'], 'd/m/Y');
     }
 
 }

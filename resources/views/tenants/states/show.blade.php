@@ -33,8 +33,8 @@
         <div class="card-body pad">
             <p><strong>ID: </strong>{{  $data->id }}</p>
             <p><strong>Pais: </strong>{{  $data->country->name }}</p>
-            <p><strong>Inicial: </strong>{{  $data->initials }}</p>
-            <p><strong>Nome: </strong>{{  $data->name }}</p>
+            <p><strong>Inicial: </strong>{{  $data->letter }}</p>
+            <p><strong>Nome: </strong>{{  $data->title }}</p>
         </div>
         <!-- /.card-body -->
     </div>

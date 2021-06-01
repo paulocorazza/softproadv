@@ -40,6 +40,8 @@
         </div>
     </div>
 
+
+
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">
             {!! Form::text('price', null, ['class' => 'form-control money', 'placeholder' => ' ', 'id' => 'price']) !!}

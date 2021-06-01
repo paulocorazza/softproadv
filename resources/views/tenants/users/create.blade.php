@@ -190,7 +190,7 @@
         <div class="card-body pad">
             {!! Form::label('users', 'Usuários', ['class' => 'control-label']); !!}
             <div class="form-group">
-                {!! Form::select('userViews', $userViews, null, ['class' => 'form-control',  'multiple' => 'multiple',  'id' => 'userViews', 'name' => 'userViews[]']) !!}
+                {!! Form::select('userViews', $userViews, @$usersSelected, ['class' => 'form-control',  'multiple' => 'multiple',  'id' => 'userViews', 'name' => 'userViews[]']) !!}
             </div>
         </div>
         <!-- /.card-body -->

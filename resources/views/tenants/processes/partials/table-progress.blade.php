@@ -29,7 +29,7 @@
                     <input class="form-control" readonly type="text"
                            name="progresses[{{ $progress['id']  }}][date]"
                            id="progresses[{{ $progress['id']  }}][date]"
-                           value="{{ $progress['date']  }}">
+                           value="{{ $progress['date_br']  }}">
                 </td>
 
                 <td>
@@ -43,7 +43,7 @@
                     <input class="form-control" readonly type="text"
                            name="progresses[{{ $progress['id'] }}][date_term]"
                            id="progresses[{{ $progress['id'] }}][date_term]"
-                           value="{{ $progress['date_term'] }}">
+                           value="{{ $progress['date_term_br'] }}">
                 </td>
 
                 <td>

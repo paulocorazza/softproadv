@@ -43,6 +43,7 @@ $(document).ready(function () {
 
             submitHandler: function (form) {
                 form.submit();
+                $('input[type=submit]').prop('disabled', true);
             }
         })
 

@@ -29,8 +29,8 @@ class EloquentPersonRepository extends BaseEloquentRepository
      */
     private function saveAddress(array $data, $person)
     {
-        if (isset($data['address'])) {
-            foreach ($data['address'] as $item) {
+        if (isset($data['addresses'])) {
+            foreach ($data['addresses'] as $item) {
 
                 $id = ($item['id'] > 0) ? $item['id'] : 0;
 
@@ -185,6 +185,11 @@ class EloquentPersonRepository extends BaseEloquentRepository
                 'data' => $processes,
             ];
         }
+
+        return [
+            'status' => true,
+            'data' => $data,
+        ];
     }
 
     /**
@@ -200,11 +205,30 @@ class EloquentPersonRepository extends BaseEloquentRepository
                 $processes[] = [
                     'id' => $process->id,
                     'process' => $process->number_process . ' - ' . $person->name,
-                    ];
+                ];
             }
         }
 
         return $processes;
     }
 
+    public function getPersonProcessesFinancial(Request $request)
+    {
+        $filtro = $request->all();
+
+        return $this->model
+            ->whereHas('processes.financials', function ($query) use ($filtro) {
+                return $query->whereBetween($filtro['date_for'], array($filtro['data_inicial'], $filtro['data_final']));
+            })
+            ->with('processes.financials', function ($query) use ($filtro) {
+                return $query->whereBetween($filtro['date_for'], array($filtro['data_inicial'], $filtro['data_final']));
+            })
+            ->select(['id', 'name', 'fantasy'])
+            ->where(function ($query) use ($filtro) {
+                if ($filtro['person_id']) {
+                    return $query->where('id', $filtro['person_id']);
+                }
+            })
+            ->get();
+    }
 }

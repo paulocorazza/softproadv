@@ -39,9 +39,9 @@
         var urlAjax = '{{ route('cities.index') }}';
 
         var columns = [
-            {data: "id", name: 'id'},
-            {data: "name", name: 'name'},
-            {data: "state.initials", name: 'state.initials'},
+            {data: "iso", name: 'iso'},
+            {data: "title", name: 'title'},
+            {data: "state.letter", name: 'state.letter'},
             {
                 data: 'action',
                 orderable: false

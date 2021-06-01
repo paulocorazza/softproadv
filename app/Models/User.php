@@ -249,7 +249,12 @@ class User extends Authenticatable
 
     public function scopeAdvogados($query)
     {
-        return $query->where('type', '=', 'A');
+        return $query->where('type', 'A');
+    }
+
+    public function scopeAtivos($query)
+    {
+        return $query->where('status', 'A');
     }
 
 

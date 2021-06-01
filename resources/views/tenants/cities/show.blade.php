@@ -31,9 +31,9 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
-            <p><strong>IBGE: </strong>{{  $data->id }}</p>
-            <p><strong>Estado: </strong>{{  $data->state->name }}</p>
-            <p><strong>Nome: </strong>{{  $data->name }}</p>
+            <p><strong>IBGE: </strong>{{  $data->iso }}</p>
+            <p><strong>Estado: </strong>{{  $data->state->title }}</p>
+            <p><strong>Nome: </strong>{{  $data->title }}</p>
         </div>
         <!-- /.card-body -->
     </div>

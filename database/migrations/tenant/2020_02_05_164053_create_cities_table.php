@@ -15,15 +15,16 @@ class CreateCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->bigInteger('id')->unique()->unsigned();
-            $table->bigInteger('state_id')->unsigned();
-            $table->string('name');
-            $table->string('siafi')->nullable();
-            $table->timestamps();
-
-            $table->foreign('state_id')
-                ->references('id')
-                ->on('states')
-                ->onDelete('cascade');
+            $table->foreignId('state_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->integer('iso');
+            $table->integer('iso_ddd')->nullable();
+            $table->integer('status')->nullable();
+            $table->string('slug')->nullable();
+            $table->integer('population')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
+            $table->decimal('income_per_capita', 8, 2)->nullable();
         });
     }
 

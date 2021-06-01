@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,6 +11,9 @@ class Event extends Model
 {
     use SoftDeletes;
 
+    protected $appends = [
+        'start_br', 'end_br'
+    ];
 
     protected $fillable = [
         'user_id',
@@ -25,14 +29,14 @@ class Event extends Model
     ];
 
 
-    public function getStartAttribute($value)
+    public function getStartBrAttribute()
     {
-        return Helper::formatDateTime($value, 'd/m/Y H:i:s');
+        return Helper::formatDateTime($this->start, 'd/m/Y H:i:s');
     }
 
-    public function getEndAttribute($value)
+    public function getEndBrAttribute()
     {
-        return Helper::formatDateTime($value, 'd/m/Y H:i:s');
+        return Helper::formatDateTime($this->end, 'd/m/Y H:i:s');
     }
 
 
@@ -63,8 +67,27 @@ class Event extends Model
         ];
     }
 
+    public function getDaysDiffAttribute()
+    {
+        $hoje = Carbon::now();
+        $end = Carbon::parse($this->end);
+
+        $diff =  $hoje->diff($end);
+        return $diff->d . 'd ' . $diff->h . 'h ' . $diff->m . 'm' ;
+    }
+
     public function scopeSchedule($query)
     {
         return $query->where('schedule', true);
+    }
+
+    public function scopePending($query)
+    {
+        return $query->whereNull('finish');
+    }
+
+    public function scopeFinish($query)
+    {
+        return $query->whereNotNull('finish');
     }
 }

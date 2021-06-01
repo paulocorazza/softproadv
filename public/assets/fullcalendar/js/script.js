@@ -31,6 +31,17 @@ $(function () {
         let users = $('#modalCalendar #users').val()
 
 
+        if (users.length === 0) {
+            alertify.alert('Informe um advogado para o evento!')
+            return
+        }
+
+        if (title === '') {
+            alertify.alert('Informe um título para o evento!')
+            return
+        }
+
+
         let Event = {
             title: title,
             start: start,
@@ -42,6 +53,7 @@ $(function () {
         }
 
         let route;
+
 
         if (id == '') {
             route = routeEvents('routeEventStore')

@@ -21,7 +21,7 @@ class People extends Controller
                 $id = (isset($request->id) && !empty($request->id)) ? $request->id : 0;
 
                 $data = $people->Where('id', '<>',  $id)
-                               ->StateActive()
+                               ->active()
                                ->Where('name', 'LIKE', "%$search%")
                                ->orWhere('cpf', 'LIKE', "%$search%")
                                ->get();
