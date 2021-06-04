@@ -63,7 +63,7 @@ class DistrictController extends ControllerStandard
     {
         $district = $this->model->find($id);
 
-        $stick = $district->sticks()->detach($stickId);
+        $district->sticks()->detach($stickId);
 
         return redirect()->route('districts.sticks', $district->id)
             ->with('success', 'Vara removida com sucesso!');

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\CountryRepositoryInterface;
-use Illuminate\Http\Request;
 
 class CountryController extends ControllerStandard
 {
