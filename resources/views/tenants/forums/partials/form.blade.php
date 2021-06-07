@@ -61,7 +61,7 @@
 
     <div class="col-12 col-sm-3">
         Estado
-        {!! Form::select('uf', \App\Support\Enum\UFEnum::UF , null, ['class' => 'form-control', 'id' => 'estado']) !!}
+        {!! Form::select('uf', \App\Support\Enum\UFEnum::UF , '35', ['class' => 'form-control', 'id' => 'estado']) !!}
     </div>
 </div>
 

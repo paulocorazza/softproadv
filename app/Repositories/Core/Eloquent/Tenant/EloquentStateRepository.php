@@ -50,11 +50,7 @@ class EloquentStateRepository extends BaseEloquentRepository
     {
         if ($id) {
 
-            $state = $this->relationships([
-                'cities' => function ($query) {
-                    $query->orderBy('title');
-                }
-            ])->find($id);
+            $state = $this->relationships('cities')->where('iso', '=', $id)->first();
 
             return [
               'status'  => true,

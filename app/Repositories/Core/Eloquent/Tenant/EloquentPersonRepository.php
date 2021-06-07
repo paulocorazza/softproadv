@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
+use App\Models\City;
 use App\Models\Person;
+use App\Models\State;
 use App\Repositories\Contracts\PersonRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 use Illuminate\Http\Request;
@@ -33,6 +35,9 @@ class EloquentPersonRepository extends BaseEloquentRepository
             foreach ($data['addresses'] as $item) {
 
                 $id = ($item['id'] > 0) ? $item['id'] : 0;
+
+                $item['state_id'] = State::where('iso', $item['iso'])->first()->id;
+                $item['city_id'] = City::where('iso', $item['city_iso'])->first()->id;
 
                 $insert = $person->addresses()->updateOrCreate(['id' => $id], $item);
 

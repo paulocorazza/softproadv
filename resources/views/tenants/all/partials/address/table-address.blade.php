@@ -63,18 +63,18 @@
                 <td>
                     <select class="form-control"
                             readonly
-                            name="addresses[{{ $address['id'] }}][city_id]">
+                            name="addresses[{{ $address['id'] }}][city_iso]">
                         <option
-                            value="{{ $address['city_id'] }}"> {{ $address['city']['title'] }}</option>
+                            value="{{ $address['city']['iso'] }}">{{ $address['city']['title'] }}</option>
                     </select>
                 </td>
 
                 <td>
                     <select class="form-control"
                             readonly
-                            name="addresses[{{ $address['id'] }}][state_id]">
+                            name="addresses[{{ $address['id'] }}][iso]">
                         <option
-                            value="{{ $address['state_id'] }}"> {{ $address['state']['letter'] }}</option>
+                            value="{{ $address['state']['iso'] }}">{{ $address['state']['letter'] }}</option>
                     </select>
                 </td>
 

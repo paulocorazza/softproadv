@@ -141,6 +141,7 @@ class PersonController extends ControllerStandard
 
         $dataForm['type_person'] = serialize($dataForm['type_person']);
         $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
+
         $update = $this->model->update($id, $dataForm);
 
         if (!$update['status']) {

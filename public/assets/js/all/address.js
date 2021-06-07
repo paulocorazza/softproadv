@@ -43,9 +43,9 @@ function editAddress(obj) {
     var complement = $('input[type=hidden][name="addresses[' + id + '][complement]"]').val();
     var type_address_id = $('select[name="addresses[' + id + '][type_address_id]"]').val();
     var country_id = $('input[type=hidden][name="addresses[' + id + '][country_id]"]').val();
-    state_id = $('select[name="addresses[' + id + '][state_id]"]').val();
+    state_id = $('select[name="addresses[' + id + '][iso]"]').val();
    // var state = $('select[name="addresses[' + id + '][state_id]"] option:selected').text().trim()
-    city_id = $('select[name="addresses[' + id + '][city_id]"]').val();
+    city_id = $('select[name="addresses[' + id + '][city_iso]"]').val();
    // var city = $('select[name="addresses[' + id + '][city_id]"] option:selected').text().trim()
 
 
@@ -154,10 +154,15 @@ function searchAdrress(cep) {
                 $('#district').val(json.data.original.bairro);
                 $('#complement').val(json.data.original.complemento);
 
+
+                state_id = json.data.original.ibge.substring(0, 2)
+                city_id = json.data.original.ibge
+
+
                 $('#country_id').val(1058);
                 $('#country_id').trigger('change');
 
-                var dataState = {
+               /* var dataState = {
                     id: json.data.original.ibge.substring(0, 2),
                     text: json.data.original.uf.toUpperCase()
                 };
@@ -173,6 +178,9 @@ function searchAdrress(cep) {
 
                 var newOption = new Option(dataCity.text, dataCity.id, false, false);
                 $('#city_id').append(newOption).trigger('change');
+                */
+
+
 
                 if (json.data.original.logradouro == '') {
                     $('#street').focus()
@@ -298,13 +306,13 @@ $(document).ready(function () {
 
 
             '<td>' +
-            '<select class="form-control" readonly name="addresses[' + countAddress + '][city_id]">' +
+            '<select class="form-control" readonly name="addresses[' + countAddress + '][city_iso]">' +
             '<option value="' + city_id + '">' + city + '</option>' +
             '</select>' +
             '</td>' +
 
             '<td>' +
-            '<select class="form-control" readonly name="addresses[' + countAddress + '][state_id]">' +
+            '<select class="form-control" readonly name="addresses[' + countAddress + '][iso]">' +
             '<option value="' + state_id + '">' + state + '</option>' +
             '</select>' +
             '</td>' +
@@ -364,7 +372,7 @@ $(document).ready(function () {
                 success: function (data) {
                     $('.jloadState').find('.form_load').fadeOut(500);
                     var states = $.map(data, function (item) {
-                        return new Option(item.letter, item.id, false, false)
+                        return new Option(item.letter, item.iso, false, false)
 
                     })
 
@@ -374,7 +382,7 @@ $(document).ready(function () {
                     $('#state_id').append(states);
 
                     if (state_id !== '') {
-                        $('#state_id').val(state_id);
+                           $('#state_id').val(state_id);
                     }
 
                     $('#state_id').trigger('change');
@@ -409,7 +417,7 @@ $(document).ready(function () {
                 success: function (data) {
                     $('.jloadCity').find('.form_load').fadeOut(500);
                     var cities = $.map(data, function (item) {
-                        return new Option(item.title, item.id, false, false)
+                        return new Option(item.title, item.iso, false, false)
 
                     })
 
