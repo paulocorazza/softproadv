@@ -40,11 +40,11 @@
 
         var columns =  [
             {data: "id", name : 'processes.id'},
+            {data: "number_process", name : 'processes.number_process'},
             {data: "person.name", name : 'person.name'},
 
             {data: 'listAdv', name: 'listAdv', orderable: false},
             {data: 'progress', name: 'list-adv', orderable: false},
-
 
             {data: "phase.name", name : 'phase.name' },
             {data: "stage.name", name : 'stage.name' },

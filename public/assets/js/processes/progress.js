@@ -105,7 +105,6 @@ $(document).ready(function () {
     $('#btnSaveUpdateProgress').on('click', function (e) {
         e.preventDefault();
 
-
         if (id != '')
             count = id
 
@@ -169,6 +168,7 @@ $(document).ready(function () {
 
 
         if (id != '') {
+            console.log(td)
             $('#progress_table').find('.j_list').find('#progresses' + id).html(td);
 
         } else if (id == '') {

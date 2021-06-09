@@ -76,8 +76,7 @@ class PersonController extends ControllerStandard
         }
 
 
-        $dataForm['type_person'] = serialize($dataForm['type_person']);
-        $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
+
         $insert = $this->model->create($dataForm);
 
         if (!$insert['status']) {
@@ -100,7 +99,7 @@ class PersonController extends ControllerStandard
         ])->find($id);
 
 
-        $data->type_person = unserialize($data->type_person);
+        $data->type_person = json_decode($data->type_person);
 
 
         $title = "Editar {$this->title}: {$data->name}";
@@ -138,9 +137,6 @@ class PersonController extends ControllerStandard
 
             $dataForm[$this->upload['name']] = $nameFile;
         }
-
-        $dataForm['type_person'] = serialize($dataForm['type_person']);
-        $dataForm['status'] = isset($dataForm['status']) ? 'I' : 'A';
 
         $update = $this->model->update($id, $dataForm);
 

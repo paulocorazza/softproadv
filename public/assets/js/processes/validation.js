@@ -15,7 +15,10 @@ $(document).ready(function () {
 
     $('.money').mask('#.##0,00', {reverse: true});
 
+
     $('#formRegister').each(function () {
+
+
         $(this).validate({
             rules: {
                 person_id: {
@@ -27,36 +30,52 @@ $(document).ready(function () {
                 },
 
                 forum_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    }
                 },
 
 
                 stick_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 district_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 group_action_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 type_action_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 phase_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 stage_id: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 number_process: {
-                    required: true,
+                    required: function () {
+                        return $('#type_process').val() === 'Ajuizado'
+                    },
                 },
 
                 users: {
@@ -86,13 +105,13 @@ $(document).ready(function () {
 
             submitHandler: function (form) {
                 //if (validateFiles()) {
-               //     form.submit();
-               // }
+                //     form.submit();
+                // }
 
 
                 if ($('.modal.show').length == 0) {
-                   // var dados = $(form).serialize();
-                     var dados = new FormData(form);
+                    // var dados = $(form).serialize();
+                    var dados = new FormData(form);
 
 
                     var _method = $('#formRegister').find('input[name="_method"]').val()
@@ -101,7 +120,7 @@ $(document).ready(function () {
                     if (_method == undefined) {
                         ajaxSumit(dados, submitAjax)
                     } else if (_method == 'PUT') {
-                       ajaxSumit(dados, submitAjaxPut)
+                        ajaxSumit(dados, submitAjaxPut)
                     }
 
                     return false
@@ -160,40 +179,6 @@ $(document).ready(function () {
         $('input[type=submit]').prop('disabled', false);
         $('.preload .form_load').fadeOut();
     }
-
-
-
-    $('#counterpart_id').select2({
-        theme: "classic",
-        allowClear: true,
-        placeholder: 'Selecione a Parte Contrária',
-
-        ajax: {
-            delay: 250,
-            type: 'post',
-            url: url_base + '/people/search',
-
-            data: function (params) {
-                return {
-                    q: $.trim(params.term),
-                    id: $('#person_id').val()
-                };
-            },
-
-            dataType: 'json',
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
 
     $('#forum_id').select2({
         placeholder: "Selecione o Fórum",
@@ -356,6 +341,12 @@ $(document).ready(function () {
         allowClear: true,
         theme: "classic",
     })
+
+    $('#type_process').select2({
+        allowClear: true,
+        theme: "classic",
+    })
+
 
     //deleta registro mestre
     $('.j_delete').on('click', function (e) {

@@ -14,12 +14,18 @@ class Process extends Model
       'Cancelado'   => 'Cancelado'
     ];
 
+    public const TYPE_PROCESS = [
+      'Ajuizado' => 'Ajuizado',
+      'Não Ajuizado' => 'Não Ajuizado'
+    ];
+
     use SoftDeletes;
 
     protected $fillable = [
         'user_id',
         'person_id',
         'counterpart_id',
+        'judge_id',
         'forum_id',
         'stick_id',
         'district_id',
@@ -35,7 +41,8 @@ class Process extends Model
         'price',
         'percent_fees',
         'description',
-        'status'
+        'status',
+        'type_process'
     ];
 
 
@@ -46,15 +53,18 @@ class Process extends Model
         return [
             'person_id' => "required|exists:people,id",
             'counterpart_id' => "required|exists:people,id",
-            'forum_id' => "required|exists:forums,id",
-            'stick_id' => "required|exists:sticks,id",
-            'district_id' => "required|exists:districts,id",
-            'group_action_id' => "required|exists:group_actions,id",
-            'type_action_id' => "required|exists:type_actions,id",
-            'phase_id' => "required|exists:phases,id",
-            'stage_id' => "required|exists:stages,id",
-            'number_process' => 'required|min:3|unique:processes,id,{$id},id',
+            'judge_id' => "nullable|exists:people,id",
+            'forum_id' => "nullable|required_if:type_process,Ajuizado|exists:forums,id",
+            'stick_id' => "nullable|required_if:type_process,Ajuizado|exists:sticks,id",
+            'district_id' => "nullable|required_if:type_process,Ajuizado|exists:districts,id",
+            'group_action_id' => "nullable|required_if:type_process,Ajuizado|exists:group_actions,id",
+            'type_action_id' => "nullable|required_if:type_process,Ajuizado|exists:type_actions,id",
+            'phase_id' => "nullable|required_if:type_process,Ajuizado|exists:phases,id",
+            'stage_id' => "nullable|required_if:type_process,Ajuizado|exists:stages,id",
+            'number_process' => 'nullable|required_if:type_process,Ajuizado|min:3',
             'users' => 'required',
+            'status' => 'required|in:Em Andamento,Concluído,Cancelado',
+            'type_process' => 'required|in:Ajuizado,Não Ajuizado',
 
             'progresses.*.date' => 'required',
             'progresses.*.description' => 'required',
@@ -76,6 +86,11 @@ class Process extends Model
     public function financials()
     {
         return $this->hasMany(Financial::class);
+    }
+
+    public function judge()
+    {
+        return $this->belongsTo(Person::class, 'judge_id', 'id');
     }
 
     /**
@@ -213,4 +228,5 @@ class Process extends Model
     {
         return $query->where('status', 'Em Andamento');
     }
+
 }

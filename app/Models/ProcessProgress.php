@@ -15,10 +15,6 @@ class ProcessProgress extends Model
         'date_term_br' => 'date',
     ];
 
-    protected $dates = [
-        'date_term',
-        'date'
-    ];
 
     protected $fillable = [
         'date',

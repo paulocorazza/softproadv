@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProcessProgress;
+use App\Models\ProcessStage;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
@@ -83,6 +85,7 @@ class ProcessController extends ControllerStandard
     public function create()
     {
         $person = [];
+        $judge = [];
         $counterpart = [];
         $forums = $this->forum->getForums();
         $sticks = $this->sticks->getSticks();
@@ -95,8 +98,40 @@ class ProcessController extends ControllerStandard
 
         $title = "Cadastrar {$this->title}";
         return view("{$this->view}.create",
-            compact('title', 'person', 'counterpart', 'forums', 'sticks', 'districts', 'groupActions', 'typeActions',
+            compact('title', 'person', 'counterpart', 'judge', 'forums', 'sticks', 'districts', 'groupActions', 'typeActions',
                 'users', 'phases', 'stages'));
+    }
+
+
+    public function show($id)
+    {
+        $data = $this->model->relationships(
+            [
+                'person',
+                'counterPart',
+                'judge',
+                'forum',
+                'stick',
+                'district',
+                'groupAction',
+                'typeAction',
+                'phase',
+                'stage',
+                'users',
+                'progresses' => function ($query) {
+                    $query->latest('date');
+                } ,
+                'files',
+            ])->find($id);
+
+
+        $stages = ProcessStage::with(['user', 'stage'])->where('process_id', $id)->get();
+
+        $progresses = $data->progresses->groupBy('date');
+
+        $title = "{$this->title}: {$data->name}";
+
+        return view("{$this->view}.show", compact('title', 'data', 'progresses', 'stages'));
     }
 
 
@@ -105,6 +140,7 @@ class ProcessController extends ControllerStandard
         $data = $this->model->relationships(
             [
                 'person',
+                'judge',
                 'counterPart',
                 'forum',
                 'stick',
@@ -122,22 +158,26 @@ class ProcessController extends ControllerStandard
         $progresses = $data->progresses;
         $files = $data->files;
 
-
         $person = $data->person()->pluck('name', 'id');
+        $judge = $data->judge()->pluck('name', 'id');
         $counterpart = $data->counterPart()->pluck('name', 'id');
         $forums = $this->forum->getForums();
         $sticks = $this->sticks->getSticks();
         $districts = $this->districts->getDistricts();
         $groupActions = $this->groupActions->getGroupActions();
+
         $typeActions = $this->typeAction->getTypeActionByGroupId($data->group_action_id);
+
         $phases = $this->typeAction->getPhasesByTypeAction($data->type_action_id);
         $stages = $this->phase->getStagesByPhase($data->phase_id);
         $users = $this->users->getAdvogados();
 
         $title = "Editar {$this->title}: {$data->name}";
 
+
+
         return view("{$this->view}.create",
-            compact('title', 'data', 'person', 'counterpart', 'forums', 'sticks', 'districts', 'groupActions',
+            compact('title', 'data', 'person', 'counterpart', 'judge', 'forums', 'sticks', 'districts', 'groupActions',
                 'typeActions',
                 'users', 'phases', 'stages', 'progresses', 'files'));
     }

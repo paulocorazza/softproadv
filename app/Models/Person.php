@@ -11,7 +11,8 @@ class Person extends Model
         'Contato' => 'Contato',
         'Cliente' => 'Cliente',
         'Fornecedor' => 'Fornecedor',
-        'Parte Contrária' => 'Parte Contrária'
+        'Parte Contrária' => 'Parte Contrária',
+        'Juiz' => 'Juiz',
     ];
 
 

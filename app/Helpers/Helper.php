@@ -224,4 +224,9 @@ class Helper
     {
         return '#' . dechex(rand(0x000000, 0xFFFFFF));
     }
+
+    public static function roundTo($value, $precision = 2)
+    {
+        return round($value, $precision);
+    }
 }

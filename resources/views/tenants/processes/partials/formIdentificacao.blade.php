@@ -76,7 +76,7 @@
     <div class="col-12">
         {!! Form::label('status', 'Status do Processo', ['class' => 'control-label']); !!}
         <div class="form-group">
-            {!! Form::select('status', \App\Models\Process::STATUS, 'Em Andamento', ['placeholder' => 'Selecione o Status', 'class' => 'form-control', 'id' => 'status']) !!}
+            {!! Form::select('status', \App\Models\Process::STATUS, isset($data) ? $data->status : 'Em Andamento' , ['placeholder' => '', 'class' => 'form-control', 'id' => 'status']) !!}
         </div>
     </div>
 </div>

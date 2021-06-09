@@ -23,7 +23,6 @@
     @include('tenants.includes.alerts')
 
     <section class="content">
-
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
@@ -62,55 +61,55 @@
                                 <div class="info-box bg-light">
                                     <div class="info-box-content">
                                         <span class="info-box-text text-center text-muted">Honorários (%)</span>
-                                        <span class="info-box-number text-center text-muted mb-0">{{ $data->percent_fees }} <span>
-                    </span></span></div>
+                                        <span
+                                            class="info-box-number text-center text-muted mb-0">{{ $data->percent_fees }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <h4>Andamento do Processo</h4>
-                                @foreach($data->progresses as $progress)
-                                    <div class="post">
-                                        <div class="user-block">
-                                            @if ($progress->pending)
-                                                <img src="{{ asset('assets/images/uncheck.png') }}"
-                                                     class="img-circle img-bordered-sm" alt="pending">
-
-                                            @else
-
-                                                <img src="{{ asset('assets/images/check.png') }}"
-                                                     class="img-circle img-bordered-sm" alt="active">
-
-                                            @endif
-
-
-                                            <span class="username">
-                                             <a href="#">{{ $progress->description }}</a>
-                                        </span>
+                                <!-- The time line -->
+                                <div class="timeline">
+                                @foreach($progresses as $index => $value)
+                                    <!-- timeline time label -->
+                                        <div class="time-label">
                                             <span
-                                                class="description">{{ $progress->pending ? 'Pendente' : 'Realizado' }}</span>
-                                            <span class="description">Criação: {{ \App\Helpers\Helper::formatDateTime($progress->date, 'd/m/Y') }} - Prazo: {{ \App\Helpers\Helper::formatDateTime($progress->date_term, 'd/m/Y') }}</span>
+                                                class="bg-red">{{ \App\Helpers\Helper::formatDateTime($index, 'd/m/Y') }}</span>
                                         </div>
-                                        <!-- /.user-block -->
-                                        <p>
-                                            {{ $progress->publication }}
-                                        </p>
-                                    </div>
-                                @endforeach
-                            </div>
+                                        <!-- /.timeline-label -->
+                                    @foreach($value as $progress)
+                                        <!-- timeline item -->
+                                            <div>
+                                                <i class="fas {{ $progress->pending ? 'fa-envelope' : 'fa-clock' }}   bg-blue"></i>
+                                                <div class="timeline-item">
+                                                    <span class="time"><i class="fas fa-clock"></i>  Prazo: {{ \App\Helpers\Helper::formatDateTime($progress->date_term, 'd/m/Y') }}</span>
+                                                    <h3 class="timeline-header"><strong>{{ $progress->description }}</strong> {{ $progress->pending ? 'Pendente' : 'Realizado' }}
+                                                    </h3>
 
+                                                    <div class="timeline-body">
+                                                        {{ $progress->publication }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    @endforeach
+                                    <!-- END timeline item -->
+                                        <!-- timeline item -->
+                                @endforeach
+                                </div>
+                            </div>
+                            <!-- /.col -->
                         </div>
 
-                        @if(isset($data->events))
+                        @if(count($data->events) > 0)
                             <div class="row">
                                 <div class="col-12">
                                     <h4>Atividades Recentes</h4>
                                     @foreach($data->events as $event)
                                         <div class="post">
                                             <div class="user-block">
-
                                                 @foreach($event->users as $user)
                                                     @if( !empty($user->image) )
                                                         <div class="img-post">
@@ -155,10 +154,7 @@
                                     @endforeach
                                 </div>
                             </div>
-
                         @endif
-
-
                     </div>
 
 
@@ -178,6 +174,13 @@
                                         href="{{ route('people.show', $data->counterpart_id) }}">{{ $data->counterPart->name }}</a>
                                 </b>
                             </p>
+
+                            @if(!empty($data->judge_id))
+                                <p class="text-sm">Juiz
+                                    <b class="d-block"><a
+                                            href="{{ route('people.show', $data->judge_id) }}">{{ $data->judge->name }}</a></b>
+                                </p>
+                            @endif
                         </div>
 
                         <h5 class="mt-5 text-muted">Arquivos do Processo</h5>
@@ -215,6 +218,28 @@
                                 </li>
                             @endforeach
                         </ul>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="mt-5 text-muted">Etapas Concluídas</h5>
+                                @foreach($stages as $stage)
+                                    <div class="post">
+                                        <div class="user-block">
+                                            <img src="{{ asset('assets/images/check.png') }}"
+                                                 class="img-circle img-bordered-sm" alt="active">
+                                            <span class="username">
+                          <a href="#">{{ $stage->stage->name }}</a>
+                        </span>
+                                            <span
+                                                class="description"> {{ \App\Helpers\Helper::formatDateTime($stage->created_at, 'd/m/Y') }}</span>
+                                        </div>
+                                        <!-- /.user-block -->
+                                        <p>Concluído por: {{ $stage->user->name }} </p>
+                                        <a class="j_link_delete" href="{{ route('stageDelete', $stage->id) }}">Remover Etapa</a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

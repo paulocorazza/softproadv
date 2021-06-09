@@ -254,6 +254,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('process/file/delete', 'ExtraAction\ProcessFileDestroy')->name('fileDelete');
 
     Route::post('process/progress/delete', 'ExtraAction\ProcessProgressDestroy')->name('progressDelete');
+    Route::get('process/stage/{id}/delete', 'ExtraAction\ProcessStageController')->name('stageDelete');
 
     Route::resource('processes', 'ProcessController');
 

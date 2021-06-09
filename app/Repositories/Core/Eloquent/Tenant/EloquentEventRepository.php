@@ -102,8 +102,8 @@ class EloquentEventRepository extends BaseEloquentRepository
      */
     private function finish(array $data, $event): array
     {
-        if (!$this->isFinish($event) && $this->hasFinish($data)) {
-            return $this->setDateFinish($data);
+        if ($this->hasFinish($data)) {
+            return $this->setDateFinish($event, $data);
         }
 
         return $this->unsetFinish($data);
@@ -142,7 +142,7 @@ class EloquentEventRepository extends BaseEloquentRepository
      */
     private function unsetFinish(array $data): array
     {
-        unset($data['finish']);
+        $data['finish'] = null;
 
         return $data;
     }
@@ -151,9 +151,15 @@ class EloquentEventRepository extends BaseEloquentRepository
      * @param array $data
      * @return array
      */
-    private function setDateFinish(array $data): array
+    private function setDateFinish($event, array $data): array
     {
-        $data['finish'] = date('Y-m-d H:i:s');
+        if (!$this->isFinish($event)) {
+            $data['finish'] = date('Y-m-d H:i:s');
+
+            return $data;
+        }
+
+        unset($data['finish']);
 
         return $data;
     }

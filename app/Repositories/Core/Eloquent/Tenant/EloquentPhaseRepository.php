@@ -60,6 +60,10 @@ class EloquentPhaseRepository extends BaseEloquentRepository
 
     public function getStagesByPhase($phase_id)
     {
+        if (!isset($phase_id)) {
+            return [];
+        }
+
         $phase = $this->relationships('stages')->find($phase_id);
 
         return $phase->stages()

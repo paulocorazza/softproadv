@@ -1,3 +1,17 @@
+{!! Form::label('judge_id', 'Juiz', ['class' => 'control-label']); !!}
+<div class="form-group">
+    {!! Form::select('judge_id', $judge, null, ['placeholder' => 'Selecione o Juiz', 'class' => 'form-control',  'id' => 'judge_id']) !!}
+</div>
+
+<div class="row">
+    <div class="col-12">
+        {!! Form::label('status', 'Tipo de Processo', ['class' => 'control-label']); !!}
+        <div class="form-group">
+            {!! Form::select('type_process', \App\Models\Process::TYPE_PROCESS, isset($data) ? $data->type_process : 'Não Ajuizado', ['placeholder' => '', 'class' => 'form-control', 'id' => 'type_process']) !!}
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-12 col-sm-6">
         <div class="form-group label-float">

@@ -99,15 +99,6 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="form-group label-float">
-            {!! Form::file('image',  ['class' => 'form-control', 'placeholder' => ' ']) !!}
-            {!! Form::label('image', 'Foto', ['class' => 'control-label']); !!}
-        </div>
-    </div>
-</div>
-
 <div class="form-group">
     <label>
         {!! Form::checkbox('status', null, @$data->status == 'I') !!}

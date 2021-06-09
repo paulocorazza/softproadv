@@ -18,12 +18,12 @@ class People extends Controller
 
                 $search = $request->q;
 
-                $id = (isset($request->id) && !empty($request->id)) ? $request->id : 0;
+                $type =  explode(',', $request->type);
 
-                $data = $people->Where('id', '<>',  $id)
-                               ->active()
-                               ->Where('name', 'LIKE', "%$search%")
+                $data = $people->whereJsonContains('type_person', $type )
+                               ->where('name', 'LIKE', "%$search%")
                                ->orWhere('cpf', 'LIKE', "%$search%")
+                               ->active()
                                ->get();
             }
 

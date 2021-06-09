@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
+use App\Helpers\Helper;
 use App\Models\Process;
 use App\Models\Stage;
 use App\Repositories\Contracts\ProcessRepositoryInterface;
@@ -36,7 +37,13 @@ class EloquentProcessRepository extends BaseEloquentRepository
         $countEventsFinish = $model->events()->finish()->count();
 
 
-        return (($countPivot + $countEventsFinish) / ($countStages + $countEvents)) * 100;
+        $totalStagesEvents = $countStages + $countEvents;
+
+        if ($totalStagesEvents == 0) {
+            return 0;
+        }
+
+        return  Helper::roundTo(($countPivot + $countEventsFinish) / $totalStagesEvents * 100);
     }
 
 
@@ -131,6 +138,13 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $percent = $this->getPercentProgress($model);
                 return view('tenants.processes.partials.progress', compact('percent'));
             })
+
+            ->editColumn('phase.name', function ($model) {
+                return $model->phase->name ?? '';
+            })
+            ->editColumn('stage.name', function ($model) {
+                return $model->stage->name ?? '';
+            })
             ->addColumn($column, $view)
             ->make(true);
     }
@@ -224,7 +238,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
     private function saveStage(Process $process, array $data)
     {
-        if ($this->isUpdateStage($process, $data['stage_id'])) {
+        if ($this->isUpdateStage($process, $data)) {
             $process->stages()->attach([
                 $process->stage_id => ['user_id' => Auth::user()->id]
             ]);
@@ -235,12 +249,12 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
     /**
      * @param Process $process
-     * @param $stage_id
+     * @param $data
      * @return bool
      */
-    private function isUpdateStage(Process $process, $stage_id): bool
+    private function isUpdateStage(Process $process, $data): bool
     {
-        return isset($process->stage_id) && !$process->stages()->find($process->stage_id) && $process->stage_id != $stage_id;
+        return isset($process->stage_id) && !$process->stages()->find($process->stage_id) && ($process->stage_id !=  $data['stage_id'] || $data['status'] == 'Concluído');
     }
 
 }

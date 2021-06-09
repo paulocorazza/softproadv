@@ -88,6 +88,11 @@ class EloquentTypeActionRepository extends BaseEloquentRepository
 
     public function getTypeActionByGroupId($groupId)
     {
+        if (!isset($groupId)){
+            return [];
+        }
+
+
         return  $this->model->where('group_action_id', $groupId)
                             ->get()
                             ->pluck('name', 'id');
@@ -97,8 +102,11 @@ class EloquentTypeActionRepository extends BaseEloquentRepository
 
     public function getPhasesByTypeAction($id)
     {
-        $typeAction = $this->relationships('phases')->find($id);
+       if (!isset($id)) {
+           return [];
+       }
 
+        $typeAction = $this->relationships('phases')->find($id);
 
         return $typeAction->phases()
                           ->get()

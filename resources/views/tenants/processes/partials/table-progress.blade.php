@@ -9,7 +9,7 @@
     </tr>
     </thead>
 
-    <tbody class="j_lits">
+    <tbody class="j_list">
     <!-- /foreach progresses -->
 
     @if(isset($progresses))

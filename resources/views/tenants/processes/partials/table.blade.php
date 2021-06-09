@@ -4,6 +4,7 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Processo</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Advogados</th>
                 <th scope="col">Progresso</th>

@@ -143,8 +143,10 @@ class EventController extends ControllerStandard
      */
     private function defaultValues(Request $request): Request
     {
+
         $request['user_id'] = auth()->user()->id;
         $request['schedule'] = (isset($request['schedule'])) ? true :false;
+
         return $request;
     }
 

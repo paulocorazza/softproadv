@@ -15,17 +15,17 @@ class CreateProcessesTable extends Migration
     {
         Schema::create('processes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('person_id')->unsigned();
-            $table->bigInteger('counterpart_id')->unsigned();
-            $table->bigInteger('forum_id')->unsigned();
-            $table->bigInteger('stick_id')->unsigned();
-            $table->bigInteger('district_id')->unsigned();
-            $table->bigInteger('group_action_id')->unsigned();
-            $table->bigInteger('type_action_id')->unsigned();
-            $table->bigInteger('phase_id')->unsigned();
-            $table->bigInteger('stage_id')->unsigned();
-            $table->string('number_process')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('person_id')->unsigned();
+            $table->unsignedBigInteger('counterpart_id')->unsigned();
+            $table->unsignedBigInteger('forum_id')->nullable();
+            $table->unsignedBigInteger('stick_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
+            $table->unsignedBigInteger('group_action_id')->nullable();
+            $table->unsignedBigInteger('type_action_id')->nullable();
+            $table->unsignedBigInteger('phase_id')->nullable();
+            $table->unsignedBigInteger('stage_id')->nullable();
+            $table->string('number_process')->nullable();
             $table->string('protocol')->nullable();
             $table->string('folder')->nullable();
             $table->date('date_request')->nullable();
