@@ -83,10 +83,10 @@
                                     @foreach($value as $progress)
                                         <!-- timeline item -->
                                             <div>
-                                                <i class="fas {{ $progress->pending ? 'fa-envelope' : 'fa-clock' }}   bg-blue"></i>
+                                                <i class="fas {{ $progress->concluded ? 'fa-envelope' : 'fa-clock' }}   bg-blue"></i>
                                                 <div class="timeline-item">
                                                     <span class="time"><i class="fas fa-clock"></i>  Prazo: {{ \App\Helpers\Helper::formatDateTime($progress->date_term, 'd/m/Y') }}</span>
-                                                    <h3 class="timeline-header"><strong>{{ $progress->description }}</strong> {{ $progress->pending ? 'Pendente' : 'Realizado' }}
+                                                    <h3 class="timeline-header"><strong>{{ $progress->description }}</strong> {{ $progress->concluded ? 'Concluído' : 'Pendente' }}
                                                     </h3>
 
                                                     <div class="timeline-body">

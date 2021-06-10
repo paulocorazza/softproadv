@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label for="date_for">Status</label>
                             <select name="status" class="form-control">
-                                <option value="">Todos</option>
+                                <option value="todos">Todos</option>
                                 <option value="aberto">Em Aberto</option>
                                 <option value="baixado">Baixado</option>
                             </select>
@@ -79,7 +79,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="data_inicial">Pessoa</label>
-                            {!! Form::select('person_id', $person, null, ['placeholder' => 'Selecione a Pessoa', 'class' => 'form-control',  'id' => 'person_id']) !!}
+                            {!! Form::select('person_id', $person, null, ['placeholder' => 'Selecione a Pessoa', 'class' => 'form-control',  'id' => 'people']) !!}
                         </div>
                     </div>
                 </div>

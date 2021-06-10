@@ -191,7 +191,7 @@ $(document).ready(function () {
 
             data: function (params) {
                 return {
-                    q: $.trim(params.term)
+                    q: $.trim(params.term),
                 };
             },
 
@@ -209,6 +209,7 @@ $(document).ready(function () {
             cache: true
         }
     });
+
     $('#process_id').select2({
         theme: "classic",
         allowClear: true,

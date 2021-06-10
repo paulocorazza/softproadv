@@ -11,7 +11,7 @@
         <br />
         <table>
             <tr>
-                <th style="padding-left:5px;width:10%"><strong>Processo</strong></th>
+                <th style="text-align:left;"><strong>Documento</strong></th>
                 <th style="text-align:left"><strong>Cliente</strong></th>
                 <th style="text-align:center;width:10%"><strong>Tipo</strong></th>
                 <th style="text-align:right;width:10%"><strong>Valor</strong></th>
@@ -29,7 +29,7 @@
             @endphp
 
             <tr>
-                <td style="text-align:center;">{{$honorary->document }}</td>
+                <td style="text-align:left;">{{$honorary->document }}</td>
                 <td style="text-align:left;">{{$honorary->person->name}}</td>
                 <td style="text-align:center;">{{$honorary->type === "Receber" ? "Crédito": "Débito"}}</td>
                 <td style="text-align:right;margin-right:2px">{{App\Helpers\Helper::formatDecimal($honorary->value,2)}}</td>

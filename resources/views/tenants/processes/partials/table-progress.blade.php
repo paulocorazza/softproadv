@@ -4,7 +4,7 @@
         <th>Data</th>
         <th>Publicação</th>
         <th>Prazo</th>
-        <th>Pendente</th>
+        <th>Concluído</th>
         <th width="50px" scope="col">Ação</th>
     </tr>
     </thead>
@@ -48,8 +48,8 @@
 
                 <td>
                     <input class="form-control" readonly type="checkbox"
-                           name="progresses[{{ $progress['id'] }}][pending]"
-                           id="progresses[{{ $progress['id'] }}][pending]" {{ $progress['pending'] ? 'checked' : '' }} >
+                           name="progresses[{{ $progress['id'] }}][concluded]"
+                           id="progresses[{{ $progress['id'] }}][concluded]" {{ $progress['concluded'] ? 'checked' : '' }} >
                 </td>
 
 

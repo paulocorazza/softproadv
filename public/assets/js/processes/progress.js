@@ -19,7 +19,7 @@ function limparAndamento() {
     $('#progress_description').val('');
     $('#progress_date_term').val('');
     $('#progress_publication').val('');
-    $('#progress_pending').val('');
+    $('#progress_concluded').val('');
 }
 
 
@@ -33,7 +33,7 @@ function editDetail(obj) {
     var publication = $('input[type=hidden][name="progresses[' + id + '][publication]"]').val();
 
 
-    var pending = ($('input[type=checkbox][name="progresses[' + id + '][pending]"]').prop('checked') == true) ? true : false;
+    var concluded = ($('input[type=checkbox][name="progresses[' + id + '][concluded]"]').prop('checked') == true) ? true : false;
 
 
     $('#progress_date').val(moment(created, "DD/MM/YYYY").format("YYYY-MM-DD"));
@@ -41,7 +41,7 @@ function editDetail(obj) {
     $('#progress_date_term').val(moment(dateTerm, "DD/MM/YYYY").format("YYYY-MM-DD"));
     $('#progress_publication').val(publication);
 
-    $('#progress_pending').prop("checked", pending);
+    $('#progress_concluded').prop("checked", concluded);
 
     $('#modalProgress').modal('show');
 }
@@ -115,7 +115,7 @@ $(document).ready(function () {
         var description = $('#progress_description').val();
         var date_term =  moment($('#progress_date_term').val()).format("DD/MM/YYYY")
         var publication = $('#progress_publication').val();
-        var pending = ($("#progress_pending").prop('checked') == true) ? "checked" : '';
+        var concluded = ($("#progress_concluded").prop('checked') == true) ? "checked" : '';
 
 
         if (date == '') {
@@ -157,7 +157,7 @@ $(document).ready(function () {
             '</td>' +
 
             '<td>' +
-            '<input class="form-control" type="checkbox" id="pending' + count + '" name="progresses[' + count + '][pending]"' +  pending +' >' +
+            '<input class="form-control" type="checkbox" id="concluded' + count + '" name="progresses[' + count + '][concluded]"' +  concluded +' >' +
             '</td>' +
 
             '<td>' +

@@ -179,8 +179,24 @@
                             @endif
                         </div>
 
-                        <div class="info">
-                            <a href="{{ route('profile') }}"  class="d-block" >{{ auth()->user()->name }}</a>
+
+
+                        <div class="sidebar">
+                            <nav class="mt-2">
+                                <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
+                                    data-widget="treeview" role="menu"
+                                    @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
+                                    @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
+
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="{{ route('profile') }}">
+                                            <p>
+                                                {{ auth()->user()->name }}
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
 

@@ -116,6 +116,7 @@ return [
     'url'                  => 'O formato da URL informada para o campo :attribute é inválido.',
     'uuid'                 => 'O campo :attribute deve ser um UUID válido.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -198,7 +199,8 @@ return [
         'year'                  => 'ano',
         'email'                 => 'e-mail',
         'remember'              => 'lembrar-me',
-        'type'                  => 'tipo'
-
+        'type'                  => 'tipo',
+        'start'                 => 'Data Início',
+        'end'                   => 'Data Fim'
     ],
 ];

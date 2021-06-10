@@ -21,7 +21,7 @@ class ProcessProgress extends Model
         'date_term',
         'description',
         'publication',
-        'pending',
+        'concluded',
         'process_id'
     ];
 
@@ -33,10 +33,16 @@ class ProcessProgress extends Model
         return $this->belongsTo(Process::class);
     }
 
+    public function scopeConcluded($query)
+    {
+        return $query->where('concluded', true);
+    }
+
     public function scopePending($query)
     {
-        return $query->where('pending', true);
+        return $query->where('concluded', false);
     }
+
 
     public function setDateAttribute($input)
     {

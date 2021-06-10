@@ -152,9 +152,7 @@ class EloquentFinancialRepository extends BaseEloquentRepository
     {
         $filtro = $request->all();
 
-        $status = $filtro['status'] == 'baixado' ?  $filtro['status'] : null;
-
-        $data = $this->model::with('person')->where(function ($query) use ($filtro, $status) {
+        $data = $this->model::with('person')->where(function ($query) use ($filtro) {
             $query->whereBetween($filtro['date_for'], array($filtro['data_inicial'], $filtro['data_final']));
 
             if ($filtro['person_id']) {
@@ -165,8 +163,12 @@ class EloquentFinancialRepository extends BaseEloquentRepository
                 $query->where('type', $filtro['type']);
             }
 
-            if ($status) {
+            if ($filtro['status'] == 'baixado') {
                 $query->whereNotNull('payday');
+            }
+
+            if ($filtro['status'] == 'aberto') {
+                $query->whereNull('payday');
             }
 
 

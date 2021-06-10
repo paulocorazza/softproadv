@@ -57,7 +57,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="data_inicial">Pessoa</label>
-                            {!! Form::select('person_id', $person, null, ['placeholder' => 'Selecione a Pessoa', 'class' => 'form-control',  'id' => 'person_id']) !!}
+                            {!! Form::select('person_id', $person, null, ['placeholder' => 'Selecione a Pessoa', 'class' => 'form-control',  'id' => 'people']) !!}
                         </div>
                     </div>
                 </div>

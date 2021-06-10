@@ -53,7 +53,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
             foreach ($data['progresses'] as $progress) {
                 $id = ($progress['id'] > 0) ? $progress['id'] : 0;
 
-                $progress['pending'] = (isset($progress['pending'])) ? true : false;
+                $progress['concluded'] = (isset($progress['concluded'])) ? true : false;
 
                 $process->progresses()->updateOrCreate(['id' => $id], $progress);
             }

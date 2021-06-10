@@ -18,13 +18,23 @@ class People extends Controller
 
                 $search = $request->q;
 
-                $type =  explode(',', $request->type);
+                $type = [];
 
-                $data = $people->whereJsonContains('type_person', $type )
-                               ->where('name', 'LIKE', "%$search%")
-                               ->orWhere('cpf', 'LIKE', "%$search%")
-                               ->active()
-                               ->get();
+                if ($request->has('type')) {
+                    $type = explode(',', $request->type);
+                }
+
+                $data = $people->where(function ($query) use ($type) {
+                    if (count($type) > 0) {
+                        array_map(function ($item) use ($query) {
+                            $query->orWhereJsonContains('type_person', $item);
+                        }, $type);
+                    }
+                })
+                ->where('name', 'LIKE', "%$search%")
+                ->orWhere('cpf', 'LIKE', "%$search%")
+                ->active()
+                ->get();
             }
 
             return response()->json($data);

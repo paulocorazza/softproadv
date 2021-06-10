@@ -19,7 +19,7 @@ class CreateProcessProgressesTable extends Migration
             $table->date('date_term');
             $table->string('description');
             $table->text('publication');
-            $table->boolean('pending');
+            $table->boolean('concluded');
 
             $table->bigInteger('process_id')->unsigned();
             $table->timestamps();

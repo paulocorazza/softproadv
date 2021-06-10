@@ -36,8 +36,8 @@
 <div class="row">
     <div class="col-12">
         <div class="icheck-primary d-inline">
-            <input id="progress_pending" name="progress_pending" type="checkbox">
-            <label for="progress_pending">Pendente</label>
+            <input id="progress_concluded" name="progress_concluded" type="checkbox">
+            <label for="progress_concluded">Concluído</label>
         </div>
     </div>
 </div>

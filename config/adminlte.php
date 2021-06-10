@@ -30,8 +30,8 @@ return [
     |
     */
 
-    'logo' => '<b>SofPro</b> ADV',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>SoftPro</b> Advogados',
+    'logo_img' => 'assets/images/icon-adv.ico',
     'logo_img_class' => 'brand-image-xl',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
