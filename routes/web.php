@@ -68,7 +68,7 @@ Route::group(['namespace' => 'Tenant', 'middleware' => 'auth'], function () {
 });
 
 
-Route::group(['namespace' => 'site'], function () {
+Route::group(['namespace' => 'Site'], function () {
     /*     * ************************************************ */
     /*     * *************      REGISTER      ***************** */
     /*     * ************************************************ */
