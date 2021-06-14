@@ -75,7 +75,7 @@ class User extends Authenticatable
     {
         return [
             'name'      => 'required|min:3|max:100',
-            'fantasy'   => 'required|min:3|max:100',
+            'fantasy'   => 'nullable|min:3|max:100',
             'email'     => "required|min:3|max:100|email|unique:users,email,{$id},id",
             'image'     => 'image',
             'cpf'       => 'nullable|cpf|required_if:type,U',
@@ -90,7 +90,7 @@ class User extends Authenticatable
     {
         return [
             'name'      => 'required|min:3|max:100',
-            'fantasy'   => 'required|min:3|max:100',
+            'fantasy'   => 'nullable|min:3|max:100',
             'email'     => "required|min:3|max:100|email|unique:users,email,{$id},id",
             'image'     => 'image',
             'cpf'       => 'nullable|cpf|required_if:type,U',
@@ -105,7 +105,7 @@ class User extends Authenticatable
     {
         return [
             'name'      => 'required|min:3|max:100',
-            'fantasy'   => 'required|min:3|max:100',
+            'fantasy'   => 'nullable|min:3|max:100',
             'email'     => "required|min:3|max:100|email|unique:users,email,{$id},id",
             'image'     => 'image',
             'cpf'       => 'nullable|cpf|required_if:type,U',

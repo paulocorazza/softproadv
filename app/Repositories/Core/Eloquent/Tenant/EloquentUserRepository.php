@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
+use App\Models\City;
 use App\Models\Profile;
+use App\Models\State;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
@@ -27,10 +29,13 @@ class EloquentUserRepository extends BaseEloquentRepository
      */
     private function saveAddress(array $data, $user)
     {
-        if (isset($data['address'])) {
-            foreach ($data['address'] as $item) {
+
+        if (isset($data['addresses'])) {
+            foreach ($data['addresses'] as $item) {
 
                 $id = ($item['id'] > 0) ? $item['id'] : 0;
+                $item['state_id'] = State::where('iso', $item['iso'])->first()->id;
+                $item['city_id'] = City::where('iso', $item['city_iso'])->first()->id;
 
                 $insert = $user->addresses()->updateOrCreate(['id' => $id], $item);
 
