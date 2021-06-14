@@ -13,7 +13,7 @@
     <title>Softpro - Advogados</title>
 
     <!-- favicon icon -->
-    <link rel="shortcut icon" href="assets/site/images/favicon.ico" />
+    <link rel="shortcut icon" href="assets/images/icon-adv.ico" />
 
     <!-- inject css start -->
 
