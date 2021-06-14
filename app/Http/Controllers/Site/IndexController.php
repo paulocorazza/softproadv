@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCompanyFormRequest;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
 use Session;
@@ -22,7 +23,7 @@ class IndexController extends Controller
             return redirect()->route('home');
         }
 
-        return view('welcome');
+        return view('site.index');
     }
 
     public function register(StoreUpdateCompanyFormRequest $request)

@@ -68,17 +68,21 @@ Route::group(['namespace' => 'Tenant', 'middleware' => 'auth'], function () {
 });
 
 
-/*     * ************************************************ */
-/*     * *************      REGISTER      ***************** */
-/*     * ************************************************ */
+Route::group(['namespace' => 'site'], function () {
+    /*     * ************************************************ */
+    /*     * *************      REGISTER      ***************** */
+    /*     * ************************************************ */
     Route::post('register-company', 'IndexController@register')->name('register.company');
+    Route::get('/', 'IndexController@index')->name('index');
+});
+
+
 
 
 /*     * ************************************************ */
 /*     * *************      SYSTEM      ***************** */
 /*     * ************************************************ */
 Route::group(['middleware' => 'auth'], function () {
-
 
     /*     * ************************************************ */
     /*     * *************     COUNTRIES    ***************** */
@@ -322,7 +326,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::get('/', 'IndexController@index')->name('index');
+
 Route::get('/teste', function () {
     $financial = \App\Models\Financial::with(['process.person'])->get();
 
