@@ -42,7 +42,7 @@ class HomeController extends Controller
 
                 $myEvents = $this->event->pending()->paginate($this->perPage);
 
-                return View::make('tenants.home._partials.events', compact('myEvents'))->render();
+                return View::make('tenants.home.index._partials.events', compact('myEvents'))->render();
             }
 
             if ($request->has('progress')) {
@@ -62,7 +62,7 @@ class HomeController extends Controller
                          ->pending()
                          ->paginate($this->perPage);
 
-        return view('home', compact('totalProcesses', 'totalPeople', 'totalEvents', 'progresses', 'myEvents', 'totalAdvogados'));
+        return view('tenants.home.index', compact('totalProcesses', 'totalPeople', 'totalEvents', 'progresses', 'myEvents', 'totalAdvogados'));
     }
 
     /**

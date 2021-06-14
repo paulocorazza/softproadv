@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>SoftPro</b> Advogados',
+    'logo' => '<b>SoftPro</b> Advogado',
     'logo_img' => 'assets/images/icon-adv.ico',
     'logo_img_class' => 'brand-image-xl',
     'logo_img_xl' => null,
