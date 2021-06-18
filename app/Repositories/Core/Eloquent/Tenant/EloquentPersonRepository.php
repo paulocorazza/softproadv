@@ -87,6 +87,20 @@ class EloquentPersonRepository extends BaseEloquentRepository
         return Person::class;
     }
 
+    public function dataTables($column, $view)
+    {
+
+        $model = $this->model->query();
+
+        return Datatables()
+            ->eloquent($model)
+            ->addColumn($column, $view)
+            ->filterColumn('type_person_list', function ($query, $keyword) {
+                $query->whereJsonContains('type_person', "$keyword");
+            })
+            ->make(true);
+    }
+
 
     public function create(array $data)
     {

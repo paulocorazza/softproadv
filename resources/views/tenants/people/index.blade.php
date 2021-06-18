@@ -51,11 +51,12 @@
 
         var columns = [
             {data: "id"},
+            {data: "type_person_list"},
             {data: "name"},
             {data: "email"},
             {
                 data: 'action',
-                orderable: false
+                orderable: false,
             }
         ]
     </script>

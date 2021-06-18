@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    public const TYPE_PERSON = [
+     public const TYPE_PERSON = [
         'Contato' => 'Contato',
         'Cliente' => 'Cliente',
         'Fornecedor' => 'Fornecedor',
         'Parte Contrária' => 'Parte Contrária',
         'Juiz' => 'Juiz',
     ];
+
+     protected $appends = ['type_person_list'];
 
 
     protected $fillable = [
@@ -97,6 +100,14 @@ class Person extends Model
     public function financials()
     {
         return $this->hasMany(Financial::class);
+    }
+
+
+    public function getTypePersonListAttribute()
+    {
+        $search = ['[', ']', '"'];
+
+        return  str_replace($search, "", $this->attributes['type_person']);
     }
 
     public function scopeActive($query)

@@ -116,6 +116,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
     public function dataTables($column, $view)
     {
+
         $model = $this->model
             ->query()
             ->with([
@@ -127,7 +128,8 @@ class EloquentProcessRepository extends BaseEloquentRepository
             ]);
 
 
-        return Datatables()->eloquent($model)
+        return Datatables()
+            ->eloquent($model)
             ->addColumn('listAdv', ' ')
             ->editColumn('listAdv', function ($model) {
                 $users = $model->users()->get();
@@ -146,6 +148,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 return $model->stage->name ?? '';
             })
             ->addColumn($column, $view)
+
             ->make(true);
     }
 

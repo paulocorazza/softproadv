@@ -43,13 +43,13 @@
             {data: "number_process", name : 'processes.number_process'},
             {data: "person.name", name : 'person.name'},
 
-            {data: 'listAdv', name: 'listAdv', orderable: false},
-            {data: 'progress', name: 'list-adv', orderable: false},
+            {data: 'listAdv', name: 'listAdv', orderable: false, searchable: false},
+            {data: 'progress', name: 'list-adv', orderable: false, searchable: false},
 
             {data: "phase.name", name : 'phase.name' },
             {data: "stage.name", name : 'stage.name' },
 
-            {data: 'action', name: 'action', orderable: false}
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     </script>
     <script type="text/javascript" src={{ asset('assets/js/all/table-default.js') }}></script>

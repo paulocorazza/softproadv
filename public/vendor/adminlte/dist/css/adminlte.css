@@ -11571,7 +11571,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .user-panel .image {
   display: inline-block;
-  padding-left: 0.8rem;
+  padding-left: 1.2rem;
 }
 
 .user-panel img {
