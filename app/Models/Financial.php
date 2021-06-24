@@ -41,7 +41,8 @@ class Financial extends Model
         'competence',
         'due_date',
         'payday',
-        'honorary'
+        'honorary',
+        'register'
     ];
 
     public function rules($id = '')

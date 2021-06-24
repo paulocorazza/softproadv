@@ -15,6 +15,10 @@
     {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) !!}
 </div>
 
+<div class="form-group">
+    {!! Form::label('email_confirmation', 'E-mail - Confirmação', ['class' => 'control-label']); !!}
+    {!! Form::text('email_confirmation', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) !!}
+</div>
 
 <div class="form-group">
     {!! Form::label('cellphone', 'Celular', ['class' => 'control-label']); !!}

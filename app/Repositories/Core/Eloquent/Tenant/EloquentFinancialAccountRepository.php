@@ -5,6 +5,7 @@ use App\Models\FinancialAccount;
 use App\Models\FinancialCategory;
 use App\Repositories\Contracts\FinancialAccountRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Support\Facades\DB;
 
 /**
  * .class [ TIPO ]
@@ -26,4 +27,97 @@ class EloquentFinancialAccountRepository extends BaseEloquentRepository
     {
         return FinancialAccount::class;
     }
+
+    public function create(array $data)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $financialAccount = parent::create($data);
+
+            $instructions = $this->saveInstructions($data, $financialAccount);
+
+            if (!$financialAccount || !$instructions) {
+                DB::rollBack();
+
+                return [
+                    'status' => false,
+                    'message' => 'Não foi possível salvar o registro'
+                ];
+            }
+
+            DB::commit();
+
+            return ['status' => true];
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'status' => false,
+                'message' => 'Não foi possível salvar o registro.' . $e->getMessage()
+            ];
+        }
+    }
+
+
+    public function update($id, array $data)
+    {
+        if (!$financialAccount = parent::find($id)) {
+            return [
+                'status' => false,
+                'message' => 'Registro não encontrado!'
+            ];
+        }
+
+
+        DB::beginTransaction();
+
+        try {
+
+            $financialAccount->update($data);
+
+            $instructions = $this->saveInstructions($data, $financialAccount);
+
+            if (!$financialAccount || !$instructions) {
+                DB::rollBack();
+
+                return [
+                    'status' => false,
+                    'message' => 'Não foi possível atualizar o registro'
+                ];
+            }
+
+
+            DB::commit();
+
+            return [
+                'status' => true,
+                'message' => 'Registro atualizado com sucesso!'
+            ];
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'status' => false,
+                'message' => 'Não foi possível atualizar o registro.' . $e->getMessage()
+            ];
+        }
+    }
+
+    private function saveInstructions(array $data, FinancialAccount $financialAccount)
+    {
+        $financialAccount->instructions()->delete();
+
+        if (isset($data['instructions'])) {
+            $financialAccount->instructions()->createMany($data['instructions']);
+        }
+
+        return true;
+    }
+
 }
