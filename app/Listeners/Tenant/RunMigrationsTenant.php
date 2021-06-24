@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RunMigrationsTenant
 {
@@ -40,13 +41,13 @@ class RunMigrationsTenant
 
 
         if ($migration === 0) {
-            $senha = uniqid(date('YmdHis'));
+            $password = Str::random(8);
 
-            $this->createUser($company, $senha);
+            $this->createUser($company, $password);
 
             $this->createLocations();
 
-            Mail::to($company->email)->send(new SendMailCompany($company, $senha));
+            Mail::to($company->email)->send(new SendMailCompany($company, $password));
         }
 
 
@@ -55,14 +56,14 @@ class RunMigrationsTenant
 
     /**
      * @param Company $company
-     * @param string $senha
+     * @param string $password
      */
-    private function createUser(Company $company, string $senha): void
+    private function createUser(Company $company, string $password): void
     {
         $user =  User::create([
             'name' => $company->name,
             'email' => $company->email,
-            'password' => bcrypt($senha),
+            'password' => bcrypt($password),
             'nivel' => '1'
         ]);
 
