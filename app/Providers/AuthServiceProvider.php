@@ -56,7 +56,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::before(function (User $user, $ability) {
-            if ($user->hasProfile('Admin') &&  Helper::domainIsMain())  {
+            if ($user->hasProfile('Admin') ||  Helper::domainIsMain())  {
                 return true;
             }
         });
