@@ -27,7 +27,8 @@ class UserTableSeeder extends Seeder
             'name'      => 'Suporte',
             'fantasy'   => 'Suporte',
             'email'     => 'suporte@theplace.com.br',
-            'password'  => bcrypt('pl4c32k')
+            'password'  => bcrypt('pl4c32k'),
+            'nivel'     => '0'
         ]);
     }
 

@@ -57,7 +57,37 @@ class AddBankBookToFincialAccounts extends Migration
     public function down()
     {
         Schema::table('financial_accounts', function (Blueprint $table) {
-            //
+            $table->dropColumn('bank_code');
+            $table->dropColumn('bank_contract');
+            $table->dropColumn('cnpj');
+
+            $table->dropColumn('agency');
+            $table->dropColumn('agency_dv');
+
+            $table->dropColumn('account');
+            $table->dropColumn('account_dv');
+            $table->dropColumn('assignor');
+            $table->dropColumn('assignor_dv');
+
+            $table->dropColumn('fine');
+            $table->dropColumn('rate');
+            $table->dropColumn('days_of_rate');
+            $table->dropColumn('days_to_protest');
+
+            $table->dropColumn('code_protest');
+            $table->dropColumn('cnab_shipping');
+            $table->dropColumn('cnab_return');
+            $table->dropColumn('agreement');
+            $table->dropColumn('agreement_variation');
+            $table->dropColumn('accept');
+            $table->dropColumn('client_code');
+            $table->dropColumn('type_account');
+            $table->dropColumn('recipient');
+            $table->dropColumn('cep');
+            $table->dropColumn('address');
+            $table->dropColumn('district');
+            $table->dropColumn('city');
+            $table->dropColumn('uf');
         });
     }
 }

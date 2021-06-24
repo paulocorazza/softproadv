@@ -105,6 +105,17 @@ class EloquentUserRepository extends BaseEloquentRepository
         return User::class;
     }
 
+    public function dataTables($column, $view)
+    {
+
+        $model = $this->model->query();
+
+        return Datatables()
+            ->eloquent($model->nivel1())
+            ->addColumn($column, $view)
+            ->make(true);
+    }
+
 
     /**
      * @param array $data
@@ -248,7 +259,8 @@ class EloquentUserRepository extends BaseEloquentRepository
 
     public function getAdvogados()
     {
-        return $this->model->Advogados()
+        return $this->model->advogados()
+                           ->nivel1()
                            ->get()
                            ->pluck('name', 'id');
     }

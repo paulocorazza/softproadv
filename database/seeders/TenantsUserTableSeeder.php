@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
@@ -28,7 +29,8 @@ class TenantsUserTableSeeder extends Seeder
             'name'      => 'Suporte',
             'fantasy'   => 'Suporte',
             'email'     => 'suporte@theplace.com.br',
-            'password'  => bcrypt('pl4c32k')
+            'password'  => bcrypt('pl4c32k'),
+            'nivel'     => '0'
         ]);
     }
 
@@ -44,7 +46,10 @@ class TenantsUserTableSeeder extends Seeder
     private function sync()
     {
         $admin = $this->user->where('name', 'Suporte')->first();
-        $admin->profiles()->save($this->profile);
+        $admin->profiles()->attach($this->profile);
+
+        $permissions = Permission::get();
+        $this->profile->permissions()->sync($permissions);
     }
 
 
@@ -67,9 +72,9 @@ class TenantsUserTableSeeder extends Seeder
 
         $this->createProfile();
         $this->createUser();
-        $this->sync();
-
         $this->createPermissions();
+
+        $this->sync();
 
         // Habilitas as FKs
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

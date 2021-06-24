@@ -5,6 +5,7 @@ namespace App\Listeners\Tenant;
 use App\Events\Tenant\DatabaseCreated;
 use App\Mail\SendMailCompany;
 use App\Models\Company;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -58,11 +59,15 @@ class RunMigrationsTenant
      */
     private function createUser(Company $company, string $senha): void
     {
-        User::create([
+        $user =  User::create([
             'name' => $company->name,
             'email' => $company->email,
-            'password' => bcrypt($senha)
+            'password' => bcrypt($senha),
+            'nivel' => '1'
         ]);
+
+
+        Profile::first()->users()->attach($user);
     }
 
     private function createLocations(): void

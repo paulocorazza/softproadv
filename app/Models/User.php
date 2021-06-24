@@ -47,7 +47,8 @@ class User extends Authenticatable
         'journey_pause',
         'journey_end',
         'observation',
-        'status'
+        'status',
+        'nivel'
     ];
 
     /**
@@ -255,6 +256,11 @@ class User extends Authenticatable
     public function scopeAtivos($query)
     {
         return $query->where('status', 'A');
+    }
+
+    public function scopeNivel1($query)
+    {
+        return $query->where('nivel', '1');
     }
 
 
