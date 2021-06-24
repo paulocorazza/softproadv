@@ -27,7 +27,7 @@ class EventController extends ControllerStandard
 
         $this->user = $user;
 
-        $this->middleware('can:event');
+        $this->middleware('can:events');
 
         $this->middleware('can:create_event')->only(['create', 'store']);
         $this->middleware('can:update_event')->only(['edit', 'update']);
