@@ -93,7 +93,7 @@
                         <!-- Navbar -->
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand logo" href="index.html">
-                                <img id="logo-img" class="img-fluid" src="assets/site/images/logo-customizer/logo-color-5.png" alt="">
+                                <img id="logo-img" class="img-fluid" src="{{ url('assets/images/logo-the-place.png') }}" alt="">
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span>
                                 <span></span>
@@ -588,7 +588,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-logo">
-                            <img id="footer-logo-white-img" src="assets/site/images/logo-customizer-white/logo-color-5.png" class="img-fluid" alt="">
+                            <img id="logo-img" class="img-fluid" src="{{ url('assets/images/logo-the-place.png') }}" alt="">
                         </div>
                         <p class="mb-0">Softino Software Landing Page Is fully responsible, Build whatever you like with the Softino, Softino is the creative, modern HTML5 Template suitable for Your business.</p>
                     </div>

@@ -58,7 +58,7 @@
     <div class="login-box login-form">
         <div class="login-logo">
             <div class="text-center">
-                <img src="{{ url('assets/images/logo-the-place.png') }}">
+                <img style="width: 250px" src="{{ url('assets/images/logo-the-place.png') }}">
             </div>
         </div>
         <div class="card">

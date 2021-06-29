@@ -53,8 +53,8 @@ class Person extends Model
             'email'     => "nullable|min:3|max:100|email",
             'image'     => 'image',
             'type'      => 'required|in:F,J',
-            'cpf'       => 'nullable|cpf|required_if:type,F',
-            'cnpj'      => 'nullable|cnpj|required_if:type,J',
+           // 'cpf'       => 'nullable|cpf|required_if:type,F',
+           // 'cnpj'      => 'nullable|cnpj|required_if:type,J',
             'marital_status' => 'required|in:Solteiro,Casado,Separado,Divorciado,Viúvo',
         ];
     }

@@ -5,7 +5,7 @@
         </h3>
 
         <div class="card-tools" id="links_events">
-            {!! $myEvents->links() !!}
+            <div class="pagination pagination-sm">{!! $myEvents->links() !!}</div>
         </div>
 
     </div>

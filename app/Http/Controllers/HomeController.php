@@ -24,18 +24,18 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $totalProcesses = $this->process
-                               ->inProgress()
-                               ->count();
-
-        $totalPeople = $this->person
-                            ->where('type_person', 'like', '%Cliente%')
-                            ->active()
-                            ->count();
+        $totalProcesses = $this->process->count();
+        $totalInProgress = $this->progress->pending()->count();
 
 
-        $totalEvents = $this->event->pending()->count();
-        $totalAdvogados =  $this->user->advogados()->ativos()->count();
+        $countEvent = $this->event->whereHas('users', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->count();
+
+        $totalEvents = $countEvent > 0 ? ($this->event->whereHas('users', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->finish()->count() / $countEvent) * 100 : 100 ;
+
 
         if ($request->ajax()) {
             if ($request->has('events')) {
@@ -62,7 +62,7 @@ class HomeController extends Controller
                          ->pending()
                          ->paginate($this->perPage);
 
-        return view('tenants.home.index', compact('totalProcesses', 'totalPeople', 'totalEvents', 'progresses', 'myEvents', 'totalAdvogados'));
+        return view('tenants.home.index', compact('totalProcesses', 'totalInProgress',  'totalEvents', 'progresses', 'myEvents'));
     }
 
     /**

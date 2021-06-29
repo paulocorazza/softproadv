@@ -327,8 +327,8 @@ inset 0 30px 0 rgba(5,248,161, 0.4), inset -30px 0 0 rgba(255,8,68, 0.4), inset 
 ------------------------*/
 .spinner-eff {position: absolute; width: 200px; height: 200px; bottom: 0;}
 .spinner-eff .spinner-circle {border-radius: 100px; position: absolute; left: 0; right: 0; margin: auto; transform: scale(1); transform-origin: center center;}
-.spinner-eff .circle-1 {width: 100%; height: 100%; background-color: #60f691;  top: 0; animation: pulse 1.6s linear 0s infinite;}
-.spinner-eff .circle-2 {width: 66.6%; height: 66.6%; background-color: #0cca4a; top: 16.5%; animation: pulse-2 1.6s linear 0s infinite;}
+.spinner-eff .circle-1 {width: 100%; height: 100%; background-color: #932022;  top: 0; animation: pulse 1.6s linear 0s infinite;}
+.spinner-eff .circle-2 {width: 66.6%; height: 66.6%; background-color: #934446; top: 16.5%; animation: pulse-2 1.6s linear 0s infinite;}
 
 
 /* ------------------------

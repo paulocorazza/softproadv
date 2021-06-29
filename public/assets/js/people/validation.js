@@ -54,15 +54,15 @@ $(document).ready(function () {
                 },
 
 
-                cpf: {
+             /*   cpf: {
                     cpfBR: true,
-                    requiredCpfIf: true
+                   // requiredCpfIf: true
                 },
 
                 cnpj: {
                     cnpjBR: true,
-                    requiredCnpjIf: true
-                },
+                   // requiredCnpjIf: true
+                },*/
 
 
                 marital_status: {

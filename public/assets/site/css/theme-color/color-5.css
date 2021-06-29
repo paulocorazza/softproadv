@@ -8,11 +8,11 @@
 /* ------------------------
     General
 ------------------------*/
-::-moz-selection { background: #05f8a1; color: #fff; text-shadow: none; }
-::-moz-selection { background: #05f8a1; color: #fff; text-shadow: none; }
-::selection { background: #05f8a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #8A0000; color: #fff; text-shadow: none; }
+::-moz-selection { background: #8A0000; color: #fff; text-shadow: none; }
+::selection { background: #8A0000; color: #fff; text-shadow: none; }
 
- 
+
 /* ------------------------
     Background Color
 ------------------------*/
@@ -47,14 +47,14 @@ div.color-customizer a.opener,
 .bg-effect-4::after,
 .ht-progress-bar .progress .progress-bar,
 .timeline-content::before, .timeline-content::after
-{ background-color: #05f8a1;}
+{ background-color: #8A0000;}
 
 .testimonial-caption::before, .post-title::before, .post.style-3 .post-meta::before, .timeline-inner::after, .home-6 .banner .bnr-box{background-color: #2ec78d;}
 
 /* ------------------------
     Color
 ------------------------*/
-a, button, input, 
+a, button, input,
 a:focus, a:hover,
 .text-theme,
 .navbar-nav .nav-link:hover, .navbar-nav .nav-item .nav-link.active,
@@ -99,7 +99,7 @@ h1 span,
 .contact-media i,
 .widget-searchbox .search-btn,
 .timeline-title h2
-{color: #05f8a1;}
+{color: #8A0000;}
 
 .price-table.style-2 .price-title,
 .post-categories:hover,
@@ -124,7 +124,7 @@ h1 span,
 .testimonial.style-2 .testimonial-img:after,
 .contact-media,
 .timeline-inner::before
-{border-color: #05f8a1;}
+{border-color: #8A0000;}
 
 [class*="col-"]:nth-child(2) .contact-media
 {border-color: #2ec78d;}
@@ -141,8 +141,8 @@ h1 span,
 
 @media (max-width: 992px){
 .navbar-toggler span,
-.header-3 #header-wrap.fixed-header .navbar-toggler span{background-color: #05f8a1;}
+.header-3 #header-wrap.fixed-header .navbar-toggler span{background-color: #8A0000;}
 .navbar-nav .nav-link:hover::before, .navbar-nav .nav-item .nav-link.show::before, .navbar-nav .nav-item .nav-link.active::before, .navbar-nav .nav-link:focus::before,
 .header-3 .navbar-nav .nav-link:hover, .header-3 .navbar-nav .nav-item .nav-link.active,
-.header-3 .navbar-nav .nav-link:hover::before, .header-3 .navbar-nav .nav-item .nav-link.active::before, .header-3 .navbar-nav .nav-link:focus::before{color: #05f8a1}
+.header-3 .navbar-nav .nav-link:hover::before, .header-3 .navbar-nav .nav-item .nav-link.active::before, .header-3 .navbar-nav .nav-link:focus::before{color: #8A0000}
 }

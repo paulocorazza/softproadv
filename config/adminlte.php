@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'SoftPro - Advogados',
+    'title' => 'SoftPro - Advogado',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -176,71 +176,71 @@ return [
         ['header' => 'Meu Painel'],
 
         [
-            'text' => 'Gerenciamento',
-            'icon' => 'fas fa-solar-panel',
-            'submenu' => [
-                [
-                    'text' => 'Planos',
-                    'url' => 'tenants/plans',
-                    'icon' => 'fab fa-paypal',
-                    'label_color' => 'success',
-                    'can' => 'plans'
-                ],
-
-                [
-                    'text' => 'Empresas',
-                    'url' => 'tenants/companies',
-                    'icon' => 'far fa-building',
-                    'label_color' => 'success',
-                    'can' => 'companies'
-                ],
-
-                [
-                    'text' => 'Pessoas',
-                    'url' => 'people',
-                    'icon' => 'fas fa-id-card',
-                    'label_color' => 'success',
-                    'can' => 'people'
-                ],
-
-
-                [
-                    'text' => 'Processos',
-                    'url' => 'processes',
-                    'icon' => 'fas fa-balance-scale',
-                    'label_color' => 'success',
-                    'can' => 'processes'
-                ],
-
-                [
-                    'text' => 'Agenda',
-                    'url' => 'schedule',
-                    'icon' => 'fas fa-calendar-check',
-                    'label_color' => 'success',
-                    'can' => 'schedule'
-                ],
-
-                [
-                    'text' => 'Atividades',
-                    'url' => 'events',
-                    'icon' => 'fas fa-tasks',
-                    'label_color' => 'success',
-                    'can' => 'events'
-                ],
-
-
-            ],
+            'text' => 'Planos',
+            'url' => 'tenants/plans',
+            'icon' => 'fab fa-paypal',
+            'label_color' => 'success',
+            'can' => 'plans'
         ],
 
         [
+            'text' => 'Empresas',
+            'url' => 'tenants/companies',
+            'icon' => 'far fa-building',
+            'label_color' => 'success',
+            'can' => 'companies'
+        ],
+
+        [
+            'text' => 'Pessoas',
+            'url' => 'people',
+            'icon' => 'fas fa-id-card',
+            'label_color' => 'success',
+            'can' => 'people'
+        ],
+
+
+        [
+            'text' => 'Processos',
+            'url' => 'processes',
+            'icon' => 'fas fa-balance-scale',
+            'label_color' => 'success',
+            'can' => 'processes'
+        ],
+
+        [
+            'text' => 'Agenda',
+            'url' => 'schedule',
+            'icon' => 'fas fa-calendar-check',
+            'label_color' => 'success',
+            'can' => 'schedule'
+        ],
+
+        [
+            'text' => 'Atividades',
+            'url' => 'events',
+            'icon' => 'fas fa-tasks',
+            'label_color' => 'success',
+            'can' => 'events'
+        ],
+
+
+        [
             'text' => 'Financeiro',
+            'can' => 'subdomain',
             'icon' => 'fas fa-comment-dollar',
             'submenu' => [
                 [
-                    'text' => 'Categoria Financeira',
-                    'url' => 'financial-category',
-                    'icon' => 'fas fa-search-dollar',
-                    'can' => 'financial-category'
+                    'text' => 'A Pagar / Receber',
+                    'url' => 'financial',
+                    'icon' => 'fas fa-hand-holding-usd',
+                    'can' => 'financials'
+                ],
+
+                [
+                    'text' => 'Boletos',
+                    'url' => '',
+                    'icon' => 'fab fa-btc',
                 ],
 
                 [
@@ -251,16 +251,21 @@ return [
                 ],
 
                 [
-                    'text' => 'A Pagar / Receber',
-                    'url' => 'financial',
-                    'icon' => 'fas fa-hand-holding-usd',
-                    'can' => 'financials'
+                    'text' => 'Categoria Financeira',
+                    'url' => 'financial-category',
+                    'icon' => 'fas fa-search-dollar',
+                    'can' => 'financial-category'
                 ],
+
+
+
+
             ],
         ],
 
         [
             'text' => 'Relatórios',
+            'can' => 'subdomain',
             'icon' => 'fas fa-flag',
             'submenu' => [
                 [
@@ -291,6 +296,7 @@ return [
     ],
     [
         'text' => 'Cadastros',
+        'can' => 'subdomain',
         'icon' => 'fas fa-cogs',
         'submenu' => [
             [

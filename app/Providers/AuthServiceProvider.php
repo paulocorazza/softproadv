@@ -39,20 +39,32 @@ class AuthServiceProvider extends ServiceProvider
 
         foreach ($permissions as $permission) {
             Gate::define($permission->name , function (User $user) use ($permission) {
-                return $user->hasPermission($permission);
+                return (!Helper::domainIsMain()) && $user->hasPermission($permission);
             });
         }
 
         Gate::define('companies', function (User $user) {
             $permission = Permission::where('name', 'companies')->first();
+
+            if (!$permission)
+                return false;
+
             return (Helper::domainIsMain()) && ($user->hasPermission($permission));
         });
 
         Gate::define('plans', function (User $user) {
             $permission = Permission::where('name', 'plans')->first();
 
-            return (Helper::domainIsMain()) && ($user->hasPermission($permission));
+            if (!$permission)
+                return false;
+
+             return (Helper::domainIsMain()) && ($user->hasPermission($permission));
         });
+
+        Gate::define('subdomain', function (User $user) {
+            return !Helper::domainIsMain();
+        });
+
 
 
 /*        Gate::before(function (User $user, $ability) {
