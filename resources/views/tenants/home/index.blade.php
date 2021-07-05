@@ -78,6 +78,7 @@
 
 
 @section('js')
+    {!! $financialChart->script()  !!}
     <script src="{{ asset('vendor/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>

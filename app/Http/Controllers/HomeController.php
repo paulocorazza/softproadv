@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Financial;
 use App\Models\Person;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Models\User;
+use App\Services\Reports\FinancialCharts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use View;
@@ -16,8 +18,12 @@ class HomeController extends Controller
 
     private $perPage = 10;
 
-    public function __construct(private Process $process, private ProcessProgress $progress, private Person $person, private Event $event, private User $user)
-    {
+    public function __construct(
+        private Process $process,
+        private ProcessProgress $progress,
+        private Event $event,
+        private FinancialCharts $financialCharts
+    ) {
 
     }
 
@@ -28,13 +34,15 @@ class HomeController extends Controller
         $totalInProgress = $this->progress->pending()->count();
 
 
+        $financialChart = $this->financialCharts->getReports();
+
         $countEvent = $this->event->whereHas('users', function ($query) {
             $query->where('user_id', Auth::user()->id);
         })->count();
 
         $totalEvents = $countEvent > 0 ? ($this->event->whereHas('users', function ($query) {
-            $query->where('user_id', Auth::user()->id);
-        })->finish()->count() / $countEvent) * 100 : 100 ;
+                    $query->where('user_id', Auth::user()->id);
+                })->finish()->count() / $countEvent) * 100 : 100;
 
 
         if ($request->ajax()) {
@@ -55,14 +63,15 @@ class HomeController extends Controller
 
         $progresses = $this->getProgress();
 
-        $myEvents  = $this->event
-                          ->whereHas('users', function ($query) {
-                              $query->where('user_id', Auth::user()->id);
-                          })
-                         ->pending()
-                         ->paginate($this->perPage);
+        $myEvents = $this->event
+            ->whereHas('users', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })
+            ->pending()
+            ->paginate($this->perPage);
 
-        return view('tenants.home.index', compact('totalProcesses', 'totalInProgress',  'totalEvents', 'progresses', 'myEvents'));
+        return view('tenants.home.index',
+            compact('totalProcesses', 'totalInProgress', 'totalEvents', 'progresses', 'myEvents', 'financialChart'));
     }
 
     /**

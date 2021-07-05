@@ -125,10 +125,11 @@ class EloquentFinancialRepository extends BaseEloquentRepository
     private function replaceValues(array $data): array
     {
         $data['honorary'] = isset($data['honorary']) ? 'S' : 'N';
+        $data['register'] = isset($data['register']);
         $data['original'] = Helper::replaceDecimal($data['original']);
-        $data['discount'] = Helper::replaceDecimal($data['discount']);
-        $data['fine'] = Helper::replaceDecimal($data['fine']);
-        $data['rate'] = Helper::replaceDecimal($data['rate']);
+        $data['discount'] = isset($data['discount']) ? Helper::replaceDecimal($data['discount']) : 0;
+        $data['fine'] = isset($data['fine']) ? Helper::replaceDecimal($data['fine']) : 0;
+        $data['rate'] =  isset($data['rate']) ? Helper::replaceDecimal($data['rate']) : 0;
         $data['payment'] = Helper::replaceDecimal($data['payment']);
         return $data;
     }

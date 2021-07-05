@@ -131,6 +131,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/setasign/fpdf" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/neitanod/forceutf8" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/eduardokum/laravel-boleto" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/balping/json-raw-encoder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consoletvs/charts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

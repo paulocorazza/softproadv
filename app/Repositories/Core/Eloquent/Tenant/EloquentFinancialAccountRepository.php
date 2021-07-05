@@ -113,11 +113,30 @@ class EloquentFinancialAccountRepository extends BaseEloquentRepository
     {
         $financialAccount->instructions()->delete();
 
-        if (isset($data['instructions'])) {
-            $financialAccount->instructions()->createMany($data['instructions']);
+        $instructions = $this->getInstructions($data['instructions']);
+
+        if (count($instructions) > 0) {
+            $financialAccount->instructions()->createMany($instructions);
         }
 
         return true;
+    }
+
+    /**
+     * @param $instructions1
+     * @param array $instructions
+     * @return array
+     */
+    private function getInstructions(array $instructions): array
+    {
+        $newInstructions = [];
+
+        foreach ($instructions as $instruction) {
+            if (!empty($instruction['instruction'])) {
+                array_push($newInstructions, $instruction);
+            }
+        }
+        return $newInstructions;
     }
 
 }
