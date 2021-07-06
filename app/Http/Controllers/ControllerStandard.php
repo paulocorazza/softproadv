@@ -30,9 +30,14 @@ class ControllerStandard extends BaseController
         $file = $request->file($this->upload['name']);
 
         //define o nome para o arquivo
-        $nameFile = (!empty($dataFile)) ? $dataFile : uniqid(date('YmdHis')) . '.' . $file->getClientOriginalExtension();
+        $nameFile = (!empty($dataFile)) ? $this->upload['patch'] . '/' . $dataFile : $this->upload['patch'] . '/' . uniqid(date('YmdHis')) . '.' . $file->getClientOriginalExtension();
 
-        $upload = $file->storeAs($this->upload['patch'], $nameFile);
+        if (isset(session('company')['uuid'])) {
+            $nameFile = session('company')['uuid'] . '/' .  $nameFile;
+        }
+
+
+        $upload = $file->storeAs($this->upload['patch'],  $nameFile);
         return array($nameFile, $upload);
     }
 

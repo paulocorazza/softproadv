@@ -88,9 +88,10 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
                     $path = $file['img']->store("files/process/{$process->id}");
 
+
                     $filesUploaded['description'] = $file['description'];
                     $filesUploaded['ext'] = $ext;
-                    $filesUploaded['file'] = $path;
+                    $filesUploaded['file'] =  isset(session('company')['uuid']) ? session('company')['uuid'] . '/' . $path : $path;
 
 
                     $insert = $process->files()->create($filesUploaded);

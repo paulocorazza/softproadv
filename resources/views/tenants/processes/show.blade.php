@@ -113,10 +113,8 @@
                                                 @foreach($event->users as $user)
                                                     @if( !empty($user->image) )
                                                         <div class="img-post">
-                                                            <img
-                                                                src="{{ asset('storage/tenants/users/' . $user->image) }}"
-                                                                alt="{{ $user->name }}"
-                                                                class="user-dashboard img-circle">
+                                                            <img src="{{ asset('storage/tenants/' . $user->image) }}" alt="{{$user['name']}}"
+                                                                 class="user-dashboard img-circle">
                                                         </div>
                                                     @else
                                                         <div class="img-post">
@@ -202,8 +200,8 @@
                                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                         <div class="image">
                                             @if( !empty($user->image) )
-                                                <img src="{{ asset('storage/tenants/users/' . $user->image) }}"
-                                                     alt="{{ $user->name }}" class="user-dashboard img-circle">
+                                                <img src="{{ asset('storage/tenants/' . $user->image) }}" alt="{{$user['name']}}"
+                                                     class="user-dashboard img-circle">
                                             @else
                                                 <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro"
                                                      class="user-dashboard img-circle">

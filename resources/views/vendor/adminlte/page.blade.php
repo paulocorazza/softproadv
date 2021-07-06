@@ -173,7 +173,7 @@
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
                             @if( !empty(auth()->user()->image) )
-                                <img src="{{ asset('storage/tenants/users/' . auth()->user()->image) }}" alt="{{auth()->user()->name}}" class="user-dashboard img-circle">
+                                <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}" alt="{{auth()->user()->name}}" class="user-dashboard img-circle">
                             @else
                                 <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro" class="user-dashboard img-circle">
                             @endif
