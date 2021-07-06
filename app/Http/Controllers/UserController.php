@@ -172,9 +172,9 @@ class UserController extends ControllerStandard
         $data = $this->model->find($id);
 
         if ($this->upload && $request->hasFile($this->upload['name'])) {
-            $file = $data->{$this->upload['name']};
+           // $file = $data->{$this->upload['name']};
 
-            list($nameFile, $upload) = $this->upload($request, $file);
+            list($nameFile, $upload) = $this->upload($request);
 
             if (!$upload) {
                 return redirect()->back()

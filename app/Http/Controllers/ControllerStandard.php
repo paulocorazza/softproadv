@@ -30,14 +30,18 @@ class ControllerStandard extends BaseController
         $file = $request->file($this->upload['name']);
 
         //define o nome para o arquivo
-        $nameFile = (!empty($dataFile)) ? $this->upload['patch'] . '/' . $dataFile : $this->upload['patch'] . '/' . uniqid(date('YmdHis')) . '.' . $file->getClientOriginalExtension();
+        $nameFile =  uniqid(date('YmdHis')) . '.' . $file->getClientOriginalExtension();
+
+        $upload = $file->storeAs($this->upload['patch'], $nameFile);
 
         if (isset(session('company')['uuid'])) {
-            $nameFile = session('company')['uuid'] . '/' .  $nameFile;
+            $nameFile = session('company')['uuid'] . '/'.  $this->upload['patch'] . '/' . $nameFile;
+        }  else {
+            $nameFile = $this->upload['patch'] . '/' . $nameFile;
         }
 
 
-        $upload = $file->storeAs($this->upload['patch'],  $nameFile);
+
         return array($nameFile, $upload);
     }
 
@@ -63,7 +67,7 @@ class ControllerStandard extends BaseController
     public function index()
     {
         if (request()->ajax()) {
-            return $this->model->dataTables('action',  $this->view . '.partials.acoes');
+            return $this->model->dataTables('action', $this->view . '.partials.acoes');
         }
 
         $title = "Gestão de {$this->title}s";
@@ -98,8 +102,8 @@ class ControllerStandard extends BaseController
 
             if (!$upload) {
                 return redirect()->back()
-                                 ->with('error', 'Falha no upload do arquivo')
-                                 ->withInput();
+                    ->with('error', 'Falha no upload do arquivo')
+                    ->withInput();
             }
 
             $dataForm[$this->upload['name']] = $nameFile;
@@ -113,12 +117,12 @@ class ControllerStandard extends BaseController
 
         if (!$insert) {
             return redirect()->back()
-                             ->with('error', 'Falha ao cadastrar')
-                             ->withInput();
+                ->with('error', 'Falha ao cadastrar')
+                ->withInput();
         }
 
         return redirect()->route("{$this->route}.index")
-                         ->with('success', 'Registro realizado com sucesso!');
+            ->with('success', 'Registro realizado com sucesso!');
     }
 
     /**
@@ -172,8 +176,8 @@ class ControllerStandard extends BaseController
 
             if (!$upload) {
                 return redirect()->back()
-                                 ->with('error', 'Falha no upload do arquivo')
-                                 ->withInput();
+                    ->with('error', 'Falha no upload do arquivo')
+                    ->withInput();
             }
 
             $dataForm[$this->upload['name']] = $nameFile;
@@ -187,12 +191,12 @@ class ControllerStandard extends BaseController
 
         if (!$update) {
             return redirect()->back()
-                             ->with('error', 'Falha ao atualizar')
-                             ->withInput();
+                ->with('error', 'Falha ao atualizar')
+                ->withInput();
         }
 
         return redirect()->route("{$this->route}.index")
-                         ->with('success', 'Registro alterado com sucesso!');
+            ->with('success', 'Registro alterado com sucesso!');
     }
 
     /**
@@ -209,7 +213,7 @@ class ControllerStandard extends BaseController
 
         if (!$delete) {
             return redirect()->back()
-                             ->with('error', 'Falha ao deletar');
+                ->with('error', 'Falha ao deletar');
         }
 
         if ($this->upload) {
@@ -217,7 +221,7 @@ class ControllerStandard extends BaseController
         }
 
         return redirect()->route("{$this->route}.index")
-                         ->with('success', 'Registro deletado com sucesso!');
+            ->with('success', 'Registro deletado com sucesso!');
     }
 
     public function search(Request $request)

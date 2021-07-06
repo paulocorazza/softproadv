@@ -179,8 +179,6 @@
                             @endif
                         </div>
 
-
-
                         <div class="sidebar">
                             <nav class="mt-0">
                                 <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
