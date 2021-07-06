@@ -24,26 +24,20 @@ class EloquentProcessRepository extends BaseEloquentRepository
     /*     * ************************************************ */
     private function getPercentProgress($model)
     {
-        $process_id = $model->id;
-
-        $countStages = Stage::whereHas('phase.typeAction.processes', function ($subQuery) use ($process_id) {
-            $subQuery->where('id', $process_id);
-        })->count();
-
         $countEvents = $model->events->count();
-
-
-        $countPivot = $model->stages->count();
         $countEventsFinish = $model->events()->finish()->count();
 
+        $countProgresses = $model->progresses->count();
+        $countProgressesConcluded = $model->progresses()->concluded()->count();
 
-        $totalStagesEvents = $countStages + $countEvents;
 
-        if ($totalStagesEvents == 0) {
+        $totalProgressesEvents = $countProgresses + $countEvents;
+
+        if ($totalProgressesEvents == 0) {
             return 0;
         }
 
-        return  Helper::roundTo(($countPivot + $countEventsFinish) / $totalStagesEvents * 100);
+        return  Helper::roundTo(($countProgressesConcluded + $countEventsFinish) / $totalProgressesEvents * 100);
     }
 
 
