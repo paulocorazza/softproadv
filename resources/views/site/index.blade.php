@@ -148,7 +148,8 @@
                     <div class="col-lg-6 col-md-12 ms-auto mt-5 mt-lg-0 mb-5 mb-lg-0">
                         <h1 class="mb-4 fw-normal wow fadeInUp" data-wow-duration="1.5s"><span class="fw-bold">SoftPro Advogado</span>
                         </h1>
-                        <h2 class="mb-4 wow fadeInUp"  data-wow-duration="2s" data-wow-delay="0.3s">O sistema que você precisa para inovar a gestão
+                        <h2 class="mb-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.3s">O sistema que você
+                            precisa para inovar a gestão
                             do seu escritório</h2>
                         <p class="lead mb-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.3s">Simplifique a sua
                             rotina, economize tempo e ganhe mais clientes.</p>
@@ -231,7 +232,9 @@
                             </div>
                             <h2>Software Moderno E Sofisticado para seu escritório de advocacia.</h2>
                         </div>
-                        <p class="lead mb-5">Não gerencie apenas processos e atividades jurídicas, faça também a gestão financeira do seu escritório, com relatórios gerenciais que te ajudarão a crescer cada vez mais!</p>
+                        <p class="lead mb-5">Não gerencie apenas processos e atividades jurídicas, faça também a gestão
+                            financeira do seu escritório, com relatórios gerenciais que te ajudarão a crescer cada vez
+                            mais!</p>
                         <div class="owl-carousel no-pb" data-dots="false" data-items="2" data-margin="30"
                              data-autoplay="true">
                             <div class="item">
@@ -422,7 +425,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
                                             <h4 class="mb-4">Importantes para a gestão do seu escritório</h4>
-                                            <p class="mb-4">Cadastros que facilitam a gestão de pessoas, processos e geram mais segurança para a sua equipe na tomada de decisão.</p>
+                                            <p class="mb-4">Cadastros que facilitam a gestão de pessoas, processos e
+                                                geram mais segurança para a sua equipe na tomada de decisão.</p>
                                             <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                                                 <li>Grupo de Ações</li>
                                                 <li>Tipos de Ações</li>
@@ -441,7 +445,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
                                             <h4 class="mb-4">Prazos, Andamentos e Progresso</h4>
-                                            <p class="mb-4">Controle os processos através do andamento, fases e etapas. Não perca prazos.</p>
+                                            <p class="mb-4">Controle os processos através do andamento, fases e etapas.
+                                                Não perca prazos.</p>
                                             <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                                                 <li>Acompanhe o progresso</li>
                                                 <li>Registre os processos não ajuizados</li>
@@ -460,7 +465,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
                                             <h4 class="mb-4">Tarefas e Compromissos</h4>
-                                            <p class="mb-4">Registre tarefas e compromissos por advogado, acompanhe por dia, semana ou mês.</p>
+                                            <p class="mb-4">Registre tarefas e compromissos por advogado, acompanhe por
+                                                dia, semana ou mês.</p>
                                             <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                                                 <li>Compartilhamento de Agenda</li>
                                                 <li>Vinculo do processo</li>
@@ -477,7 +483,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
                                             <h4 class="mb-4">Gestão de Contas a Pagar e Receber</h4>
-                                            <p class="mb-4">Faça previsões e baixas de valores a pagar e receber, analise relatórios financeiros.</p>
+                                            <p class="mb-4">Faça previsões e baixas de valores a pagar e receber,
+                                                analise relatórios financeiros.</p>
                                             <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                                                 <li>Controle por Conta Financeira</li>
                                                 <li>Emissão de Boletos</li>
@@ -511,7 +518,8 @@
                                 <i class="la la-money"></i>
                             </div>
                             <h2 class="title">Grátis por 7 dias</h2>
-                            <p class="text-black">SoftPro Advogado: investimento que cabe no orçamento do seu escritório</p>
+                            <p class="text-black">SoftPro Advogado: investimento que cabe no orçamento do seu
+                                escritório</p>
                         </div>
                         <ul class="list-unstyled list-icon mb-4">
                             <li class="mb-3"><i class="la la-check"></i> Diga adeus as planilhas</li>
@@ -607,50 +615,49 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-logo">
-                            <img id="logo-img" class="img-fluid" src="{{ url('assets/images/logo-the-place.png') }}"
+                            <img id="logo-img" class="img-fluid"
+                                 src="{{ url('assets/site/images/logo-the-place-white.png') }}"
                                  alt="">
                         </div>
-                        <p class="mb-0">Softino Software Landing Page Is fully responsible, Build whatever you like with
-                            the Softino, Softino is the creative, modern HTML5 Template suitable for Your business.</p>
+                        <p class="mb-0">A gestão da sua empresa deve ser simples, rápida e inteligente
+                            Conheça nossas soluções de gestão para a sua empresa e deixe toda complexidade de lado.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 ps-md-5 mt-5 mt-md-0 footer-list justify-content-between d-flex">
                         <ul class="list-unstyled w-100">
-                            <li><a href="about-us.html">Sobre</a>
+                            <li>Nossas Soluções</a>
                             </li>
-                            <li><a href="services.html">Service</a>
+                            <li><a href="http://theplace.com.br/nossas-solucoes/softpro-erp">SoftPro ERP</a>
                             </li>
-                            <li><a href="team.html">Team</a>
+                            <li><a href="http://theplace.com.br/nossas-solucoes/softpro-producao">SoftPro Produção</a>
                             </li>
-                            <li><a href="team-single.html">Team Single</a>
+                            <li><a href="http://theplace.com.br/nossas-solucoes/softpro-loja">SoftPro Loja</a>
                             </li>
-                            <li><a href="contact.html">Contact Us</a>
+                            <li><a href="http://softproceramica.com.br/">SoftPro Cerâmica</a>
                             </li>
                         </ul>
                         <ul class="list-unstyled w-100">
-                            <li><a href="blog-right-sidebar.html">Blog</a>
+                            <li>Sobre Nós</li>
+                            <li><a href="http://theplace.com.br/sobre-nos">Nossa História</a>
                             </li>
-                            <li><a href="faq.html">Faq</a>
-                            </li>
-                            <li><a href="error-404.html">Error 404</a>
-                            </li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a>
-                            </li>
-                            <li><a href="terms-and-conditions.html">Terms</a>
+                            <li><a href="http://theplace.com.br/seja-um-franqueado">Seja um Franqueado</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-12 mt-5 mt-lg-0">
                         <ul class="media-icon list-unstyled">
                             <li>
-                                <p class="mb-0">Address: <b>423B, Road Wordwide Country, USA</b>
+                                <p class="mb-0">Endereço: <b>Rua Benjamin Constant, 440, Centro - Itu - São Paulo</b>
                                 </p>
                             </li>
-                            <li>Email: <a href="mailto:themeht23@gmail.com"><b>themeht23@gmail.com</b></a>
+                            <li>
+                                <a href="http://theplace.mysuite1.com.br/clientvivo.php?param=sochat_chatdep&inf=&sl=thp&idm=&redirect=http://theplace.mysuite1.com.br/empresas/thp/atendimento.php"><b>Suporte
+                                        OnLine</b></a></li>
                             </li>
-                            <li>Phone: <a href="tel:+912345678900"><b>+91-234-567-8900</b></a>
-                            </li>
-                            <li>Fax: <a href="tel:+912345678900"><b>+91-234-567-8900</b></a>
-                            </li>
+                            <li><a href="tel:1124299521"><b>(11) 2429.9521</b></a></li>
+                            <li><a href="tel:1124299523"><b>(11) 2429.9523</b></a></li>
+                            <li><a href="tel:1124299524"><b>(11) 2429.9524</b></a></li>
+                            <li>Email: <a href="mailto:contato@theplace.com.br"><b>contato@theplace.com.br</b></a>
+
                         </ul>
                     </div>
                 </div>
@@ -660,16 +667,16 @@
             <div class="container">
                 <div class="copyright">
                     <div class="row align-items-center">
-                        <div class="col-lg-6 col-md-12"><span>Copyright 2019 Softino Theme by <u><a href="#">ThemeHt</a></u> | All Rights Reserved</span>
+                        <div class="col-lg-6 col-md-12"><span>Copyright 2021 The Place Sistemas by <u><a href="#">Carlos. A. Santos Jr</a></u> | All Rights Reserved</span>
                         </div>
                         <div class="col-lg-6 col-md-12 text-lg-end mt-3 mt-lg-0">
                             <div class="footer-social">
                                 <ul class="list-inline">
-                                    <li class="me-2"><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                                    <li class="me-2"><a href="https://www.facebook.com/ThePlaceSistemas/"><i class="fab fa-facebook-f"></i> Facebook</a>
                                     </li>
-                                    <li class="me-2"><a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                                    <li class="me-2"><a href="https://www.linkedin.com/company/the-place-sistemas-corporativos"><i class="fab fa-linkedin"></i> Linkedin</a>
                                     </li>
-                                    <li><a href="#"><i class="fab fa-google-plus-g"></i> Google Plus</a>
+                                    <li><a href="https://twitter.com/grupotheplace"><i class="fab fa-twitter"></i> Twitter</a>
                                     </li>
                                 </ul>
                             </div>
