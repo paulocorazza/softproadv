@@ -11,7 +11,7 @@
                 <th scope="col">Valor Original</th>
                 <th scope="col">Data da Baixa</th>
                 <th scope="col">Valor Líquido</th>
-                <th width="120px" scope="col">Ações</th>
+                <th width="120px" scope="col"></th>
             </tr>
             </thead>
         </table>

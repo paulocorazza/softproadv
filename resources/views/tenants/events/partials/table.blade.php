@@ -7,7 +7,7 @@
                 <th scope="col">Titulo</th>
                 <th scope="col">Início</th>
                 <th scope="col">Fim</th>
-                <th width="300px" scope="col">Ações</th>
+                <th width="300px" scope="col"></th>
             </tr>
             </thead>
         </table>

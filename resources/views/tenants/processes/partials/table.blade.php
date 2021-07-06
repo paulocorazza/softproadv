@@ -10,7 +10,7 @@
                 <th scope="col">Progresso</th>
                 <th scope="col">Fase</th>
                 <th scope="col">Etapa</th>
-                <th width="150px" scope="col">Ações</th>
+                <th width="150px" scope="col"></th>
             </tr>
             </thead>
         </table>

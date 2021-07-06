@@ -6,7 +6,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Estado</th>
-                <th width="150px" scope="col">Ações</th>
+                <th width="150px" scope="col"></th>
             </tr>
             </thead>
         </table>

@@ -7,7 +7,7 @@
                 <th scope="col">Plano</th>
                 <th scope="col">Preço</th>
                 <th scope="col">PayPal</th>
-                <th width="150px" scope="col">Ações</th>
+                <th width="150px" scope="col"></th>
             </tr>
             </thead>
         </table>

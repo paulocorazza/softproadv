@@ -6,7 +6,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tipo de Ação</th>
                 <th scope="col">Grupo de Ação</th>
-                <th width="150px" scope="col">Ações</th>
+                <th width="150px" scope="col"></th>
             </tr>
             </thead>
         </table>

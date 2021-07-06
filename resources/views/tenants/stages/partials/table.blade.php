@@ -6,7 +6,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Etapa da ação</th>
                 <th scope="col">Fase da Ação</th>
-                <th width="150px" scope="col">Ações</th>
+                <th width="150px" scope="col"></th>
             </tr>
             </thead>
         </table>
