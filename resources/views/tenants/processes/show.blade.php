@@ -13,7 +13,7 @@
         @include('tenants.includes.breadcrumbs',  ['title' =>  isset($data->id) ? 'Gestão de Processos - ' . $data->number_process : 'Gestão de Processos' ,
                                'breadcrumbs' => [
                                'Processos' => route('processes.index'),
-                                isset($data->id) ? 'Editar' : 'Cadastrar', ]
+                                isset($data->id) ? 'Detalhes' : 'Cadastrar', ]
                               ])
     </div><!-- /.container-fluid -->
 @stop
@@ -26,7 +26,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Detalhes do Processo</h3>
+                <h3 class="card-title">Detalhes do Processo - <a href="{{ route('processes.edit', $data->id)  }}">Editar</a></h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -134,7 +134,7 @@
                                                     class="description">Início: {{ $event->start }} - Fim: {{ $event->end }}</span>
                                                 <span
                                                     class="description">{{ !empty($event->finish) ? 'Finalizado' : 'Pendente' }}</span>
-                                            </div>
+
                                             <!-- /.user-block -->
 
                                             <p>
@@ -158,7 +158,7 @@
 
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                         <h3 class="text-primary"><i class="fas fa-paint-brush"></i>
-                            Processo {{ $data->number_process }}
+                            Processo <a href="{{ route('processes.edit', $data->id)  }}">{{ $data->number_process }}</a>
                         </h3>
                         <p class="text-muted">{{ $data->description}}</p>
                         <br>

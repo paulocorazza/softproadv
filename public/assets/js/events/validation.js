@@ -106,7 +106,7 @@ $(document).ready(function () {
     $('#process_id').select2({
         theme: "classic",
         allowClear: true,
-        placeholder: 'Pesquisar por Nome ou CPF do cliente',
+        placeholder: 'Pesquisar por Nº do Processo, Nome ou CPF do cliente',
 
         ajax: {
             delay: 250,

@@ -199,6 +199,9 @@ class EloquentPersonRepository extends BaseEloquentRepository
             $data = $this->relationships('processes')
                 ->orWhere('name', 'LIKE', "%$search%")
                 ->orWhere('cpf', 'LIKE', "%$search%")
+                ->orWhereHas('processes', function ($query) use ($search) {
+                    $query->where('number_process', $search);
+                })
                 ->get();
 
             $processes = $this->getProcesses($data);

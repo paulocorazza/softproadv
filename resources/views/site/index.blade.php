@@ -92,7 +92,7 @@
                     <div class="col-lg-12">
                         <!-- Navbar -->
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand logo" href="index.html">
+                            <a class="navbar-brand logo" href="#home">
                                 <img id="logo-img" class="img-fluid" src="{{ url('assets/images/logo-the-place.png') }}"
                                      alt="">
                             </a>
@@ -431,7 +431,7 @@
                                                 <li>Grupo de Ações</li>
                                                 <li>Tipos de Ações</li>
                                                 <li>Fases do Processo</li>
-                                                <li>Etapas do Sistema</li>
+                                                <li>Etapas do Processo</li>
                                                 <li>Origem das Pessoas</li>
                                                 <li>Permissões por usuário</li>
                                             </ul>
@@ -518,7 +518,7 @@
                                 <i class="la la-money"></i>
                             </div>
                             <h2 class="title">Grátis por 7 dias</h2>
-                            <p class="text-black">SoftPro Advogado: investimento que cabe no orçamento do seu
+                            <p class="text-black">Investimento que cabe no orçamento do seu
                                 escritório</p>
                         </div>
                         <ul class="list-unstyled list-icon mb-4">
@@ -550,8 +550,8 @@
                                         </ul>
                                     </div>
                                     <a class="btn btn-theme btn-circle mt-4" href="#"
-                                       data-text="Experimente 1 Mês grátis">
-                                        <span>E</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>m</span><span>e</span><span>n</span><span>t</span><span>e <span>1</span> <span>M</span><span>ê</span><span>s </span> G</span><span>r</span><span>á</span><span>t</span><span>i</span><span>s</span>
+                                       data-text="Experimente 7 Dias grátis">
+                                        <span>E</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>m</span><span>e</span><span>n</span><span>t</span><span>e <span>7</span> <span>D</span><span>i</span><span>a</span><span>s </span> G</span><span>r</span><span>á</span><span>t</span><span>i</span><span>s</span>
                                     </a>
                                 </div>
                             </div>
@@ -575,8 +575,8 @@
                                         </ul>
                                     </div>
                                     <a class="btn btn-theme btn-circle mt-4" href="#"
-                                       data-text="Experimente 1 Mês grátis">
-                                        <span>E</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>m</span><span>e</span><span>n</span><span>t</span><span>e <span>1</span> <span>M</span><span>ê</span><span>s </span> G</span><span>r</span><span>á</span><span>t</span><span>i</span><span>s</span>
+                                       data-text="Experimente 7 Dias grátis">
+                                        <span>E</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>m</span><span>e</span><span>n</span><span>t</span><span>e <span>7</span> <span>D</span><span>i</span><span>a</span><span>s </span> G</span><span>r</span><span>á</span><span>t</span><span>i</span><span>s</span>
                                     </a>
                                 </div>
                             </div>
@@ -619,7 +619,7 @@
                                  src="{{ url('assets/site/images/logo-the-place-white.png') }}"
                                  alt="">
                         </div>
-                        <p class="mb-0">A gestão da sua empresa deve ser simples, rápida e inteligente
+                        <p class="mb-0">A gestão da sua empresa deve ser simples, rápida e inteligente.
                             Conheça nossas soluções de gestão para a sua empresa e deixe toda complexidade de lado.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 ps-md-5 mt-5 mt-md-0 footer-list justify-content-between d-flex">
