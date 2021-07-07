@@ -42,9 +42,12 @@
             </ul>
             <br>
 
+            @if(isset($data->process_id))
             <p><strong>Processo: </strong>
                 <a href="{{ route('processes.show', $data->process_id) }}">{{ $data->process->process_person }}</a>
             </p>
+            @endif
+
             <p><strong>O que a pessoa irá fazer: </strong>
             <p>{{  $data->title}}</p>
             <p><strong>Data de Inicio: </strong>{{ $data->start }}

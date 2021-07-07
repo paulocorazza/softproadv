@@ -41,14 +41,14 @@
             <p><strong>Processo: </strong>{{  @$data->process->number_process }}</p>
             <hr>
             <p><strong>Número do Documento: </strong>{{  $data->document }}</p>
-            <p><strong>Data de Vencimento: </strong>{{   Helper::formatDateTime($data->due_date, 'd/m/Y')  }}</p>
-            <p><strong>Data de Competência: </strong>{{  Helper::formatDateTime($data->competence, 'd/m/Y') }}</p>
+            <p><strong>Data de Vencimento: </strong>{{   \App\Helpers\Helper::formatDateTime($data->due_date, 'd/m/Y')  }}</p>
+            <p><strong>Data de Competência: </strong>{{  \App\Helpers\Helper::formatDateTime($data->competence, 'd/m/Y') }}</p>
             <p><strong>Valor Original: </strong>{{  $data->original }}</p>
             <p><strong>Desconto: </strong>{{  $data->discount }}</p>
             <p><strong>Multa: </strong>{{  $data->fine }}</p>
             <p><strong>Juros: </strong>{{  $data->rate }}</p>
             <p><strong>Valor Líquido: </strong>{{  $data->payment }}</p>
-            <p><strong>Data da Baixa: </strong>{{  Helper::formatDateTime($data->payday, 'd/m/Y')  }}</p>
+            <p><strong>Data da Baixa: </strong>{{  \App\Helpers\Helper::formatDateTime($data->payday, 'd/m/Y')  }}</p>
         </div>
         <!-- /.card-body -->
     </div>

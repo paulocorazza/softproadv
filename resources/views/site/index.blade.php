@@ -667,7 +667,7 @@
             <div class="container">
                 <div class="copyright">
                     <div class="row align-items-center">
-                        <div class="col-lg-6 col-md-12"><span>Copyright 2021 The Place Sistemas by <u><a href="#">Carlos. A. Santos Jr</a></u> | All Rights Reserved</span>
+                        <div class="col-lg-6 col-md-12"><span>Copyright 2021 The Place Sistemas by <u><a href="#">Carlos Santos</a></u> | All Rights Reserved</span>
                         </div>
                         <div class="col-lg-6 col-md-12 text-lg-end mt-3 mt-lg-0">
                             <div class="footer-social">
