@@ -134,7 +134,7 @@
                                                     class="description">Início: {{ $event->start }} - Fim: {{ $event->end }}</span>
                                                 <span
                                                     class="description">{{ !empty($event->finish) ? 'Finalizado' : 'Pendente' }}</span>
-
+                                            </div>
                                             <!-- /.user-block -->
 
                                             <p>
