@@ -26,6 +26,11 @@ class IndexController extends Controller
         return view('site.index');
     }
 
+    public function showRegister()
+    {
+        return view('site.register');
+    }
+
     public function register(StoreUpdateCompanyFormRequest $request)
     {
         $company = $this->repository->create($request->all());

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Event;
 use App\Models\Financial;
 use App\Models\Person;
@@ -40,10 +41,12 @@ class HomeController extends Controller
             $query->where('user_id', Auth::user()->id);
         })->count();
 
-        $totalEvents = $countEvent > 0 ? ($this->event->whereHas('users', function ($query) {
-                    $query->where('user_id', Auth::user()->id);
-                })->finish()->count() / $countEvent) * 100 : 100;
+        $countEventFinish = $this->event->whereHas('users', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->finish()->count();
 
+
+        $totalEvents =  $countEvent > 0 ? Helper::roundTo(($countEventFinish / $countEvent) * 100) : 100;
 
         if ($request->ajax()) {
             if ($request->has('events')) {

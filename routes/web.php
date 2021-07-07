@@ -73,6 +73,7 @@ Route::group(['namespace' => 'Site'], function () {
     /*     * *************      REGISTER      ***************** */
     /*     * ************************************************ */
     Route::post('register-company', 'IndexController@register')->name('register.company');
+    Route::get('register-show', 'IndexController@showRegister')->name('register.show');
     Route::get('/', 'IndexController@index')->name('index');
 });
 
