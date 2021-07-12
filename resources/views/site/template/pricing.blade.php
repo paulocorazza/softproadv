@@ -39,7 +39,7 @@
                                     <li>Controle financeiro</li>
                                 </ul>
                             </div>
-                            <a class="btn btn-theme btn-circle mt-4" href="#"
+                            <a class="btn btn-theme btn-circle mt-4" href="{{ route('register.show') }}"
                                data-text="Experimente 7 Dias grátis">
                                 <span>E</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>m</span><span>e</span><span>n</span><span>t</span><span>e <span>7</span> <span>D</span><span>i</span><span>a</span><span>s </span> G</span><span>r</span><span>á</span><span>t</span><span>i</span><span>s</span>
                             </a>

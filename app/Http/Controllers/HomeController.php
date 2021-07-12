@@ -34,17 +34,10 @@ class HomeController extends Controller
         $totalProcesses = $this->process->count();
         $totalInProgress = $this->progress->pending()->count();
 
-
         $financialChart = $this->financialCharts->getReports();
 
-        $countEvent = $this->event->whereHas('users', function ($query) {
-            $query->where('user_id', Auth::user()->id);
-        })->count();
-
-        $countEventFinish = $this->event->whereHas('users', function ($query) {
-            $query->where('user_id', Auth::user()->id);
-        })->finish()->count();
-
+        $countEvent = $this->event->count();
+        $countEventFinish = $this->event->finish()->count();
 
         $totalEvents =  $countEvent > 0 ? Helper::roundTo(($countEventFinish / $countEvent) * 100) : 100;
 

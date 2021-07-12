@@ -38,12 +38,13 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
     public function create(array $data)
     {
-
         DB::beginTransaction();
 
         try {
 
             $company = parent::create($data);
+
+
 
             $createDataBase = ($data['create_database']) ? true : false;
 
@@ -53,6 +54,8 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
             return $company;
         } catch (\Exception $e) {
+
+            dd($e);
             DB::rollBack();
 
             redirect()->back()

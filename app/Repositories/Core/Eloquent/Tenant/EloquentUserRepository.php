@@ -123,7 +123,7 @@ class EloquentUserRepository extends BaseEloquentRepository
      */
     public function create(array $data)
     {
-        DB::beginTransaction();
+         DB::beginTransaction();
 
         try {
             $user = parent::create($data);

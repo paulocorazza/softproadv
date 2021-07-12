@@ -46,7 +46,7 @@ class CreateUsersTable extends Migration
             $table->time('journey_start')->nullable();
             $table->time('journey_pause')->nullable();
             $table->time('journey_end')->nullable();
-            $table->decimal('salary', 18, 2);
+            $table->decimal('salary', 18, 2)->nullable();
 
             $table->text('observation')->nullable();
             $table->enum('status', ['A', 'I'])->default('A')->comment('A -> Ativo, I -> Inativo');

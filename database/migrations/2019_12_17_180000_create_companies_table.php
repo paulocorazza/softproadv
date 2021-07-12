@@ -25,8 +25,8 @@ class CreateCompaniesTable extends Migration
             $table->string('qtd_processes');
             $table->string('email');
             $table->enum('payment_status', ['testing', 'active', 'canceled'])->default('testing');
-            $table->string('payment_id');
-            $table->string('identify');
+            $table->string('payment_id')->nullable();
+            $table->string('identify')->nullable();
 
             $table->unsignedBigInteger('plan_id')->nullable();
 

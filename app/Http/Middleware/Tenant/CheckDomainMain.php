@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Tenant;
 
+use App\Tenant\ManagerTenant;
 use Closure;
 
 class CheckDomainMain
@@ -15,10 +16,12 @@ class CheckDomainMain
      */
     public function handle($request, Closure $next)
     {
-        if (request()->getHost() != config('tenant.domain_main')) {
-         abort(401, 'Acesso negado!');
+        $manager = app(ManagerTenant::class);
+
+        if (!$manager->domainIsMain()) {
+            abort(401, 'Acesso negado!');
         }
 
-        return $next($request);
+         return $next($request);
     }
 }

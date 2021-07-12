@@ -126,16 +126,13 @@
 <script src="assets/site/js/snap.svg.js"></script>
 <script src="assets/site/js/step.js"></script>
 
-<!--== contact-form -->
-<script src="assets/site/js/contact-form/contact-form.js"></script>
-
 <!--== wow -->
 <script src="assets/site/js/wow.min.js"></script>
 
 <!--== theme-script -->
 <script src="assets/site/js/theme-script.js"></script>
 
-<!-- inject js end -->
+@yield('java-script')
 
 </body>
 

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Observers\UserObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -40,6 +42,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('tenantmain', function () {
             return (request()->getHost() == config('tenant.domain_main'));
         });
+
+
+
+        /**
+         * Observers
+         */
+        User::observe(UserObserver::class);
 
     }
 }

@@ -11,7 +11,7 @@ class ManagerTenant
     public function domainIsMain()
     {
        //  dd(request()->getHost(), config('tenant.domain_main'));
-        return (request()->getHost() == config('tenant.domain_main'));
+        return in_array(request()->getHost(), config('tenant.domain_main'));
     }
 
     public function setConnection(Company $company)

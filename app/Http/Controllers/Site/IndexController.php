@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCompanyFormRequest;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
+use App\Tenant\ManagerTenant;
 use Session;
 
 
@@ -19,7 +20,9 @@ class IndexController extends Controller
     }
     public function index()
     {
-        if (request()->getHost() != config('tenant.domain_main')) {
+        $manager = app(ManagerTenant::class);
+
+        if (!$manager->domainIsMain()) {
             return redirect()->route('home');
         }
 
@@ -33,6 +36,7 @@ class IndexController extends Controller
 
     public function register(StoreUpdateCompanyFormRequest $request)
     {
+
         $company = $this->repository->create($request->all());
 
         if (!$company) {
