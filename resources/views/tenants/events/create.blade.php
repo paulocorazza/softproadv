@@ -56,6 +56,7 @@
         var routeProcessAjax = "{{ route('processes.select') }}"
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>

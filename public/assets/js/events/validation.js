@@ -98,6 +98,13 @@ $(document).ready(function () {
     }
 
 
+    $('#start').change(function () {
+        let start = moment($(this).val()).add(1, 'hours').format('DD/MM/YYYY HH:mm:ss')
+        let end = moment(start, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DDTHH:mm:ss")
+        $('#end').val(end)
+    })
+
+
     $('#users').select2({
         allowClear: true,
         theme: "classic",

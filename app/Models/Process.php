@@ -42,7 +42,8 @@ class Process extends Model
         'percent_fees',
         'description',
         'status',
-        'type_process'
+        'type_process',
+        'contract'
     ];
 
 

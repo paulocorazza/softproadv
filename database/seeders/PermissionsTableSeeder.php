@@ -185,6 +185,13 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'view_type_address',   'label' => 'Visualizar um Tipo de Endereço'],
             ['name' => 'delete_type_address', 'label' => 'Excluir um Tipo de Endereço'],
 
+            /** CONTRACT MODEL */
+            ['name' => 'contracts',       'label' => 'Gestão de Modelo de Contratos'],
+            ['name' => 'create_contract', 'label' => 'Criar um novo Modelo de Contrato'],
+            ['name' => 'update_contract', 'label' => 'Alterar um Modelo de Contrato'],
+            ['name' => 'view_contract',   'label' => 'Visualizar um Modelo de Contrato'],
+            ['name' => 'delete_contract', 'label' => 'Excluir um Modelo de Contrato'],
+
 
             /** REPORTS */
             ['name' => 'rel-honorary',                'label' => 'Relatório de Honorários'],

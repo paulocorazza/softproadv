@@ -48,10 +48,9 @@
             {!! Form::label('end', 'Data Fim', ['class' => 'control-label']); !!}
             <br>
             <input type="datetime-local" class="form-control" name="end" id="end"
-                   value="{{ old('end', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->end_br) ? $data->end_br : date('d/m/Y H:i:s') )->format('Y-m-d\TH:i:s') ) }}">
+                   value="{{ old('end', \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', isset($data->end_br) ? $data->end_br : date('d/m/Y H:i:s', strtotime('+1 hours')) )->format('Y-m-d\TH:i:s') ) }}">
         </div>
     </div>
-
 
 </div>
 

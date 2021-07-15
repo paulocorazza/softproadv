@@ -8,6 +8,7 @@ use App\Repositories\Contracts\AgreementRepositoryInterface;
 use App\Repositories\Contracts\CityRepositoryInterface;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
 use App\Repositories\Contracts\ContactRepositoryInterface;
+use App\Repositories\Contracts\ContractModelInterface;
 use App\Repositories\Contracts\CountryRepositoryInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\EventRepositoryInterface;
@@ -38,6 +39,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentAddressRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCityRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCompanyRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentContactRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentContractModelRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentCountryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentDistrictRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentEventRepository;
@@ -203,6 +205,9 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(FinancialRepositoryInterface::class,
         EloquentFinancialRepository::class);
+
+        $this->app->bind(ContractModelInterface::class,
+        EloquentContractModelRepository::class);
 
     }
 }

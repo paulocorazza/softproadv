@@ -15,7 +15,10 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-lg-6 col-md-12 ms-auto mt-5 mt-lg-0 mb-5 mb-lg-0">
+
                     <h1 class="mb-4 fw-normal wow fadeInUp" data-wow-duration="1.5s"><span class="fw-bold">SoftPro Advogado</span>
                     </h1>
                     <h2 class="mb-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.3s">O sistema que você

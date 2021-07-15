@@ -26,6 +26,7 @@ class Event extends Model
         'schedule',
         'finish',
         'file',
+        'audience'
     ];
 
 

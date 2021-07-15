@@ -355,6 +355,12 @@ return [
                 'can' => 'forums'
             ],
 
+            [
+                'text' => 'Modelo de Contratos',
+                'url' => 'contracts',
+                'icon' => 'fas fa-file-contract',
+                'can' => 'contracts'
+            ],
 
             [
                 'text' => 'Tipos de endereços',

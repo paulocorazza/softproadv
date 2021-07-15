@@ -36,17 +36,21 @@ class TenantSeeder extends Command
     }
 
 
-    private function execCommand(Company $company) {
+    private function execCommand(Company $company)
+    {
 
         $this->tenant->setConnection($company);
 
         $this->info("Connecting Company {$company->name}");
 
+
         $run = Artisan::call('db:seed', [
             //adicionado --force
             '--force' => true,
+           // '--class' => 'ContractModelTableSeeder'
             '--class' => 'TenantsUserTableSeeder'
         ]);
+
 
         if ($run === 0) {
             $this->info("Success {$company->name}");
@@ -55,7 +59,6 @@ class TenantSeeder extends Command
         $this->info("End Connecting Company {$company->name}");
         $this->info("----------------------------------------");
     }
-
 
 
     /**
