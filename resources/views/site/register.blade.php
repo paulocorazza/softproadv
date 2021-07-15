@@ -2,9 +2,6 @@
 
 @section('body')
     <section class="register position-relative overflow-hidden">
-        <div class="bg-animation">
-            <img class="zoom-fade" src="images/pattern/03.png" alt="">
-        </div>
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8 col-md-12">

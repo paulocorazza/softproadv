@@ -4,11 +4,6 @@
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Navbar -->
-
-                    <div class="bg-animation">
-                        <img class="zoom-fade" src="assets/site/images/pattern/03.png" alt="">
-                    </div>
-
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand logo" href="{{ url('/') }}">
                             <img id="logo-img" class="img-fluid" src="{{ url('assets/images/logo-the-place.png') }}"
