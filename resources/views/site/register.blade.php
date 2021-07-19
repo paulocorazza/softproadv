@@ -80,7 +80,7 @@
                                             {!! Form::text('subdomain', null, ['class' => 'form-control', 'placeholder' => 'SubDomínio']) !!}
 
                                             <div class="input-group-append">
-                                                <span class="input-group-text">{{ env('APP_SUBDOMAIN') }}</span>
+                                                <span class="input-group-text">{{ config('tenant.subdomain')}} </span>
                                             </div>
                                         </div>
 

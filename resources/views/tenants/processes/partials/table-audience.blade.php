@@ -1,10 +1,9 @@
 <table class="table table-hover" id="progress_table">
     <thead>
     <tr>
-        <th>Data</th>
-        <th>Publicação</th>
-        <th>Prazo</th>
-        <th>Concluído</th>
+        <th>Título</th>
+        <th>Data Início</th>
+        <th>Data Fim</th>
         <th width="50px" scope="col"></th>
     </tr>
     </thead>

@@ -28,18 +28,18 @@ class Company extends Model
         parent::boot();
 
         self::creating(function ($model) {
-            if (Empty($model->db_database))
+            if (empty($model->db_database))
                 $model->db_database = $model->subdomain . '-adv';
 
-            if (Empty($model->db_host)) {
-                 $model->db_host = env('DB_HOST');
+            if (empty($model->db_host)) {
+                 $model->db_host = config('database.connections.tenant.host');
             }
 
-            if (Empty($model->db_username))
-                $model->db_username = env('DB_USERNAME');
+            if (empty($model->db_username))
+                $model->db_username = config('database.connections.tenant.username');
 
-            if (Empty($model->db_password))
-                $model->db_password = env('DB_PASSWORD');
+            if (empty($model->db_password))
+                $model->db_password = config('database.connections.tenant.password');
 
             $model->uuid = (string)Uuid::uuid4();
         });

@@ -136,6 +136,58 @@
     <!-- /.Andamentos -->
 
 
+
+    <!-- /.Audiências -->
+    <div class="card card-outline card-cyan">
+        <div class="card-header">
+            <h3 class="card-title">
+                Audiências
+                <small>do Processo</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
+            <button id="btnAudience" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target=".modal-audience">Adicionar
+            </button>
+            <br>
+            <br>
+
+            <div id="modalAudience" class="modal fade modal-audience" tabindex="-1" role="dialog"
+                 aria-labelledby="modalLarge" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalLarge">Audiência</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @include('tenants.processes.partials.formAudience')
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                            <button id="btnSaveUpdateAudience" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @include('tenants.includes.load')
+                @include('tenants.processes.partials.table-audience')
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.Andamentos -->
+
+
     <!-- /.Arquivos -->
     <div class="card card-outline card-blue">
         <div class="card-header">
@@ -165,8 +217,8 @@
                         </div>
 
                         <div class="col-2">
-                            <button type="button" class="btn bg-primary" onclick="addFile(this)"> + </button>
-                            <button type="button" class="btn bg-danger" onclick="removeFile(this)"> - </button>
+                            <button type="button" class="btn bg-primary" onclick="addFile(this)"> +</button>
+                            <button type="button" class="btn bg-danger" onclick="removeFile(this)"> -</button>
                         </div>
                     </div>
                 </div>
@@ -180,7 +232,8 @@
                     <h3 class="card-title">Arquivos</h3>
 
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
                             <i class="fas fa-minus"></i></button>
                     </div>
                 </div>
@@ -194,6 +247,26 @@
     </div>
     <!-- /.Arquivos -->
 
+    <!-- /.Contrato -->
+    <div class="card card-outline card-info">
+        <div class="card-header">
+            <h3 class="card-title">
+                Contrato
+                <small>do Processo</small>
+            </h3>
+            <!-- tools box -->
+        @include('tenants.includes.toolsBox')
+        <!-- /. tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pad">
+            <div class="form-group">
+                {!! Form::textarea('contract',null, ['class' => 'form-control', 'placeholder' => 'Contrato', 'id' => 'editor']) !!}
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.Contrato -->
 
 
     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
@@ -225,6 +298,24 @@
 
     <script type="text/javascript" src={{ asset('assets/js/processes/validation.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/people/person-select.js') }}></script>
+
+    <script src="{{ asset('assets/ckeditor.js') }} "></script>
+    <script src=" {{ asset('assets/ckfinder/ckfinder.js') }}"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: '/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+                },
+                toolbar: ['heading',  '|', 'bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList', 'blockQuote', '|', 'link', '|', 'insertTable', '|', 'indent', 'outdent']
+            })
+            .then(editor => {
+                //  editor.ui.view.editable.element.style.height = '150px';
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @stop
 
 

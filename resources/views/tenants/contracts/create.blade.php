@@ -52,7 +52,7 @@
                 ckfinder: {
                     uploadUrl: '/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
                 },
-                toolbar: [ 'heading', '|', 'ckfinder',  '|', 'bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList', 'blockQuote', '|', 'link', '|', 'insertTable', '|', 'indent', 'outdent' ]
+                toolbar: [ 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList', 'blockQuote', '|', 'link', '|', 'insertTable', '|', 'indent', 'outdent' ]
             })
             .then( editor => {
                 //  editor.ui.view.editable.element.style.height = '150px';
