@@ -138,7 +138,7 @@
 
 
     <!-- /.Audiências -->
-    <div class="card card-outline card-cyan">
+{{--    <div class="card card-outline card-cyan">
         <div class="card-header">
             <h3 class="card-title">
                 Audiências
@@ -184,7 +184,7 @@
             </div>
         </div>
         <!-- /.card-body -->
-    </div>
+    </div>--}}
     <!-- /.Andamentos -->
 
 
