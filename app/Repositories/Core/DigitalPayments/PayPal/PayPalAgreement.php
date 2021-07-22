@@ -49,11 +49,11 @@ class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
     protected function shippingAddress(): ShippingAddress
     {
         $shippingAddress = new ShippingAddress();
-        $shippingAddress->setLine1('111 First Street')
-            ->setCity('Saratoga')
-            ->setState('CA')
-            ->setPostalCode('95070')
-            ->setCountryCode('US');
+        $shippingAddress->setLine1('Rua Francisco Mendes Galvão, 250')
+            ->setCity('Itu')
+            ->setState('SP')
+            ->setPostalCode('13311-680')
+            ->setCountryCode('BR');
         return $shippingAddress;
     }
 
@@ -67,7 +67,7 @@ class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
         $startdate = Carbon::now()->add(1, 'day')->toAtomString();
 
         $agreement = new Agreement();
-        $agreement->setName('SoftPro - Contrato de Licença de Uso')
+        $agreement->setName('SoftPro - Advogado / Contrato de Licença de Uso')
                   ->setDescription('Contrato de Licença de Uso')
                   ->setStartDate($startdate);
 
