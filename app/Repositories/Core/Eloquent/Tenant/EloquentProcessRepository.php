@@ -341,9 +341,10 @@ class EloquentProcessRepository extends BaseEloquentRepository
      */
     private function getReplaceProcess(Process $process, mixed $contract): string|array
     {
-        $contract = str_replace('{Fórum}', $process->forum->name, $contract);
-        $contract = str_replace('{Vara}', $process->stick->name, $contract);
-        $contract = str_replace('{Comarca}', $process->district->name, $contract);
+        $contract = str_replace('{Fórum}', (isset($process->forum)) ??  $process->forum->name, $contract);
+        $contract = str_replace('{Vara}', (isset($process->stick)) ?? $process->stick->name, $contract);
+        $contract = str_replace('{Comarca}', (isset($process->district)) ?? $process->district->name, $contract);
+
         $contract = str_replace('{Número do Processo}', $process->number_process, $contract);
         $contract = str_replace('{Número do Protocolo}', $process->protocol, $contract);
         $contract = str_replace('{Número da Pasta}', $process->folder, $contract);
