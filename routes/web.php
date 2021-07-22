@@ -252,6 +252,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * *************      PROCESS     ***************** */
     /*     * ************************************************ */
 
+
     Route::get('process/processSelect', 'ExtraAction\PersonProcess')->name('processes.select');
     Route::get('process/search', 'ExtraAction\Process');
     Route::get('process/file/{id}/download', 'ExtraAction\ProcessFileDownload')->name('fileDownload');
@@ -263,6 +264,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('process/progress/delete', 'ExtraAction\ProcessProgressDestroy')->name('progressDelete');
     Route::get('process/stage/{id}/delete', 'ExtraAction\ProcessStageController')->name('stageDelete');
 
+    Route::get('processes/{id}/preview', 'ProcessContractController@preview')->name('processes.contract.preview');
+    Route::get('processes/{id}/contract', 'ProcessContractController@contract')->name('processes.contract');
+    Route::put('processes/{id}/contract', 'ProcessContractController@updateContract')->name('processes.contract.update');
     Route::resource('processes', 'ProcessController');
 
 

@@ -42,6 +42,7 @@
 @include('adminlte::plugins', ['type' => 'js'])
 
 @yield('adminlte_js')
+
 @else
 <script src="{{ asset('js/app.js') }}"></script>
 @endif

@@ -2,10 +2,11 @@
 
 namespace App\Repositories\Contracts;
 
-use Illuminate\Http\Request;
+use App\Models\Process;
 
 interface ProcessRepositoryInterface
 {
-
+    public function updateContract($id, array $data);
+    public function replaceTags(Process $process) : string;
 }
 

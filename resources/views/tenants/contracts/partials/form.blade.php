@@ -7,7 +7,7 @@
 
 <div class="form-group label-float">
     {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => ' ', 'id' => 'description']) !!}
-    {!! Form::label('description', 'Nome', ['class' => 'control-label']); !!}
+    {!! Form::label('description', 'Descrição', ['class' => 'control-label']); !!}
 </div>
 
 <div class="form-group">

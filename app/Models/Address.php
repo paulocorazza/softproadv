@@ -41,6 +41,11 @@ class Address extends Model
         return $this->belongsTo(State::class);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
 
     public function rules($id = '')
     {

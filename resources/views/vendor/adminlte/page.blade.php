@@ -249,6 +249,7 @@
     <script>
         setTimeout("$('.hide-msg').fadeOut();", 5000)
         var url_base = "{{ url('/') }}"
+        var tags = ['Nome', 'Endereço', 'Número', 'Bairro']
     </script>
     @stack('js')
     @yield('js')

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('css')
+@section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <style type="text/css">
         .table td, .table th {
@@ -247,28 +247,6 @@
     </div>
     <!-- /.Arquivos -->
 
-    <!-- /.Contrato -->
-    <div class="card card-outline card-info">
-        <div class="card-header">
-            <h3 class="card-title">
-                Contrato
-                <small>do Processo</small>
-            </h3>
-            <!-- tools box -->
-        @include('tenants.includes.toolsBox')
-        <!-- /. tools -->
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body pad">
-            <div class="form-group">
-                {!! Form::textarea('contract',null, ['class' => 'form-control', 'placeholder' => 'Contrato', 'id' => 'editor']) !!}
-            </div>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.Contrato -->
-
-
     {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
@@ -286,6 +264,11 @@
         var deleteProgressAjax = "{{ route('progressDelete') }}";
     </script>
 
+    <script src="{{ url('vendor/ckeditor/bundle.js') }}"></script>
+    <script>
+        editor = new editor("#editor", tags );
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
@@ -295,27 +278,12 @@
     <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/processes/progress.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/processes/files.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/processes/contract.js') }}></script>
 
     <script type="text/javascript" src={{ asset('assets/js/processes/validation.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/people/person-select.js') }}></script>
 
-    <script src="{{ asset('assets/ckeditor.js') }} "></script>
-    <script src=" {{ asset('assets/ckfinder/ckfinder.js') }}"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                ckfinder: {
-                    uploadUrl: '/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-                },
-                toolbar: ['heading',  '|', 'bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList', 'blockQuote', '|', 'link', '|', 'insertTable', '|', 'indent', 'outdent']
-            })
-            .then(editor => {
-                //  editor.ui.view.editable.element.style.height = '150px';
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
+
 @stop
 
 

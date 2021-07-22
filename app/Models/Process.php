@@ -47,7 +47,7 @@ class Process extends Model
     ];
 
 
-    protected $appends = ['process_person'];
+    protected $appends = ['process_person',];
 
     public function rules($id = '')
     {

@@ -1,7 +1,8 @@
 @extends('adminlte::page')
 
-@section('css')
+@section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 @stop
 
 @section('title_postfix', ' - Cadastrar Novo Modelo de Contrato')
@@ -39,27 +40,15 @@
 @stop
 
 @section('js')
+    <script src="{{ url('vendor/ckeditor/bundle.js') }}"></script>
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script type="text/javascript" src={{ asset('assets/js/contracts/validation.js') }}></script>
-    <script src="{{ asset('assets/ckeditor.js') }} "></script>
-    <script src=" {{ asset('assets/ckfinder/ckfinder.js') }}"></script>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) , {
-                ckfinder: {
-                    uploadUrl: '/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-                },
-                toolbar: [ 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo', '|', 'numberedList', 'bulletedList', 'blockQuote', '|', 'link', '|', 'insertTable', '|', 'indent', 'outdent' ]
-            })
-            .then( editor => {
-                //  editor.ui.view.editable.element.style.height = '150px';
-            })
-            .catch( error => {
-                console.error( error );
-            } );
+
+        new editor("#editor", tags );
     </script>
 @stop
 

@@ -14,7 +14,7 @@ class ContractModel extends Model
     public function rules($id = '')
     {
         return [
-            'description'      => 'required|unique:contract_models,description,{$id},id',
+            'description'      => "required|min:3|max:60|unique:contract_models,description,{$id},id",
             'contract'         => "required",
         ];
     }

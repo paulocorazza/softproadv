@@ -17,8 +17,6 @@ $(document).ready(function () {
 
 
     $('#formRegister').each(function () {
-
-
         $(this).validate({
             rules: {
                 person_id: {

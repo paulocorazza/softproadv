@@ -2,11 +2,13 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
+use App\Enum\Tag;
 use App\Helpers\Helper;
 use App\Models\Process;
 use App\Models\Stage;
 use App\Repositories\Contracts\ProcessRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +39,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
             return 0;
         }
 
-        return  Helper::roundTo(($countProgressesConcluded + $countEventsFinish) / $totalProgressesEvents * 100);
+        return Helper::roundTo(($countProgressesConcluded + $countEventsFinish) / $totalProgressesEvents * 100);
     }
 
 
@@ -83,7 +85,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
                     $filesUploaded['description'] = $file['description'];
                     $filesUploaded['ext'] = $ext;
-                    $filesUploaded['file'] =  isset(session('company')['uuid']) ? session('company')['uuid'] . '/' . $path : $path;
+                    $filesUploaded['file'] = isset(session('company')['uuid']) ? session('company')['uuid'] . '/' . $path : $path;
 
                     $insert = $process->files()->create($filesUploaded);
 
@@ -132,7 +134,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $percent = $this->getPercentProgress($model);
                 return view('tenants.processes.partials.progress', compact('percent'));
             })
-
             ->editColumn('phase.name', function ($model) {
                 return $model->phase->name ?? '';
             })
@@ -140,7 +141,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 return $model->stage->name ?? '';
             })
             ->addColumn($column, $view)
-
             ->make(true);
     }
 
@@ -205,7 +205,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
             $files = $this->saveFiles($data, $process);
 
 
-
             if (!$process || !$progresses || !$files || !$users || !$state) {
                 DB::rollBack();
 
@@ -231,6 +230,30 @@ class EloquentProcessRepository extends BaseEloquentRepository
         }
     }
 
+    public function updateContract($id, array $data)
+    {
+        if (!$process = parent::find($id)) {
+            return [
+                'status' => false,
+                'message' => 'Registro não encontrado!'
+            ];
+        }
+        $update = $process->update($data);
+
+        if (!$update) {
+            return [
+                'status' => false,
+                'message' => 'Não foi possível atualizar o registro.' . $e->getMessage()
+            ];
+
+        }
+
+        return [
+            'status' => true,
+            'process' => $process
+        ];
+    }
+
     private function saveStage(Process $process, array $data)
     {
         if ($this->isUpdateStage($process, $data)) {
@@ -249,7 +272,94 @@ class EloquentProcessRepository extends BaseEloquentRepository
      */
     private function isUpdateStage(Process $process, $data): bool
     {
-        return isset($process->stage_id) && !$process->stages()->find($process->stage_id) && ($process->stage_id !=  $data['stage_id'] || $data['status'] == 'Concluído');
+        return isset($process->stage_id) && !$process->stages()->find($process->stage_id) && ($process->stage_id != $data['stage_id'] || $data['status'] == 'Concluído');
     }
 
+    public function replaceTags(Process $process): string
+    {
+        $contract = $process->contract;
+        $contract = $this->getReplacePerson($process, $contract);
+        $contract = $this->getReplaceCounterPart($process, $contract);
+        $contract = $this->getReplaceProcess($process, $contract);
+        $contract = $this->getUsers($process, $contract);
+        return $this->getUsersOab($process, $contract);
+    }
+
+    /**
+     * @param Process $process
+     * @param mixed $contract
+     * @return array|mixed|string|string[]
+     */
+    private function getUsers(Process $process, mixed $contract): mixed
+    {
+        $users = array_map(function ($item) {
+            return $item['name'];
+        }, $process->users->toArray());
+
+        return str_replace('{Honorários %}', implode(',', $users), $contract);
+    }
+
+    private function getUsersOab(Process $process, mixed $contract): mixed
+    {
+        $users = array_map(function ($item) {
+            return $item['name'] . ' OAB: ' . $item['oab'];
+        }, $process->users->toArray());
+
+        return str_replace('{Honorários %}', implode(',', $users), $contract);
+    }
+
+    /**
+     * @param Process $process
+     * @param mixed $contract
+     * @return array|string|string[]
+     */
+    private function getReplacePerson(Process $process, mixed $contract): string|array
+    {
+        $contract = str_replace('{Nome do Cliente}', $process->person->name, $contract);
+        $contract = str_replace('{CPF do Cliente}', $process->person->cpf, $contract);
+        $contract = str_replace('{CNPJ do Cliente}', $process->person->cnpj, $contract);
+        $contract = str_replace('{RG do Cliente}', $process->person->rg, $contract);
+
+        $address = $process->person->addresses()->with('city', 'state', 'country')->first();
+
+        if ($address) {
+            $contract = str_replace('{Endereço do Cliente}', $address->street, $contract);
+            $contract = str_replace('{Número do Cliente}', $address->number, $contract);
+            $contract = str_replace('{Bairro do Cliente}', $address->district, $contract);
+            $contract = str_replace('{Complemento do Cliente}', $address->complement, $contract);
+            $contract = str_replace('{Cidade do Cliente}', $address->city->title, $contract);
+            $contract = str_replace('{UF do Cliente}', $address->state->letter, $contract);
+            $contract = str_replace('{País do Cliente}', $address->country->name, $contract);
+        }
+        return $contract;
+    }
+
+    /**
+     * @param Process $process
+     * @param mixed $contract
+     * @return array|string|string[]
+     */
+    private function getReplaceProcess(Process $process, mixed $contract): string|array
+    {
+        $contract = str_replace('{Fórum}', $process->forum->name, $contract);
+        $contract = str_replace('{Vara}', $process->stick->name, $contract);
+        $contract = str_replace('{Comarca}', $process->district->name, $contract);
+        $contract = str_replace('{Número do Processo}', $process->number_process, $contract);
+        $contract = str_replace('{Número do Protocolo}', $process->protocol, $contract);
+        $contract = str_replace('{Número da Pasta}', $process->folder, $contract);
+        $contract = str_replace('{Data do Requerimento}', $process->date_request, $contract);
+        $contract = str_replace('{Expectativa / Valor da causa}', $process->expectancy, $contract);
+        $contract = str_replace('{Valor dos honorários}', $process->price, $contract);
+        return str_replace('{Honorários %}', $process->percent_fees, $contract);
+    }
+
+    /**
+     * @param Process $process
+     * @param array|string $contract
+     * @return array|string|string[]
+     */
+    private function getReplaceCounterPart(Process $process, array|string $contract): string|array
+    {
+        return str_replace('{Nome da Parte Contrária}', $process->counterPart->name, $contract);
+    }
 }

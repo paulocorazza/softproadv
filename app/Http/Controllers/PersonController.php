@@ -75,8 +75,6 @@ class PersonController extends ControllerStandard
             $dataForm[$this->upload['name']] = $nameFile;
         }
 
-
-
         $insert = $this->model->create($dataForm);
 
         if (!$insert['status']) {

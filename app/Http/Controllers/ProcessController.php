@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProcessProgress;
 use App\Models\ProcessStage;
+use App\Repositories\Contracts\ContractModelInterface;
 use App\Repositories\Contracts\DistrictRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
@@ -51,6 +52,11 @@ class ProcessController extends ControllerStandard
      */
     private $phase;
 
+    /**
+     * @var ContractModelInterface
+     */
+    private ContractModelInterface $contractModel;
+
     public function __construct(
         ProcessRepositoryInterface $process,
         ForumRepositoryInterface $forum,
@@ -59,8 +65,8 @@ class ProcessController extends ControllerStandard
         GroupActionRepositoryInterface $groupActions,
         UserRepositoryInterface $users,
         TypeActionRepositoryInterface $typeAction,
-        PhaseRepositoryInterface $phase
-
+        PhaseRepositoryInterface $phase,
+        ContractModelInterface $contractModel,
     ) {
         $this->model = $process;
         $this->forum = $forum;
@@ -80,6 +86,7 @@ class ProcessController extends ControllerStandard
         $this->middleware('can:update_process')->only(['edit', 'update']);
         $this->middleware('can:view_process')->only(['show']);
         $this->middleware('can:delete_process')->only(['delete']);
+        $this->contractModel = $contractModel;
     }
 
     public function create()
@@ -98,7 +105,8 @@ class ProcessController extends ControllerStandard
 
         $title = "Cadastrar {$this->title}";
         return view("{$this->view}.create",
-            compact('title', 'person', 'counterpart', 'judge', 'forums', 'sticks', 'districts', 'groupActions', 'typeActions',
+            compact('title', 'person', 'counterpart', 'judge', 'forums', 'sticks', 'districts', 'groupActions',
+                'typeActions',
                 'users', 'phases', 'stages'));
     }
 
@@ -120,7 +128,7 @@ class ProcessController extends ControllerStandard
                 'users',
                 'progresses' => function ($query) {
                     $query->latest('date');
-                } ,
+                },
                 'files',
             ])->find($id);
 
@@ -175,7 +183,6 @@ class ProcessController extends ControllerStandard
         $title = "Editar {$this->title}: {$data->name}";
 
 
-
         return view("{$this->view}.create",
             compact('title', 'data', 'person', 'counterpart', 'judge', 'forums', 'sticks', 'districts', 'groupActions',
                 'typeActions',
@@ -187,7 +194,7 @@ class ProcessController extends ControllerStandard
     {
         $dataForm = $request->all();
 
-        $validate = Validator::make($request->all(),  $this->model->rules());
+        $validate = Validator::make($request->all(), $this->model->rules());
 
         if ($validate->fails()) {
             return implode($validate->messages()->all("<p>:message</p>"));
@@ -209,7 +216,7 @@ class ProcessController extends ControllerStandard
     {
         $dataForm = $request->all();
 
-          $validate = Validator::make($request->all(),  $this->model->rules($id));
+        $validate = Validator::make($request->all(), $this->model->rules($id));
 
         if ($validate->fails()) {
             return implode($validate->messages()->all("<p>:message</p>"));

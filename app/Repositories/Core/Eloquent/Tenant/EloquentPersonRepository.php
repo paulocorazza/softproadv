@@ -107,7 +107,8 @@ class EloquentPersonRepository extends BaseEloquentRepository
         DB::beginTransaction();
 
         try {
-            $data['type_person'] = json_encode($data['type_person']);
+            $data['type_person'] = json_encode($data['type_person'], JSON_UNESCAPED_UNICODE);
+
             $data['state'] = (isset($data['state']) ? 'I' : 'A');
             $data['user_id'] = Auth::user()->id;
 
@@ -153,7 +154,7 @@ class EloquentPersonRepository extends BaseEloquentRepository
 
         DB::beginTransaction();
         try {
-            $data['type_person'] = json_encode($data['type_person']);
+            $data['type_person'] = json_encode($data['type_person'], JSON_UNESCAPED_UNICODE);
 
             $data['state'] = (isset($data['state']) ? 'I' : 'A');
 

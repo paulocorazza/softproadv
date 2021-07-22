@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-12 col-sm-6">
-        {!! Form::label('forum_id', 'Forum', ['class' => 'control-label']); !!}
+        {!! Form::label('forum_id', 'Fórum', ['class' => 'control-label']); !!}
         <div class="form-group">
             {!! Form::select('forum_id', $forums, null, ['placeholder' => 'Selecione o Forum', 'class' => 'form-control', 'id' => 'forum_id']) !!}
         </div>
