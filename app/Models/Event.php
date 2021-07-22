@@ -91,4 +91,9 @@ class Event extends Model
     {
         return $query->whereNotNull('finish');
     }
+
+    public function scopeAudience($query)
+    {
+        return $query->where('audience', true);
+    }
 }

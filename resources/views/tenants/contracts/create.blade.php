@@ -2,7 +2,6 @@
 
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 @stop
 
 @section('title_postfix', ' - Cadastrar Novo Modelo de Contrato')
@@ -41,15 +40,15 @@
 
 @section('js')
     <script src="{{ url('vendor/ckeditor/bundle.js') }}"></script>
+    <script>
+        editor =  new editor("#editor", {!!  json_encode(array_values(App\Enum\Tag::Tags()))   !!} );
+    </script>
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
     <script src="{{ url('vendor/jquery/messages_pt_BR.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script type="text/javascript" src={{ asset('assets/js/contracts/validation.js') }}></script>
-    <script>
 
-        new editor("#editor", tags );
-    </script>
 @stop
 
 

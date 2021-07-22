@@ -264,11 +264,6 @@
         var deleteProgressAjax = "{{ route('progressDelete') }}";
     </script>
 
-    <script src="{{ url('vendor/ckeditor/bundle.js') }}"></script>
-    <script>
-        editor = new editor("#editor", tags );
-    </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="{{ url('vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ url('vendor/jquery/additional-methods.js') }}"></script>
@@ -282,8 +277,6 @@
 
     <script type="text/javascript" src={{ asset('assets/js/processes/validation.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/people/person-select.js') }}></script>
-
-
 @stop
 
 

@@ -11,58 +11,63 @@
     <tbody class="j_list">
     <!-- /foreach progresses -->
 
-    @if(isset($progresses))
-        @forelse($progresses as $progress)
-            <tr data-id="{{ $progress['id']  }}" id="progresses{{ $progress['id'] }}">
+    @if(isset($events))
+        @forelse($events as $event)
+            <tr data-id="{{ $event['id']  }}" id="audiences{{ $event['id'] }}">
                 <td>
                     <input type="hidden"
-                           name="progresses[{{ $progress['id']  }}][id]"
-                           id="progresses[{{ $progress['id']  }}][id]"
-                           value="{{ $progress['id'] }}">
+                           name="audiences[{{ $event['id']  }}][id]"
+                           id="audiences[{{ $event['id']  }}][id]"
+                           value="{{ $event['id'] }}">
 
                     <input type="hidden"
-                           name="progresses[{{ $progress['id']  }}][publication]"
-                           id="progresses[{{ $progress['id']  }}][publication]"
-                           value="{{ $progress['publication'] }}">
+                           name="audiences[{{ $event['id']  }}][color]"
+                           id="audiences[{{ $event['id']  }}][color]"
+                           value="{{ $event['color'] }}">
+
+                    <input type="hidden"
+                           name="audiences[{{ $event['id']  }}][publication]"
+                           id="audiences[{{ $event['id']  }}][publication]"
+                           value="{{ $event['publication'] }}">
 
                     <input class="form-control" readonly type="text"
-                           name="progresses[{{ $progress['id']  }}][date]"
-                           id="progresses[{{ $progress['id']  }}][date]"
-                           value="{{ $progress['date_br']  }}">
+                           name="audiences[{{ $event['id']  }}][title]"
+                           id="audiences[{{ $event['id']  }}][title]"
+                           value="{{ $event['title']  }}">
                 </td>
 
                 <td>
                     <input class="form-control" readonly type="text"
-                           name="progresses[{{ $progress['id']  }}][description]"
-                           id="progresses[{{ $progress['id']  }}][description]"
-                           value="{{ $progress['description'] }}">
+                           name="audiences[{{ $event['id']  }}][start]"
+                           id="audiences[{{ $event['id']  }}][start]"
+                           value="{{ $event['start_br'] }}">
                 </td>
 
                 <td>
                     <input class="form-control" readonly type="text"
-                           name="progresses[{{ $progress['id'] }}][date_term]"
-                           id="progresses[{{ $progress['id'] }}][date_term]"
-                           value="{{ $progress['date_term_br'] }}">
+                           name="audiences[{{ $event['id'] }}][end]"
+                           id="audiences[{{ $event['id'] }}][end]"
+                           value="{{ $event['end_br'] }}">
                 </td>
 
                 <td>
                     <input class="form-control" readonly type="checkbox"
-                           name="progresses[{{ $progress['id'] }}][concluded]"
-                           id="progresses[{{ $progress['id'] }}][concluded]" {{ $progress['concluded'] ? 'checked' : '' }} >
+                           name="audiences[{{ $event['id'] }}][concluded]"
+                           id="audiences[{{ $event['id'] }}][concluded]" {{ $event['concluded'] ? 'checked' : '' }} >
                 </td>
 
 
                 <td>
-                    <a rel="{{ $progress['id'] }}" class="badge bg-yellow" href="javascript:;"
-                       onclick="editDetail(this)">Editar</a>
+                    <a rel="{{ $event['id'] }}" class="badge bg-yellow" href="javascript:;"
+                       onclick="editDetailEvent(this)">Editar</a>
 
-                    <a rel="{{$progress['id'] }}" class="badge bg-danger" href="javascript:;"
-                       onclick="removeDetail(this)">Excluir</a>
+                    <a rel="{{$event['id'] }}" class="badge bg-danger" href="javascript:;"
+                       onclick="removeDetailEvent(this)">Excluir</a>
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="5">Nenhum Contato Adicionado</td>
+                <td colspan="5">Nenhuma Audiência Adicionada</td>
             </tr>
         @endforelse
     @endif

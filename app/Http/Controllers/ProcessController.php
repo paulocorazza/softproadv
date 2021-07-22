@@ -160,10 +160,14 @@ class ProcessController extends ControllerStandard
                 'users',
                 'progresses',
                 'files',
+                'events' => function ($query) {
+                    $query->audience();
+                },
 
             ])->find($id);
 
         $progresses = $data->progresses;
+        $events = $data->events;
         $files = $data->files;
 
         $person = $data->person()->pluck('name', 'id');
@@ -186,7 +190,7 @@ class ProcessController extends ControllerStandard
         return view("{$this->view}.create",
             compact('title', 'data', 'person', 'counterpart', 'judge', 'forums', 'sticks', 'districts', 'groupActions',
                 'typeActions',
-                'users', 'phases', 'stages', 'progresses', 'files'));
+                'users', 'phases', 'stages', 'progresses', 'events', 'files'));
     }
 
 
