@@ -296,7 +296,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
             return $item['name'];
         }, $process->users->toArray());
 
-        return str_replace('{Honorários %}', implode(',', $users), $contract);
+        return str_replace('{Advogados}', implode(', ', $users), $contract);
     }
 
     private function getUsersOab(Process $process, mixed $contract): mixed
@@ -305,7 +305,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
             return $item['name'] . ' OAB: ' . $item['oab'];
         }, $process->users->toArray());
 
-        return str_replace('{Honorários %}', implode(',', $users), $contract);
+        return str_replace('{Advogados/OAB}', implode(', ', $users), $contract);
     }
 
     /**
@@ -341,9 +341,9 @@ class EloquentProcessRepository extends BaseEloquentRepository
      */
     private function getReplaceProcess(Process $process, mixed $contract): string|array
     {
-        $contract = str_replace('{Fórum}', (isset($process->forum)) ??  $process->forum->name, $contract);
-        $contract = str_replace('{Vara}', (isset($process->stick)) ?? $process->stick->name, $contract);
-        $contract = str_replace('{Comarca}', (isset($process->district)) ?? $process->district->name, $contract);
+        $contract = str_replace('{Fórum}', (isset($process->forum)) ? $process->forum->name : '{Fórum}' , $contract);
+        $contract = str_replace('{Vara}', (isset($process->stick)) ? $process->stick->name : '{Vara}', $contract);
+        $contract = str_replace('{Comarca}', (isset($process->district)) ? $process->district->name : '{Comarca}', $contract);
 
         $contract = str_replace('{Número do Processo}', $process->number_process, $contract);
         $contract = str_replace('{Número do Protocolo}', $process->protocol, $contract);
