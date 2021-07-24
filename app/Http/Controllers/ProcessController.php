@@ -184,6 +184,7 @@ class ProcessController extends ControllerStandard
         $stages = $this->phase->getStagesByPhase($data->phase_id);
         $users = $this->users->getAdvogados();
 
+
         $title = "Editar {$this->title}: {$data->name}";
 
 
@@ -225,7 +226,6 @@ class ProcessController extends ControllerStandard
         if ($validate->fails()) {
             return implode($validate->messages()->all("<p>:message</p>"));
         }
-
 
         $update = $this->model->update($id, $dataForm);
 

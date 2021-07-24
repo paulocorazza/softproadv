@@ -262,6 +262,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('process/file/delete', 'ExtraAction\ProcessFileDestroy')->name('fileDelete');
 
     Route::post('process/progress/delete', 'ExtraAction\ProcessProgressDestroy')->name('progressDelete');
+    Route::post('process/audience/delete', 'ExtraAction\ProcessAudienceDestroy')->name('AudienceDelete');
     Route::get('process/stage/{id}/delete', 'ExtraAction\ProcessStageController')->name('stageDelete');
 
     Route::get('processes/{id}/preview', 'ProcessContractController@preview')->name('processes.contract.preview');

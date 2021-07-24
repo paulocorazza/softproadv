@@ -1,4 +1,4 @@
-<table class="table table-hover" id="progress_table">
+<table class="table table-hover" id="audiences_table">
     <thead>
     <tr>
         <th>Título</th>
@@ -9,26 +9,27 @@
     </thead>
 
     <tbody class="j_list">
-    <!-- /foreach progresses -->
+    <!-- /foreach audiencese -->
 
     @if(isset($events))
         @forelse($events as $event)
             <tr data-id="{{ $event['id']  }}" id="audiences{{ $event['id'] }}">
                 <td>
+                    <select hidden name="audiences[{{ $event['id']  }}][users][]" id="users_audience{{$event['id']}}" multiple aria-hidden="true">
+                        @foreach($event->users as $user)
+                            <option selected value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+
                     <input type="hidden"
                            name="audiences[{{ $event['id']  }}][id]"
                            id="audiences[{{ $event['id']  }}][id]"
                            value="{{ $event['id'] }}">
 
                     <input type="hidden"
-                           name="audiences[{{ $event['id']  }}][color]"
-                           id="audiences[{{ $event['id']  }}][color]"
-                           value="{{ $event['color'] }}">
-
-                    <input type="hidden"
-                           name="audiences[{{ $event['id']  }}][publication]"
-                           id="audiences[{{ $event['id']  }}][publication]"
-                           value="{{ $event['publication'] }}">
+                           name="audiences[{{ $event['id']  }}][description]"
+                           id="audiences[{{ $event['id']  }}][description]"
+                           value="{{ $event['description'] }}">
 
                     <input class="form-control" readonly type="text"
                            name="audiences[{{ $event['id']  }}][title]"
@@ -48,12 +49,6 @@
                            name="audiences[{{ $event['id'] }}][end]"
                            id="audiences[{{ $event['id'] }}][end]"
                            value="{{ $event['end_br'] }}">
-                </td>
-
-                <td>
-                    <input class="form-control" readonly type="checkbox"
-                           name="audiences[{{ $event['id'] }}][concluded]"
-                           id="audiences[{{ $event['id'] }}][concluded]" {{ $event['concluded'] ? 'checked' : '' }} >
                 </td>
 
 

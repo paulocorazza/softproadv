@@ -2,13 +2,11 @@
 
 namespace App\Repositories\Core\Eloquent\Tenant;
 
-use App\Enum\Tag;
 use App\Helpers\Helper;
 use App\Models\Process;
-use App\Models\Stage;
 use App\Repositories\Contracts\ProcessRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
-use Illuminate\Support\Arr;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +30,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
         $countProgresses = $model->progresses->count();
         $countProgressesConcluded = $model->progresses()->concluded()->count();
 
-
         $totalProgressesEvents = $countProgresses + $countEvents;
 
         if ($totalProgressesEvents == 0) {
@@ -52,6 +49,29 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $progress['concluded'] = (isset($progress['concluded'])) ? true : false;
 
                 $process->progresses()->updateOrCreate(['id' => $id], $progress);
+            }
+        }
+
+        return true;
+    }
+
+    private function saveAudiences(array $data, $process)
+    {
+        if (isset($data['audiences'])) {
+            foreach ($data['audiences'] as $audience) {
+                $id = ($audience['id'] > 0) ? $audience['id'] : 0;
+
+                $audience['user_id'] = Auth::user()->id;
+                $audience['color'] = '#000000';
+                $audience['schedule'] = true;
+                $audience['audience'] = true;
+                $audience['start'] = Carbon::createFromFormat('d/m/Y H:i:s', $audience['start'])->format('Y-m-d H:i:s');
+                $audience['end'] = Carbon::createFromFormat('d/m/Y H:i:s', $audience['end'])->format('Y-m-d H:i:s');
+
+
+                $event = $process->events()->updateOrCreate(['id' => $id], $audience);
+
+                $event->users()->sync($audience['users']);
             }
         }
 
@@ -157,8 +177,9 @@ class EloquentProcessRepository extends BaseEloquentRepository
             $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
             $files = $this->saveFiles($data, $process);
+            $audiences = $this->saveAudiences($data, $process);
 
-            if (!$process || !$progresses || !$files || !$users) {
+            if (!$process || !$progresses || !$files || !$users || !$audiences) {
                 DB::rollBack();
 
                 return [
@@ -202,10 +223,11 @@ class EloquentProcessRepository extends BaseEloquentRepository
             $process->update($data);
             $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
+            $audiences = $this->saveAudiences($data, $process);
             $files = $this->saveFiles($data, $process);
 
 
-            if (!$process || !$progresses || !$files || !$users || !$state) {
+            if (!$process || !$progresses || !$files || !$users || !$state || !$audiences) {
                 DB::rollBack();
 
                 return [

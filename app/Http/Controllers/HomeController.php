@@ -36,17 +36,23 @@ class HomeController extends Controller
 
         $financialChart = $this->financialCharts->getReports();
 
-        $countEvent = $this->event->count();
-        $countEventFinish = $this->event->finish()->count();
+        $countEvent = $this->event->notAudience()->count();
+        $countEventFinish = $this->event->notAudience()->finish()->count();
 
         $totalEvents =  $countEvent > 0 ? Helper::roundTo(($countEventFinish / $countEvent) * 100) : 100;
 
         if ($request->ajax()) {
             if ($request->has('events')) {
-
-                $myEvents = $this->event->pending()->paginate($this->perPage);
+                $myEvents = $this->event->notAudience()->pending()->paginate($this->perPage);
 
                 return View::make('tenants.home.index._partials.events', compact('myEvents'))->render();
+            }
+
+            if ($request->has('audiences')) {
+
+                $myAudiences = $this->event->audience()->pending()->paginate($this->perPage);
+
+                return View::make('tenants.home.index._partials.audiences', compact('myAudiences'))->render();
             }
 
             if ($request->has('progress')) {
@@ -63,11 +69,23 @@ class HomeController extends Controller
             ->whereHas('users', function ($query) {
                 $query->where('user_id', Auth::user()->id);
             })
+            ->latest('start')
             ->pending()
+            ->notAudience()
+            ->paginate($this->perPage);
+
+
+        $myAudiences = $this->event
+            ->whereHas('users', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })
+            ->latest('start')
+            ->pending()
+            ->audience()
             ->paginate($this->perPage);
 
         return view('tenants.home.index',
-            compact('totalProcesses', 'totalInProgress', 'totalEvents', 'progresses', 'myEvents', 'financialChart'));
+            compact('totalProcesses', 'totalInProgress', 'totalEvents', 'progresses', 'myEvents', 'myAudiences', 'financialChart'));
     }
 
     /**
@@ -78,7 +96,7 @@ class HomeController extends Controller
         return $this->progress
             ->with('process')
             ->pending()
-            ->latest('date_term')
+            ->oldest('date_term')
             ->paginate($this->perPage);
     }
 

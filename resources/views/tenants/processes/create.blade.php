@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title_postfix', ' - Cadastrar Processos')
+
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <style type="text/css">
@@ -7,12 +9,7 @@
             padding: 0.30rem;
         }
     </style>
-@stop
 
-
-@section('title_postfix', ' - Cadastrar Processos')
-
-@section('adminlte_css')
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
 @stop
@@ -138,7 +135,7 @@
 
 
     <!-- /.Audiências -->
-{{--    <div class="card card-outline card-cyan">
+    <div class="card card-outline card-cyan">
         <div class="card-header">
             <h3 class="card-title">
                 Audiências
@@ -156,8 +153,9 @@
             <br>
             <br>
 
-            <div id="modalAudience" class="modal fade modal-audience" tabindex="-1" role="dialog"
+            <div id="modalAudience" class="modal fade modal-audience" style="overflow:hidden" role="dialog"
                  aria-labelledby="modalLarge" aria-hidden="true">
+
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -184,7 +182,7 @@
             </div>
         </div>
         <!-- /.card-body -->
-    </div>--}}
+    </div>
     <!-- /.Andamentos -->
 
 
@@ -262,6 +260,7 @@
         var submitAjax = "{{ route('processes.store') }}";
         var deleteFileAjax = "{{ route('fileDelete') }}";
         var deleteProgressAjax = "{{ route('progressDelete') }}";
+        var deleteAudienceAjax = "{{ route('AudienceDelete') }}";
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
@@ -274,6 +273,7 @@
     <script type="text/javascript" src={{ asset('assets/js/processes/progress.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/processes/files.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/processes/contract.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/processes/audience.js') }}></script>
 
     <script type="text/javascript" src={{ asset('assets/js/processes/validation.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/people/person-select.js') }}></script>

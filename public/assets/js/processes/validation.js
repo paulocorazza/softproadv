@@ -1,3 +1,5 @@
+$.fn.modal.Constructor.prototype.enforceFocus = function() {};
+
 $(document).ready(function () {
     function reset() {
         $("#toggleCSS").attr("href", "alertify.default.css");
@@ -178,6 +180,11 @@ $(document).ready(function () {
         $('.preload .form_load').fadeOut();
     }
 
+    $('#audiences_users').select2({
+        allowClear: true,
+        dropdownParent: $('#modalAudience')
+    });
+
     $('#forum_id').select2({
         placeholder: "Selecione o Fórum",
         allowClear: true,
@@ -334,6 +341,7 @@ $(document).ready(function () {
         allowClear: true,
         theme: "classic",
     })
+
 
     $('#status').select2({
         allowClear: true,

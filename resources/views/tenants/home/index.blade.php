@@ -51,6 +51,14 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="card" id="tabela_audience">
+                        @include('tenants.home._partials.audiences')
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-lg-6 col-12">
@@ -66,16 +74,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
-
-
-
 @stop
-
 
 @section('js')
     {!! $financialChart->script()  !!}
