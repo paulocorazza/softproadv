@@ -205,7 +205,6 @@ class EloquentPersonRepository extends BaseEloquentRepository
                         ->orWhere('people.cpf', 'LIKE', "%$search%")
                         ->get();
 
-
             return [
                 'status' => true,
                 'data' => $data,

@@ -117,13 +117,13 @@ $(document).ready(function () {
             alertify.error('Advogado é de preenchimento obrigatório!')
             return false
         }
-        if (start == '') {
-            alertify.error('Data Início é de preenchimento obrigatório!')
+        if (start == 'Invalid date') {
+            alertify.error('Data / Hora Início é de preenchimento obrigatório!')
             return false
         }
 
-        if (end == '') {
-            alertify.error('Data Fim é de preenchimento obrigatório!')
+        if (end == 'Invalid date') {
+            alertify.error('Data / Hora Fim é de preenchimento obrigatório!')
             return false
         }
 
