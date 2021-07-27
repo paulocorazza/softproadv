@@ -185,6 +185,10 @@ class EloquentEventRepository extends BaseEloquentRepository
      */
     private function createEvent(array $data)
     {
+        if ($this->hasFinish($data)) {
+            $data['finish'] = date('Y-m-d H:i:s');
+        }
+
         $event = parent::create($data);
 
         $this->saveUsers($data, $event);
