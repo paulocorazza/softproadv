@@ -197,19 +197,18 @@ class EloquentPersonRepository extends BaseEloquentRepository
 
             $search = $request->q;
 
-            $data = $this->relationships('processes')
-                ->orWhere('name', 'LIKE', "%$search%")
-                ->orWhere('cpf', 'LIKE', "%$search%")
-                ->orWhereHas('processes', function ($query) use ($search) {
-                    $query->where('number_process', $search);
-                })
-                ->get();
+            $data = DB::table('processes')
+                        ->select('processes.id', DB::raw('CONCAT(processes.number_process, \' - \', people.name) AS process'))
+                        ->join('people', 'processes.person_id', '=', 'people.id')
+                        ->orWhere('processes.number_process', 'like', "%$search%")
+                        ->orWhere('people.name', 'LIKE', "%$search%")
+                        ->orWhere('people.cpf', 'LIKE', "%$search%")
+                        ->get();
 
-            $processes = $this->getProcesses($data);
 
             return [
                 'status' => true,
-                'data' => $processes,
+                'data' => $data,
             ];
         }
 
@@ -219,25 +218,6 @@ class EloquentPersonRepository extends BaseEloquentRepository
         ];
     }
 
-    /**
-     * @param $data
-     * @return array
-     */
-    private function getProcesses($data): array
-    {
-        $processes = [];
-
-        foreach ($data as $person) {
-            foreach ($person->processes as $process) {
-                $processes[] = [
-                    'id' => $process->id,
-                    'process' => $process->number_process . ' - ' . $person->name,
-                ];
-            }
-        }
-
-        return $processes;
-    }
 
     public function getPersonProcessesFinancial(Request $request)
     {
