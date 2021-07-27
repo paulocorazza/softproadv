@@ -16,7 +16,8 @@ class FinancialAccount extends Model
         '399' => 'HSBC',
         '341' => 'Itaú',
         '033' => 'Santander',
-        '748' => 'Sicredi'
+        '748' => 'Sicredi',
+        '999' => 'Outro',
     ];
 
     public const CNAB = [

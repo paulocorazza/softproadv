@@ -37,8 +37,8 @@ function editDetailEvent(obj) {
 
     $('#audiences_users').val(users).change();
     $('#audiences_title').val(title);
-    $('#audiences_start').val(moment(start, "DD/MM/YYYY hh:mm:ss").format('YYYY-MM-DDThh:mm:ss'));
-    $('#audiences_end').val(moment(end, "DD/MM/YYYY hh:mm:ss").format("YYYY-MM-DDThh:mm:ss"));
+    $('#audiences_start').val(moment(start, "DD/MM/YYYY HH:mm:ss").format('YYYY-MM-DDTHH:mm:ss'));
+    $('#audiences_end').val(moment(end, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DDTHH:mm:ss"));
     $('#audiences_description').val(description);
 
 
@@ -108,8 +108,8 @@ $(document).ready(function () {
             count = id
 
         var description = $('#audiences_description').val();
-        var start =  moment($('#audiences_start').val()).format("DD/MM/YYYY hh:mm:ss")
-        var end =  moment($('#audiences_end').val()).format("DD/MM/YYYY hh:mm:ss")
+        var start =  moment($('#audiences_start').val()).format("DD/MM/YYYY HH:mm:ss")
+        var end =  moment($('#audiences_end').val()).format("DD/MM/YYYY HH:mm:ss")
         var title = $('#audiences_title').val();
 
 
@@ -181,5 +181,12 @@ $(document).ready(function () {
 
         $('#modalAudience').modal('hide');
     })
+
+    $('#audiences_start').change(function () {
+        let start = moment($(this).val()).add(1, 'hours').format('DD/MM/YYYY HH:mm:ss')
+        let end = moment(start, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DDTHH:mm:ss")
+        $('#audiences_end').val(end)
+    })
+
 
 })

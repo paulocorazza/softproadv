@@ -45,14 +45,14 @@ class HomeController extends Controller
             if ($request->has('events')) {
                 $myEvents = $this->event->notAudience()->pending()->paginate($this->perPage);
 
-                return View::make('tenants.home.index._partials.events', compact('myEvents'))->render();
+                return View::make('tenants.home._partials.events', compact('myEvents'))->render();
             }
 
             if ($request->has('audiences')) {
 
                 $myAudiences = $this->event->audience()->pending()->paginate($this->perPage);
 
-                return View::make('tenants.home.index._partials.audiences', compact('myAudiences'))->render();
+                return View::make('tenants.home._partials.audiences', compact('myAudiences'))->render();
             }
 
             if ($request->has('progress')) {

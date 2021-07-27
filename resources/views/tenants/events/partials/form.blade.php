@@ -80,6 +80,14 @@
 
 <div class="row">
     <div class="form-group">
+        {!! Form::checkbox('audience', null, null, ['id' => 'audience']) !!}
+        {!! Form::label('audience', 'Audiência'); !!}
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="form-group">
         <input type="checkbox" name="finish" id="finish" {{ !empty(@$data->finish) ? 'checked' : '' }}>
         {!! Form::label('finish', 'Finalizado'); !!}
     </div>

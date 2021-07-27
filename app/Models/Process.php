@@ -206,7 +206,7 @@ class Process extends Model
 
     public function setExpectancyAttribute($value)
     {
-        $this->attributes['expectancy'] = Helper::replaceDecimal($value);
+        $this->attributes['expectancy'] = $value ? Helper::replaceDecimal($value) : 0;
     }
 
     public function getExpectancyAttribute($value)
@@ -217,7 +217,7 @@ class Process extends Model
 
     public function setPriceAttribute($value)
     {
-        $this->attributes['price'] = Helper::replaceDecimal($value);
+        $this->attributes['price'] = $value ? Helper::replaceDecimal($value) : 0;
     }
 
     public function getPriceAttribute($value)
