@@ -44,8 +44,8 @@
         var columns = [
             {data: "id"},
             {data: "title"},
-            {data: "start_br"},
-            {data: "end_br"},
+            {data: "start"},
+            {data: "end"},
             {
                 data: 'action',
                 orderable: false

@@ -23,6 +23,7 @@ class Schedule extends Model
         'schedule',
         'finish',
         'file',
+        'audience'
     ];
 
 

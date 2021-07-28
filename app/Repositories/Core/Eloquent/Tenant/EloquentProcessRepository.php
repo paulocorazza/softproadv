@@ -130,23 +130,18 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
     public function dataTables($column, $view)
     {
-
         $model = $this->model
             ->query()
             ->with([
                 'person',
-                'phase',
-                'stage',
-                'stages',
                 'users',
             ]);
-
 
         return Datatables()
             ->eloquent($model)
             ->addColumn('listAdv', ' ')
             ->editColumn('listAdv', function ($model) {
-                $users = $model->users()->get();
+                $users = $model->users;
                 return view('tenants.processes.partials.listAdv', compact('users'));
             })
             ->addColumn('progress', ' ')
@@ -154,12 +149,12 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $percent = $this->getPercentProgress($model);
                 return view('tenants.processes.partials.progress', compact('percent'));
             })
-            ->editColumn('phase.name', function ($model) {
-                return $model->phase->name ?? '';
+/*            ->editColumn('phase.name', function ($model) {
+                     return $model->phase->name ?? '';
             })
             ->editColumn('stage.name', function ($model) {
                 return $model->stage->name ?? '';
-            })
+            })*/
             ->addColumn($column, $view)
             ->make(true);
     }

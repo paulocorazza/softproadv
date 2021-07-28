@@ -21,13 +21,32 @@ class EloquentEventRepository extends BaseEloquentRepository
         return Event::class;
     }
 
+    public function dataTables($column, $view)
+    {
+
+        $model = $this->model
+            ->query();
+
+        return Datatables()
+            ->eloquent($model)
+            ->editColumn('start', function ($model) {
+                return $model->start_br;
+            })
+            ->editColumn('end', function ($model) {
+                return $model->end_br;
+            })
+            ->addColumn($column, $view)
+            ->make(true);
+    }
+
+
     public function create(array $data)
     {
         DB::beginTransaction();
 
         try {
 
-            if (!$this->createEvent($data) ) {
+            if (!$this->createEvent($data)) {
                 DB::rollBack();
 
                 return [
@@ -51,37 +70,37 @@ class EloquentEventRepository extends BaseEloquentRepository
     }
 
 
-  public function update($id, array $data)
-  {
-      DB::beginTransaction();
+    public function update($id, array $data)
+    {
+        DB::beginTransaction();
 
 
-      try {
-          $event = parent::find($id);
+        try {
+            $event = parent::find($id);
 
-          if (!$this->updateEvent($data, $event) ) {
+            if (!$this->updateEvent($data, $event)) {
 
-              DB::rollBack();
+                DB::rollBack();
 
-              return [
-                  'status' => false,
-                  'message' => 'Não foi possível salvar o registro'
-              ];
-          }
+                return [
+                    'status' => false,
+                    'message' => 'Não foi possível salvar o registro'
+                ];
+            }
 
-          DB::commit();
+            DB::commit();
 
-          return ['status' => true];
+            return ['status' => true];
 
-      } catch (\Exception $e) {
-          DB::rollBack();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-          return [
-              'status' => false,
-              'message' => 'Não foi possível salvar o registro. ' . $e->getMessage()
-          ];
-      }
-  }
+            return [
+                'status' => false,
+                'message' => 'Não foi possível salvar o registro. ' . $e->getMessage()
+            ];
+        }
+    }
 
     /**
      * @param array $data

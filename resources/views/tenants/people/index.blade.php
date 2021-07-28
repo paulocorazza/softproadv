@@ -51,7 +51,7 @@
 
         var columns = [
             {data: "id"},
-            {data: "type_person_list"},
+            {data: "type_person_list", orderable: false},
             {data: "name"},
             {data: "email"},
             {

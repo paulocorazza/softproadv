@@ -46,8 +46,8 @@
             {data: 'listAdv', name: 'listAdv', orderable: false, searchable: false},
             {data: 'progress', name: 'list-adv', orderable: false, searchable: false},
 
-            {data: "phase.name", name : 'phase.name' },
-            {data: "stage.name", name : 'stage.name' },
+            {data: "type_process", name : 'processes.type_process' },
+            {data: "status", name : 'processes.status' },
 
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

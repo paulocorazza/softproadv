@@ -80,6 +80,7 @@ class ScheduleController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['schedule'] = true;
+        $data['audience'] = false;
 
         $event = Schedule::create($data);
 

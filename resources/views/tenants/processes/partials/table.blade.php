@@ -8,9 +8,9 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Advogados</th>
                 <th scope="col">Progresso</th>
-                <th scope="col">Fase</th>
-                <th scope="col">Etapa</th>
-                <th width="180px" scope="col"></th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Status</th>
+                <th width="190px" scope="col"></th>
             </tr>
             </thead>
         </table>

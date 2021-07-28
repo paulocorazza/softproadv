@@ -5,7 +5,7 @@
 <a href="{{route('processes.contract', $id)}}" class="badge bg-cyan">Contrato</a>
 
 @can('view_process')
-    <a href="{{route('processes.show', $id)}}" class="badge bg-dark">Detalhes</a>
+    <a href="{{route('processes.show', $id )}}" class="badge bg-dark">Detalhes</a>
 @endcan
 
 
