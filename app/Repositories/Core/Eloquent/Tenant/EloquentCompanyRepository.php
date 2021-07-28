@@ -95,7 +95,7 @@ class EloquentCompanyRepository extends BaseEloquentRepository
         $adapter = new \Cloudflare\API\Adapter\Guzzle($key);
 
         $zone = new \Cloudflare\API\Endpoints\Zones($adapter);
-        $zoneID = $zone->getZoneID(config('cloudflare.email'));
+        $zoneID = config('cloudflare.zone');
 
         $dns = new \Cloudflare\API\Endpoints\DNS($adapter);
         if ($dns->addRecord($zoneID, "A", $company->subdomain, config('cloudflare.server'), 0, true) === true) {
