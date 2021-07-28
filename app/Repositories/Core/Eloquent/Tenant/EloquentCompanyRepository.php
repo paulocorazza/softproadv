@@ -7,8 +7,11 @@ use App\Events\Tenant\DatabaseCreated;
 use App\Models\Company;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
+use Cloudflare\API\Adapter\Guzzle;
 use Cloudflare\API\Auth\APIKey;
+use Cloudflare\API\Auth\APIToken;
 use Cloudflare\API\Endpoints\DNS;
+use Cloudflare\API\Endpoints\Zones;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -91,13 +94,12 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
     private function createDNSCloudFlare(mixed $company)
     {
-        $key = new \Cloudflare\API\Auth\APIToken(config('cloudflare.token'));
-        $adapter = new \Cloudflare\API\Adapter\Guzzle($key);
+        $key = new APIToken(config('cloudflare.token'));
+        $adapter = new Guzzle($key);
 
-        $zone = new \Cloudflare\API\Endpoints\Zones($adapter);
         $zoneID = config('cloudflare.zone');
 
-        $dns = new \Cloudflare\API\Endpoints\DNS($adapter);
+        $dns = new DNS($adapter);
         if ($dns->addRecord($zoneID, "A", $company->subdomain, config('cloudflare.server'), 0, true) === true) {
            return true;
         }
