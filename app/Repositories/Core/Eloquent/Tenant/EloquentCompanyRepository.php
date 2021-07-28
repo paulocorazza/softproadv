@@ -94,7 +94,8 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
     private function createDNSCloudFlare(mixed $company)
     {
-        $key = new APIToken(config('cloudflare.token'));
+        $key = new APIKey(config('cloudflare.email'),  config('cloudflare.token'));
+
         $adapter = new Guzzle($key);
 
         $zoneID = config('cloudflare.zone');
