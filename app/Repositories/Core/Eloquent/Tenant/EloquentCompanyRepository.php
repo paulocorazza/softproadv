@@ -106,12 +106,13 @@ class EloquentCompanyRepository extends BaseEloquentRepository
                 }*/
 
         /* Cloudflare.com | APİv4 | Api Ayarları */
-        $apikey		= config('cloudflare.token'); // Cloudflare Global API
-        $email 		= config('cloudflare.email'); // Cloudflare Email Adress
-        $domain 	= 'softproadv-homolog.com.br';  // zone_name // Cloudflare Domain Name
-        $zoneid 	= config('cloudflare.zone'); // zone_id // Cloudflare Domain Zone ID
+        $apikey = '28aaa8ce7c9f061b640f7e1b07057111b98cf'; // Cloudflare Global API
+        $email = 'calosasjr2003@hotmail.com.br'; // Cloudflare Email Adress
+        $domain = 'softproadv-homolog.com.br';  // zone_name // Cloudflare Domain Name
+        $zoneid = '38da23e6b397ba85f0e18712587e3a40'; // zone_id // Cloudflare Domain Zone ID
 
-// A-record oluşturur DNS sistemi için.
+
+        // A-record oluşturur DNS sistemi için.
         $ch = curl_init("https://api.cloudflare.com/client/v4/zones/".$zoneid."/dns_records");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -121,20 +122,21 @@ class EloquentCompanyRepository extends BaseEloquentRepository
             'X-Auth-Email: '.$email.'',
             'X-Auth-Key: '.$apikey.'',
             'Cache-Control: no-cache',
-// 'Content-Type: multipart/form-data; charset=utf-8',
+            // 'Content-Type: multipart/form-data; charset=utf-8',
             'Content-Type:application/json',
             'purge_everything: true'
 
         ));
 
-
+        // -d curl parametresi.
         $data = array(
 
             'type' => 'A',
-            'name' => $company->subdomain,
-            'content' =>  config('cloudflare.server'),
+            'name' => ''.$dnsadgeldi.'',
+            'content' => ''.$dnsipgeldi.'',
             'zone_name' => ''.$domain.'',
             'zone_id' => ''.$zoneid.'',
+            'proxiable' => 'true',
             'proxied' => true,
             'ttl' => '120'
         );
@@ -143,11 +145,12 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_string));
 
         $sonuc = curl_exec($ch);
 
-        dd($sonuc);
+        // If you want show output remove code slash.
+        // print_r($sonuc);
 
         curl_close($ch);
     }
