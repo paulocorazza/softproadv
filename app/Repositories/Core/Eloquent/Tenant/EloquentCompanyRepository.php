@@ -147,9 +147,7 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
         $sonuc = curl_exec($ch);
 
-        /*
-            //print_r($sonuc);
-        */
+        dd($sonuc);
 
         curl_close($ch);
     }
