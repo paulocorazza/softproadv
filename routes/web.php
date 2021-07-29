@@ -342,6 +342,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('/teste', function () {
+  $response = \Illuminate\Support\Facades\Http::get('https://carlos.softproadv-homolog.com.br');
 
+  if ($response->successful()) {
+      echo 'online';
+  } else {
+      echo 'offline';
+  }
 
 });
