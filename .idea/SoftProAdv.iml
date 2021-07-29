@@ -135,6 +135,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/balping/json-raw-encoder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/consoletvs/charts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cloudflare/sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nette/utils" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/config" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dflydev/dot-access-data" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nette/schema" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

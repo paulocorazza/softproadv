@@ -94,15 +94,63 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
     private function createDNSCloudFlare(mixed $company)
     {
-        $key = new APIKey(config('cloudflare.email'),  config('cloudflare.token'));
+        /*        $key = new APIKey(config('cloudflare.email'),  config('cloudflare.token'));
 
-        $adapter = new Guzzle($key);
+                $adapter = new Guzzle($key);
 
-        $zoneID = config('cloudflare.zone');
+                $zoneID = config('cloudflare.zone');
 
-        $dns = new DNS($adapter);
-        if ($dns->addRecord($zoneID, "A", $company->subdomain, config('cloudflare.server'), 0, true) === true) {
-           return true;
-        }
+                $dns = new DNS($adapter);
+                if ($dns->addRecord($zoneID, "A", $company->subdomain, config('cloudflare.server'), 0, true) === true) {
+                   return true;
+                }*/
+
+        /* Cloudflare.com | APİv4 | Api Ayarları */
+        $apikey		= config('cloudflare.token'); // Cloudflare Global API
+        $email 		= config('cloudflare.email'); // Cloudflare Email Adress
+        $domain 	= 'softproadv-homolog.com.br';  // zone_name // Cloudflare Domain Name
+        $zoneid 	= config('cloudflare.zone'); // zone_id // Cloudflare Domain Zone ID
+
+// A-record oluşturur DNS sistemi için.
+        $ch = curl_init("https://api.cloudflare.com/client/v4/zones/".$zoneid."/dns_records");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'X-Auth-Email: '.$email.'',
+            'X-Auth-Key: '.$apikey.'',
+            'Cache-Control: no-cache',
+// 'Content-Type: multipart/form-data; charset=utf-8',
+            'Content-Type:application/json',
+            'purge_everything: true'
+
+        ));
+
+
+        $data = array(
+
+            'type' => 'A',
+            'name' => $company->subdomain,
+            'content' =>  config('cloudflare.server'),
+            'zone_name' => ''.$domain.'',
+            'zone_id' => ''.$zoneid.'',
+            'proxied' => true,
+            'ttl' => '120'
+        );
+
+        $data_string = json_encode($data);
+
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+
+
+        $sonuc = curl_exec($ch);
+
+        /*
+            //print_r($sonuc);
+        */
+
+        curl_close($ch);
     }
 }
