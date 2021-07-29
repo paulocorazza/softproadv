@@ -41,13 +41,14 @@ class RunMigrationsTenant
 
 
         if ($migration === 0) {
-            $password = Str::random(8);
+            //usuário será criado no momento em que for propagado o dns do subdominio
+/*            $password = Str::random(8);
 
-            $this->createUser($company, $password);
+            $this->createUser($company, $password);*/
 
             $this->createLocations();
 
-            Mail::to($company->email)->send(new SendMailCompany($company, $password));
+            //Mail::to($company->email)->send(new SendMailCompany($company, $password));
         }
 
 
@@ -58,7 +59,7 @@ class RunMigrationsTenant
      * @param Company $company
      * @param string $password
      */
-    private function createUser(Company $company, string $password): void
+/*    private function createUser(Company $company, string $password): void
     {
         $user =  User::create([
             'name' => $company->name,
@@ -67,9 +68,8 @@ class RunMigrationsTenant
             'nivel' => '1'
         ]);
 
-
         Profile::first()->users()->attach($user);
-    }
+    }*/
 
     private function createLocations(): void
     {

@@ -31,6 +31,24 @@ class ManagerTenant
        } catch (\PDOException $exception) {
            throw new \Exception('Falha ao conectar ao banco de dados: ' . $exception->getMessage());
        }
+    }
 
+    public function setConnectionMain()
+    {
+        try {
+            DB::purge('tenant');
+
+            $dbname = 'database.connections.tenant.';
+            config()->set($dbname . 'host', config('database.connections.mysql.host'));
+            config()->set($dbname . 'database', config('database.connections.mysql.database'));
+            config()->set($dbname . 'username', config( 'database.connections.mysql.username'));
+            config()->set($dbname . 'password', config( 'database.connections.mysql.password'));
+
+            DB::reconnect('tenant');
+
+            Schema::connection('tenant')->getConnection()->reconnect();
+        } catch (\PDOException $exception) {
+            throw new \Exception('Falha ao conectar ao banco de dados: ' . $exception->getMessage());
+        }
     }
 }

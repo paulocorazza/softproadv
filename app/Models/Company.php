@@ -20,7 +20,8 @@ class Company extends Model
         'db_database',
         'db_host',
         'db_username',
-        'db_password'
+        'db_password',
+        'dns_status'
     ];
 
     protected static function boot()

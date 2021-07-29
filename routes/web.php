@@ -342,8 +342,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('/teste', function () {
-    $financial = \App\Models\Financial::with(['process.person'])->get();
 
-   dd($financial->groupBy(['person_id', 'process_id']));
 
 });

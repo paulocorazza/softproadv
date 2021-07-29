@@ -94,15 +94,25 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
     private function createDNSCloudFlare(mixed $company)
     {
-        $key = new APIKey(config('cloudflare.email'), config('cloudflare.token'));
+        if ($this->isProduction()) {
+            $key = new APIKey(config('cloudflare.email'), config('cloudflare.token'));
 
-        $adapter = new Guzzle($key);
+            $adapter = new Guzzle($key);
 
-        $zoneID = config('cloudflare.zone');
+            $zoneID = config('cloudflare.zone');
 
-        $dns = new DNS($adapter);
-        if ($dns->addRecord($zoneID, "A", $company->subdomain, config('cloudflare.server'), 0, true) === true) {
-            return true;
+            $dns = new DNS($adapter);
+            if ($dns->addRecord($zoneID, "A", $company->subdomain, config('cloudflare.server'), 0, true) === true) {
+                return true;
+            }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isProduction(): bool
+    {
+        return config('app.env') == 'production';
     }
 }

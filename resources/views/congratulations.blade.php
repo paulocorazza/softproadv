@@ -163,13 +163,12 @@
                                             <tr>
                                                 <td align="center" style="color:#FFFFFF; font-size:24px;">
                                                     <font face="'Roboto', Arial, sans-serif">
-                                                                <span style="font-size:44px; color:#FFF">
+{{--                                                                <span style="font-size:44px; color:#FFF">
                                                                 <a style="color: #FFF;
     text-decoration: none;" href="http://{{ $company->subdomain ?? 'teste'}}{{env('APP_SUBDOMAIN') }}">http://{{ $company->subdomain ?? 'teste' }}{{ env('APP_SUBDOMAIN') }}</a>
-                                                                </span><br/>
-                                                        <br/>
-                                                        <span style="font-size:24px;">Suas informações foram gravadas e o SoftPro - Advogados está pronto para seu negócio!<br/>
-                                                               <p>Basta acessar o domínio escolhido no momento do seu cadastro, e identificar-se com seu usuário e senha que enviamos para o seu e-mail</p></span>
+                                                                </span><br/>--}}
+                                                        <span style="font-size:24px;">Estamos criando o ambiente virtual seguro do seu Escritório. Vai levar alguns minutos e nós avisaremos você!<br/>
+                                                               <p>Você receberá o acesso com o domínio escolhido no momento do seu cadastro, seu usuário e senha para acessar a plataforma.</p></span>
                                                         <br/><br/>
 
 
