@@ -83,7 +83,7 @@ class TenantCreateUserSendEmail extends Command
 
     private function hasDNSAvailable(Company $company)
     {
-        return $this->getUrlStatus($company->subdomain . config('tenant.subdomain'));
+        return  true; //$this->getUrlStatus($company->subdomain . config('tenant.subdomain'));
 
     }
 
