@@ -83,7 +83,7 @@ class TenantCreateUserSendEmail extends Command
 
     private function hasDNSAvailable(Company $company)
     {
-        $response = Http::get('https://' . $company->subdomain . config('tenant.subdomain'));
+        $response = Http::get('http://' . $company->subdomain . config('tenant.subdomain'));
 
         return $response->ok();
     }
