@@ -6,13 +6,14 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Olá!')
+# @lang('Hello!')
 @endif
 @endif
 
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
 {{ $line }}
+
 @endforeach
 
 {{-- Action Button --}}
@@ -42,7 +43,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Atenciosamente'),<br>
+@lang('Regards'),<br>
 {{ config('app.name') }}
 @endif
 

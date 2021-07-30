@@ -43,14 +43,16 @@ class ResetPasswordNotify extends Notification
     {
         $manager = app(ManagerTenant::class);
 
-        $subdomain = !$manager->domainIsMain() ? $manager->subDomain() . '.' : '';
-
-        $url = config('app.url_client');
+       if (!$manager->domainIsMain()) {
+           $url = 'https://' .  $manager->subDomain() .  config('app.url_client') . '/reset/' . $this->token;
+       } else {
+           $url =  config('app.url') . '/reset/' . $this->token;
+       }
 
         return (new MailMessage)
             ->subject('Alterar Senha')
             ->line('Você está recebendo este e-mail porque recebemos um pedido de redefinição de senha para sua conta.')
-            ->action('Resetar Senha',  $subdomain .  $url . '/reset/' . $this->token)
+            ->action('Resetar Senha',  $url)
             ->line('Se você não solicitou uma alteração da senha, nenhuma ação adicional é necessária.');
     }
 

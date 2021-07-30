@@ -44,19 +44,23 @@ class RegisterNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $dominio = $this->company->subdomain . '.' .  config('app.url_client');
+        $dominio = 'https://' . $this->company->subdomain .  config('app.url_client');
+        $appName = 'SoftPro Advogado';
 
         return (new MailMessage)
-            ->subject('Registro no ' .  config('app.name') )
-            ->salutation($this->company->name)
-            ->line('Obrigado por escolher o ' .  config('app.name') . '!')
+            ->subject('Registro no ' . $appName )
+            ->greeting('Olá, ' . $this->company->name )
 
+            ->line('Obrigado por escolher o ' . $appName . '!')
             ->line('Criamos um domínio seguro especialmente para você.')
             ->line('Para acessar o sistema com seu domínio personalizado clique no botão abaixo.')
             ->action($dominio,  $dominio)
 
             ->line('E-mail de acesso: ' . $this->company->email)
-            ->line('Sua senha para o primeiro acesso: ' . $this->password);
+            ->line('Sua senha para o primeiro acesso: ' . $this->password)
+
+            ->line('Agora você pode gerenciar os processos, agenda e financeiro em um único lugar.')
+            ->salutation('Conte com a gente sempre!');
     }
 
     /**
