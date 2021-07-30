@@ -49,11 +49,12 @@ class TenantCreateUserSendEmail extends Command
             //Connection Tenant
             $this->tenant->setConnection($company);
 
-            /** code her */
+            /** send email user */
             $password = Str::random(8);
             $this->createUser($company, $password);
             $this->info("Send Email to User {$company->name}");
-            Mail::to($company->email)->send(new SendMailCompany($company, $password));
+
+            $company->sendRegisterNotification($company, $password);
 
             //Connection Domain Mail
             $this->tenant->setConnectionMain();
@@ -82,7 +83,7 @@ class TenantCreateUserSendEmail extends Command
 
     private function hasDNSAvailable(Company $company)
     {
-        $response = Http::get('http://' . $company->subdomain . config('tenant.subdomain'));
+        $response = Http::get('https://' . $company->subdomain . config('tenant.subdomain'));
 
         return $response->ok();
     }

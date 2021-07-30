@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\Notifications\RegisterNotification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Ramsey\Uuid\Uuid;
+
 
 class Company extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'name',
         'cellphone',
@@ -53,5 +58,10 @@ class Company extends Model
     public function Plan()
     {
         return $this->belongsTo(Plan::class);
+    }
+
+    public function sendRegisterNotification(Company $company, string $password)
+    {
+        $this->notify(new RegisterNotification($company, $password));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use App\Notifications\ResetPasswordNotify;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -261,6 +262,11 @@ class User extends Authenticatable
     public function scopeNivel1($query)
     {
         return $query->where('nivel', '1');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotify($token));
     }
 
 

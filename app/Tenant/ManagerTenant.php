@@ -10,9 +10,18 @@ class ManagerTenant
 {
     public function domainIsMain()
     {
-       //  dd(request()->getHost(), config('tenant.domain_main'));
         return in_array(request()->getHost(), config('tenant.domain_main'));
     }
+
+    /**
+     * @return mixed
+     */
+    public function subDomain()
+    {
+        $piecesHost = explode('.', request()->getHost());
+        return $piecesHost[0];
+    }
+
 
     public function setConnection(Company $company)
     {

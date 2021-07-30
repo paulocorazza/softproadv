@@ -38,15 +38,6 @@ class TenantMiddleware
         return false;
     }
 
-    /**
-     * @return mixed
-     */
-    private function subDomain()
-    {
-        $piecesHost = explode('.', request()->getHost());
-        $tenant = $piecesHost[0];
-        return $tenant;
-    }
 
     /**
      * @param $company
@@ -78,7 +69,7 @@ class TenantMiddleware
         }
 
         //se for um subdominio
-        $company = $this->getCompany($this->subDomain());
+        $company = $this->getCompany($manager->subDomain());
 
         if (!$company && $request->url() != route('404.tenant')) {
             return redirect()->route('404.tenant');

@@ -27,6 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'url_client' => env('APP_SUBDOMAIN', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------

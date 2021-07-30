@@ -333,9 +333,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('reports/people', [\App\Http\Controllers\Reports\PeopleController::class, 'report'])->name('people.report');
 
-
-
-
 });
 
 
