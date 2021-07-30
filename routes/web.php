@@ -339,12 +339,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('/teste', function () {
-  $response = \Illuminate\Support\Facades\Http::get('https://carlos.softproadv-homolog.com.br');
+    $_sUrl ='http://pedro.softproadv-homolog.com.br';
 
-  if ($response->successful()) {
-      echo 'online';
-  } else {
-      echo 'offline';
-  }
+    $cl = curl_init($_sUrl);
+    curl_setopt($cl,CURLOPT_VERBOSE, true);
+    curl_setopt($cl,CURLOPT_CONNECTTIMEOUT,1);
+    curl_setopt($cl,CURLOPT_HEADER,true);
+    curl_setopt($cl,CURLOPT_NOBODY,true);
+    curl_setopt($cl,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($cl,CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($cl);
+    curl_close($cl);
+
+    dd($response ?? true);
 
 });

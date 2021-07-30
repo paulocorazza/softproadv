@@ -83,21 +83,23 @@ class TenantCreateUserSendEmail extends Command
 
     private function hasDNSAvailable(Company $company)
     {
-        return  true; //$this->getUrlStatus($company->subdomain . config('tenant.subdomain'));
+        return  $this->getUrlStatus($company->subdomain . config('tenant.subdomain'));
 
     }
 
-    private function getUrlStatus($url)
+    private function getUrlStatus($url) : bool
     {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $data = curl_exec($ch);
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        $cl = curl_init($url);
+        curl_setopt($cl,CURLOPT_VERBOSE, true);
+        curl_setopt($cl,CURLOPT_CONNECTTIMEOUT,1);
+        curl_setopt($cl,CURLOPT_HEADER,true);
+        curl_setopt($cl,CURLOPT_NOBODY,true);
+        curl_setopt($cl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($cl,CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($cl);
+        curl_close($cl);
 
-        return $httpcode >= 200 && $httpcode < 300;
+         return (bool) $response;
     }
 
 
