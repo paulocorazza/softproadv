@@ -355,5 +355,3 @@ Route::get('/teste', function () {
 
 });
 
-
-URL::forceScheme('https');
