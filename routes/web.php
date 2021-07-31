@@ -354,3 +354,6 @@ Route::get('/teste', function () {
     dd($response ?? true);
 
 });
+
+
+URL::forceScheme('https');
