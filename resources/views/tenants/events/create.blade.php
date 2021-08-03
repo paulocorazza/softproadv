@@ -1,12 +1,9 @@
 @extends('adminlte::page')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
-@stop
-
 @section('title_postfix', ' - Cadastrar Nova Atividade')
 
 @section('adminlte_css')
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
 @stop

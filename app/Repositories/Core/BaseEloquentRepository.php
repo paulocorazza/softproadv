@@ -227,7 +227,7 @@ class BaseEloquentRepository implements RepositoryInterface
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function dataTables($column, $view)
+    public function dataTables($column, $view, $request = null)
     {
         return Datatables()->eloquent($this->model->query())->addColumn($column, $view)
             ->make(true);

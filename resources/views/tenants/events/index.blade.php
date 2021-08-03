@@ -27,6 +27,8 @@
             </p>
          @endcan
 
+    @include('tenants.events.partials.search')
+
     <!--TABELA -->
     @include('tenants.events.partials.table')
     <!--TABELA -->
@@ -34,8 +36,6 @@
 @stop
 
 @section('js')
-    <script src="{{ url('vendor/jquery/jquery.min.js') }}"></script>
-
     @include('tenants.includes.dataTableJs')
 
     <script>
@@ -43,16 +43,19 @@
 
         var columns = [
             {data: "id"},
+            {data: "process.number_process", name : 'process.number_process', orderable: false},
+            {data: 'listAdv', name: 'listAdv', orderable: false, searchable: false},
             {data: "title"},
             {data: "start"},
             {data: "end"},
+            {data: "finish"},
             {
                 data: 'action',
                 orderable: false
             }
         ]
     </script>
-    <script type="text/javascript" src={{ asset('assets/js/all/table-default.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/events/table.js') }}></script>
 @stop
 
 

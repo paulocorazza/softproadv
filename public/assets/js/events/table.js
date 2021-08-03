@@ -6,6 +6,10 @@ $(document).ready(function () {
 
         "ajax": {
             url: urlAjax,
+            data : function (d) {
+                d.status = $('#status').val()
+                d.users = $('#users').val()
+            }
         },
 
         "columns": columns,
@@ -85,5 +89,15 @@ $(document).ready(function () {
             }
         }
     })
+
+    $('.change').change(function (e) {
+        tabela.draw()
+    })
+
+    $('#users').select2({
+        width: 'resolve',
+        placeholder: 'Advogado(s)'
+    })
+
 
 });

@@ -21,19 +21,41 @@ class EloquentEventRepository extends BaseEloquentRepository
         return Event::class;
     }
 
-    public function dataTables($column, $view)
+    public function dataTables($column, $view, $request = null)
     {
-
         $model = $this->model
-            ->query();
+            ->query()
+            ->with('process', 'users');
+
+        $model->where(function ($query) use ($request) {
+            if (!empty($request->get('status'))) {
+                $request->get('status') == 'Finalizado' ? $query->whereNotNull('finish') : $query->whereNull('finish');
+            }
+
+            if (!empty($request->get('users'))) {
+                $users = $request->get('users');
+
+                $query->whereHas('users', function ($query) use ($users) {
+                    $query->whereIn('users.id', $users);
+                });
+            }
+        });
 
         return Datatables()
             ->eloquent($model)
+            ->addColumn('listAdv', ' ')
+            ->editColumn('listAdv', function ($model) {
+                $users = $model->users;
+                return view('tenants.processes.partials.listAdv', compact('users'));
+            })
             ->editColumn('start', function ($model) {
                 return $model->start_br;
             })
             ->editColumn('end', function ($model) {
                 return $model->end_br;
+            })
+            ->editColumn('finish', function ($model) {
+                return $model->finish ? 'Finalizado' : 'Aberto';
             })
             ->addColumn($column, $view)
             ->make(true);

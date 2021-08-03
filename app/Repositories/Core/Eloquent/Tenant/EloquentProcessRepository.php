@@ -128,7 +128,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
     }
 
 
-    public function dataTables($column, $view)
+    public function dataTables($column, $view, $request = null )
     {
         $model = $this->model
             ->query()

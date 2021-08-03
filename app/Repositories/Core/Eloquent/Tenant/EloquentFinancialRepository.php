@@ -23,7 +23,7 @@ class EloquentFinancialRepository extends BaseEloquentRepository
         return Financial::class;
     }
 
-    public function dataTables($column, $view)
+    public function dataTables($column, $view, $request = null)
     {
         $model = $this->model
             ->query()

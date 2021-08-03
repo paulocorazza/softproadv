@@ -35,6 +35,18 @@ class EventController extends ControllerStandard
         $this->middleware('can:delete_event')->only(['delete']);
     }
 
+    public function index(Request $request)
+    {
+        if (request()->ajax()) {
+            return $this->model->dataTables('action', $this->view . '.partials.acoes', $request);
+        }
+
+        $users = $this->user->getAdvogados();
+
+        $title = "Gestão de {$this->title}s";
+        return view("{$this->view}.index", compact('title', 'users'));
+    }
+
     public function create()
     {
         $title = "Cadastrar {$this->title}";

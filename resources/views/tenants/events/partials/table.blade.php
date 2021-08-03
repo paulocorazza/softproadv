@@ -4,10 +4,13 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Processo</th>
+                <th scope="col">Advogados</th>
                 <th scope="col">Titulo</th>
                 <th scope="col">Início</th>
                 <th scope="col">Fim</th>
-                <th width="300px" scope="col"></th>
+                <th scope="col">Status</th>
+                <th width="150px" scope="col"></th>
             </tr>
             </thead>
         </table>

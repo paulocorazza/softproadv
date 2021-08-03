@@ -19,7 +19,7 @@ interface RepositoryInterface
     public function updateOrCreate(array $attributes, array $values = []);
     public function delete($id);
     public function orderBy($column, $order = 'DESC');
-    public function dataTables($column, $view);
+    public function dataTables($column, $view, $request = null);
     public function relationships($relationships);
     public function pluck($column, $key = null);
     public function rules($id = '');

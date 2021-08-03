@@ -87,7 +87,7 @@ class EloquentPersonRepository extends BaseEloquentRepository
         return Person::class;
     }
 
-    public function dataTables($column, $view)
+    public function dataTables($column, $view, $request = null)
     {
 
         $model = $this->model->query();

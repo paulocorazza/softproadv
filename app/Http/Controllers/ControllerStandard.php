@@ -64,10 +64,10 @@ class ControllerStandard extends BaseController
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         if (request()->ajax()) {
-            return $this->model->dataTables('action', $this->view . '.partials.acoes');
+            return $this->model->dataTables('action', $this->view . '.partials.acoes', $request);
         }
 
         $title = "Gestão de {$this->title}s";
