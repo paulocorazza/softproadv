@@ -66,4 +66,14 @@ class ProcessProgress extends Model
     {
         return Helper::formatDateTime($this->date_term, 'd/m/Y');
     }
+
+    public function getDaysDiffAttribute()
+    {
+        $hoje = Carbon::now();
+        $end = Carbon::parse($this->date_term);
+
+        $diff = $hoje->diff($end);
+        return $diff->d . 'd ' . $diff->h . 'h ' . $diff->m . 'm';
+
+    }
 }

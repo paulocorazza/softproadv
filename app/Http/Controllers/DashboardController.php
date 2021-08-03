@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use View;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
 
     private $perPage = 10;
@@ -23,6 +23,7 @@ class HomeController extends Controller
         private Process $process,
         private ProcessProgress $progress,
         private Event $event,
+        private FinancialCharts $financialCharts
     ) {
 
     }
@@ -30,6 +31,16 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+        $totalProcesses = $this->process->count();
+        $totalInProgress = $this->progress->pending()->count();
+
+        $financialChart = $this->financialCharts->getReports();
+
+        $countEvent = $this->event->notAudience()->count();
+        $countEventFinish = $this->event->notAudience()->finish()->count();
+
+        $totalEvents =  $countEvent > 0 ? Helper::roundTo(($countEventFinish / $countEvent) * 100) : 100;
+
         if ($request->ajax()) {
             if ($request->has('events')) {
                 $myEvents = $this->event->notAudience()->pending()->paginate($this->perPage);
@@ -74,7 +85,7 @@ class HomeController extends Controller
             ->paginate($this->perPage);
 
         return view('tenants.home.index',
-            compact( 'progresses', 'myEvents', 'myAudiences'));
+            compact('totalProcesses', 'totalInProgress', 'totalEvents', 'progresses', 'myEvents', 'myAudiences', 'financialChart'));
     }
 
     /**
@@ -83,7 +94,7 @@ class HomeController extends Controller
     private function getProgress()
     {
         return $this->progress
-            ->with('process.person')
+            ->with('process')
             ->pending()
             ->oldest('date_term')
             ->paginate($this->perPage);

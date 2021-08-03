@@ -9,7 +9,7 @@
 
 
     <div class="col-12 col-sm-6">
-        <div class="form-group label-float">
+        <div class="form-group label-float ">
             <input id="progress_description" name="progress_description" class="form-control" type="text"
                    class="form-control" placeholder=" ">
             <label for="progress_description">Descrição</label>

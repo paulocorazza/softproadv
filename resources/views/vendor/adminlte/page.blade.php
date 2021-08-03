@@ -52,7 +52,7 @@
 @endif
 
 @section('body')
-    <div class="wrapper">
+    <div class="wrapper bg-white">
         @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
             <nav
                 class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.topnav_color', 'navbar-white navbar-light')}}">
@@ -106,12 +106,12 @@
                                 </li>
                                 @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                                 @yield('content_top_nav_left')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        {{ session('company')['name'] ?? '' }}
-                                    </a>
-                                </li>
-                            </ul>
+                                       <li class="nav-item">
+                                           <a class="nav-link" href="#">
+                                               {{ session('company')['name'] ?? '' }}
+                                           </a>
+                                       </li>
+                             </ul>
                             @endif
                             <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
                                 @yield('content_top_nav_right')
@@ -170,7 +170,7 @@
                         </a>
                     @endif
 
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="user-panel border-top border-bottom mt-3 pt-3 pb-3 mb-3 d-flex">
                         <div class="image">
                             @if( !empty(auth()->user()->image) )
                                 <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}" alt="{{auth()->user()->name}}" class="user-dashboard img-circle">
@@ -179,7 +179,7 @@
                             @endif
                         </div>
 
-                        <div class="sidebar">
+                        <div class="sidebar ">
                             <nav class="mt-0">
                                 <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
                                     data-widget="treeview" role="menu"
@@ -192,6 +192,7 @@
                                 </ul>
                             </nav>
                         </div>
+
                     </div>
 
                     <div class="sidebar">
@@ -207,7 +208,7 @@
                 </aside>
             @endif
 
-            <div class="content-wrapper">
+            <div class="content-wrapper bg-white">
                 @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
                     <div class="container">
                         @endif

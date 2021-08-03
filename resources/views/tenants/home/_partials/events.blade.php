@@ -1,8 +1,5 @@
     <div class="card-header ui-sortable-handle" style="cursor: move;">
-        <h3 class="card-title">
-            Minhas Atividades
-            <span class="badge badge-danger">{{ $myEvents->toArray()['total'] }}</span>
-        </h3>
+        <h4><strong>Minhas Atividades </strong><span class="badge badge-danger">{{ $myEvents->toArray()['total'] }}</span></h4>
 
         <div class="card-tools" id="links_events">
             <div class="pagination pagination-sm">{!! $myEvents->links() !!}</div>
@@ -44,8 +41,4 @@
         </ul>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer clearfix">
-        <a href="{{ route('events.create') }}" class="btn btn-primary float-right"><i
-                class="fas fa-plus"></i> Adicionar</a>
-    </div>
 

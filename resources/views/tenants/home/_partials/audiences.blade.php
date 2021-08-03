@@ -1,8 +1,12 @@
     <div class="card-header ui-sortable-handle" style="cursor: move;">
-        <h3 class="card-title">
-            Minhas Audiências
-            <span class="badge badge-danger">{{ $myAudiences->toArray()['total'] }}</span>
-        </h3>
+        <div class="row">
+                <div class="col-5">
+                    <h4><strong>Audiências</strong></h4>
+                </div>
+
+            <div class="col-1"><span class="badge badge-danger">{{ $myAudiences->toArray()['total'] }}</span></div>
+
+        </div>
 
         <div class="card-tools" id="links_audiences">
             <div class="pagination pagination-sm">{!! $myAudiences->links() !!}</div>
@@ -44,8 +48,5 @@
         </ul>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer clearfix">
-        <a href="{{ route('events.create') }}" class="btn btn-primary float-right"><i
-                class="fas fa-plus"></i> Adicionar</a>
-    </div>
+
 
