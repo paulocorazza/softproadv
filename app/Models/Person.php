@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Person extends Model
 {
@@ -14,7 +15,7 @@ class Person extends Model
         'Juiz' => 'Juiz',
     ];
 
-     protected $appends = ['type_person_list'];
+     protected $appends = ['name_limit', 'type_person_list'];
 
 
     protected $fillable = [
@@ -100,6 +101,10 @@ class Person extends Model
         return $this->hasMany(Financial::class);
     }
 
+    public function getNameLimitAttribute()
+    {
+        return Str::limit($this->attributes['name'], 25);
+    }
 
     public function getTypePersonListAttribute()
     {

@@ -6,13 +6,14 @@ use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Event extends Model
 {
     use SoftDeletes;
 
     protected $appends = [
-        'start_br', 'end_br'
+      'title_limit',  'start_br', 'end_br'
     ];
 
     protected $fillable = [
@@ -70,11 +71,17 @@ class Event extends Model
 
     public function getDaysDiffAttribute()
     {
-        $hoje = Carbon::now();
+        $now = Carbon::now();
         $end = Carbon::parse($this->end);
 
-        $diff =  $hoje->diff($end);
-        return $diff->d . 'd ' . $diff->h . 'h ' . $diff->m . 'm' ;
+        $diff =  $end->diff($now);
+
+        return $diff->d . 'd ' . $diff->h . 'h ' . $diff->i . 'm' ;
+    }
+
+    public function getTitleLimitAttribute()
+    {
+        return Str::limit($this->attributes['title'], 25);
     }
 
     public function scopeSchedule($query)
@@ -101,4 +108,6 @@ class Event extends Model
     {
         return $query->where('audience', false);
     }
+
+
 }

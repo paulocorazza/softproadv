@@ -121,16 +121,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card" id="tabela_events">
-                @include('tenants.home._partials.events')
+            <div class="row">
+                <div class="col-12">
+                    <div class="card" id="tabela_events">
+                        @include('tenants.home._partials.events')
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
 @stop
 
 @section('js')

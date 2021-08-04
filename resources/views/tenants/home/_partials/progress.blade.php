@@ -22,7 +22,7 @@
             @if(isset($progress->process))
                 <tr>
                     <td>{{ $progress->date_term_br }}</td>
-                    <td>{{ $progress->process->person->name }}</td>
+                    <td>{{ $progress->process->person->name_limit }}</td>
                     <td>{{ $progress->process->number_process }}</td>
                     <td>{{ $progress->description }}</td>
                     <td><small class="badge {{ $progress->color_days_diff }}"><i class="far fa-clock"></i>{{ $progress->days_diff }} dias

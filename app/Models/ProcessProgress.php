@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ProcessProgress extends Model
 {
     protected $table = 'process_progresses';
+
+    protected $appends = ['description_limit'];
 
     protected $casts = [
         'date_br' => 'date',
@@ -64,6 +67,11 @@ class ProcessProgress extends Model
     public function getDateTermBrAttribute($value)
     {
         return Helper::formatDateTime($this->date_term, 'd/m/Y');
+    }
+
+    public function getDescriptionLimitAttribute()
+    {
+        return Str::limit($this->attributes['description'], 25);
     }
 
     public function getDaysDiffAttribute()
