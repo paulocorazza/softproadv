@@ -106,12 +106,12 @@
                                 </li>
                                 @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                                 @yield('content_top_nav_left')
-                                       <li class="nav-item">
-                                           <a class="nav-link" href="#">
-                                               {{ session('company')['name'] ?? '' }}
-                                           </a>
-                                       </li>
-                             </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        {{ session('company')['name'] ?? '' }}
+                                    </a>
+                                </li>
+                            </ul>
                             @endif
                             <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
                                 @yield('content_top_nav_right')
@@ -170,33 +170,35 @@
                         </a>
                     @endif
 
-                    <div class="user-panel border-top border-bottom mt-3 pt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            @if( !empty(auth()->user()->image) )
-                                <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}" alt="{{auth()->user()->name}}" class="user-dashboard img-circle">
-                            @else
-                                <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro" class="user-dashboard img-circle">
-                            @endif
-                        </div>
-
-                        <div class="sidebar ">
-                            <nav class="mt-0">
+                    <div class="user-panel mt-3 d-flex">
+                        <div class="sidebar">
+                            <nav>
                                 <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
                                     data-widget="treeview" role="menu"
                                     @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
                                     @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
+                                        <div class="image d-inline">
+                                            @if( !empty(auth()->user()->image) )
+                                                <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}"
+                                                     alt="{{auth()->user()->name}}" class="img-circle elevation-3">
+                                            @else
+                                                <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro"
+                                                     class="img-circle elevation-3">
+                                            @endif
+                                        </div>
+
+                                        <a class="d-inline nav-link" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
-
                     </div>
 
+
                     <div class="sidebar">
-                        <nav class="mt-2">
+                        <nav>
                             <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
                                 data-widget="treeview" role="menu"
                                 @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
@@ -231,7 +233,6 @@
 
             @hasSection('footer')
                 <footer class="main-footer">
-
                     @yield('footer')
                 </footer>
             @endif
