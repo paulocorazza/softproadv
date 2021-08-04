@@ -1,5 +1,5 @@
 <div class="card-header">
-    <h4><strong>Prazos </strong></h4>
+    <h5><strong>Prazos </strong></h5>
     <div class="card-tools" id="links_progress">
         <div class="pagination pagination-sm">{!! $progresses->links() !!}</div>
     </div>
@@ -25,7 +25,7 @@
                     <td>{{ $progress->process->person->name }}</td>
                     <td>{{ $progress->process->number_process }}</td>
                     <td>{{ $progress->description }}</td>
-                    <td><small class="badge badge-danger"><i class="far fa-clock"></i>{{ $progress->days_diff }}
+                    <td><small class="badge {{ $progress->color_days_diff }}"><i class="far fa-clock"></i>{{ $progress->days_diff }} dias
                         </small></td>
                     <td>
                         <a href="{{ route('processes.show', $progress->process->id) }}" class="text-muted">

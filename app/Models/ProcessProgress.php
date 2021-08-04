@@ -15,7 +15,6 @@ class ProcessProgress extends Model
         'date_term_br' => 'date',
     ];
 
-
     protected $fillable = [
         'date',
         'date_term',
@@ -72,8 +71,17 @@ class ProcessProgress extends Model
         $hoje = Carbon::now();
         $end = Carbon::parse($this->date_term);
 
-        $diff = $hoje->diff($end);
-        return $diff->d . 'd ' . $diff->h . 'h ' . $diff->m . 'm';
+        return $end->diffInDays($hoje, false);
+    }
 
+    public function getColorDaysDiffAttribute()
+    {
+        $days = $this->days_diff;
+
+        return match (true) {
+            $days <= 5 => 'badge-danger',
+            $days <= 10 => 'badge-warning',
+            default => 'badge-info',
+        };
     }
 }

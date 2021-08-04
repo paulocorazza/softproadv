@@ -1,13 +1,6 @@
     <div class="card-header ui-sortable-handle" style="cursor: move;">
-        <div class="row">
-                <div class="col-5">
-                    <h4><strong>Audiências</strong></h4>
-                </div>
-
-            <div class="col-1"><span class="badge badge-danger">{{ $myAudiences->toArray()['total'] }}</span></div>
-
-        </div>
-
+            <h5 class="d-inline"><strong>Audiências</strong></h5>
+            <span class="d-inline badge badge-danger">{{ $myAudiences->toArray()['total'] }}</span>
         <div class="card-tools" id="links_audiences">
             <div class="pagination pagination-sm">{!! $myAudiences->links() !!}</div>
         </div>
