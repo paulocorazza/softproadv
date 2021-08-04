@@ -68,10 +68,10 @@ class ProcessProgress extends Model
 
     public function getDaysDiffAttribute()
     {
-        $hoje = Carbon::now();
+        $now = Carbon::now();
         $end = Carbon::parse($this->date_term);
 
-        return $end->diffInDays($hoje, false);
+        return $now->diffInDays($end, false);
     }
 
     public function getColorDaysDiffAttribute()
