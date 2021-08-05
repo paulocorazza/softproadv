@@ -1,3 +1,22 @@
+@if(isset($home))
+    <div class="alert alert-warning" style="display: none">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-exclamation"></i> Atenção!</h4>
+        <div id="warning"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            {!! Form::label('process_id', 'Processo', ['class' => 'control-label']); !!}
+            <div class="form-group">
+                {!! Form::select('process_id', [], null, ['placeholder' => 'Selecione o Processo', 'class' => 'form-control',  'id' => 'process_id']) !!}
+            </div>
+        </div>
+    </div>
+@endif
+
+
 <div class="row">
     <div class="col-12 col-sm-3">
         <div class="form-group label-float">
@@ -19,7 +38,8 @@
 
     <div class="col-12 col-sm-3">
         <div class="form-group label-float">
-            <input id="progress_date_term" name="progress_date_term" class="form-control" type="date" class="form-control" placeholder=" " autofocus>
+            <input id="progress_date_term" name="progress_date_term" class="form-control" type="date"
+                   class="form-control" placeholder=" " autofocus>
             <label for="progress_date_term">Prazo</label>
         </div>
     </div>

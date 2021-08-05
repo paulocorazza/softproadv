@@ -73,8 +73,10 @@ class HomeController extends Controller
             ->audience()
             ->paginate($this->perPage);
 
+        $home = true;
+
         return view('tenants.home.index',
-            compact( 'progresses', 'myEvents', 'myAudiences'));
+            compact( 'progresses', 'myEvents', 'myAudiences','home'));
     }
 
     /**

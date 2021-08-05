@@ -130,7 +130,6 @@ $(document).ready(function () {
             processResults: function (data) {
                 return {
                     results: $.map(data, function (item) {
-                        console.log(item)
                         return {
                             text: item.process,
                             id: item.id

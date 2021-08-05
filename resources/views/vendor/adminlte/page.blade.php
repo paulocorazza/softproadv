@@ -170,9 +170,9 @@
                         </a>
                     @endif
 
-                    <div class="user-panel mt-3 d-flex">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="sidebar">
-                            <nav>
+                            <nav class="mt-2>
                                 <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
                                     data-widget="treeview" role="menu"
                                     @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
