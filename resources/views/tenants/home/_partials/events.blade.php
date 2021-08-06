@@ -1,6 +1,6 @@
 <div class="card-header ui-sortable-handle" style="cursor: move;">
-    <h5 class="d-inline"><strong>Minhas Atividades </strong></h5>
-    <span class="d-inline badge badge-danger">{{ $myEvents->toArray()['total'] }}</span>
+    <h5 class="d-inline"><strong>Atividades </strong></h5>
+
 
     <div class="card-tools" id="links_events">
         <div class="pagination pagination-sm">{!! $myEvents->links() !!}</div>

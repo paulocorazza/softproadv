@@ -1,3 +1,23 @@
+@if(isset($home))
+    <div class="alert alert-warning" style="display: none">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-exclamation"></i> Atenção!</h4>
+        <div id="warning"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            {!! Form::label('process_event_id', 'Processo', ['class' => 'control-label']); !!}
+            <div class="form-group">
+                {!! Form::select('process_event_id', [], null, ['placeholder' => 'Selecione o Processo', 'class' => 'form-control',  'id' => 'process_event_id']) !!}
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" value="" id="id_audience">
+@endif
+
 <div class="row">
     <div class="col-12 ">
         {!! Form::label('audiences_users', 'Advogados', ['class' => 'control-label']); !!}
@@ -44,7 +64,7 @@
 <div class="row">
     <div class="col-12">
         <div class="form-group">
-            {!! Form::textarea('audiences_description', null, ['class' => 'form-control', 'placeholder' => 'Detalhes', 'id' => 'audiences_description', 'cols' => 20, 'rows' => 4]) !!}
+            {!! Form::textarea('audiences_description', null, ['class' => 'form-control', 'placeholder' => 'Detalhes', 'id' => 'audiences_description', 'cols' => 20, 'rows' => 3]) !!}
         </div>
     </div>
 </div>

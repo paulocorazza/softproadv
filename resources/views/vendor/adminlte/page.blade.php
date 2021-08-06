@@ -172,14 +172,14 @@
 
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="sidebar">
-                            <nav class="mt-2>
+                            <nav class="mt-2">
                                 <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
                                     data-widget="treeview" role="menu"
                                     @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
                                     @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
 
                                     <li class="nav-item">
-                                        <div class="image d-inline">
+                                        <div class="image d-inline" style="margin-left: -7px">
                                             @if( !empty(auth()->user()->image) )
                                                 <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}"
                                                      alt="{{auth()->user()->name}}" class="img-circle elevation-3">
@@ -189,7 +189,7 @@
                                             @endif
                                         </div>
 
-                                        <a class="d-inline nav-link" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
+                                        <a class="d-inline nav-link" style="margin-left: -12px" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -197,7 +197,7 @@
                     </div>
 
 
-                    <div class="sidebar">
+                    <div class="sidebar" style="margin-top: 0px">
                         <nav>
                             <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
                                 data-widget="treeview" role="menu"

@@ -59,13 +59,18 @@ class EventController extends ControllerStandard
 
     public function edit($id)
     {
-        $data = $this->model->relationships('process')
+        $data = $this->model->relationships(['process.person', 'users'])
             ->find($id);
 
         $title = "{$this->title}: {$data->name}";
 
         $users = $this->user->getAdvogados();
         $processes = $data->process()->get()->pluck('process_person', 'id');
+
+
+        if (\request()->ajax()) {
+            return response()->json($data);
+        }
 
         return view("{$this->view}.create", compact('title', 'data', 'users', 'processes'));
     }

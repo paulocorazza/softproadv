@@ -107,6 +107,7 @@ $(document).ready(function () {
         if (id != '')
             count = id
 
+        var users = $('#audiences_users').val()
         var description = $('#audiences_description').val();
         var start =  moment($('#audiences_start').val()).format("DD/MM/YYYY HH:mm:ss")
         var end =  moment($('#audiences_end').val()).format("DD/MM/YYYY HH:mm:ss")
@@ -168,7 +169,6 @@ $(document).ready(function () {
 
 
         if (id != '') {
-            console.log(td)
             $('#audiences_table').find('.j_list').find('#audiences' + id).html(td);
 
         } else if (id == '') {

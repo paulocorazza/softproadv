@@ -1,5 +1,5 @@
-<div class="card-header">
-    <h5><strong>Prazos </strong></h5>
+<div class="card-header ui-sortable-handle" style="cursor: move;">
+    <h5 class="d-inline"><strong>Andamentos </strong></h5>
     <div class="card-tools" id="links_progress">
         <div class="pagination pagination-sm">{!! $progresses->links() !!}</div>
     </div>
@@ -28,7 +28,7 @@
                     <td><small class="badge {{ $progress->color_days_diff }}"><i class="far fa-clock"></i>{{ $progress->days_diff }} dias
                         </small></td>
                     <td>
-                        <a href="{{ route('processes.show', $progress->process->id) }}" class="text-muted">
+                        <a data-toggle="modal" data-target=".modal-progress" data-id="{{ $progress->id }}"   href="javascript:;"  onclick="editDetailProgress(this)" class="text-muted">
                             <i class="fas fa-search"></i>
                         </a>
                     </td>

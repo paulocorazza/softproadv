@@ -17,7 +17,7 @@
     </li>
 
     <li class="nav-item">
-        <a href="{{ route('events.create') }}" class="nav-link btn bg-blue float-right"><i
+        <a id="btnAudience" href="{{ route('events.create') }}"  data-toggle="modal" data-target=".modal-audience" class="nav-link btn bg-blue float-right"><i
                 class="fas fa-plus"></i> Audiências</a>
     </li>
     <li class="nav-item dropdown">
@@ -111,7 +111,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modalLarge">Andamento</h4>
+                    <h4 class="modal-title" id="modalLarge">Andamento </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
                 </div>
@@ -131,7 +131,31 @@
         </div>
     </div>
 
+    <div id="modalAudience" class="modal fade modal-audience" style="overflow:hidden" role="dialog"
+         aria-labelledby="modalLarge" aria-hidden="true">
 
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLarge">Audiência</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @include('tenants.processes.partials.formAudience')
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button id="btnSaveUpdateAudience" type="button" class="btn btn-primary">Salvar</button>
+                    <div class="preload">
+                        @include('tenants.includes.load')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-8 col-12">
@@ -169,6 +193,8 @@
 @section('js')
     <script>
         var routeProcessAjax = "{{ route('processes.select') }}"
+        var routeProcessPost = "{{ route('progresses.store') }}"
+        var routeAudiencePost = "{{ route('events.store') }}"
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
@@ -179,6 +205,7 @@
     <script type="text/javascript" src={{ asset('assets/js/home/home.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/home/dashboard.js') }}></script>
     <script type="text/javascript" src={{ asset('assets/js/home/progress.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/home/event.js') }}></script>
 @stop
 
 

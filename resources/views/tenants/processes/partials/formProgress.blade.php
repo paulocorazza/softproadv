@@ -14,6 +14,8 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" value="" id="id_progress">
 @endif
 
 

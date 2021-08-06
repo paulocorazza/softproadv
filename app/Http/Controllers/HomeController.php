@@ -9,6 +9,7 @@ use App\Models\Person;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Services\Reports\FinancialCharts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,13 @@ use View;
 class HomeController extends Controller
 {
 
-    private $perPage = 10;
+    private $perPage = 20;
 
     public function __construct(
         private Process $process,
         private ProcessProgress $progress,
         private Event $event,
+        private UserRepositoryInterface $user
     ) {
 
     }
@@ -32,14 +34,28 @@ class HomeController extends Controller
     {
         if ($request->ajax()) {
             if ($request->has('events')) {
-                $myEvents = $this->event->notAudience()->pending()->paginate($this->perPage);
+                $myEvents = $this->event
+                    ->whereHas('users', function ($query) {
+                        $query->where('user_id', Auth::user()->id);
+                    })
+                    ->notAudience()
+                    ->pending()
+                    ->latest('start')
+                    ->simplePaginate(5);
 
                 return View::make('tenants.home._partials.events', compact('myEvents'))->render();
             }
 
             if ($request->has('audiences')) {
 
-                $myAudiences = $this->event->audience()->pending()->paginate($this->perPage);
+                $myAudiences = $this->event
+                    ->whereHas('users', function ($query) {
+                        $query->where('user_id', Auth::user()->id);
+                    })
+                    ->audience()
+                    ->pending()
+                    ->latest('start')
+                    ->simplePaginate(5);
 
                 return View::make('tenants.home._partials.audiences', compact('myAudiences'))->render();
             }
@@ -61,7 +77,7 @@ class HomeController extends Controller
             ->latest('start')
             ->pending()
             ->notAudience()
-            ->paginate($this->perPage);
+            ->simplePaginate(5);
 
 
         $myAudiences = $this->event
@@ -71,12 +87,14 @@ class HomeController extends Controller
             ->latest('start')
             ->pending()
             ->audience()
-            ->paginate($this->perPage);
+            ->simplePaginate(5);
 
         $home = true;
 
+        $users = $this->user->getAdvogados();
+
         return view('tenants.home.index',
-            compact( 'progresses', 'myEvents', 'myAudiences','home'));
+            compact( 'progresses', 'myEvents', 'myAudiences', 'users', 'home'));
     }
 
     /**
@@ -88,7 +106,7 @@ class HomeController extends Controller
             ->with('process.person')
             ->pending()
             ->oldest('date_term')
-            ->paginate($this->perPage);
+            ->simplePaginate($this->perPage);
     }
 
 

@@ -248,11 +248,18 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     Route::resource('stages', 'StageController');
 
+
+    /*     * ************************************************ */
+    /*     * *************     PROGRESSES     ***************** */
+    /*     * ************************************************ */
+    Route::get('progresses/{process}', 'ProgressController@edit')->name('progresses.edit');
+    Route::post('progresses', 'ProgressController@store')->name('progresses.store');
+    Route::post('progresses/{id}', 'ProgressController@update')->name('progresses.update');
+
+
     /*     * ************************************************ */
     /*     * *************      PROCESS     ***************** */
     /*     * ************************************************ */
-
-
     Route::get('process/processSelect', 'ExtraAction\PersonProcess')->name('processes.select');
     Route::get('process/search', 'ExtraAction\Process');
     Route::get('process/file/{id}/download', 'ExtraAction\ProcessFileDownload')->name('fileDownload');
