@@ -132,6 +132,10 @@ class EloquentEventRepository extends BaseEloquentRepository
     private function saveUsers(array $data, $event)
     {
         if ($this->hasUsers($data)) {
+            if (is_string($data['users'])) {
+                $data['users'] = explode(',', $data['users']);
+            }
+
             $event->users()->sync($data['users']);
         }
     }
