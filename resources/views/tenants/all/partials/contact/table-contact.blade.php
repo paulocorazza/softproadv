@@ -51,11 +51,13 @@
 
 
                 <td>
-                    <a rel="{{ $contact['id'] }}" class="badge bg-yellow" href="javascript:;"
-                       onclick="editDetail(this)">Editar</a>
+                    @if (!isset($disabled) || !$disabled)
+                        <a rel="{{ $contact['id'] }}" class="badge bg-yellow" href="javascript:;"
+                           onclick="editDetail(this)">Editar</a>
 
-                    <a rel="{{$contact['id'] }}" class="badge bg-danger" href="javascript:;"
-                       onclick="removeDetail(this)">Excluir</a>
+                        <a rel="{{$contact['id'] }}" class="badge bg-danger" href="javascript:;"
+                           onclick="removeDetail(this)">Excluir</a>
+                    @endif
                 </td>
             </tr>
         @empty

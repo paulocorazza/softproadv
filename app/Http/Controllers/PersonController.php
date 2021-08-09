@@ -49,9 +49,10 @@ class PersonController extends ControllerStandard
         $type_addresses = $this->typeAddress->get();
         $countries = $this->country->get();
         $origins = $this->origin->getOrigins();
+        $disabled = false;
 
 
-        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries', 'origins'));
+        return view("{$this->view}.create", compact('title', 'type_addresses', 'countries', 'origins', 'disabled'));
     }
 
 
@@ -86,6 +87,31 @@ class PersonController extends ControllerStandard
         return '1';
     }
 
+    public function show($id)
+    {
+        $data = $this->model->relationships([
+            'addresses.type_address',
+            'addresses.city',
+            'addresses.state',
+            'contacts'
+        ])->find($id);
+
+
+        $data->type_person = json_decode($data->type_person);
+
+
+        $title = "Detalhes {$this->title}: {$data->name}";
+
+        $type_addresses = $this->typeAddress->get();
+        $countries = $this->country->get();
+        $origins = $this->origin->getOrigins();
+        $contacts = $data->contacts;
+        $addresses = $data->addresses;
+        $disabled = true;
+
+        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'origins', 'contacts', 'addresses', 'disabled'));
+    }
+
 
     public function edit($id)
     {
@@ -107,8 +133,9 @@ class PersonController extends ControllerStandard
         $origins = $this->origin->getOrigins();
         $contacts = $data->contacts;
         $addresses = $data->addresses;
+        $disabled = false;
 
-        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'origins', 'contacts', 'addresses'));
+        return view("{$this->view}.create", compact('title', 'data', 'type_addresses', 'countries', 'origins', 'contacts', 'addresses', 'disabled'));
     }
 
 

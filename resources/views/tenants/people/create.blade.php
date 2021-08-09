@@ -75,11 +75,14 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
-            <button id="btnEndereco" type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target=".modal-address">Adicionar
-            </button>
-            <br>
-            <br>
+            @if (!$disabled)
+                <button id="btnEndereco" type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target=".modal-address">Adicionar
+                </button>
+
+                <br>
+                <br>
+            @endif
 
             <div id="modalAddress" class="modal fade modal-address" tabindex="-1" role="dialog"
                  aria-labelledby="modalLarge" aria-hidden="true">
@@ -126,11 +129,13 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
-            <button id="btnContact" type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target=".modal-contact">Adicionar
-            </button>
-            <br>
-            <br>
+            @if (!$disabled)
+                <button id="btnContact" type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target=".modal-contact">Adicionar
+                </button>
+                <br>
+                <br>
+            @endif
 
             <div id="modalContact" class="modal fade modal-contact" tabindex="-1" role="dialog"
                  aria-labelledby="modalLarge" aria-hidden="true">
@@ -182,8 +187,11 @@
     </div>
     <!-- /.Outros Dados -->
 
+    @if(!$disabled)
+        {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+    @endif
 
-    {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+
     {!! Form::close() !!}
 
     <div class="preload">

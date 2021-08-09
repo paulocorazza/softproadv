@@ -88,11 +88,13 @@
 
 
                 <td>
+                 @if (!isset($disabled) || !$disabled)
                     <a rel="{{ $address['id'] }}" class="badge bg-yellow" href="javascript:;"
                        onclick="editAddress(this)">Editar</a>
 
                     <a rel="{{ $address['id'] }}" class="badge bg-danger" href="javascript:;"
                        onclick="removeAddress(this)">Excluir</a>
+                    @endif
                 </td>
             </tr>
         @empty
