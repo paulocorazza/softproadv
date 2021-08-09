@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProgressController extends Controller
 {
@@ -25,6 +26,12 @@ class ProgressController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validate = Validator::make($request->all(), $this->progress->rules($id));
+
+        if ($validate->fails()) {
+            return implode($validate->messages()->all("<p>:message</p>"));
+        }
+
         $progress = $this->progress->findOrFail($id);
 
         $data = $request->all();
@@ -39,6 +46,13 @@ class ProgressController extends Controller
 
     public function store(Request $request)
     {
+        $validate = Validator::make($request->all(), $this->progress->rules());
+
+        if ($validate->fails()) {
+            return implode($validate->messages()->all("<p>:message</p>"));
+        }
+
+
         $data = $request->all();
 
         $process = $this->process->findOrFail($data['process_id']);

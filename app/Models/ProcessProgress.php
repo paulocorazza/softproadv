@@ -27,6 +27,16 @@ class ProcessProgress extends Model
         'process_id'
     ];
 
+    public function rules($id = '')
+    {
+        return [
+            'date' => 'required',
+            'description' => 'required|min:3|max:120',
+            'date_term' => 'required',
+            'publication' => 'required',
+        ];
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
