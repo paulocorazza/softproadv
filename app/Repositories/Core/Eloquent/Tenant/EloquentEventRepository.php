@@ -135,7 +135,7 @@ class EloquentEventRepository extends BaseEloquentRepository
         if ($this->hasUsers($data)) {
             $data = $this->checkTypeUser($data);
 
-            $event->users()->sync($data['users']);
+            $this->linkUsersEvent($data['users'], $event);
         }
     }
 
