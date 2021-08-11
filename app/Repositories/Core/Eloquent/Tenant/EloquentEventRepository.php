@@ -3,6 +3,7 @@
 namespace App\Repositories\Core\Eloquent\Tenant;
 
 use App\Models\Event;
+use App\Models\EventUsers;
 use App\Repositories\Contracts\EventRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 use Illuminate\Support\Facades\DB;
@@ -132,9 +133,7 @@ class EloquentEventRepository extends BaseEloquentRepository
     private function saveUsers(array $data, $event)
     {
         if ($this->hasUsers($data)) {
-            if (is_string($data['users'])) {
-                $data['users'] = explode(',', $data['users']);
-            }
+            $data = $this->checkTypeUser($data);
 
             $event->users()->sync($data['users']);
         }
@@ -239,6 +238,32 @@ class EloquentEventRepository extends BaseEloquentRepository
         $this->saveUsers($data, $event);
 
         return true;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function checkTypeUser(array $data): array
+    {
+        if (is_string($data['users'])) {
+            $data['users'] = explode(',', $data['users']);
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param $users
+     * @param $event
+     */
+    private function linkUsersEvent($users, $event): void
+    {
+        foreach ($users as $user) {
+            EventUsers::updateOrCreate(['user_id' => $user, 'event_id' => $event->id],
+                ['user_id' => $user, 'event_id' => $event->id]
+            );
+        }
     }
 
 }
