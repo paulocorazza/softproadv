@@ -4,21 +4,10 @@ const typesNotifications = {
     event: 'App\\Notifications\\UserLinkedEvent'
 }
 
-/*
-//Canal aberto, funcionando.....
-if (window.Laravel.user) {
-    window.Echo.channel('softproadv_database_notification-created')
-        .notification((notification) => {
-            if (window.Laravel.user == notification.user_id) {
-                store.commit('ADD_NOTIFICATION', notification)
-            }
-        })
-}*/
 
 if (window.Laravel.user) {
-    window.Echo.private(`App.Models.User.${window.Laravel.user}`)
+    window.Echo.private(`notification-created.${window.Laravel.user}`)
         .notification((notification) => {
-            console.log(notification)
             if (window.Laravel.user == notification.user_id) {
                 store.commit('ADD_NOTIFICATION', notification)
             }

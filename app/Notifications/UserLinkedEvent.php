@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Events\NotificationCreated;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
@@ -21,7 +22,10 @@ class UserLinkedEvent extends Notification
      *
      * @return void
      */
-    public function __construct(private Event $event)
+    public function __construct(
+        private User $user,
+        private Event $event
+    )
     {
         //
     }
@@ -39,6 +43,7 @@ class UserLinkedEvent extends Notification
 
     public function toDatabase($notifiable)
     {
+        $this->id_user = $notifiable->id;
         $data = $this->event->load('user', 'process.person');
 
         return [
@@ -58,9 +63,8 @@ class UserLinkedEvent extends Notification
         ]);
     }
 
-    //muda a notificação para um canal aberto.
-/*    public function broadcastOn()
+    public function broadcastOn()
     {
-        return new Channel('notification-created');
-    }*/
+        return new PrivateChannel('notification-created.' . $this->user->id);
+    }
 }
