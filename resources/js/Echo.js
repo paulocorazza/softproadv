@@ -5,6 +5,7 @@ const typesNotifications = {
 }
 
 /*
+//Canal aberto, funcionando.....
 if (window.Laravel.user) {
     window.Echo.channel('softproadv_database_notification-created')
         .notification((notification) => {

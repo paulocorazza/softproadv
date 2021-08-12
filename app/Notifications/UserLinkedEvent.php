@@ -58,6 +58,7 @@ class UserLinkedEvent extends Notification
         ]);
     }
 
+    //muda a notificação para um canal aberto.
 /*    public function broadcastOn()
     {
         return new Channel('notification-created');
