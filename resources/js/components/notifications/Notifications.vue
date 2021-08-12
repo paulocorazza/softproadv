@@ -16,7 +16,7 @@
              </notification>
 
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">Marcar todas como lidas</a>
+            <a v-if="allNotifications.length > 0" @click.prevent="markAllAsRead" href="#" class="dropdown-item dropdown-footer">Marcar todas como lidas</a>
         </div>
         </li>
     </div>
@@ -37,7 +37,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(['loadNotifications']),
+        ...mapActions(['loadNotifications', 'markAllAsRead']),
     }
 
 }

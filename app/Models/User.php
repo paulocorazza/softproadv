@@ -269,5 +269,10 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotify($token));
     }
 
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'users.'.$this->id;
+    }
+
 
 }

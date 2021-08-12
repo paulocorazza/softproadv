@@ -6,10 +6,12 @@
                     <v-btn text
                         v-bind="attrs"
                         v-on="on"
+                           class="text-lowercase"
                     >
                         <i class="fas fa-envelope mr-2"></i>
-                        {{ item.title_limit}}
+                        {{ item.title_limit }}
                     </v-btn>
+                    <span @click.prevent="markAsRead(item.id)" class="float-right text-muted text-sm">Lida</span>
                 </template>
                 <div>
                     <p>{{ item.user.name}} adicionou você em uma atividade</p>
@@ -22,6 +24,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     name: "Notification",
     props: ['notification'],
@@ -30,6 +34,10 @@ export default {
         item() {
             return this.notification.data.data
         }
+    },
+
+    methods: {
+        ...mapActions(['markAsRead'])
     }
 }
 </script>

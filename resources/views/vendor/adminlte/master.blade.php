@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script>
+        window.Laravel = {!! json_encode([
+        'csrf' => csrf_token(),
+        'user' => auth()->check() ? auth()->user()->id : null
+        ])
+        !!}
+    </script>
+
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
 @yield('title', config('adminlte.title', 'AdminLTE 3'))
 @yield('title_postfix', config('adminlte.title_postfix', ''))</title>

@@ -2,9 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Events\NotificationCreated;
 use App\Models\Event;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -30,15 +34,45 @@ class UserLinkedEvent extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toDatabase($notifiable)
     {
+        $data = $this->event->load('user', 'process');
+
+
+/*        event(new NotificationCreated([
+            'id' => $this->id,
+            'user_id'   => $notifiable->id,
+            'read_at' => null,
+            'data' => $data
+        ]));*/
+
         return [
-          'data' => $this->event->load('user', 'process')
+          'data' => $data
         ];
     }
 
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+           'id' => $this->id,
+           'user_id' => $notifiable->id,
+           'read_at' => null,
+           'data' => [
+               'data' => $this->event->load('user', 'process')
+           ]
+        ]);
+    }
 
+    public function broadcastOn()
+    {
+        return new Channel('notification-created');
+    }
+
+    public function broadcatWith()
+    {
+
+    }
 }

@@ -345,9 +345,9 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * ***********     NOTIFICATIONS    *************** */
     /*     * ************************************************ */
+    Route::put('notifications-read', [NotificationController::class, 'markAsRead']);
+    Route::put('notifications-all-read', [NotificationController::class, 'markAllRead']);
     Route::get('notifications', [NotificationController::class, 'notifications']);
-
-
 });
 
 
