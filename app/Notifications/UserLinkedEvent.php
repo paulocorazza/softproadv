@@ -39,15 +39,7 @@ class UserLinkedEvent extends Notification
 
     public function toDatabase($notifiable)
     {
-        $data = $this->event->load('user', 'process');
-
-
-/*        event(new NotificationCreated([
-            'id' => $this->id,
-            'user_id'   => $notifiable->id,
-            'read_at' => null,
-            'data' => $data
-        ]));*/
+        $data = $this->event->load('user', 'process.person');
 
         return [
           'data' => $data
@@ -61,18 +53,13 @@ class UserLinkedEvent extends Notification
            'user_id' => $notifiable->id,
            'read_at' => null,
            'data' => [
-               'data' => $this->event->load('user', 'process')
+               'data' => $this->event->load('user', 'process.person')
            ]
         ]);
     }
 
-    public function broadcastOn()
+/*    public function broadcastOn()
     {
         return new Channel('notification-created');
-    }
-
-    public function broadcatWith()
-    {
-
-    }
+    }*/
 }
