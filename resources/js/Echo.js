@@ -4,7 +4,6 @@ const typesNotifications = {
     event: 'App\\Notifications\\UserLinkedEvent'
 }
 
-
 if (window.Laravel.user) {
     window.Echo.private(`notification-created.${window.Laravel.user}`)
         .notification((notification) => {
