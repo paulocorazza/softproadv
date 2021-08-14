@@ -7,14 +7,14 @@ use App\Tenant\ManagerTenant;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
-class TenantSeeder extends Command
+class TenantSeederUuidUser extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'tenants:seed {id?}';
+    protected $signature = 'tenants:uuid-user {id?}';
 
     /**
      * The console command description.
@@ -46,7 +46,7 @@ class TenantSeeder extends Command
 
         $run = Artisan::call('db:seed', [
                 '--force' => true,
-                '--class' => 'TenantsUserTableSeeder'
+                '--class' => 'UserUuidTableSeeder'
         ]);
 
         if ($run === 0) {
