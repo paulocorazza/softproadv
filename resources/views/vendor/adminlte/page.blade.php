@@ -117,84 +117,28 @@
 
                                 @yield('content_top_nav_right')
 
+                                <div class="d-inline">
+                                    <notifications/>
+                                </div>
 
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                                            <i class="far fa-comments"></i>
-                                            <span class="badge badge-danger navbar-badge">0</span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-                                            {{--            <a href="#" class="dropdown-item">
-                                                            <!-- Message Start -->
-                                                            <div class="media">
-                                                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                                                <div class="media-body">
-                                                                    <h3 class="dropdown-item-title">
-                                                                        Brad Diesel
-                                                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                                                    </h3>
-                                                                    <p class="text-sm">Call me whenever you can...</p>
-                                                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Message End -->
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a href="#" class="dropdown-item">
-                                                            <!-- Message Start -->
-                                                            <div class="media">
-                                                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                                                <div class="media-body">
-                                                                    <h3 class="dropdown-item-title">
-                                                                        John Pierce
-                                                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                                                    </h3>
-                                                                    <p class="text-sm">I got your message bro</p>
-                                                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Message End -->
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a href="#" class="dropdown-item">
-                                                            <!-- Message Start -->
-                                                            <div class="media">
-                                                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                                                <div class="media-body">
-                                                                    <h3 class="dropdown-item-title">
-                                                                        Nora Silvester
-                                                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                                                    </h3>
-                                                                    <p class="text-sm">The subject goes here</p>
-                                                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Message End -->
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>--}}
-                                        </div>
-                                    </li>
-
-                                @if(Auth::user())
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"
-                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                        >
-                                            <i class="fa fa-fw fa-power-off"></i> {{ __('adminlte::adminlte.log_out') }}
-                                        </a>
-                                        <form id="logout-form" action="{{ $logout_url }}" method="POST"
-                                              style="display: none;">
-                                            @if(config('adminlte.logout_method'))
-                                                {{ method_field(config('adminlte.logout_method')) }}
-                                            @endif
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                @endif
-
-                                     <notifications />
-
+                                  <div class="d-inline" >
+                                    @if(Auth::user())
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                            >
+                                                <i class="fa fa-fw fa-power-off"></i> {{ __('adminlte::adminlte.log_out') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ $logout_url }}" method="POST"
+                                                  style="display: none;">
+                                                @if(config('adminlte.logout_method'))
+                                                    {{ method_field(config('adminlte.logout_method')) }}
+                                                @endif
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    @endif
+                                </div>
 
 
                                 @if(config('adminlte.right_sidebar'))
@@ -255,7 +199,8 @@
                                             @endif
                                         </div>
 
-                                        <a class="d-inline nav-link" style="margin-left: -12px" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
+                                        <a class="d-inline nav-link" style="margin-left: -12px"
+                                           href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
                                     </li>
                                 </ul>
                             </nav>
