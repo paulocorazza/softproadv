@@ -1,39 +1,39 @@
 {
-	"authHost": "http://softproadv",
-	"authEndpoint": "/broadcasting/auth",
-	"clients": [
-		{
-			"appId": "04f2cb1c0556b70c",
-			"key": "a9f797825cdb2674fdc6938d4bb32144"
-		}
-	],
-	"database": "redis",
-	"databaseConfig": {
-		"redis": {
+    "authHost": ["http://softproadv", ".softproadv"],
+    "authEndpoint": "/broadcasting/auth",
+    "clients": [
+        {
+            "appId": "04f2cb1c0556b70c",
+            "key": "a9f797825cdb2674fdc6938d4bb32144"
+        }
+    ],
+    "database": "redis",
+    "databaseConfig": {
+        "redis": {
             "hosts" : "redis"
         },
-		"sqlite": {
-			"databasePath": "/database/laravel-echo-server.sqlite"
-		}
-	},
-	"devMode": true,
-	"host": null,
-	"port": "6001",
-	"protocol": "http",
-	"socketio": {},
-	"secureOptions": 67108864,
-	"sslCertPath": "",
-	"sslKeyPath": "",
-	"sslCertChainPath": "",
-	"sslPassphrase": "",
-	"subscribers": {
-		"http": true,
-		"redis": true
-	},
-	"apiOriginAllow": {
-		"allowCors": true,
-		"allowOrigin": "http://softproadv",
-		"allowMethods": "GET, POST",
-		"allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
-	}
+        "sqlite": {
+            "databasePath": "/database/laravel-echo-server.sqlite"
+        }
+    },
+    "devMode": true,
+    "host": null,
+    "port": "6001",
+    "protocol": "http",
+    "socketio": {},
+    "secureOptions": 67108864,
+    "sslCertPath": "",
+    "sslKeyPath": "",
+    "sslCertChainPath": "",
+    "sslPassphrase": "",
+    "subscribers": {
+        "http": true,
+        "redis": true
+    },
+    "apiOriginAllow": {
+        "allowCors": true,
+        "allowOrigin": "http://softproadv",
+        "allowMethods": "GET, POST",
+        "allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
+    }
 }

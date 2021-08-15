@@ -176,9 +176,6 @@
                                         </div>
                                     </li>
 
-                                     <notifications />
-
-
                                 @if(Auth::user())
                                     <li class="nav-item">
                                         <a class="nav-link" href="#"
@@ -195,6 +192,11 @@
                                         </form>
                                     </li>
                                 @endif
+
+                                     <notifications />
+
+
+
                                 @if(config('adminlte.right_sidebar'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="#" data-widget="control-sidebar"

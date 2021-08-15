@@ -201,7 +201,10 @@ class Process extends Model
 
     public function getProcessPersonAttribute()
     {
+        if (isset($this->person))
         return $this->number_process . ' - ' . $this->person()->first()->name;
+
+        return $this->number_process;
     }
 
     public function setExpectancyAttribute($value)

@@ -1,5 +1,4 @@
 <template>
-    <div>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
@@ -19,7 +18,6 @@
             <a v-if="allNotifications.length > 0" @click.prevent="markAllAsRead" href="#" class="dropdown-item dropdown-footer">Marcar todas como lidas</a>
         </div>
         </li>
-    </div>
 </template>
 
 <script>

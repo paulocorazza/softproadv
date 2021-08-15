@@ -12,6 +12,6 @@ class EventUsersObserver
         $user = $eventUsers->user()->first();
         $event = $eventUsers->event()->first();
 
-        $user->notify(new UserLinkedEvent($user, $event));
+        $user->notify(new UserLinkedEvent($user->uuid, $event));
     }
 }

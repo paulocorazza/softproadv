@@ -2026,8 +2026,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Notifications",
@@ -2056,6 +2054,8 @@ var typesNotifications = {
 
 if (window.Laravel.user) {
   window.Echo["private"]("notification-created.".concat(window.Laravel.user)).notification(function (notification) {
+    console.log(notification);
+
     if (window.Laravel.user == notification.user_id) {
       _vuex_store__WEBPACK_IMPORTED_MODULE_0__.default.commit('ADD_NOTIFICATION', notification);
     }
@@ -31609,9 +31609,9 @@ var render = function() {
                       [
                         _c("i", { class: _vm.classObject }),
                         _vm._v(
-                          "\n                     " +
+                          "\n                         " +
                             _vm._s(_vm.item.title_limit) +
-                            "\n                "
+                            "\n                    "
                         )
                       ]
                     ),
@@ -31662,10 +31662,6 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.item.process
-                ? _c("p", [_vm._v(_vm._s(_vm.item.process.person.name))])
-                : _vm._e(),
-              _vm._v(" "),
               _c("p", [_vm._v("Início em: " + _vm._s(_vm.item.start_br))]),
               _vm._v(" "),
               _c("p", [_vm._v("Fim em: " + _vm._s(_vm.item.end_br))])
@@ -31700,62 +31696,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("li", { staticClass: "nav-item dropdown" }, [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link",
-          attrs: { "data-toggle": "dropdown", href: "#" }
-        },
-        [
-          _c("i", { staticClass: "far fa-bell" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "badge badge-warning navbar-badge" }, [
-            _vm._v(_vm._s(_vm.allNotifications.length))
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "dropdown-menu dropdown-menu-lg dropdown-menu-right" },
-        [
-          _c("span", { staticClass: "dropdown-item dropdown-header" }, [
-            _vm._v(_vm._s(_vm.allNotifications.length) + " Notificações")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-divider" }),
-          _vm._v(" "),
-          _vm._l(_vm.allNotifications, function(notification, index) {
-            return _c("notification", {
-              key: index,
-              attrs: { notification: notification }
-            })
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-divider" }),
-          _vm._v(" "),
-          _vm.allNotifications.length > 0
-            ? _c(
-                "a",
-                {
-                  staticClass: "dropdown-item dropdown-footer",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.markAllAsRead.apply(null, arguments)
-                    }
+  return _c("li", { staticClass: "nav-item dropdown" }, [
+    _c(
+      "a",
+      {
+        staticClass: "nav-link",
+        attrs: { "data-toggle": "dropdown", href: "#" }
+      },
+      [
+        _c("i", { staticClass: "far fa-bell" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "badge badge-warning navbar-badge" }, [
+          _vm._v(_vm._s(_vm.allNotifications.length))
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "dropdown-menu dropdown-menu-lg dropdown-menu-right" },
+      [
+        _c("span", { staticClass: "dropdown-item dropdown-header" }, [
+          _vm._v(_vm._s(_vm.allNotifications.length) + " Notificações")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "dropdown-divider" }),
+        _vm._v(" "),
+        _vm._l(_vm.allNotifications, function(notification, index) {
+          return _c("notification", {
+            key: index,
+            attrs: { notification: notification }
+          })
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "dropdown-divider" }),
+        _vm._v(" "),
+        _vm.allNotifications.length > 0
+          ? _c(
+              "a",
+              {
+                staticClass: "dropdown-item dropdown-footer",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.markAllAsRead.apply(null, arguments)
                   }
-                },
-                [_vm._v("Marcar todas como lidas")]
-              )
-            : _vm._e()
-        ],
-        2
-      )
-    ])
+                }
+              },
+              [_vm._v("Marcar todas como lidas")]
+            )
+          : _vm._e()
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []

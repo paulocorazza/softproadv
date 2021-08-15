@@ -5,13 +5,13 @@ namespace App\Notifications;
 use App\Events\NotificationCreated;
 use App\Models\Event;
 use App\Models\User;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Session;
 
 class UserLinkedEvent extends Notification
 {
@@ -23,11 +23,10 @@ class UserLinkedEvent extends Notification
      * @return void
      */
     public function __construct(
-        private User $user,
+        private $uuid,
         private Event $event
     )
     {
-        //
     }
 
     /**
@@ -55,16 +54,16 @@ class UserLinkedEvent extends Notification
     {
         return new BroadcastMessage([
            'id' => $this->id,
-           'user_id' => $notifiable->id,
+           'user_id' => $this->uuid,
            'read_at' => null,
            'data' => [
-               'data' => $this->event->load('user', 'process.person')
+               'data' => $this->event->load('user', 'process')
            ]
         ]);
     }
 
     public function broadcastOn()
     {
-        return new PrivateChannel('notification-created.' . $this->user->id);
+        return new PrivateChannel('notification-created.' . $this->uuid);
     }
 }

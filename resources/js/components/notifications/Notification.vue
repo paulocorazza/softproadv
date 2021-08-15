@@ -17,7 +17,7 @@
                     <p v-if="item.audience == 0">{{ item.user.name}} adicionou você em uma atividade</p>
                     <p v-else-if="item.audience == 1">{{ item.user.name}} adicionou você em uma audiência</p>
                     <p v-if="item.process">Referente ao processo: {{ item.process.number_process}}</p>
-                    <p v-if="item.process">{{ item.process.person.name}}</p>
+<!--                    <p v-if="item.process">{{ item.process.person.name}}</p>-->
                     <p>Início em: {{ item.start_br }}</p>
                     <p>Fim em: {{ item.end_br}}</p>
                 </div>

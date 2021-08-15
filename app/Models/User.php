@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'uuid',
         'name',
         'fantasy',
         'site',
@@ -49,7 +50,7 @@ class User extends Authenticatable
         'journey_end',
         'observation',
         'status',
-        'nivel'
+        'nivel',
     ];
 
     /**
