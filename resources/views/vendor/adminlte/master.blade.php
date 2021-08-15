@@ -18,7 +18,7 @@
 @yield('title', config('adminlte.title', 'AdminLTE 3'))
 @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
 
-<!--    <link rel="stylesheet" href="{{ asset('css/app.css') }}">-->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 
     @if(! config('adminlte.enabled_laravel_mix'))
@@ -50,7 +50,7 @@
     @yield('body')
 </div>
 
-<!--<script src="{{ asset('js/app.js') }}"></script>-->
+<script src="{{ asset('js/app.js') }}"></script>
 
 @if(! config('adminlte.enabled_laravel_mix'))
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
