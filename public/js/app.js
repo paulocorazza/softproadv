@@ -31609,9 +31609,9 @@ var render = function() {
                       [
                         _c("i", { class: _vm.classObject }),
                         _vm._v(
-                          "\n                         " +
+                          "\n                     " +
                             _vm._s(_vm.item.title_limit) +
-                            "\n                    "
+                            "\n                "
                         )
                       ]
                     ),
@@ -31660,6 +31660,10 @@ var render = function() {
                         _vm._s(_vm.item.process.number_process)
                     )
                   ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.item.process
+                ? _c("p", [_vm._v(_vm._s(_vm.item.process.person.name))])
                 : _vm._e(),
               _vm._v(" "),
               _c("p", [_vm._v("Início em: " + _vm._s(_vm.item.start_br))]),
