@@ -18,7 +18,7 @@
     },
     "devMode": true,
     "host": null,
-    "port": "2053",
+    "port": "8443",
     "protocol": "http",
     "socketio": {},
     "secureOptions": 67108864,
@@ -32,7 +32,7 @@
     },
     "apiOriginAllow": {
         "allowCors": true,
-        "allowOrigin": "http://localhost:80",
+        "allowOrigin": "http://softproadv",
         "allowMethods": "GET, POST",
         "allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
     }

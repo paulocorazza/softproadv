@@ -34,7 +34,7 @@ window.io = require('socket.io-client')
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: window.location.hostname + ':2053'
+    host: window.location.hostname + ':8443'
 })
 
 require('./Echo')
