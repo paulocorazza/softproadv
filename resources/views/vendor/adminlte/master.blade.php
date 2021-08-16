@@ -46,6 +46,8 @@
 </head>
 <body class="@yield('classes_body')" @yield('body_data')>
 
+@yield('body_master')
+
 <div id="app">
     @yield('body')
 </div>
