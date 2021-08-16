@@ -4,3 +4,163 @@
 [2021-08-15 09:27:15][l5MtRthxdTfdGb9aQqDsB524e5ooNIk1] Processed:  Illuminate\Notifications\Events\BroadcastNotificationCreated
 [2021-08-15 09:28:54][4dQFrlO1nTg7wKbEwtpD9YcQekiISOG0] Processing: Illuminate\Notifications\Events\BroadcastNotificationCreated
 [2021-08-15 09:28:54][4dQFrlO1nTg7wKbEwtpD9YcQekiISOG0] Processed:  Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:38:15][uvEkt56NyNBRcEfGxIfMDjfDyyxPlTxV] Processing: Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:38:15][uvEkt56NyNBRcEfGxIfMDjfDyyxPlTxV] Processed:  Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:40:09][FztU3DSGS6zZbYWj5LYlGjFdg1MfXAOV] Processing: Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:40:09][FztU3DSGS6zZbYWj5LYlGjFdg1MfXAOV] Processed:  Illuminate\Notifications\Events\BroadcastNotificationCreated
+
+   Predis\Connection\ConnectionException 
+
+
+
+   Predis\Connection\ConnectionException 
+
+  Error while reading line from the server. [tcp://redis:6379]
+
+   Predis\Connection\ConnectionException 
+
+  Error while reading line from the server. [tcp://redis:6379]
+   Predis\Connection\ConnectionException 
+
+  Error while reading line from the server. [tcp://redis:6379]
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+
+   Predis\Connection\ConnectionException 
+
+  Error while reading line from the server. [tcp://redis:6379]
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+
+   Predis\Connection\ConnectionException 
+
+  Error while reading line from the server. [tcp://redis:6379]
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+
+   Predis\Connection\ConnectionException 
+
+  Error while reading line from the server. [tcp://redis:6379]
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+  Error while reading line from the server. [tcp://redis:6379]
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+
+   Predis\Connection\ConnectionException 
+
+      [2m+28 vendor frames [22m
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+
+  Error while reading line from the server. [tcp://redis:6379]
+
+  at /var/www/Projects/softproadv/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+    151▕      */
+    152▕     protected function onConnectionError($message, $code = null)
+    153▕     {
+    154▕         CommunicationException::handle(
+  ➜ 155▕             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156▕         );
+    157▕     }
+    158▕ 
+    159▕     /**
+
+      [2m+28 vendor frames [22m
+  29  /var/www/Projects/softproadv/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+[2021-08-16 11:45:31][L3YoE72xDihv8lnB6VFU0zSi6gMRCmLs] Processing: Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:45:31][L3YoE72xDihv8lnB6VFU0zSi6gMRCmLs] Processed:  Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:50:01][5QlsrkcA05b1Epw4CtcYghyqXx32NpG2] Processing: Illuminate\Notifications\Events\BroadcastNotificationCreated
+[2021-08-16 11:50:01][5QlsrkcA05b1Epw4CtcYghyqXx32NpG2] Processed:  Illuminate\Notifications\Events\BroadcastNotificationCreated
