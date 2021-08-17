@@ -28,6 +28,7 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrf;
 //     encrypted: true
 // });
 
+/*
 
 import Echo from 'laravel-echo';
 
@@ -35,8 +36,9 @@ window.io = require('socket.io-client')
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: 'http://softproadv-homolog.com.br:8443'
+    host:  window.location.host + ':8443'
 })
 
 require('./Echo')
+*/
 
