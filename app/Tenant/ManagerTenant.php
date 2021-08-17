@@ -10,6 +10,7 @@ class ManagerTenant
 {
     public function domainIsMain()
     {
+        request()->getHost();
         return in_array(request()->getHost(), config('tenant.domain_main'));
     }
 
