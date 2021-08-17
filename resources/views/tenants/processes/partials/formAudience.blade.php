@@ -7,45 +7,30 @@
 
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             {!! Form::label('process_event_id', 'Processo', ['class' => 'control-label']); !!}
             <div class="form-group">
                 {!! Form::select('process_event_id', [], null, ['placeholder' => 'Selecione o Processo', 'class' => 'form-control',  'id' => 'process_event_id']) !!}
             </div>
         </div>
-
-        <div class="col-6">
-            {!! Form::label('audiences_users', 'Advogados', ['class' => 'control-label']); !!}
-            <div class="form-group">
-                <select class="form-control" name="audiences_users[]" id="audiences_users" multiple>
-                    @foreach($users as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-
     </div>
 
     <input type="hidden" value="" id="id_audience">
 
-@else
-    <div class="row">
-        <div class="col-12 ">
-            {!! Form::label('audiences_users', 'Advogados', ['class' => 'control-label']); !!}
-            <div class="form-group">
-                <select class="form-control" name="audiences_users[]" id="audiences_users" multiple>
-                    @foreach($users as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-    </div>
 @endif
 
-
+<div class="row">
+    <div class="col-12 ">
+        {!! Form::label('audiences_users', 'Advogados', ['class' => 'control-label']); !!}
+        <div class="form-group">
+            <select class="form-control" name="audiences_users[]" id="audiences_users" multiple>
+                @foreach($users as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
 
 
 <div class="row">

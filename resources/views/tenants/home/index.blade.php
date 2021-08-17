@@ -11,13 +11,15 @@
 
 @section('content_top_nav_right')
     <li class="nav-item" style="margin-right: 5px">
-        <a id="btnProgress" data-toggle="modal" data-target=".modal-progress" href="{{ route('events.create') }}" class="nav-link btn bg-blue float-right"><i
+        <a id="btnProgress" data-toggle="modal" data-target=".modal-progress" href="{{ route('events.create') }}"
+           class="nav-link btn bg-blue float-right"><i
                 class="fas fa-plus"></i> Andamentos</a>
 
     </li>
 
     <li class="nav-item">
-        <a id="btnAudience" href="{{ route('events.create') }}"  data-toggle="modal" data-target=".modal-audience" class="nav-link btn bg-blue float-right"><i
+        <a id="btnAudience" href="{{ route('events.create') }}" data-toggle="modal" data-target=".modal-audience"
+           class="nav-link btn bg-blue float-right"><i
                 class="fas fa-plus"></i> Audiências</a>
     </li>
 @stop
@@ -27,20 +29,22 @@
          aria-labelledby="modalLarge" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalLarge">Andamento </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
+                <div class="modal-header d-flex justify-content-between">
+                    <div>
+                        <h4 class="modal-title" id="modalLarge">Andamento </h4>
+                    </div>
+
+                    <div>
+                        <button id="btnSaveUpdateProgress" type="button" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                        <div class="preload">
+                            @include('tenants.includes.load')
+
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
-                        @include('tenants.processes.partials.formProgress')
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                    <button id="btnSaveUpdateProgress" type="button" class="btn btn-primary">Salvar</button>
-                    <div class="preload">
-                        @include('tenants.includes.load')
-                    </div>
+                    @include('tenants.processes.partials.formProgress')
                 </div>
             </div>
         </div>
@@ -51,20 +55,21 @@
 
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalLarge">Audiência</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
+                <div class="modal-header d-flex justify-content-between">
+                    <div>
+                        <h4 class="modal-title" id="modalLarge">Audiência </h4>
+                    </div>
+
+                    <div>
+                        <button id="btnSaveUpdateAudience" type="button" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                        <div class="preload">
+                            @include('tenants.includes.load')
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
-                      @include('tenants.processes.partials.formAudience')
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                    <button id="btnSaveUpdateAudience" type="button" class="btn btn-primary">Salvar</button>
-                    <div class="preload">
-                        @include('tenants.includes.load')
-                    </div>
+                    @include('tenants.processes.partials.formAudience')
                 </div>
             </div>
         </div>
@@ -85,7 +90,7 @@
             <div class="row">
                 <div class="col-lg-12 col-12">
                     <div class="card" id="tabela_audience">
-                         @include('tenants.home._partials.audiences')
+                        @include('tenants.home._partials.audiences')
                     </div>
                 </div>
             </div>
