@@ -6,9 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script>
+        window.Laravel = {!! json_encode([
+        'csrf' => csrf_token(),
+        'user' => auth()->check() ? auth()->user()->uuid : null
+        ])
+        !!}
+    </script>
+
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
 @yield('title', config('adminlte.title', 'AdminLTE 3'))
 @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+
     @if(! config('adminlte.enabled_laravel_mix'))
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
@@ -27,12 +39,20 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @endif
 
+
+
     <!-- favicon icon -->
     <link rel="shortcut icon" href="assets/images/icon-adv.ico" />
 </head>
 <body class="@yield('classes_body')" @yield('body_data')>
 
-@yield('body')
+@yield('body_master')
+
+<div id="app">
+    @yield('body')
+</div>
+
+<script src="{{ asset('js/app.js') }}"></script>
 
 @if(! config('adminlte.enabled_laravel_mix'))
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

@@ -1,7 +1,7 @@
 @extends('adminlte::master')
 
 @section('adminlte_css_pre')
-{{--    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">--}}
+    {{--    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">--}}
     <style>
         #particles-js {
             position: absolute;
@@ -50,7 +50,7 @@
     @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
 @endif
 
-@section('body')
+@section('body_master')
     <div
         id="particles-js"
         class="bg_fundo"

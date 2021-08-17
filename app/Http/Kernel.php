@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.domain.main' => \App\Http\Middleware\Tenant\CheckDomainMain::class,
         'not.domain.main' => \App\Http\Middleware\Tenant\NotDomainMain::class,
+        'tenant' =>  \App\Http\Middleware\Tenant\TenantMiddleware::class,
     ];
 }

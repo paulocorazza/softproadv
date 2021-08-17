@@ -35,6 +35,7 @@
         <div class="card-body pad">
             <p><strong>ID: </strong>{{  $data->id }}</p>
             <p><strong>Nome: </strong>{{  $data->name }}</p>
+            <p><strong>Fantasia: </strong>{{  $data->fantasy }}</p>
             <p><strong>E-mail: </strong>{{  $data->email }}</p>
             <p><strong>Celular: </strong>{{  $data->cellphone }}</p>
             <p><strong>Telefone: </strong>{{  $data->telephone }}</p>

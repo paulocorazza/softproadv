@@ -45,12 +45,9 @@ class TenantSeeder extends Command
 
 
         $run = Artisan::call('db:seed', [
-            //adicionado --force
-            '--force' => true,
-           // '--class' => 'ContractModelTableSeeder'
-            '--class' => 'TenantsUserTableSeeder'
+                '--force' => true,
+                '--class' => 'TenantsUserTableSeeder'
         ]);
-
 
         if ($run === 0) {
             $this->info("Success {$company->name}");

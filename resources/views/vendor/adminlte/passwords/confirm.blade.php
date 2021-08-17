@@ -17,7 +17,7 @@
     @php( $dashboard_url = $register_url ? url($dashboard_url) : '' )
 @endif
 
-@section('body')
+@section('body_master')
     <div class="lockscreen-wrapper">
         <div class="lockscreen-logo">
             <a href="{{ $dashboard_url }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>

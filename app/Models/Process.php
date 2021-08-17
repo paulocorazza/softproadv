@@ -55,14 +55,14 @@ class Process extends Model
             'person_id' => "required|exists:people,id",
             'counterpart_id' => "required|exists:people,id",
             'judge_id' => "nullable|exists:people,id",
-            'forum_id' => "nullable|required_if:type_process,Ajuizado|exists:forums,id",
-            'stick_id' => "nullable|required_if:type_process,Ajuizado|exists:sticks,id",
-            'district_id' => "nullable|required_if:type_process,Ajuizado|exists:districts,id",
-            'group_action_id' => "nullable|required_if:type_process,Ajuizado|exists:group_actions,id",
-            'type_action_id' => "nullable|required_if:type_process,Ajuizado|exists:type_actions,id",
-            'phase_id' => "nullable|required_if:type_process,Ajuizado|exists:phases,id",
-            'stage_id' => "nullable|required_if:type_process,Ajuizado|exists:stages,id",
-            'number_process' => 'nullable|required_if:type_process,Ajuizado|min:3',
+            'forum_id' => "nullable|exists:forums,id",
+            'stick_id' => "nullable|exists:sticks,id",
+            'district_id' => "nullable|exists:districts,id",
+            'group_action_id' => "nullable|exists:group_actions,id",
+            'type_action_id' => "nullable|exists:type_actions,id",
+            'phase_id' => "nullable|exists:phases,id",
+            'stage_id' => "nullable|exists:stages,id",
+            'number_process' => 'nullable|min:3',
             'users' => 'required',
             'status' => 'required|in:Em Andamento,Concluído,Cancelado',
             'type_process' => 'required|in:Ajuizado,Não Ajuizado',
@@ -201,7 +201,10 @@ class Process extends Model
 
     public function getProcessPersonAttribute()
     {
+        if (isset($this->person))
         return $this->number_process . ' - ' . $this->person()->first()->name;
+
+        return $this->number_process;
     }
 
     public function setExpectancyAttribute($value)

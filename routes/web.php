@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
 
@@ -340,6 +341,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('reports/people', [\App\Http\Controllers\Reports\PeopleController::class, 'report'])->name('people.report');
 
+
+    /*     * ************************************************ */
+    /*     * ***********     NOTIFICATIONS    *************** */
+    /*     * ************************************************ */
+    Route::put('notifications-read', [NotificationController::class, 'markAsRead']);
+    Route::put('notifications-all-read', [NotificationController::class, 'markAllRead']);
+    Route::get('notifications', [NotificationController::class, 'notifications']);
 });
 
 

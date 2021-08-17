@@ -29,7 +29,7 @@ $(document).ready(function () {
                     required: true,
                 },
 
-                forum_id: {
+               /* forum_id: {
                     required: function () {
                         return $('#type_process').val() === 'Ajuizado'
                     }
@@ -77,7 +77,7 @@ $(document).ready(function () {
                         return $('#type_process').val() === 'Ajuizado'
                     },
                 },
-
+*/
                 users: {
                     required: true
                 },

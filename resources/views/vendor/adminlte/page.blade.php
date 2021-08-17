@@ -114,23 +114,33 @@
                             </ul>
                             @endif
                             <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
+
                                 @yield('content_top_nav_right')
-                                @if(Auth::user())
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"
-                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                        >
-                                            <i class="fa fa-fw fa-power-off"></i> {{ __('adminlte::adminlte.log_out') }}
-                                        </a>
-                                        <form id="logout-form" action="{{ $logout_url }}" method="POST"
-                                              style="display: none;">
-                                            @if(config('adminlte.logout_method'))
-                                                {{ method_field(config('adminlte.logout_method')) }}
-                                            @endif
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                @endif
+
+                                <div class="d-inline">
+                                    <notifications/>
+                                </div>
+
+                                  <div class="d-inline" >
+                                    @if(Auth::user())
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                            >
+                                                <i class="fa fa-fw fa-power-off"></i> {{ __('adminlte::adminlte.log_out') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ $logout_url }}" method="POST"
+                                                  style="display: none;">
+                                                @if(config('adminlte.logout_method'))
+                                                    {{ method_field(config('adminlte.logout_method')) }}
+                                                @endif
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    @endif
+                                </div>
+
+
                                 @if(config('adminlte.right_sidebar'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="#" data-widget="control-sidebar"
@@ -189,7 +199,8 @@
                                             @endif
                                         </div>
 
-                                        <a class="d-inline nav-link" style="margin-left: -12px" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
+                                        <a class="d-inline nav-link" style="margin-left: -12px"
+                                           href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
                                     </li>
                                 </ul>
                             </nav>

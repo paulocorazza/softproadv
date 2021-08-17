@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Event;
+use App\Models\EventUsers;
 use App\Models\User;
+use App\Observers\EventObserver;
+use App\Observers\EventUsersObserver;
 use App\Observers\UserObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -54,6 +58,6 @@ class AppServiceProvider extends ServiceProvider
          * Observers
          */
         User::observe(UserObserver::class);
-
+        EventUsers::observe(EventUsersObserver::class);
     }
 }
