@@ -55,6 +55,7 @@ class RegisterNotification extends Notification
             ->line('Criamos um domínio seguro especialmente para você.')
             ->line('Para acessar o sistema com seu domínio personalizado clique no botão abaixo.')
             ->action($dominio,  $dominio)
+            ->line('Caso o link ainda não esteja disponível, aguarde mais alguns minutos para a liberação do sistema.')
 
             ->line('E-mail de acesso: ' . $this->company->email)
             ->line('Sua senha para o primeiro acesso: ' . $this->password)

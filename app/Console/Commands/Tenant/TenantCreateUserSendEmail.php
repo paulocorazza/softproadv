@@ -43,7 +43,7 @@ class TenantCreateUserSendEmail extends Command
 
     private function execCommand(Company $company)
     {
-        if ($this->hasDNSAvailable($company)) {
+        //if ($this->hasDNSAvailable($company)) {
             $this->info("Creating User {$company->name}");
 
             //Connection Tenant
@@ -66,7 +66,7 @@ class TenantCreateUserSendEmail extends Command
             $this->info("Email Send Successfully {$company->name}");
 
             $this->info("----------------------------------------");
-        }
+        //}
     }
 
     private function createUser(Company $company, string $password): void
@@ -81,11 +81,11 @@ class TenantCreateUserSendEmail extends Command
         Profile::first()->users()->attach($user);
     }
 
-    private function hasDNSAvailable(Company $company)
+/*    private function hasDNSAvailable(Company $company)
     {
         return $this->getUrlStatus('https://' . $company->subdomain . config('tenant.subdomain'));
 
-    }
+    }*/
 
     private function getUrlStatus($url): bool
     {
