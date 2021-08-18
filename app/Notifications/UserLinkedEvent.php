@@ -57,7 +57,7 @@ class UserLinkedEvent extends Notification
            'user_id' => $this->uuid,
            'read_at' => null,
            'data' => [
-               'data' => $this->event->load('user', 'process')
+               'data' => $this->event->load('user', 'process.person')
            ]
         ]);
     }

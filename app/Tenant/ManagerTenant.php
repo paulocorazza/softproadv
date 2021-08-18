@@ -20,6 +20,7 @@ class ManagerTenant
     public function subDomain()
     {
         $piecesHost = explode('.', request()->getHost());
+
         return $piecesHost[0];
     }
 
