@@ -198,7 +198,7 @@ class EloquentPersonRepository extends BaseEloquentRepository
             $search = $request->q;
 
             $data = DB::table('processes')
-                        ->select('processes.id', DB::raw('CONCAT(processes.number_process, \' - \', people.name) AS process'))
+                        ->select('processes.id', DB::raw('CONCAT(IFNULL(processes.number_process, processes.id), \' - \', people.name) AS process'))
                         ->join('people', 'processes.person_id', '=', 'people.id')
                         ->orWhere('processes.number_process', 'like', "%$search%")
                         ->orWhere('people.name', 'LIKE', "%$search%")

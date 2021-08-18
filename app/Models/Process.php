@@ -204,10 +204,10 @@ class Process extends Model
 
         if (empty($this->person)) {
             $this->load('person');
-            return $this->number_process . ' - ' . $this->person->name;
+            return this->number_process ?? $this->id  . ' - ' . $this->person->name;
         }
 
-        return $this->number_process . ' - ' . $this->person->name;
+        return $this->number_process ?? $this->id . ' - ' . $this->person->name;
     }
 
     public function setExpectancyAttribute($value)
