@@ -81,7 +81,6 @@
         </div>
     </div>
 
-
     <!-- /.Andamentos -->
     <div class="card card-outline card-blue">
         <div class="card-header">
@@ -131,8 +130,6 @@
         <!-- /.card-body -->
     </div>
     <!-- /.Andamentos -->
-
-
 
     <!-- /.Audiências -->
     <div class="card card-outline card-cyan">
@@ -245,12 +242,18 @@
     </div>
     <!-- /.Arquivos -->
 
-    {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
-    {!! Form::close() !!}
-
-    <div class="preload">
-        @include('tenants.includes.load')
+    <div class="row d-flex justify-content-between fixed-bottom">
+        <div></div>
+        <div class="m-4">
+            {!! Form::submit('Salvar', ['class' => 'btn btn-primary text-white']) !!}
+            {!! Form::close() !!}
+            <div class="preload">
+                @include('tenants.includes.load')
+            </div>
+        </div>
     </div>
+
+
 @stop
 
 

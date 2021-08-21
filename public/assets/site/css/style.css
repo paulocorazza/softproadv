@@ -43,10 +43,10 @@ body {font-family: 'Heebo', sans-serif; font-weight: normal; font-style: normal;
 /* ------------------------
     Typography
 ------------------------*/
-h1, h2, h3, h4, h5, h6{font-weight:normal; margin-top: 0px; margin-bottom: 0px; text-transform: capitalize; letter-spacing: 2px; font-family: 'Nunito', sans-serif;}
+h1, h2, h3, h4, h5, h6{font-weight:normal; margin-top: 0px; margin-bottom: 0px; letter-spacing: 2px; font-family: 'Nunito', sans-serif;}
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: inherit; }
-h1 { font-size: 60px; font-style: normal; line-height: 70px; font-weight: bold; text-transform: capitalize; color: #1c1d3e; letter-spacing: 0;}
-h2 { font-size: 40px; font-style: normal; line-height: 46px; font-weight: 600; color: #1c1d3e; text-transform: capitalize; margin-bottom: 10px; position: relative;}
+h1 { font-size: 60px; font-style: normal; line-height: 70px; font-weight: bold; color: #1c1d3e; letter-spacing: 0;}
+h2 { font-size: 40px; font-style: normal; line-height: 46px; font-weight: 600; color: #1c1d3e; margin-bottom: 10px; position: relative;}
 h3 { font-size: 30px; font-style: normal; line-height: 36px; font-weight: 500;}
 h4 { font-size: 24px; font-style: normal; margin-bottom: 10px; font-weight: 500; line-height: 30px; color: #1c1d3e;}
 h5 { font-size: 20px; font-style: normal; margin-bottom: 10px; font-weight: 500; line-height: 26px; color: #1c1d3e;}

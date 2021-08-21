@@ -169,6 +169,12 @@ class Process extends Model
     }
 
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -204,7 +210,7 @@ class Process extends Model
 
         if (empty($this->person)) {
             $this->load('person');
-            return this->number_process ?? $this->id  . ' - ' . $this->person->name;
+            return $this->number_process ?? $this->id  . ' - ' . $this->person->name;
         }
 
         return $this->number_process ?? $this->id . ' - ' . $this->person->name;

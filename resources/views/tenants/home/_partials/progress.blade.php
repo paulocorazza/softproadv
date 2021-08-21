@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{ $progress->date_term_br }}</td>
                     <td>{{ $progress->process->person->name_limit }}</td>
-                    <td>{{ $progress->process->number_process }}</td>
+                    <td><a href="{{ route('processes.show', $progress->process->id)  }}">{{ $progress->process->number_process }}</a></td>
                     <td>{{ $progress->description_limit }}</td>
                     <td><small class="badge {{ $progress->color_days_diff }}"><i class="far fa-clock"></i>{{ $progress->days_diff }} dias
                         </small></td>

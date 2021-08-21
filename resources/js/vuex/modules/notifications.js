@@ -37,7 +37,7 @@ export default {
         },
 
         markAsRead(context, params) {
-            axios.put('/notifications-read', params)
+             axios.put('/notifications-read', params)
                 .then(() => context.commit('MARK_AS_RED', params.id))
         },
 

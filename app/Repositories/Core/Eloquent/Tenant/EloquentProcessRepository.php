@@ -4,6 +4,7 @@ namespace App\Repositories\Core\Eloquent\Tenant;
 
 use App\Helpers\Helper;
 use App\Models\Process;
+use App\Models\ProcessUsers;
 use App\Repositories\Contracts\ProcessRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 use Carbon\Carbon;
@@ -82,7 +83,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
     private function saveUsers(array $data, $process)
     {
         if (isset($data['users'])) {
-            $process->users()->sync($data['users']);
+            $this->linkedUserProcess($data['users'], $process);
         }
 
         return true;
@@ -379,5 +380,18 @@ class EloquentProcessRepository extends BaseEloquentRepository
     private function getReplaceCounterPart(Process $process, array|string $contract): string|array
     {
         return str_replace('{Nome da Parte Contrária}', $process->counterPart->name, $contract);
+    }
+
+    /**
+     * @param $users
+     * @param $process
+     */
+    private function linkedUserProcess($users, $process): void
+    {
+        foreach ($users as $user) {
+            ProcessUsers::updateOrCreate(['user_id' => $user, 'process_id' => $process->id],
+                ['user_id' => $user, 'process_id' => $process->id]
+            );
+        }
     }
 }

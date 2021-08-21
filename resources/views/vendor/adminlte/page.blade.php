@@ -189,18 +189,21 @@
                                     @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
 
                                     <li class="nav-item">
-                                        <div class="image d-inline" style="margin-left: -7px">
-                                            @if( !empty(auth()->user()->image) )
-                                                <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}"
-                                                     alt="{{auth()->user()->name}}" class="img-circle elevation-3">
-                                            @else
-                                                <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro"
-                                                     class="img-circle elevation-3">
-                                            @endif
-                                        </div>
+                                        <a class="d-inline nav-link brand-link" style="margin-left: -12px"
+                                           href="{{ route('profile') }}">
+                                            <div class="image d-inline" style="margin-left: -7px">
+                                                @if( !empty(auth()->user()->image) )
+                                                    <img src="{{ asset('storage/tenants/' . auth()->user()->image) }}"
+                                                         alt="{{auth()->user()->name}}" class="img-circle elevation-3 brand-image">
+                                                @else
+                                                    <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro"
+                                                         class="img-circle elevation-3 brand-image">
+                                                @endif
+                                            </div>
+                                            <span class="brand-text font-weight-light ">{{ auth()->user()->name }}</span>
 
-                                        <a class="d-inline nav-link" style="margin-left: -12px"
-                                           href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
+                                        </a>
+
                                     </li>
                                 </ul>
                             </nav>

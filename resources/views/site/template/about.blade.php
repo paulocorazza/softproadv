@@ -40,7 +40,7 @@
                         <div class="ellipse"></div>
                         <i class="la la-info"></i>
                     </div>
-                    <h2>Software Moderno E Sofisticado para seu escritório de advocacia.</h2>
+                    <h2>Software moderno e sofisticado para seu escritório de advocacia.</h2>
                 </div>
                 <p class="lead mb-5">Não gerencie apenas processos e atividades jurídicas, faça também a gestão
                     financeira do seu escritório, com relatórios gerenciais que te ajudarão a crescer cada vez

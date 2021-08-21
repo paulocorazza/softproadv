@@ -6,12 +6,6 @@
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8 col-md-12">
                     <div class="section-title">
-                        <div class="title-effect">
-                            <div class="bar bar-top"></div>
-                            <div class="bar bar-right"></div>
-                            <div class="bar bar-bottom"></div>
-                            <div class="bar bar-left"></div>
-                        </div>
                         <h6>Registre-se Agora</h6>
                         <h2>E comece a usar o SoftPro Advogado</h2>
                     </div>
@@ -25,7 +19,16 @@
                             <div class="col-md-12">
                                 <div class="container" id="novo_conteiner">
 
-                                    @include('tenants.includes.alerts')
+
+                                    @if( $errors->any() )
+                                        <div class="alert alert-warning">
+                                            <h4><i class="fa fa-exclamation"></i> Atenção!</h4>
+
+                                            @foreach( $errors->all() as $error )
+                                                <p>{{$error}}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
 
                                     <div class="form-group">
                                         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome Completo Advogado(a)']) !!}
@@ -103,8 +106,7 @@
                                 <div class="col-md-12">
                                     <div class="remember-checkbox d-inline-block mb-5">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">Eu aceito os termos de uso e privacidade</label>
+                                             <label class="form-check-label" for="flexCheckDefault">Ao criar sua conta você concorda com os termos de uso.</label>
                                         </div>
                                     </div>
                                 </div>

@@ -13,7 +13,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 
-class UserLinkedEvent extends Notification
+class UserLinkedEvent extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -23,7 +23,7 @@ class UserLinkedEvent extends Notification
      * @return void
      */
     public function __construct(
-        private $uuid,
+        private string $uuid,
         private Event $event
     )
     {
@@ -42,7 +42,6 @@ class UserLinkedEvent extends Notification
 
     public function toDatabase($notifiable)
     {
-        $this->id_user = $notifiable->id;
         $data = $this->event->load('user', 'process.person');
 
         return [
