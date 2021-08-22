@@ -13,7 +13,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 
-class UserLinkedEvent extends Notification implements ShouldQueue
+class UserLinkedEvent extends Notification
 {
     use Queueable;
 

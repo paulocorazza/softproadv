@@ -32,9 +32,9 @@ class ChatController extends Controller
             'message' => $request->input('message')
         ]);
 
-        $uuidCompany = session()->has('company') ? session('company')['uuid'] : '';
+    //    $uuidCompany = session()->has('company') ? session('company')['uuid'] : '';
 
-        broadcast(new MessageCreated($message->load('user'), $uuidCompany))->toOthers();
+        broadcast(new MessageCreated($user,  $message->load('user')))->toOthers();
 
         return response()->json($message->load('user'));
     }

@@ -21,10 +21,10 @@ Broadcast::channel('notification-created.{id}', function ($user, $uuid) {
     return $user->uuid === $uuid;
 });
 
-Broadcast::channel('chat.{id}', function ($user, $uuid) {
-    if (session()->has('company')) {
+Broadcast::channel('chat', function ($user) {
+/*    if (session()->has('company')) {
         return session('company')['uuid'] === $uuid;
-    }
+    }*/
 
     return auth()->check();
 

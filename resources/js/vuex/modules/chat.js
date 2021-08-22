@@ -9,7 +9,6 @@ export default {
         },
 
         ADD_MESSAGE(state, message) {
-            console.log(message)
             state.items.push(message)
         }
     },

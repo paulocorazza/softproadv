@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -21,8 +22,8 @@ class MessageCreated implements ShouldBroadcast
      * @return void
      */
     public function __construct(
+        public User $user,
         public Message $message,
-        public string $uuidTenant
     )
     {
         //
@@ -35,6 +36,6 @@ class MessageCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('chat.' . $this->uuidTenant);
+        return new PrivateChannel('chat');
     }
 }
