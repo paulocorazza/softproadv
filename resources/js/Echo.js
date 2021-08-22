@@ -12,6 +12,12 @@ if (window.Laravel.user) {
                 store.commit('ADD_NOTIFICATION', notification)
             }
         })
+
+    window.Echo.private(`chat.${window.Laravel.company}`)
+        .listen('MessageCreated', (message) => {
+            store.commit('ADD_MESSAGE', message)
+        })
+
 }
 
 

@@ -9,7 +9,8 @@
     <script>
         window.Laravel = {!! json_encode([
         'csrf' => csrf_token(),
-        'user' => auth()->check() ? auth()->user()->uuid : null
+        'user' => auth()->check() ? auth()->user()->uuid : null,
+        'company' => session()->has('company') ? session('company')['uuid'] : ''
         ])
         !!}
     </script>

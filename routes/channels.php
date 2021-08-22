@@ -20,3 +20,12 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('notification-created.{id}', function ($user, $uuid) {
     return $user->uuid === $uuid;
 });
+
+Broadcast::channel('chat.{id}', function ($user, $uuid) {
+    if (session()->has('company')) {
+        return session('company')['uuid'] === $uuid;
+    }
+
+    return auth()->check();
+
+});

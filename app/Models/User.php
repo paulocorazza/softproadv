@@ -53,6 +53,8 @@ class User extends Authenticatable
         'nivel',
     ];
 
+    protected $appends = ['url_image'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -133,6 +135,11 @@ class User extends Authenticatable
     public function accesses()
     {
         return $this->hasMany(Access::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 
 
@@ -238,6 +245,11 @@ class User extends Authenticatable
         return !!$profile->intersect($this->profiles()->get())->count();
     }
 
+    public function getUrlImageAttribute()
+    {
+        if ($this->image)
+         return 'storage/tenants/' . $this->image;
+    }
 
     public function setSalaryAttribute($value)
     {

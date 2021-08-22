@@ -121,6 +121,10 @@
                                     <notifications/>
                                 </div>
 
+                                <div class="d-inline">
+                                    <notifications-chat></notifications-chat>
+                                </div>
+
                                   <div class="d-inline" >
                                     @if(Auth::user())
                                         <li class="nav-item">
