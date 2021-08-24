@@ -14,10 +14,10 @@
 
     @include('tenants.includes.alerts')
 
-    <div class="content">
-        <chat></chat>
-    </div>
+        <chat />
 @stop
+
+
 
 
 

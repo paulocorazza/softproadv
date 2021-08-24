@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\MessageCreated;
+use App\Events\MessageSent;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ class ChatController extends Controller
 
     public function fetchMessages()
     {
-        return $this->message::with('user')->get();
+        return $this->message::with('user')->latest()->get();
     }
 
     public function sendMessage(Request $request)
@@ -32,9 +32,9 @@ class ChatController extends Controller
             'message' => $request->input('message')
         ]);
 
-    //    $uuidCompany = session()->has('company') ? session('company')['uuid'] : '';
+        $uuidCompany = session()->has('company') ? session('company')['uuid'] : '';
 
-        broadcast(new MessageCreated($user,  $message->load('user')))->toOthers();
+        broadcast(new MessageSent($message->load('user'), $uuidCompany))->toOthers();
 
         return response()->json($message->load('user'));
     }

@@ -356,7 +356,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     Route::get('messages', [ChatController::class, 'index'])->name('messages.index');
     Route::get('fetchMessages', [ChatController::class, 'fetchMessages']);
-    Route::post('sendMessage',  [ChatController::class, 'sendMessage']);
+    Route::any('sendMessage',  [ChatController::class, 'sendMessage']);
 });
 
 

@@ -1,11 +1,11 @@
 <template>
     <div class="card-footer">
-        <form action="#" method="post">
+        <form action="#" method="post" @submit.prevent="sendMessage">
             <div class="input-group">
                 <input type="text" name="message" v-model="newMessage" placeholder="Digite aqui ..." class="form-control">
                 <span class="input-group-append">
                       <button @click.prevent="sendMessage" type="button" class="btn btn-primary">Enviar</button>
-                    </span>
+                 </span>
             </div>
         </form>
     </div>

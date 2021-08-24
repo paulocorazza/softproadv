@@ -9,7 +9,7 @@ export default {
         },
 
         ADD_MESSAGE(state, message) {
-            state.items.push(message)
+            state.items.unshift(message)
         }
     },
 

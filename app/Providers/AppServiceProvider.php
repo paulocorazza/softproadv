@@ -2,19 +2,20 @@
 
 namespace App\Providers;
 
-use App\Models\Event;
 use App\Models\EventUsers;
 use App\Models\ProcessUsers;
 use App\Models\User;
-use App\Observers\EventObserver;
 use App\Observers\EventUsersObserver;
 use App\Observers\ProcessUsersObserver;
 use App\Observers\UserObserver;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Queue;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Queue::failing(function (JobFailed $event) {
+            dd($event->exception);
+        });
+
+
         if (config('app.env') == 'production') {
             URL::forceScheme('https');
         }

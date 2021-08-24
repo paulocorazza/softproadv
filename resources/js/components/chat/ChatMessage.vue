@@ -2,8 +2,8 @@
         <!-- Message. Default to the left -->
         <div class="direct-chat-msg" :class="right">
             <div class="direct-chat-infos clearfix">
-                <span class="direct-chat-name float-left">{{ message.user.name }}</span>
-                <span class="direct-chat-timestamp float-right">{{ message.datetime_br}}</span>
+                <span class="direct-chat-name" :class="float">{{ message.user.name }}</span>
+                <span class="direct-chat-timestamp" :class="floatTime">{{ message.datetime_br}}</span>
             </div>
             <!-- /.direct-chat-infos -->
             <img v-if="message.user.image" class="direct-chat-img" :src="message.user.url_image" :alt="message.user.name">
@@ -26,11 +26,21 @@ export default {
     computed: {
         right () {
             return  window.Laravel.user === this.message.user.uuid ? 'right' : ''
+        },
+
+        float () {
+            return  window.Laravel.user === this.message.user.uuid ? 'float-right' : 'float-left'
+        },
+
+        floatTime () {
+            return  window.Laravel.user === this.message.user.uuid ? 'float-left' : 'float-right'
         }
     }
 }
 </script>
 
 <style scoped>
-
+ .direct-chat-msg {
+     transform: rotate(180deg)
+ }
 </style>

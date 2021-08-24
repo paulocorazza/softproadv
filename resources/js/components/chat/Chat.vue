@@ -1,5 +1,4 @@
 <template>
-    <div>
         <div class="card direct-chat direct-chat-primary">
             <div class="card-header ui-sortable-handle">
                 <h3 class="card-title">Mensagens</h3>
@@ -22,7 +21,6 @@
                 <chat-send/>
             <!-- /.card-footer-->
         </div>
-    </div>
 </template>
 
 <script>
@@ -50,5 +48,10 @@ export default {
 </script>
 
 <style scoped>
-
+.direct-chat-messages  {
+    height:400px;
+    overflow: auto;
+    transform: rotate(180deg);
+    direction: rtl;
+}
 </style>
