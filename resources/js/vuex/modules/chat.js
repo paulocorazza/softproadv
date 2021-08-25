@@ -1,6 +1,8 @@
 export default {
     state: {
-        items: []
+        items: [],
+        contacts: [],
+        contactsSelected: []
     },
 
     mutations: {
@@ -8,14 +10,47 @@ export default {
             state.items = messages
         },
 
+        LOAD_CONTACTS(state, contacts) {
+            state.contacts = contacts
+        },
+
         ADD_MESSAGE(state, message) {
             state.items.unshift(message)
+        },
+
+        SELECT_USER(state, user) {
+          if (!state.contactsSelected.includes(user)) {
+              state.contactsSelected.push(user)
+          }
+        },
+
+        UNSELECTED(state, user) {
+            state.contactsSelected.splice(state.contactsSelected.indexOf(user), 1);
         }
+
+
     },
 
     getters: {
         allMessages (state) {
-            return state.items
+
+            if (state.contactsSelected.length > 0)
+
+                return state.items.filter(message => {
+                    return message.user.uuid.includes(window.Laravel.user) || message.user.uuid.includes(state.contactsSelected.map(user => {
+                        return user.uuid
+                    }))
+                })
+
+              return state.items
+        },
+
+        allContacts (state) {
+            return state.contacts
+        },
+
+        allSelected (state) {
+            return state.contactsSelected
         }
     },
 
@@ -24,6 +59,13 @@ export default {
             axios.get('/fetchMessages')
                 .then(response => {
                     context.commit('LOAD_MESSAGES', response.data)
+                })
+        },
+
+        loadContacts(context) {
+            axios.get('/chat-contacts')
+                .then(response => {
+                    context.commit('LOAD_CONTACTS', response.data)
                 })
         },
 

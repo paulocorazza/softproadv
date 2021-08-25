@@ -11,6 +11,8 @@ Vue.component('notifications-chat', require('./components/chat/NotificationsChat
 Vue.component('chat', require('./components/chat/Chat.vue').default)
 Vue.component('chatMessage', require('./components/chat/ChatMessage.vue').default)
 Vue.component('chatSend', require('./components/chat/ChatSend.vue').default)
+Vue.component('chatContacts', require('./components/chat/ChatContacts.vue').default)
+Vue.component('chatUsersSelected', require('./components/chat/ChatUsersSelected.vue').default)
 
 Vue.use(vuetify)
 

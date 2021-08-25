@@ -10,7 +10,7 @@ use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserLinkedProcess extends Notification
+class UserLinkedProcess extends Notification implements ShouldQueue
 {
     use Queueable;
 

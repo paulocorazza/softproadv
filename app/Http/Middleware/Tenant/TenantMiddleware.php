@@ -62,7 +62,7 @@ class TenantMiddleware
 
     public function handle($request, Closure $next)
     {
-        $manager = app(ManagerTenant::class);
+          $manager = app(ManagerTenant::class);
 
         if ($manager->domainIsMain()) {
             return $next($request);

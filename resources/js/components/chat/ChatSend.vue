@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
     name: "ChatSend",
 
@@ -26,10 +26,23 @@ export default {
         ...mapActions(['addMessage']),
 
         sendMessage() {
-            this.addMessage({'message' : this.newMessage})
+            let params = {
+                'message' : this.newMessage,
+            }
+
+            if (this.allSelected.length > 0) {
+                params.users = this.allSelected
+            }
+
+            this.addMessage(params)
             this.newMessage = ''
         }
+    },
+
+    computed: {
+        ...mapGetters(['allSelected'])
     }
+
 }
 </script>
 

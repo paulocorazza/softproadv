@@ -2,17 +2,12 @@
     <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-comments"></i>
-            <span class="badge badge-warning navbar-badge">0</span>
+            <span class="badge badge-warning navbar-badge">{{ allMessageNotifications.length }}</span>
         </a>
 
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">0 Mensagens</span>
+            <span class="dropdown-item dropdown-header">{{ allMessageNotifications.length }} Mensagens</span>
             <div class="dropdown-divider"></div>
-
-<!--            <notification v-for="(notification, index) in allNotifications"
-                          :key="index"
-                          :notification="notification">
-            </notification>-->
 
             <div class="dropdown-divider"></div>
             <a href="/messages"
@@ -22,8 +17,21 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 export default {
-    name: "NotificationsChat"
+    name: "NotificationsChat",
+
+    mounted() {
+        this.loadMessageNotifications()
+    },
+
+    methods: {
+      ...mapActions(['loadMessageNotifications'])
+    },
+
+    computed: {
+        ...mapGetters(['allMessageNotifications'])
+    }
 }
 </script>
 

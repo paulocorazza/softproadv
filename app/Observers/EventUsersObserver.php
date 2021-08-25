@@ -9,9 +9,9 @@ class EventUsersObserver
 {
     public function created(EventUsers $eventUsers)
     {
-        $user = $eventUsers->user()->first();
-        $event = $eventUsers->event()->first();
+        $user = $eventUsers->user;
+        $event = $eventUsers->event;
 
-        $user->notify(new UserLinkedEvent($user->uuid, $event));
+        $user->notify(new UserLinkedEvent($event, $user->uuid));
     }
 }

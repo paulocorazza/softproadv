@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
     public function notifications(Request $request)
     {
-        $notifications = $request->user()->unReadNotifications;
+        $notifications = $request->user()
+                                 ->unReadNotifications
+                                 ->whereIn('type', [
+                                     'App\Notifications\UserLinkedEvent',
+                                     'App\Notifications\UserLinkedProcess'
+                                 ]);
 
-        return response()->json(compact('notifications'));
+        return NotificationResource::collection($notifications);
     }
 
     public function markAsRead(Request $request)
