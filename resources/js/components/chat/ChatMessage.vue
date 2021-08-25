@@ -43,4 +43,6 @@ export default {
  .direct-chat-msg {
      transform: rotate(180deg)
  }
+
+
 </style>

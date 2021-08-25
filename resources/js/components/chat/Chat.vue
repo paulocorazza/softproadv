@@ -73,7 +73,6 @@ export default {
     height: 400px;
     overflow: auto;
     transform: rotate(180deg);
-    direction: rtl;
 }
 
 .direct-chat-contacts {
