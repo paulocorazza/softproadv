@@ -33,14 +33,15 @@ export default {
 
     getters: {
         allMessages (state) {
-
-            if (state.contactsSelected.length > 0)
+            if (state.contactsSelected.length > 0) {
+                let selecteds = state.contactsSelected.map(user => {
+                    return user.uuid
+                });
 
                 return state.items.filter(message => {
-                    return message.user.uuid.includes(window.Laravel.user) || message.user.uuid.includes(state.contactsSelected.map(user => {
-                        return user.uuid
-                    }))
+                    return message.user.uuid.includes(window.Laravel.user) || selecteds.includes(message.user.uuid)
                 })
+            }
 
               return state.items
         },
