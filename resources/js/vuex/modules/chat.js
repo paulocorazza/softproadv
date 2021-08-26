@@ -1,5 +1,6 @@
 export default {
     state: {
+        online : false,
         items: [],
         contacts: [],
         contactsSelected: []
@@ -26,6 +27,10 @@ export default {
 
         UNSELECTED(state, user) {
             state.contactsSelected.splice(state.contactsSelected.indexOf(user), 1);
+        },
+
+        SET_STATUS(state, status) {
+            state.online = status
         }
 
 

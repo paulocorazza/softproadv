@@ -53,11 +53,17 @@ export default {
     mounted() {
         this.loadMessages()
         this.loadContacts()
+        this.SET_STATUS(true)
+        this.markAllMessageAsRead()
+    },
+
+    beforeUnmount() {
+      this.SET_STATUS(false)
     },
 
     methods: {
-        ...mapActions(['loadMessages', 'loadContacts']),
-        ...mapMutations(['ADD_MESSAGE'])
+        ...mapActions(['loadMessages', 'loadContacts', 'markAllMessageAsRead']),
+        ...mapMutations(['ADD_MESSAGE', 'SET_STATUS'])
     },
 
     computed: {

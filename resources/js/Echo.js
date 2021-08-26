@@ -11,7 +11,10 @@ if (window.Laravel.user) {
                 }
 
                 if (notification.type == typesNotifications.message) {
-                    store.commit('ADD_MESSAGE_NOTIFICATION', notification)
+                    if (!store.state.chat.online) {
+                        store.commit('ADD_MESSAGE_NOTIFICATION', notification)
+                    }
+
                     store.commit('ADD_MESSAGE', notification.data)
                 }
             }

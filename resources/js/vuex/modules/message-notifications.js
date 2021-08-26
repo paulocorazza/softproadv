@@ -36,13 +36,13 @@ export default {
                 })
         },
 
-        markAsRead(context, params) {
-             axios.put('/messages-read', params)
+        markMessageAsRead(context, params) {
+             axios.put('/message-read', params)
                 .then(() => context.commit('MARK_AS_MESSAGE_RED', params.id))
         },
 
-        markAllAsRead(context, params) {
-            axios.put('/messages-all-read', params)
+        markAllMessageAsRead(context, params) {
+            axios.put('/message-all-read', params)
                 .then(() => context.commit('MARK_ALL_MESSAGE_AS_RED'))
         }
     }
