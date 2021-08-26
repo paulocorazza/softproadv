@@ -25,14 +25,14 @@ export default {
     getters: {
         allNotifications (state) {
             return state.items
-        }
-    },
+        },
+     },
 
     actions: {
         loadNotifications(context) {
             axios.get('/notifications')
                 .then(response => {
-                    context.commit('LOAD_NOTIFICATIONS', response.data.notifications)
+                    context.commit('LOAD_NOTIFICATIONS', response.data.data)
                 })
         },
 

@@ -25,7 +25,7 @@ class ManagerTenant
     }
 
 
-    public function setConnection(Company $company)
+    public function setConnection($company)
     {
        try {
            DB::purge('tenant');

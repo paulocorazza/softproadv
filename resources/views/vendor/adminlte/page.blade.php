@@ -121,6 +121,10 @@
                                     <notifications/>
                                 </div>
 
+                                <div class="d-inline">
+                                    <notifications-chat></notifications-chat>
+                                </div>
+
                                   <div class="d-inline" >
                                     @if(Auth::user())
                                         <li class="nav-item">
@@ -188,7 +192,7 @@
                                     @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
                                     @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
 
-                                    <li class="nav-item">
+                                    <li class="nav-item" style="width: 300px">
                                         <a class="d-inline nav-link brand-link" style="margin-left: -12px"
                                            href="{{ route('profile') }}">
                                             <div class="image d-inline" style="margin-left: -7px">

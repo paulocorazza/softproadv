@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MessageNotificationController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
@@ -348,6 +350,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('notifications-read', [NotificationController::class, 'markAsRead']);
     Route::put('notifications-all-read', [NotificationController::class, 'markAllRead']);
     Route::get('notifications', [NotificationController::class, 'notifications']);
+
+
+    /*     * ************************************************ */
+    /*     * ********** MESSAGE NOTIFICATIONS *************** */
+    /*     * ************************************************ */
+    Route::put('message-read', [MessageNotificationController::class, 'markAsRead']);
+    Route::put('message-all-read', [MessageNotificationController::class, 'markAllRead']);
+    Route::get('message-notifications', [MessageNotificationController::class, 'notifications']);
+
+
+    /*     * ************************************************ */
+    /*     * ***********             CHAT     *************** */
+    /*     * ************************************************ */
+    Route::get('messages', [ChatController::class, 'index'])->name('messages.index');
+    Route::get('fetchMessages', [ChatController::class, 'fetchMessages']);
+    Route::get('chat-contacts', [ChatController::class, 'contacts']);
+    Route::any('sendMessage',  [ChatController::class, 'sendMessage']);
 });
 
 
