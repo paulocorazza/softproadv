@@ -35,12 +35,5 @@ class StoreUpdateCompanyFormRequest extends FormRequest
             'email'         => "required|min:3|max:191|confirmed|unique:companies,email,{$id},id",
             'subdomain'     => "required|min:3|max:191|unique:companies,subdomain,{$id},id",
         ];
-
-        /*
-         *  'db_database'   => "required|min:3|max:191|unique:companies,db_database,{$id},id",
-            'db_host'       => 'required|min:3|max:100',
-            'db_username'   => 'required|min:3|max:100',
-            'db_password'   => 'required|min:3|max:35',
-         */
     }
 }

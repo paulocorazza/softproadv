@@ -27,15 +27,18 @@ class ScheduleController extends Controller
     {
         $title = 'Agenda';
 
-        $user = auth()->user()->id;
+        $user = auth()->user();
 
-        $users = $this->user->getUsersView($user);
+        $users = $this->user->getUsersView($user->id);
 
         if (Session::has('userFilter')) {
             Session::forget('userFilter');
         }
 
-        return view('tenants.fullcalendar.master', compact('title', 'users'));
+        if ($user->hasGoogleCalendar())
+            return view('tenants.fullcalendar.google.calendar', compact('title', 'users'));
+
+          return view('tenants.fullcalendar.master', compact('title', 'users'));
     }
 
     public function loadUser(Request $request)

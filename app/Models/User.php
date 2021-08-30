@@ -51,6 +51,8 @@ class User extends Authenticatable
         'observation',
         'status',
         'nivel',
+        'googleCalendarApiKey',
+        'googleCalendarId'
     ];
 
     protected $appends = ['url_image'];
@@ -249,6 +251,11 @@ class User extends Authenticatable
     {
         if ($this->image)
          return 'storage/tenants/' . $this->image;
+    }
+
+    public function hasGoogleCalendar()
+    {
+        return  !empty($this->googleCalendarApiKey) && !empty($this->googleCalendarId);
     }
 
     public function setSalaryAttribute($value)

@@ -14,6 +14,8 @@
 
     @include('tenants.includes.alerts')
 
+    {!! Form::model($data, ['route' => ['profile.update', $data->id], 'class' => 'form form-search form-ds', 'files' => true, 'method' => 'put', 'id' => 'formRegister']) !!}
+
     <div class="card card-outline card-info">
         <div class="card-header">
             <h3 class="card-title">
@@ -26,7 +28,6 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body pad">
-            {!! Form::model($data, ['route' => ['profile.update', $data->id], 'class' => 'form form-search form-ds', 'files' => true, 'method' => 'put', 'id' => 'formRegister']) !!}
             <div class="form-group">
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome:', 'id' => 'name']) !!}
             </div>
@@ -126,15 +127,20 @@
                 {!! Form::file('image',  ['class' => 'form-control']) !!}
             </div>
 
-            <div class="form-group">
-                {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
-            </div>
 
-            {!! Form::close() !!}
 
         </div>
         <!-- /.card-body -->
     </div>
+
+    @include('tenants.users.partials.googleCalendarForm')
+
+    <div class="form-group">
+        {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+    </div>
+
+    {!! Form::close() !!}
+
     <div class="card card-outline card-info">
         <div class="card-header">
             <h3 class="card-title">
