@@ -51,8 +51,9 @@ class User extends Authenticatable
         'observation',
         'status',
         'nivel',
-        'googleCalendarApiKey',
-        'googleCalendarId'
+        'google_calendar_api_key',
+        'google_calendar_id',
+        'google_service_account_credentials'
     ];
 
     protected $appends = ['url_image'];
@@ -255,7 +256,7 @@ class User extends Authenticatable
 
     public function hasGoogleCalendar()
     {
-        return  !empty($this->googleCalendarApiKey) && !empty($this->googleCalendarId);
+        return  !empty($this->google_calendar_api_key) && !empty($this->google_calendar_id);
     }
 
     public function setSalaryAttribute($value)

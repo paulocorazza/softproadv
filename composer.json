@@ -17,6 +17,7 @@
         "eduardokum/laravel-boleto": "^0.8.10",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jeroennoten/laravel-adminlte": "^3.5",
         "laravel/framework": "^8.12",
@@ -26,6 +27,7 @@
         "laravellegends/pt-br-validator": "^8.0",
         "paypal/rest-api-sdk-php": "^1.14",
         "predis/predis": "^1.0",
+        "spatie/laravel-google-calendar": "^3.3",
         "yajra/laravel-datatables-oracle": "^9.7"
     },
     "require-dev": {

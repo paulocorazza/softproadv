@@ -40,8 +40,6 @@ class ControllerStandard extends BaseController
             $nameFile = $this->upload['patch'] . '/' . $nameFile;
         }
 
-
-
         return array($nameFile, $upload);
     }
 

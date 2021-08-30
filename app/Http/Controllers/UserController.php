@@ -14,9 +14,9 @@ class UserController extends ControllerStandard
     private $country;
     private $typeAddress;
 
-    public function __construct(UserRepositoryInterface $user,
+    public function __construct(UserRepositoryInterface        $user,
                                 TypeAddressRepositoryInterface $typeAddress,
-                                CountryRepositoryInterface $country)
+                                CountryRepositoryInterface     $country)
     {
         $this->model = $user;
         $this->country = $country;
@@ -26,8 +26,16 @@ class UserController extends ControllerStandard
         $this->view = 'tenants.users';
         $this->route = 'users';
         $this->upload = [
-            'name' => 'image',
-            'patch' => 'users'
+            [
+                'name' => 'image',
+                'patch' => 'users'
+            ],
+
+            [
+                'name' => 'google_service_account_credentials',
+                'patch' => 'users'
+            ],
+
         ];
 
         $this->middleware('can:users');
@@ -36,7 +44,6 @@ class UserController extends ControllerStandard
         $this->middleware('can:view_user')->only(['show']);
         $this->middleware('can:delete_user')->only(['delete']);
         $this->middleware('can:view_user_profile')->only(['profiles']);
-
     }
 
 
@@ -90,7 +97,7 @@ class UserController extends ControllerStandard
 
             if (!$upload) {
                 return redirect()->back()
-                    ->with('error',  'Falha no upload do arquivo')
+                    ->with('error', 'Falha no upload do arquivo')
                     ->withInput();
             }
 
@@ -172,7 +179,7 @@ class UserController extends ControllerStandard
         $data = $this->model->find($id);
 
         if ($this->upload && $request->hasFile($this->upload['name'])) {
-           // $file = $data->{$this->upload['name']};
+            // $file = $data->{$this->upload['name']};
 
             list($nameFile, $upload) = $this->upload($request);
 
@@ -202,7 +209,7 @@ class UserController extends ControllerStandard
     public function resetPassword(Request $request, $id)
     {
         $rules = [
-            'password'  => 'required|min:3|max:20|confirmed',
+            'password' => 'required|min:3|max:20|confirmed',
         ];
 
         $this->validate($request, $rules);
