@@ -18,7 +18,7 @@ class ControllerStandard extends BaseController
     protected $title;
     protected $view;
     protected $route;
-    protected $upload = false;
+    protected array|bool $upload = false;
 
     /**
      * @param Request $request
@@ -41,6 +41,30 @@ class ControllerStandard extends BaseController
         }
 
         return array($nameFile, $upload);
+    }
+
+    protected function uploadFiles(Request $request, &$data)
+    {
+        if (count($this->upload) > 0) {
+            foreach ($this->upload  as $uploadFile) {
+                if  ($request->hasFile($uploadFile['name'])) {
+                    $file = $request->file($uploadFile['name']);
+                    $nameFile = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalExtension();
+                    $upload = $file->storeAs($uploadFile['patch'], $nameFile);
+
+
+                    if (isset(session('company')['uuid'])) {
+                        $nameFile = session('company')['uuid'] . '/' . $uploadFile['patch'] . '/' . $nameFile;
+                    } else {
+                        $nameFile = $uploadFile['patch'] . '/' . $nameFile;
+                    }
+
+                    $data[$uploadFile['name']] = $nameFile;
+                }
+            }
+        }
+
+        return $data;
     }
 
 

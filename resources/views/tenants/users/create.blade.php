@@ -27,6 +27,8 @@
 @stop
 
 @section('content')
+
+
     @include('tenants.includes.alerts')
 
     @if( isset($data) )

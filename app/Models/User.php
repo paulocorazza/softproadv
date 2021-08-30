@@ -256,7 +256,7 @@ class User extends Authenticatable
 
     public function hasGoogleCalendar()
     {
-        return  !empty($this->google_calendar_api_key) && !empty($this->google_calendar_id);
+        return  !empty($this->google_calendar_api_key) && !empty($this->google_calendar_id) && !empty($this->google_service_account_credentials);
     }
 
     public function setSalaryAttribute($value)

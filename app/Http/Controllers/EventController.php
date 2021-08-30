@@ -28,11 +28,13 @@ class EventController extends ControllerStandard
         $this->user = $user;
 
         $this->middleware('can:events');
-
         $this->middleware('can:create_event')->only(['create', 'store']);
         $this->middleware('can:update_event')->only(['edit', 'update']);
         $this->middleware('can:view_event')->only(['show']);
         $this->middleware('can:delete_event')->only(['delete']);
+
+        $this->middleware('google.calendar');
+
     }
 
     public function index(Request $request)

@@ -24,7 +24,7 @@ class Kernel extends HttpKernel
 
 
         \App\Http\Middleware\Tenant\TenantMiddleware::class,
-        \App\Http\Middleware\Tenant\TenantFileSystems::class,
+        \App\Http\Middleware\Tenant\TenantFileSystems::class
     ];
 
     /**
@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'check.domain.main' => \App\Http\Middleware\Tenant\CheckDomainMain::class,
         'not.domain.main' => \App\Http\Middleware\Tenant\NotDomainMain::class,
         'tenant' =>  \App\Http\Middleware\Tenant\TenantMiddleware::class,
+        'google.calendar' => \App\Http\Middleware\Tenant\TenantGoogleCalendarConfig::class
     ];
 }

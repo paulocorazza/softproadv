@@ -22,18 +22,18 @@ Route::view('/404-tenant', 'erros.404-tenant')->name('404.tenant');
 /*     * ************************************************ */
 /*     * *************       LOGIN      ***************** */
 /*     * ************************************************ */
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    Route::post('login', 'Auth\LoginController@login');
-    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
 /*     * ************************************************ */
 /*     * *************  PASSWORD RESET  ***************** */
 /*     * ************************************************ */
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendresetlinkemail')->name('password.email');
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showlinkrequestform')->name('password.request');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.reseting');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showresetform')->name('password.reset');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendresetlinkemail')->name('password.email');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showlinkrequestform')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.reseting');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showresetform')->name('password.reset');
 
 
 /*     * ************************************************ */
@@ -49,13 +49,13 @@ Route::group(['middleware' => ['auth', 'not.domain.main']], function () {
 /*     * ************************************************ */
 /*     * *************   CHOOSE A PLAN  ***************** */
 /*     * ************************************************ */
-    Route::get('plans/choosePlan',
+Route::get('plans/choosePlan',
     'Tenant\PlanController@choosePlan')->middleware('not.domain.main')->name('plans.choosePlan');
 
-    Route::get('paypal/{companyUuid}/{id}',
+Route::get('paypal/{companyUuid}/{id}',
     'Tenant\AgreementController@createAgreement')->name('paypal.agreement')->middleware('not.domain.main');
 
-    Route::get('paypal/return', 'Tenant\AgreementController@execute')->name('paypal.return');
+Route::get('paypal/return', 'Tenant\AgreementController@execute')->name('paypal.return');
 
 
 /*     * ************************************************ */
@@ -81,13 +81,10 @@ Route::group(['namespace' => 'Site'], function () {
 });
 
 
-
-
 /*     * ************************************************ */
 /*     * *************      SYSTEM      ***************** */
 /*     * ************************************************ */
 Route::group(['middleware' => 'auth'], function () {
-
 
 
     /*     * ************************************************ */
@@ -120,7 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************  SEARCH ADDRESS  ***************** */
     /*     * ************************************************ */
-     Route::get('search/{cep}/address', 'SearchAddressController@search')->name('search.address');
+    Route::get('search/{cep}/address', 'SearchAddressController@search')->name('search.address');
 
     /*     * ************************************************ */
     /*     * *************       ADDRESS    ***************** */
@@ -281,14 +278,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('processes', 'ProcessController');
 
 
-
     /*     * ************************************************ */
     /*     * *************     EVENTS     ***************** */
     /*     * ************************************************ */
     Route::post('events/finish', 'EventController@finish');
     Route::get('events/file/{id}/download', 'ExtraAction\EventFileDownload')->name('events.fileDownload');
     Route::resource('events', 'EventController');
-
 
 
     /*     * ************************************************ */
@@ -300,7 +295,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('schedule/event-store', 'ScheduleController@store')->name('routeEventStore');
     Route::put('schedule/event-update', 'ScheduleController@update')->name('routeEventUpdate');
     Route::delete('schedule/event-destroy', 'ScheduleController@destroy')->name('routeEventDelete');
-
 
 
     /*     * ************************************************ */
@@ -366,22 +360,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('messages', [ChatController::class, 'index'])->name('messages.index');
     Route::get('fetchMessages', [ChatController::class, 'fetchMessages']);
     Route::get('chat-contacts', [ChatController::class, 'contacts']);
-    Route::any('sendMessage',  [ChatController::class, 'sendMessage']);
+    Route::any('sendMessage', [ChatController::class, 'sendMessage']);
 });
 
 
-
-
 Route::get('/teste', function () {
-    $_sUrl ='http://pedro.softproadv-homolog.com.br';
+    $_sUrl = 'http://pedro.softproadv-homolog.com.br';
 
     $cl = curl_init($_sUrl);
-    curl_setopt($cl,CURLOPT_VERBOSE, true);
-    curl_setopt($cl,CURLOPT_CONNECTTIMEOUT,1);
-    curl_setopt($cl,CURLOPT_HEADER,true);
-    curl_setopt($cl,CURLOPT_NOBODY,true);
-    curl_setopt($cl,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($cl,CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($cl, CURLOPT_VERBOSE, true);
+    curl_setopt($cl, CURLOPT_CONNECTTIMEOUT, 1);
+    curl_setopt($cl, CURLOPT_HEADER, true);
+    curl_setopt($cl, CURLOPT_NOBODY, true);
+    curl_setopt($cl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($cl, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($cl);
     curl_close($cl);
 

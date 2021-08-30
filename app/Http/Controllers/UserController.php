@@ -49,6 +49,8 @@ class UserController extends ControllerStandard
 
     public function create()
     {
+
+
         $title = "Cadastrar {$this->title}";
 
         $type_addresses = $this->typeAddress->get();
@@ -92,17 +94,7 @@ class UserController extends ControllerStandard
 
         $dataForm = $request->all();
 
-        if ($this->upload && $request->hasFile($this->upload['name'])) {
-            list($nameFile, $upload) = $this->upload($request);
-
-            if (!$upload) {
-                return redirect()->back()
-                    ->with('error', 'Falha no upload do arquivo')
-                    ->withInput();
-            }
-
-            $dataForm[$this->upload['name']] = $nameFile;
-        }
+        $dataForm = $this->uploadFiles($request, $dataForm);
 
         if (isset($dataForm['password'])) {
             $dataForm['password'] = bcrypt($dataForm['password']);
@@ -129,19 +121,7 @@ class UserController extends ControllerStandard
 
         $data = $this->model->find($id);
 
-        if ($this->upload && $request->hasFile($this->upload['name'])) {
-            $file = $data->{$this->upload['name']};
-
-            list($nameFile, $upload) = $this->upload($request, $file);
-
-            if (!$upload) {
-                return redirect()->back()
-                    ->withErrors(['errors' => 'Falha no upload do arquivo'])
-                    ->withInput();
-            }
-
-            $dataForm[$this->upload['name']] = $nameFile;
-        }
+        $dataForm = $this->uploadFiles($request, $dataForm);
 
         if (isset($dataForm['password'])) {
             $dataForm['password'] = bcrypt($dataForm['password']);
@@ -178,19 +158,7 @@ class UserController extends ControllerStandard
 
         $data = $this->model->find($id);
 
-        if ($this->upload && $request->hasFile($this->upload['name'])) {
-            // $file = $data->{$this->upload['name']};
-
-            list($nameFile, $upload) = $this->upload($request);
-
-            if (!$upload) {
-                return redirect()->back()
-                    ->withErrors('Falha no upload do arquivo')
-                    ->withInput();
-            }
-
-            $dataForm[$this->upload['name']] = $nameFile;
-        }
+        $dataForm = $this->uploadFiles($request, $dataForm);
 
         unset($dataForm['email']);
 
