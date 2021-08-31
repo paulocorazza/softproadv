@@ -1,18 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* initialize the external events
-    -----------------------------------------------------------------*/
-
- /*   var containerEl = document.getElementById('external-events-list');
-    new FullCalendar.Draggable(containerEl, {
-        itemSelector: '.fc-event',
-        eventData: function (eventEl) {
-            return {
-                title: eventEl.innerText.trim()
-            }
-        }
-    });*/
-
 
     /* initialize the calendar
     -----------------------------------------------------------------*/
@@ -29,14 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dayMaxEventRows: true,
         selectable: true,
         editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
-   /*     drop: function (element) {
-            // is the "remove after drop" checkbox checked?
-            if (document.getElementById('drop-remove').checked) {
-                // if so, remove the element from the "Draggable Events" list
-                element.draggedEl.parentNode.removeChild(element.draggedEl);
-            }
-        },*/
+        droppable: true,
 
         //arrastar de uma celula para outra
         eventDrop: function (element) {
@@ -54,22 +34,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 schedule: element.event.extendedProps.schedule
             };
 
-
             sendEvent(routeEvents('routeEventUpdate'), newEvent);
-
         },
 
         //ao clicar no evento que já está na celula
         eventClick: function (element) {
-            //retornar outros campos
-            //console.log(element.event.extendedProps.created_at)
-
             clearMessage('#message')
             resetForm('#formEvent');
 
             $('#modalCalendar').modal('show')
             $('#modalCalendar #titleModal').text('Alterar Evento');
-            $('#modalCalendar button.deleteEvent').css("display", 'flex');
+            $('#modalCalendar button.deleteEvent').addClass('d-inline')
 
             let id = element.event.id;
             $('#modalCalendar #id').val(id)
@@ -79,10 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
             $.each(users, function(i, obj) {
                 arr.push(obj.id)
             });
+
             $('#modalCalendar #users').val(arr);
             $('#modalCalendar #users').trigger('change');
-
-
 
             if (element.event.extendedProps.process !== null) {
                 let process_id = element.event.extendedProps.process.id
@@ -100,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
             let title = element.event.title;
             $('#modalCalendar #title').val(title)
 
-            let start = moment(element.event.start).format("DD/MM/YYYY HH:mm:ss")
+            let start = moment(element.event.start, "YYYY-MM-DD HH:mm:ss").format('YYYY-MM-DDTHH:mm:ss')
             $('#modalCalendar #start').val(start)
 
-            let end = moment(element.event.end).format("DD/MM/YYYY HH:mm:ss")
+            let end = moment(element.event.end, "YYYY-MM-DD HH:mm:ss").format('YYYY-MM-DDTHH:mm:ss')
             $('#modalCalendar #end').val(end)
 
             let color = element.event.backgroundColor;
@@ -140,16 +114,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             $('#modalCalendar').modal('show')
             $('#modalCalendar #titleModal').text('Adicionar Evento');
+            $('#modalCalendar button.deleteEvent').removeClass('d-inline')
             $('#modalCalendar button.deleteEvent').css("display", 'none');
             $('#modalCalendar #id').val('')
 
             $("#modalCalendar #users").val(null).trigger('change');
             $("#modalCalendar #process_id").val(null).trigger('change');
 
-            let start = moment(element.start).format("DD/MM/YYYY HH:mm:ss")
+            let start = moment(element.start, "DD/MM/YYYY HH:mm:ss").format('YYYY-MM-DDTHH:mm:ss')
             $('#modalCalendar #start').val(start)
 
-            let end = moment(element.end).format("DD/MM/YYYY HH:mm:ss")
+            let end = moment(element.end, "DD/MM/YYYY HH:mm:ss").format('YYYY-MM-DDTHH:mm:ss')
             $('#modalCalendar #end').val(end)
 
             let color = '#3788d8';
@@ -159,36 +134,11 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
 
-     /*   eventReceive: function(element) {
-          element.event.remove()
-        },*/
-
-        //listar os eventos no calendario
-       // events: routeEvents('routeLoadEvents')
-      //  events:  url_base + '/schedule/events/?user_id=' + userSelect()
-
-        /*eventSources: [
-
-            // your event source
-            {
-                url: routeEvents('routeLoadEvents'),
-                method: 'GET',
-                extraParams: {
-                    user_id: userSelect(),
-                }
-            }]*/
-
-
         events: routeEvents('routeLoadEvents')
-
 
     });
 
     objCalendar = calendar;
-
-//    console.log(moment(calendar.currentData).format("YYYY-MM-DD HH:mm:ss"));
-//    console.log(moment(calendar.currentData).endOf('month').format("YYYY-MM-DD HH:mm:ss"));
-
 
     calendar.render();
 });

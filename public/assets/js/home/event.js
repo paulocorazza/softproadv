@@ -182,8 +182,8 @@ $(document).ready(function () {
             return false
         }
 
-        if (users === '') {
-            alertify.error('Advogado é de preenchimento obrigatório!')
+        if (users.length === 0) {
+            alertify.error('Advogado(s) é de preenchimento obrigatório!')
             return false
         }
 

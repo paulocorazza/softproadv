@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ScheduleRequest;
-use App\Models\Schedule;
-use App\Models\User;
+use App\Models\Event;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,9 +36,6 @@ class ScheduleController extends Controller
             Session::forget('userFilter');
         }
 
-        if ($user->hasGoogleCalendar())
-            return view('tenants.fullcalendar.google.calendar', compact('title', 'users'));
-
           return view('tenants.fullcalendar.master', compact('title', 'users'));
     }
 
@@ -69,7 +65,7 @@ class ScheduleController extends Controller
 
         $user_id = (!empty($userFilter) ? ($userFilter) : (auth()->user()->id));
 
-        $events = Schedule::with(['users', 'process'])
+        $events = Event::with(['users', 'process'])
             ->whereHas('users', function ($query) use ($user_id) {
                 $query->where('user_id', $user_id);
             })
@@ -87,7 +83,7 @@ class ScheduleController extends Controller
         $data['schedule'] = true;
         $data['audience'] = false;
 
-        $event = Schedule::create($data);
+        $event = Event::create($data);
 
         if (isset($data['users'])) {
             $event->users()->sync($data['users']);
@@ -101,7 +97,7 @@ class ScheduleController extends Controller
 
     public function update(ScheduleRequest $request)
     {
-        $event = Schedule::find($request->id);
+        $event = Event::find($request->id);
 
         $data = $request->all();
 
@@ -118,7 +114,7 @@ class ScheduleController extends Controller
 
     public function destroy(Request $request)
     {
-       $delete =  Schedule::find($request->id)->delete();
+       $delete =  Event::find($request->id)->delete();
 
         if ($delete) {
             return response()->json(true);

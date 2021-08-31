@@ -1,12 +1,16 @@
 $(function () {
-
-    $('.date-time').mask('00/00/0000 00:00:00');
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $('#modalCalendar #start').change(function () {
+        let start = moment($(this).val()).add(1, 'hours').format('DD/MM/YYYY HH:mm:ss')
+        let end = moment(start, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DDTHH:mm:ss")
+        $('#modalCalendar #end').val(end)
+    })
+
 
 
     $('.deleteEvent').click(function () {
@@ -23,8 +27,10 @@ $(function () {
     $('.saveEvent').click(function () {
         let id =  $('#modalCalendar #id').val()
         let title = $('#modalCalendar #title').val()
-        let start = moment($('#modalCalendar #start').val(), "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
-        let end = moment($('#modalCalendar #end').val(), "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
+
+        let start =  moment($('#modalCalendar #start').val()).format("YYYY/MM/DD HH:mm:ss")
+        let end =  moment($('#modalCalendar #end').val()).format("YYYY/MM/DD HH:mm:ss")
+
         let color =  $('#modalCalendar #color').val()
         let description =  $('#modalCalendar #description').val()
         let process_id = $('#modalCalendar #process_id').val()

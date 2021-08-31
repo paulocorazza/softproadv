@@ -364,6 +364,10 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+Route::get('google', function () {
+   dd(\Spatie\GoogleCalendar\Event::get(calendarId: \Illuminate\Support\Facades\Auth::user()->google_calendar_id));
+})->middleware('google.calendar');
+
 Route::get('/teste', function () {
     $_sUrl = 'http://pedro.softproadv-homolog.com.br';
 

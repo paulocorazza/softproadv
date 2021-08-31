@@ -23,7 +23,8 @@ class Schedule extends Model
         'schedule',
         'finish',
         'file',
-        'audience'
+        'audience',
+        'id_google_calendar'
     ];
 
 
@@ -65,4 +66,15 @@ class Schedule extends Model
     {
         return $query->where('schedule', true);
     }
+
+    public function hasSchedule()
+    {
+        return $this->schedule;
+    }
+
+    public function hasGoogleIntegration()
+    {
+        return !empty($this->id_google_calendar);
+    }
+
 }

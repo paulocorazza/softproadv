@@ -3,11 +3,15 @@
 namespace App\Providers;
 
 use App\Models\Company;
+use App\Models\Event;
 use App\Models\EventUsers;
 use App\Models\ProcessUsers;
+use App\Models\Schedule;
 use App\Models\User;
+use App\Observers\EventObserver;
 use App\Observers\EventUsersObserver;
 use App\Observers\ProcessUsersObserver;
+use App\Observers\ScheduleObserver;
 use App\Observers\UserObserver;
 use App\Tenant\ManagerTenant;
 use Illuminate\Pagination\Paginator;
@@ -70,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
          * Observers
          */
         User::observe(UserObserver::class);
+        Event::observe(EventObserver::class);
         EventUsers::observe(EventUsersObserver::class);
         ProcessUsers::observe(ProcessUsersObserver::class);
     }

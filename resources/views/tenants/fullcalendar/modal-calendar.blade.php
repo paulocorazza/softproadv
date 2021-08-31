@@ -2,11 +2,18 @@
 <div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="titleModal">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header d-inline-flex justify-content-between">
+                <div>
+                    <h5 class="modal-title" id="titleModal">Modal title</h5>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary d-inline saveEvent">Salvar</button>
+                    <button type="button" class="btn btn-danger d-inline deleteEvent">Excluir</button>
+                    <button type="button" class="btn btn-secondary d-inline" data-dismiss="modal">Fechar</button>
+                    <div class="preload">
+                        @include('tenants.includes.load')
+                    </div>
+                </div>
             </div>
             <div class="modal-body">
                 <div id="message"></div>
@@ -15,7 +22,7 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group row">
-                        <label for="users" class="col-sm-4 col-form-label">Advogados</label>
+                        <label for="users" class="col-sm-4 col-form-label text-right">Advogados</label>
                         <div class="col-sm-8">
                             <select id="users" multiple class="select" style="width:100%" name="users">
                                 @foreach($users as $key => $value)
@@ -25,8 +32,9 @@
                         </div>
                     </div>
 
+
                     <div class="form-group row">
-                        <label for="process_id" class="col-sm-4 col-form-label">Processo</label>
+                        <label for="process_id" class="col-sm-4 col-form-label text-right">Processo</label>
                         <div class="col-sm-8">
                             <select id="process_id" class="select" style="width:100%" name="process_id">
                             </select>
@@ -34,7 +42,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="title" class="col-sm-4 col-form-label">Titulo</label>
+                        <label for="title" class="col-sm-4 col-form-label text-right">Titulo</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="title" name="title">
                         </div>
@@ -42,42 +50,40 @@
 
 
                     <div class="form-group row">
-                        <label for="start" class="col-sm-4 col-form-label">Data/hora Inicial</label>
+                        <label for="start" class="col-sm-4 col-form-label text-right">Data/hora Inicial</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control date-time" id="start" name="start">
+                            <input type="datetime-local" class="form-control" name="start" id="start">
                         </div>
                     </div>
 
 
                     <div class="form-group row">
-                        <label for="end" class="col-sm-4 col-form-label">Data/hora Final</label>
+                        <label for="end" class="col-sm-4 col-form-label text-right">Data/hora Final</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control date-time" id="end" name="end">
+                            <input type="datetime-local" class="form-control" name="end" id="end">
                         </div>
                     </div>
 
 
                     <div class="form-group row">
-                        <label for="color" class="col-sm-4 col-form-label">Cor do Evento</label>
+                        <label for="color" class="col-sm-4 col-form-label text-right">Cor do Evento</label>
                         <div class="col-sm-8">
                             <input type="color" class="form-control" id="color" name="color">
                         </div>
                     </div>
 
 
-                    <div class="form-group row">
-                        <label for="description" class="col-sm-4 col-form-label">Descrição</label>
-                        <div class="col-sm-8">
-                            <textarea name="description" id="description" cols="40" rows="4"></textarea>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Detalhes', 'id' => 'description', 'cols' => 20, 'rows' => 3]) !!}
+                            </div>
                         </div>
                     </div>
 
+
+
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-danger deleteEvent">Excluir</button>
-                <button type="button" class="btn btn-primary saveEvent">Salvar</button>
             </div>
         </div>
     </div>

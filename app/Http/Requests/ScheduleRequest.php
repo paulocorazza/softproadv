@@ -26,8 +26,8 @@ class ScheduleRequest extends FormRequest
         return [
             'user_id' => 'nullable|exists:users,id',
             'title' => 'required|min:3',
-            'start' => 'date_format:Y-m-d H:i:s|before:end',
-            'end' => 'date_format:Y-m-d H:i:s|after:start',
+            'start'         => 'date|before:end',
+            'end'           => 'date|after:start',
             'process_id' => 'nullable|exists:processes,id',
         ];
     }

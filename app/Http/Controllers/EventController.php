@@ -34,7 +34,6 @@ class EventController extends ControllerStandard
         $this->middleware('can:delete_event')->only(['delete']);
 
         $this->middleware('google.calendar');
-
     }
 
     public function index(Request $request)

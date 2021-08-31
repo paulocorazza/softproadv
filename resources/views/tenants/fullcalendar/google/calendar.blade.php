@@ -65,10 +65,10 @@
 
                 locale: 'pt-br',
 
-                googleCalendarApiKey: '{{ auth()->user()->googleCalendarApiKey }}',
+                googleCalendarApiKey: '{{ auth()->user()->google_calendar_api_key }}',
 
                 // US Holidays
-                events: '{{ auth()->user()->googleCalendarId }}',
+                events: '{{ auth()->user()->google_calendar_id }}',
 
                 eventClick: function(arg) {
                     window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');

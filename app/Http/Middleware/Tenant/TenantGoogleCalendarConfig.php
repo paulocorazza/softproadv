@@ -30,7 +30,8 @@ class TenantGoogleCalendarConfig
         $path =  config('filesystems.disks.tenant.root')  . '/' . Auth::user()->google_service_account_credentials;
 
         config()->set([
-            'google-calendar.auth_profiles.service_account.credentials_json' => $path
+            'google-calendar.auth_profiles.service_account.credentials_json' => $path,
+            'google-calendar.calendar_id' => Auth::user()->google_calendar_id
         ]);
     }
 }
