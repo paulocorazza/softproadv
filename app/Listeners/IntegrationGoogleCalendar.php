@@ -57,7 +57,7 @@ class IntegrationGoogleCalendar
         $googleEvent->startDateTime = Carbon::parse($event->start);
         $googleEvent->endDateTime = Carbon::parse($event->end);
 
-/*        foreach ($event->users as $user) {
+/*         foreach ($event->users as $user) {
             $googleEvent->addAttendee([
                 'email' => $user->email,
                 'name' => $user->name,
