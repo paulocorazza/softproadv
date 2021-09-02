@@ -40,11 +40,10 @@ class IndexController extends Controller
         $company = $this->repository->create($request->all());
 
         if (!$company) {
-            //return redirect()->route('/');
             return redirect()->route('index');
         }
 
-        return view('congratulations', compact('company'));
+        return view('site.congratulations', compact('company'));
     }
 
 
