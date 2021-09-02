@@ -29,17 +29,15 @@ class QueueServiceProvider extends ServiceProvider
     {
         $this->app['queue']->createPayloadUsing(function () {
             return session()->has('company') ? [
-                'tenant_id' => session('company')['uuid']
+                'tenant' => session('company')['uuid']
             ] : [];
         });
 
         $this->app['events']->listen(\Illuminate\Queue\Events\JobProcessing::class, function($event){
-            if (isset($event->job->payload()['tenant_id'])) {
-
-                $manager = new ManagerTenant();
-
+            if (isset($event->job->payload()['tenant'])) {
+                $manager = app(ManagerTenant::class);
                 $manager->setConnectionMain();
-                $company = Company::where('uuid', $event->job->payload()['tenant_id'])->first();
+                $company = Company::where('uuid', $event->job->payload()['tenant'])->first();
                 $manager->setConnection($company);
             }
         });
