@@ -26,7 +26,7 @@ class IntegrationGoogleCalendar
      * Handle the event.
      *
      * @param  object  $event
-     * @return void
+     * @return EventGoogle
      */
     public function handle(CreateUpdateEvent $createUpdateEvent)
     {
@@ -42,26 +42,26 @@ class IntegrationGoogleCalendar
             $googleEvent = new EventGoogle;
             $googleEvent = $this->syncGoogleCalendar($event, $googleEvent);
 
-            $event->id_google_calendar = $googleEvent->id;
+           return $event->id_google_calendar = $googleEvent->id;
         }
     }
 
     /**
-     * @param Event|\App\Models\Schedule $event
+     * @param Event $event
      * @return bool
      */
-    private function hasIntegration(Event|\App\Models\Schedule $event): bool
+    private function hasIntegration(Event $event): bool
     {
         return $this->isEventCalendar($event) && $event->hasGoogleIntegration();
     }
 
     /**
-     * @param Event|\App\Models\Schedule $event
+     * @param Event $event
      * @return bool
      */
-    private function isEventCalendar(Event|\App\Models\Schedule $event): bool
+    private function isEventCalendar(Event $event): bool
     {
-        return Auth::user()->hasGoogleCalendar() && $event->hasSchedule();
+        return Auth::user()->hasGoogleCalendar() && $event->isSchedule();
     }
 
     /**

@@ -22,7 +22,7 @@ class EventObserver
 
     public function deleting(Event $event)
     {
-        if (Auth::user()->hasGoogleCalendar() && $event->hasSchedule() && $event->hasGoogleIntegration()) {
+        if (Auth::user()->hasGoogleCalendar() && $event->isSchedule() && $event->hasGoogleIntegration()) {
             $googleEvent = EventGoogle::find($event->id_google_calendar);
             $googleEvent->delete();
         }

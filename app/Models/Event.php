@@ -110,7 +110,7 @@ class Event extends Model
         return $query->where('audience', false);
     }
 
-    public function hasSchedule()
+    public function isSchedule()
     {
         return $this->schedule;
     }
