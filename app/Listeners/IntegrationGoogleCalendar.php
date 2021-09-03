@@ -32,18 +32,36 @@ class IntegrationGoogleCalendar
     {
         $event = $createUpdateEvent->event;
 
-        if (Auth::user()->hasGoogleCalendar() && $event->hasSchedule() && $event->hasGoogleIntegration()) {
+        if ($this->hasIntegration($event)) {
             $googleEvent = EventGoogle::find($event->id_google_calendar);
 
           return $this->syncGoogleCalendar($event, $googleEvent);
         }
 
-        if (Auth::user()->hasGoogleCalendar() && $event->hasSchedule()) {
+        if ($this->isEventCalendar($event)) {
             $googleEvent = new EventGoogle;
             $googleEvent = $this->syncGoogleCalendar($event, $googleEvent);
 
             $event->id_google_calendar = $googleEvent->id;
         }
+    }
+
+    /**
+     * @param Event|\App\Models\Schedule $event
+     * @return bool
+     */
+    private function hasIntegration(Event|\App\Models\Schedule $event): bool
+    {
+        return $this->isEventCalendar($event) && $event->hasGoogleIntegration();
+    }
+
+    /**
+     * @param Event|\App\Models\Schedule $event
+     * @return bool
+     */
+    private function isEventCalendar(Event|\App\Models\Schedule $event): bool
+    {
+        return Auth::user()->hasGoogleCalendar() && $event->hasSchedule();
     }
 
     /**
@@ -57,14 +75,6 @@ class IntegrationGoogleCalendar
         $googleEvent->startDateTime = Carbon::parse($event->start);
         $googleEvent->endDateTime = Carbon::parse($event->end);
 
-/*         foreach ($event->users as $user) {
-            $googleEvent->addAttendee([
-                'email' => $user->email,
-                'name' => $user->name,
-            ]);
-        }*/
-
         return $googleEvent->save();
-
     }
 }
