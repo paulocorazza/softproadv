@@ -6,11 +6,11 @@ namespace App\Services\bankIntegration\Itau;
 
 use App\Models\Financial;
 use App\Models\FinancialAccount;
-use App\Services\Contracts\IBoleto;
+use App\Services\Contracts\Boleto;
 
-class ItauBoleto implements IBoleto
+class ItauBoleto implements Boleto
 {
-    public function __construct(private ?IBoleto $next)
+    public function __construct(private ?Boleto $next)
     {
 
     }

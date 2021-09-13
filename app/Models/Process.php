@@ -43,7 +43,8 @@ class Process extends Model
         'description',
         'status',
         'type_process',
-        'contract'
+        'contract',
+        'monitoring'
     ];
 
 
@@ -240,6 +241,11 @@ class Process extends Model
     public function scopeInProgress($query)
     {
         return $query->where('status', 'Em Andamento');
+    }
+
+    public function scopeMonitoring($query)
+    {
+        return $query->where('monitoring', true);
     }
 
 }

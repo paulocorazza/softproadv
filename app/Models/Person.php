@@ -50,7 +50,7 @@ class Person extends Model
         return [
             'type_person' => 'required',
             'name'      => 'required|min:3|max:100',
-            'fantasy'   => 'required|min:3|max:100',
+            'fantasy'   => 'nullable|min:3|max:100',
             'email'     => "nullable|min:3|max:100|email",
             'image'     => 'image',
             'type'      => 'required|in:F,J',

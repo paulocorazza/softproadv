@@ -44,7 +44,6 @@ $(document).ready(function () {
                 },
 
                 fantasy: {
-                    required: true,
                     minlength: 3,
                     maxlength: 100,
                 },

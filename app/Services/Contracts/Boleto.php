@@ -6,7 +6,7 @@ namespace App\Services\Contracts;
 
 use App\Models\Financial;
 
-interface IBoleto
+interface Boleto
 {
     public function generate(Financial $financial);
 }

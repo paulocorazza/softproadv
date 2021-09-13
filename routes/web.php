@@ -364,24 +364,22 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::get('registrou', function () {
-   return view('site.congratulations');
-});
 
-Route::get('/teste', function () {
-    $_sUrl = 'http://pedro.softproadv-homolog.com.br';
+Route::get('consulta', function () {
+    $process = '1005818-38.2017.8.26.0286';
+    $token = config('jusbrazil.token');
 
-    $cl = curl_init($_sUrl);
-    curl_setopt($cl, CURLOPT_VERBOSE, true);
-    curl_setopt($cl, CURLOPT_CONNECTTIMEOUT, 1);
-    curl_setopt($cl, CURLOPT_HEADER, true);
-    curl_setopt($cl, CURLOPT_NOBODY, true);
-    curl_setopt($cl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($cl, CURLOPT_SSL_VERIFYPEER, false);
-    $response = curl_exec($cl);
-    curl_close($cl);
+    $q = "SELECT FROM 'JURISTEK'.'INFO'";
+    $query = "SELECT FROM 'CNJ'.'PROCESSO' WHERE 'PROCESSO'='{$process}'";
+    $url = "https://irql.bipbop.com.br/?data={$query}&q={$q}&apiKey={$token}";
 
-    dd($response ?? true);
+    $client = new GuzzleHttp\Client();
+    $request = $client->get($url);
 
+    $response = $request->getBody()->getContents();
+
+    $xml = simplexml_load_string($response);
+
+    dd($xml->body);
 });
 
