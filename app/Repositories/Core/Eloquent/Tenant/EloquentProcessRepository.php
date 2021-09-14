@@ -48,6 +48,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $id = ($progress['id'] > 0) ? $progress['id'] : 0;
 
                 $progress['concluded'] = (isset($progress['concluded'])) ? true : false;
+                $process['published_at'] = now();
 
                 $process->progresses()->updateOrCreate(['id' => $id], $progress);
             }
@@ -166,9 +167,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
         DB::beginTransaction();
 
         try {
-
-            $data['user_id'] = auth()->user()->id;
-
             $process = parent::create($data);
             $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
@@ -212,11 +210,10 @@ class EloquentProcessRepository extends BaseEloquentRepository
         DB::beginTransaction();
 
         try {
-            $data['user_id'] = auth()->user()->id;
-
             $state = $this->saveStage($process, $data);
 
             $process->update($data);
+
             $users = $this->saveUsers($data, $process);
             $progresses = $this->saveProgresses($data, $process);
             $audiences = $this->saveAudiences($data, $process);

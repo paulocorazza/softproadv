@@ -127,6 +127,8 @@ class ProcessController extends ControllerStandard
                 'stage',
                 'users',
                 'progresses' => function ($query) {
+                    $query->published();
+                    $query->notArchived();
                     $query->latest('date');
                 },
                 'files',
@@ -158,7 +160,11 @@ class ProcessController extends ControllerStandard
                 'phase',
                 'stage',
                 'users',
-                'progresses',
+                'progresses' => function ($query) {
+                    $query->published();
+                    $query->notArchived();
+                    $query->latest('date');
+                },
                 'files',
                 'events' => function ($query) {
                     $query->audience();

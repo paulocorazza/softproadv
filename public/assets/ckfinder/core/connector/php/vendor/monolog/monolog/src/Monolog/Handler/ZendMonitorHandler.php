@@ -14,7 +14,7 @@ use Monolog\Formatter\NormalizerFormatter;
 use Monolog\Logger;
 
 /**
- * Handler sending logs to Zend Monitor
+ * Handler sending logs to Zend MonitorInterface
  *
  * @author  Christian Bergau <cbergau86@gmail.com>
  * @author  Jason Davis <happydude@jasondavis.net>
@@ -39,7 +39,7 @@ class ZendMonitorHandler extends AbstractProcessingHandler
     {
         if (!function_exists('zend_monitor_custom_event')) {
             throw new MissingExtensionException(
-                'You must have Zend Server installed with Zend Monitor enabled in order to use this handler'
+                'You must have Zend Server installed with Zend MonitorInterface enabled in order to use this handler'
             );
         }
         //zend monitor constants are not defined if zend monitor is not enabled.
@@ -70,7 +70,7 @@ class ZendMonitorHandler extends AbstractProcessingHandler
     }
 
     /**
-     * Write to Zend Monitor Events
+     * Write to Zend MonitorInterface Events
      * @param string $type Text displayed in "Class Name (custom)" field
      * @param string $message Text displayed in "Error String"
      * @param mixed $formatted Displayed in Custom Variables tab

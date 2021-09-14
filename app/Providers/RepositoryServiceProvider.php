@@ -17,6 +17,7 @@ use App\Repositories\Contracts\FinancialCategoryRepositoryInterface;
 use App\Repositories\Contracts\FinancialRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
+use App\Repositories\Contracts\MonitorInterface;
 use App\Repositories\Contracts\OriginRepositoryInterface;
 use App\Repositories\Contracts\PermissionRepositoryInterface;
 use App\Repositories\Contracts\PersonRepositoryInterface;
@@ -61,6 +62,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentStickRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentTypeActionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentTypeAddressRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentUserRepository;
+use App\Repositories\Core\JuzBrazil\BipBop;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -208,6 +210,9 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(ContractModelInterface::class,
         EloquentContractModelRepository::class);
+
+        $this->app->bind(MonitorInterface::class,
+        BipBop::class);
 
     }
 }

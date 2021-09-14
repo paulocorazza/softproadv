@@ -24,7 +24,10 @@ class ProcessProgress extends Model
         'description',
         'publication',
         'concluded',
-        'process_id'
+        'process_id',
+        'published_at',
+        'archived_at',
+        'type'
     ];
 
     public function rules($id = '')
@@ -53,6 +56,21 @@ class ProcessProgress extends Model
     public function scopePending($query)
     {
         return $query->where('concluded', false);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->whereNotNull('published_at');
+    }
+
+    public function scopeNotPublished($query)
+    {
+        return $query->whereNull('published_at');
+    }
+
+    public function scopeNotArchived($query)
+    {
+        return $query->whereNull('archived_at');
     }
 
 

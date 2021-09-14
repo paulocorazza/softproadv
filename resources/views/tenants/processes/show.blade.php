@@ -29,9 +29,17 @@
                 <h3 class="card-title">Detalhes do Processo - <a href="{{ route('processes.edit', $data->id)  }}">Editar</a></h3>
 
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                        <i class="fas fa-minus"></i></button>
+                    @if($data->monitoring == true)
+                    <a type="button" class="btn btn-danger text-white" href="{{ route('processes.monitor.stop', $data->id)  }}">
+                        <i class="fas fa-stop-circle"></i>
+                        Monitorando
+                    </a>
+                    @else
+                        <a type="button" class="btn btn-info"  href="{{ route('processes.monitor.start', $data->id)  }}">
+                            <i class="fas fa-play-circle"></i>
+                            Monitorar
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">

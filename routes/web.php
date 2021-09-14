@@ -14,6 +14,7 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageNotificationController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProcessMonitorController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
 
@@ -277,6 +278,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('processes/{id}/contract', 'ProcessContractController@updateContract')->name('processes.contract.update');
     Route::resource('processes', 'ProcessController');
 
+    /*     * ************************************************ */
+    /*     * ************  PROCESS MONITOR  ***************** */
+    /*     * ************************************************ */
+    Route::get('processes/{process}/monitor', [ProcessMonitorController::class, 'processCNJ'])->name('processes.monitor.index');
+    Route::get('processes/{process}/monitor/start', [ProcessMonitorController::class, 'start'])->name('processes.monitor.start');
+    Route::get('processes/{process}/monitor/stop', [ProcessMonitorController::class, 'stop'])->name('processes.monitor.stop');
+    Route::get('processes/{process}/monitor/delete', [ProcessMonitorController::class, 'delete'])->name('processes.monitor.delete');
+    Route::get('processes/{process}/monitor/cnj', [ProcessMonitorController::class, 'searchCNJ'])->name('processes.monitor.cnj');
+
 
     /*     * ************************************************ */
     /*     * *************     EVENTS     ***************** */
@@ -362,24 +372,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('chat-contacts', [ChatController::class, 'contacts']);
     Route::any('sendMessage', [ChatController::class, 'sendMessage']);
 });
-
-
-
-Route::get('consulta', function () {
-    $process = '1005818-38.2017.8.26.0286';
-    $token = config('jusbrazil.token');
-
-    $q = "SELECT FROM 'JURISTEK'.'INFO'";
-    $query = "SELECT FROM 'CNJ'.'PROCESSO' WHERE 'PROCESSO'='{$process}'";
-    $url = "https://irql.bipbop.com.br/?data={$query}&q={$q}&apiKey={$token}";
-
-    $client = new GuzzleHttp\Client();
-    $request = $client->get($url);
-
-    $response = $request->getBody()->getContents();
-
-    $xml = simplexml_load_string($response);
-
-    dd($xml->body);
-});
-

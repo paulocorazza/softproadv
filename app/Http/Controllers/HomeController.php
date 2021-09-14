@@ -105,6 +105,8 @@ class HomeController extends Controller
         return $this->progress
             ->with('process.person')
             ->pending()
+            ->published()
+            ->notArchived()
             ->oldest('date_term')
             ->simplePaginate($this->perPage);
     }

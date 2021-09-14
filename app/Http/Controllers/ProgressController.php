@@ -58,6 +58,7 @@ class ProgressController extends Controller
         $process = $this->process->findOrFail($data['process_id']);
 
         $data['concluded'] = (!empty($data['concluded'])) ? true : false;
+        $data['published_at'] = now();
         $process->progresses()->create($data);
 
         session()->flash('success', 'Registro realizado com sucesso!');
