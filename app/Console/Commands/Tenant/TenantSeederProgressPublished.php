@@ -14,7 +14,7 @@ class TenantSeederProgressPublished extends Command
      *
      * @var string
      */
-    protected $signature = 'tenants:uuid-user {id?}';
+    protected $signature = 'tenants:progress-published {id?}';
 
     /**
      * The console command description.
