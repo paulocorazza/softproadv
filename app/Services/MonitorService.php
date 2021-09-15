@@ -13,6 +13,12 @@ class MonitorService
 
     }
 
+
+    public function pusher(Process $process, $xml)
+    {
+        $this->processXML($process, $xml);
+    }
+
     public function start(Process $process)
     {
         $response = $this->monitor->createPusher($process);

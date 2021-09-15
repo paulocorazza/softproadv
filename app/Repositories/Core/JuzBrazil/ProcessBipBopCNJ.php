@@ -2,11 +2,10 @@
 
 namespace App\Repositories\Core\JuzBrazil;
 
-use App\Helpers\Helper;
 use App\Jobs\createProgress;
 use App\Models\Process;
 use App\Repositories\Contracts\XMLIntegrationProcessInterface;
-use Carbon\Carbon;
+
 
 class ProcessBipBopCNJ implements XMLIntegrationProcessInterface
 {

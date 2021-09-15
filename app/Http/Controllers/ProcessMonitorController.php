@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Process;
-use App\Repositories\Contracts\MonitorInterface;
 use App\Services\MonitorService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProcessMonitorController extends Controller
 {
@@ -13,11 +13,15 @@ class ProcessMonitorController extends Controller
     {
     }
 
-    public function processCNJ(Request $request, Process $process)
+    public function index(Request $request, Process $process)
     {
         $xml = simplexml_load_string($request->getContent());
 
-        return $xml->body;
+        $fp = fopen('monitor.xml', 'w+');
+        fwrite($fp, $xml);
+        fclose($fp);
+
+        $this->monitor->pusher($process, $xml);
     }
 
     public function start(Process $process)
