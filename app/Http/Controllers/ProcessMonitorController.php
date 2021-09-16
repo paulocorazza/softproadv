@@ -15,13 +15,17 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, $id)
     {
-        Log::alert('Chegou na requisição');
+        Log::alert('Chegou na requisição', [
+            'request' => $request
+        ]);
 
-        $process = Process::findOrFail($id);
+        if ($request->getContent()) {
+            $process = Process::findOrFail($id);
 
-        $xml = $request->getContent();
+            $xml = $request->getContent();
 
-        $this->monitor->pusher($process, $xml);
+            $this->monitor->pusher($process, $xml);
+        }
     }
 
     public function start(Process $process)
