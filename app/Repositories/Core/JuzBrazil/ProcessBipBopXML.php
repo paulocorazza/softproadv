@@ -4,10 +4,11 @@ namespace App\Repositories\Core\JuzBrazil;
 
 use App\Jobs\createProgress;
 use App\Models\Process;
+use App\Models\ProcessProgress;
 use App\Repositories\Contracts\XMLIntegrationProcessInterface;
 
 
-class ProcessBipBopCNJ implements XMLIntegrationProcessInterface
+class ProcessBipBopXML implements XMLIntegrationProcessInterface
 {
 
     public function __construct(
@@ -42,8 +43,10 @@ class ProcessBipBopCNJ implements XMLIntegrationProcessInterface
             $data = (string) $progress->data;
 
             $progress = [
+                'process_id' => $this->process->id,
                 'publication' => (string) $progress->descricao,
                 'date' => $data,
+                'data_hash' => $this->getDataHash($progress),
                 'date_term' => $data,
                 'type' => $this->getType($progress),
                 'description' => $this->getDescription($progress),
@@ -83,9 +86,15 @@ class ProcessBipBopCNJ implements XMLIntegrationProcessInterface
         }
     }
 
-    private function createProgress(array $progress)
+    private function getDataHash(mixed $progress)
     {
-        dispatch(new createProgress($this->process, $progress));
+        if (isset($progress->data)) {
+            return (string) $progress->data->attributes()['hash'];
+        }
     }
 
+    private function createProgress(array $progress)
+    {
+        dispatch(new createProgress($progress));
+    }
 }

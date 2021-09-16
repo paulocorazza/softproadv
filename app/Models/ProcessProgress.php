@@ -27,7 +27,8 @@ class ProcessProgress extends Model
         'process_id',
         'published_at',
         'archived_at',
-        'type'
+        'type',
+        'data_hash'
     ];
 
     public function rules($id = '')

@@ -44,7 +44,8 @@ class Process extends Model
         'status',
         'type_process',
         'contract',
-        'monitoring'
+        'monitoring',
+        'id_pusher'
     ];
 
 

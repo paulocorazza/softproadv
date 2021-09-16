@@ -71,6 +71,7 @@ class TenantMiddleware
         //se for um subdominio
         $company = $this->getCompany($manager->subDomain());
 
+
         if (!$company && $request->url() != route('404.tenant')) {
             return redirect()->route('404.tenant');
         }

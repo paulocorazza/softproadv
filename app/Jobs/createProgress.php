@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Process;
+use App\Models\ProcessProgress;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -20,7 +20,7 @@ class createProgress implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(private Process $process, private array $progress)
+    public function __construct(private array $progress)
     {
         //
     }
@@ -32,9 +32,8 @@ class createProgress implements ShouldQueue
      */
     public function handle()
     {
-        $this->process->progresses()->updateOrCreate([
-            'date' => $this->progress['date'],
-            'description' => $this->progress['description']
-        ], $this->progress);
+        if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
+            ProcessProgress::create($this->progress);
+        }
     }
 }

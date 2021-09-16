@@ -15,11 +15,7 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, Process $process)
     {
-        $xml = simplexml_load_string($request->getContent());
-
-        $fp = fopen('monitor.xml', 'w+');
-        fwrite($fp, $xml);
-        fclose($fp);
+        $xml = $request->getContent();
 
         $this->monitor->pusher($process, $xml);
     }
@@ -42,6 +38,24 @@ class ProcessMonitorController extends Controller
             return redirect()->back()
                 ->with('success', 'Monitoramento suspenso com sucesso!');
         }
+    }
+
+
+    public function delete(Process $process)
+    {
+        $monitor = $this->monitor->delete($process);
+
+        if ($monitor) {
+            return redirect()->back()
+                ->with('success', 'Monitoramento deletado com sucesso!');
+        }
+    }
+
+    public function document(Process $process)
+    {
+        $this->monitor->document($process);
+
+        return redirect()->route('home');
     }
 
     public function searchCNJ(Process $process)

@@ -2,6 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Company;
+use App\Models\Process;
+use App\Repositories\Core\JuzBrazil\BipBop;
+use App\Services\MonitorService;
+use App\Tenant\ManagerTenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,8 +19,27 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $company = Company::find(5);
 
-        $response->assertStatus(200);
+        $manager = new ManagerTenant();
+        $manager->setConnection($company);
+
+        $process = Process::findOrFail(90);
+
+        $manager->setConnectionMain();
+
+        $monitor = new MonitorService(new BipBop());
+
+        $xml = $monitor->document($process);
+
+
+
+        $response = $this->post("http://tarossi.softproadv/processes/90/monitor", [
+            'body' => $xml,
+        ]);
+
+        $response->dump();
+
+
     }
 }

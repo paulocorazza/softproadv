@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCompanyFormRequest;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
 use App\Tenant\ManagerTenant;
+use Illuminate\Http\Request;
 use Session;
 
 

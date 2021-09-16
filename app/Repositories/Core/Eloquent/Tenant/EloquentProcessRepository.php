@@ -151,12 +151,6 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 $percent = $this->getPercentProgress($model);
                 return view('tenants.processes.partials.progress', compact('percent'));
             })
-/*            ->editColumn('phase.name', function ($model) {
-                     return $model->phase->name ?? '';
-            })
-            ->editColumn('stage.name', function ($model) {
-                return $model->stage->name ?? '';
-            })*/
             ->addColumn($column, $view)
             ->make(true);
     }

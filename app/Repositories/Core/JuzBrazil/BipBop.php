@@ -31,7 +31,7 @@ class BipBop implements MonitorInterface
 
         $pushLabel = $this->pusherLabel($process);
 
-        $urlBack = $this->urlBack($process);
+        $urlBack = 'http://52de-186-237-1-133.ngrok.io';  //$this->urlBack($process);
 
         $url = "https://irql.bipbop.com.br/?q={$q}&pushQuery={$pushQuery}&data={$data}&apiKey={$this->token}&pushLabel={$pushLabel}&pushMaxVersion=0&Juristekcallback={$urlBack}";
 
@@ -41,18 +41,55 @@ class BipBop implements MonitorInterface
     }
 
 
+    public function enablePusher(Process $process)
+    {
+        $q = "UPDATE 'PUSHJURISTEK'.'JOB'";
+
+        $url = "https://irql.bipbop.com.br/?q={$q}&apiKey={$this->token}&id={$process->id_pusher}&pushMaxVersion=0";
+
+        $client = new Client();
+
+        return $client->post($url);
+    }
+
+    public function disablePusher(Process $process)
+    {
+        $q = "UPDATE 'PUSHJURISTEK'.'JOB'";
+
+        $url = "https://irql.bipbop.com.br/?q={$q}&apiKey={$this->token}&id={$process->id_pusher}&pushMaxVersion=-1";
+
+        $client = new Client();
+
+        return $client->post($url);
+    }
+
 
     public function deletePusher(Process $process)
     {
         $q = "DELETE FROM 'PUSH'.'JOB'";
 
-        $label = $this->pusherLabel($process);
-
-        $url = "https://irql.bipbop.com.br/?q={$q}&label={$label}&apiKey={$this->token}";
+        $url = "https://irql.bipbop.com.br/?q={$q}&id={$process->id_pusher}&apiKey={$this->token}";
 
         $client = new Client();
 
         return $client->get($url);
+    }
+
+    public function pusherDocument(Process $process)
+    {
+        $q = "SELECT FROM 'PUSH'.'DOCUMENT'";
+
+        $url = "https://irql.bipbop.com.br/?q={$q}&apiKey={$this->token}&id={$process->id_pusher}&pushMaxVersion=pushMaxVersion";
+
+        $client = new Client();
+
+        $request = $client->post($url);
+
+        $response = $request->getBody()->getContents();
+
+        $xml = simplexml_load_string($response);
+
+        return $xml;
     }
 
     public function searchOAB(string $oab)
@@ -93,5 +130,4 @@ class BipBop implements MonitorInterface
         return  config('app.url') . "/processes/{$process->id}/monitor";
 
     }
-
 }

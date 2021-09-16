@@ -82,6 +82,9 @@ Route::group(['namespace' => 'Site'], function () {
 });
 
 
+Route::any('processes/{process}/monitor', [ProcessMonitorController::class, 'index'])->name('processes.monitor.index');
+
+
 /*     * ************************************************ */
 /*     * *************      SYSTEM      ***************** */
 /*     * ************************************************ */
@@ -281,11 +284,14 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * ************  PROCESS MONITOR  ***************** */
     /*     * ************************************************ */
-    Route::get('processes/{process}/monitor', [ProcessMonitorController::class, 'index'])->name('processes.monitor.index');
     Route::get('processes/{process}/monitor/start', [ProcessMonitorController::class, 'start'])->name('processes.monitor.start');
     Route::get('processes/{process}/monitor/stop', [ProcessMonitorController::class, 'stop'])->name('processes.monitor.stop');
     Route::get('processes/{process}/monitor/delete', [ProcessMonitorController::class, 'delete'])->name('processes.monitor.delete');
     Route::get('processes/{process}/monitor/cnj', [ProcessMonitorController::class, 'searchCNJ'])->name('processes.monitor.cnj');
+    Route::get('processes/{process}/monitor/document', [ProcessMonitorController::class, 'document'])->name('processes.monitor.document');
+
+
+
 
 
     /*     * ************************************************ */
