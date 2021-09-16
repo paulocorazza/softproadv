@@ -82,7 +82,7 @@ Route::group(['namespace' => 'Site'], function () {
 });
 
 
-Route::any('processes/{process}/monitor', [ProcessMonitorController::class, 'index'])->name('processes.monitor.index');
+Route::any('processes/{id}/monitor', [ProcessMonitorController::class, 'index'])->name('processes.monitor.index');
 
 
 /*     * ************************************************ */
