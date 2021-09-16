@@ -89,7 +89,7 @@ class BipBop implements MonitorInterface
 
         $xml = simplexml_load_string($response);
 
-        return $xml;
+        return $xml->body;
     }
 
     public function searchOAB(string $oab)

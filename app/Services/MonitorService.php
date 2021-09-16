@@ -54,7 +54,7 @@ class MonitorService
     {
         return $this->monitor->pusherDocument($process);
 
-      //  $this->processXML($process, $xml);
+        $this->processXML($process, $xml);
     }
 
     public function searchCNJ(Process $process)
