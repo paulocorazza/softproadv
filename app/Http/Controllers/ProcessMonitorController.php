@@ -15,9 +15,7 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, Process $process)
     {
-        Log::alert('Chegou na requisição', [
-            'request' => $request->all()
-        ]);
+        Log::alert('Chegou na requisição');
 
         $xml = $request->getContent();
 
