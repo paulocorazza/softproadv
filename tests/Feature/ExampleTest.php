@@ -8,6 +8,7 @@ use App\Repositories\Core\JuzBrazil\BipBop;
 use App\Services\MonitorService;
 use App\Tenant\ManagerTenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -33,12 +34,10 @@ class ExampleTest extends TestCase
         $xml = $monitor->document($process);
 
 
+        $response = Http::withHeaders(["Content-Type" => "text/xml;charset=utf-8"])
+            ->post("http://tarossi.softproadv/processes/90/monitor", ['body' => $xml]);
 
-        $response = $this->post("http://tarossi.softproadv/processes/90/monitor", [
-            'body' => $xml,
-        ]);
-
-        $response->dump();
+        dd($response);
 
 
     }

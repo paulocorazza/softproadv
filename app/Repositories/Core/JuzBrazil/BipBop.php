@@ -31,7 +31,7 @@ class BipBop implements MonitorInterface
 
         $pushLabel = $this->pusherLabel($process);
 
-        $urlBack = 'http://52de-186-237-1-133.ngrok.io';  //$this->urlBack($process);
+        $urlBack = $this->urlBack($process);
 
         $url = "https://irql.bipbop.com.br/?q={$q}&pushQuery={$pushQuery}&data={$data}&apiKey={$this->token}&pushLabel={$pushLabel}&pushMaxVersion=0&Juristekcallback={$urlBack}";
 
