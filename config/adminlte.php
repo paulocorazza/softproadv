@@ -209,6 +209,20 @@ return [
         ],
 
         [
+            'text' => 'Monitoramento',
+            'can' => 'subdomain',
+            'icon' => 'fas fa-wifi',
+            'submenu' => [
+                [
+                    'text' => 'Andamentos',
+                    'url' => 'monitor/progresses',
+                    'icon' => 'fas fa-th-list',
+                    //'can' => 'monitor_progress'
+                ],
+            ]
+        ],
+
+        [
             'text' => 'Agenda',
             'url' => 'schedule',
             'icon' => 'fas fa-calendar-check',

@@ -11,6 +11,9 @@ class ProcessMonitorController extends Controller
 {
     public function __construct(private MonitorService $monitor)
     {
+        $this->middleware('can:monitor_start')->only(['start']);
+        $this->middleware('can:monitor_stop')->only(['stop']);
+        $this->middleware('can:monitor_delete')->only(['delete']);
     }
 
     public function index(Request $request, $id)
@@ -26,6 +29,16 @@ class ProcessMonitorController extends Controller
 
             $this->monitor->pusher($process, $xml);
         }
+    }
+
+    public function progresses()
+    {
+        if (request()->ajax()) {
+            return $this->monitor->getProgresses();
+        }
+
+
+        return view('tenants.monitor.progresses');
     }
 
     public function start(Process $process)
@@ -71,5 +84,33 @@ class ProcessMonitorController extends Controller
         $this->monitor->searchCNJ($process);
 
         return redirect()->route('home');
+    }
+
+    public function published(Request $request)
+    {
+        $id = $request->get('id');
+
+        $response = $this->monitor->published($id);
+
+        if ($request->ajax()) {
+            return response()->json($response);
+        }
+
+        return redirect()->back()
+            ->with('success', 'Andamento publicado com sucesso!');
+    }
+
+    public function archived(Request $request)
+    {
+        $id = $request->get('id');
+
+        $response = $this->monitor->archived($id);
+
+        if ($request->ajax()) {
+            return response()->json($response);
+        }
+
+        return redirect()->back()
+            ->with('success', 'Andamento arquivado com sucesso!');
     }
 }

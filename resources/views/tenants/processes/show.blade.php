@@ -26,19 +26,26 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Detalhes do Processo - <a href="{{ route('processes.edit', $data->id)  }}">Editar</a></h3>
+                <h3 class="card-title">Detalhes do Processo - <a
+                        href="{{ route('processes.edit', $data->id)  }}">Editar</a></h3>
 
                 <div class="card-tools">
                     @if($data->monitoring == true)
-                    <a type="button" class="btn btn-danger text-white" href="{{ route('processes.monitor.stop', $data->id)  }}">
-                        <i class="fas fa-stop-circle"></i>
-                        Monitorando
-                    </a>
+                        @can('monitor_stop')
+                            <a type="button" class="btn btn-danger text-white"
+                               href="{{ route('processes.monitor.stop', $data->id)  }}">
+                                <i class="fas fa-stop-circle"></i>
+                                Monitorando
+                            </a>
+                        @endcan
                     @else
-                        <a type="button" class="btn btn-info"  href="{{ route('processes.monitor.start', $data->id)  }}">
-                            <i class="fas fa-play-circle"></i>
-                            Monitorar
-                        </a>
+                        @can('monitor_start')
+                            <a type="button" class="btn btn-info"
+                               href="{{ route('processes.monitor.start', $data->id)  }}">
+                                <i class="fas fa-play-circle"></i>
+                                Monitorar
+                            </a>
+                        @endcan
                     @endif
                 </div>
             </div>
@@ -94,7 +101,8 @@
                                                 <i class="fas {{ $progress->concluded ? 'fa-envelope' : 'fa-clock' }}   bg-blue"></i>
                                                 <div class="timeline-item">
                                                     <span class="time"><i class="fas fa-clock"></i>  Prazo: {{ \App\Helpers\Helper::formatDateTime($progress->date_term, 'd/m/Y') }}</span>
-                                                    <h3 class="timeline-header"><strong>{{ $progress->description }}</strong> {{ $progress->concluded ? 'Concluído' : 'Pendente' }}
+                                                    <h3 class="timeline-header">
+                                                        <strong>{{ $progress->description }}</strong> {{ $progress->concluded ? 'Concluído' : 'Pendente' }}
                                                     </h3>
 
                                                     <div class="timeline-body">
@@ -105,7 +113,7 @@
                                     @endforeach
                                     <!-- END timeline item -->
                                         <!-- timeline item -->
-                                @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -121,7 +129,8 @@
                                                 @foreach($event->users as $user)
                                                     @if( !empty($user->image) )
                                                         <div class="img-post">
-                                                            <img src="{{ asset('storage/tenants/' . $user->image) }}" alt="{{$user['name']}}"
+                                                            <img src="{{ asset('storage/tenants/' . $user->image) }}"
+                                                                 alt="{{$user['name']}}"
                                                                  class="user-dashboard img-circle">
                                                         </div>
                                                     @else
@@ -208,7 +217,8 @@
                                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                         <div class="image">
                                             @if( !empty($user->image) )
-                                                <img src="{{ asset('storage/tenants/' . $user->image) }}" alt="{{$user['name']}}"
+                                                <img src="{{ asset('storage/tenants/' . $user->image) }}"
+                                                     alt="{{$user['name']}}"
                                                      class="user-dashboard img-circle">
                                             @else
                                                 <img src="{{ url('assets/images/no-image.png') }}" alt="SoftPro"
@@ -241,7 +251,8 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <p>Concluído por: {{ $stage->user->name }} </p>
-                                        <a class="j_link_delete" href="{{ route('stageDelete', $stage->id) }}">Remover Etapa</a>
+                                        <a class="j_link_delete" href="{{ route('stageDelete', $stage->id) }}">Remover
+                                            Etapa</a>
                                     </div>
                                 @endforeach
                             </div>

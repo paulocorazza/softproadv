@@ -68,7 +68,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
         $arr_str = explode('<br />',  nl2br($description));
 
-        return $arr_str[count($arr_str) -1];
+        return substr($arr_str[count($arr_str) -1],0, 191);
     }
 
      /**

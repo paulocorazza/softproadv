@@ -284,6 +284,12 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * ************  PROCESS MONITOR  ***************** */
     /*     * ************************************************ */
+    Route::get('monitor/progresses', [ProcessMonitorController::class, 'progresses'])->name('monitor.progresses');
+    Route::post('monitor/published', [ProcessMonitorController::class, 'published'])->name('monitor.published');
+    Route::post('monitor/archived', [ProcessMonitorController::class, 'archived'])->name('monitor.archived');
+
+
+
     Route::get('processes/{process}/monitor/start', [ProcessMonitorController::class, 'start'])->name('processes.monitor.start');
     Route::get('processes/{process}/monitor/stop', [ProcessMonitorController::class, 'stop'])->name('processes.monitor.stop');
     Route::get('processes/{process}/monitor/delete', [ProcessMonitorController::class, 'delete'])->name('processes.monitor.delete');

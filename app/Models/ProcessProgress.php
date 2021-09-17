@@ -11,7 +11,7 @@ class ProcessProgress extends Model
 {
     protected $table = 'process_progresses';
 
-    protected $appends = ['description_limit'];
+    protected $appends = ['date_br', 'description_limit'];
 
     protected $casts = [
         'date_br' => 'date',

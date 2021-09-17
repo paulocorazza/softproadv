@@ -26,15 +26,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      // $this->registerPolicies();
-
-
         if ($this->app->runningInConsole()) {
             return;
         }
 
-
-        $permissions = Permission::all();
+        $permissions = Permission::get();
 
 
         foreach ($permissions as $permission) {
@@ -64,7 +60,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('subdomain', function (User $user) {
             return !Helper::domainIsMain();
         });
-
 
 
 /*        Gate::before(function (User $user, $ability) {

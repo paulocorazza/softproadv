@@ -242,6 +242,7 @@ class User extends Authenticatable
     public function hasProfile($profile)
     {
         if (is_string($profile)) {
+
             return $this->profiles()->get()->contains('name', $profile);
         }
 

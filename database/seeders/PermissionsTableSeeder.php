@@ -197,6 +197,13 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'rel-honorary',                'label' => 'Relatório de Honorários'],
             ['name' => 'rel-financial-process',       'label' => 'Relatório de Ficha Financeira'],
             ['name' => 'rel-financial',               'label' => 'Relatório de Contas a Pagar / Receber'],
+
+            /** MONITOR */
+            ['name' => 'monitor_start',         'label' => 'Iniciar monitoramento de um processo'],
+            ['name' => 'monitor_stop',          'label' => 'Encerrar monitoramento de um processo'],
+            ['name' => 'monitor_delete',        'label' => 'Excluir o monitoramento de um processo'],
+            ['name' => 'monitor_progress',      'label' => 'Menu de monitoramento de andamentos'],
+            ['name' => 'monitor_oab',           'label' => 'Menu de monitoramento de OAB'],
         ]);
     }
 }

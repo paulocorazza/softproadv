@@ -14,8 +14,6 @@ $(document).ready(function () {
     }
 
 
-
-
     $('#tabela').on('click', '.j_link_delete', function (e) {
 
         e.preventDefault();

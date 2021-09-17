@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Models\Process;
+use App\Models\ProcessProgress;
 use App\Repositories\Contracts\MonitorInterface;
 use App\Repositories\Core\JuzBrazil\ProcessBipBopXML;
 
 class MonitorService
 {
+
     public function __construct(private MonitorInterface $monitor)
     {
 
@@ -52,7 +54,7 @@ class MonitorService
 
     public function document(Process $process)
     {
-        return $this->monitor->pusherDocument($process);
+        $xml = $this->monitor->pusherDocument($process);
 
         $this->processXML($process, $xml);
     }
@@ -62,6 +64,34 @@ class MonitorService
         $xml = $this->monitor->searchCNJ($process);
 
         $this->processXML($process, $xml);
+    }
+
+    public function getProgresses()
+    {
+
+        $model = ProcessProgress::with(['process.person'])->notPublished()->notArchived();
+
+        return Datatables()->eloquent($model)
+                                            ->addColumn('action', 'tenants.monitor.partials.acoes')
+
+            ->make(true);
+    }
+
+    public function published($id)
+    {
+        $id = explode(',', $id);
+
+        return ProcessProgress::whereIn('id', $id)->update(['published_at' => now()]);
+
+    }
+
+
+
+    public function archived($id)
+    {
+        $id = explode(',', $id);
+
+        return ProcessProgress::whereIn('id', $id)->update(['archived_at' => now()]);
     }
 
     private function processXML(Process $process, $xml)
