@@ -21,7 +21,7 @@ class ProcessMonitorController extends Controller
     {
         Log::alert('Chegou na requisição', [
             'id' => $id,
-            'content' => $request->getContent()->body
+            'content' => $request->getContent()
         ]);
 
 
@@ -31,9 +31,9 @@ class ProcessMonitorController extends Controller
         }
 
 
-        $xml = simplexml_load_string($request->getContent()->body);
+        $xml = simplexml_load_string($request->getContent());
 
-        $this->monitor->pusher($process, $xml);
+        $this->monitor->pusher($process, $xml->body);
 
     }
 
