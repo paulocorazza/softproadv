@@ -2,10 +2,13 @@
     <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">{{ allNotifications.length }}</span>
+            <span v-if="this.allProgress.length > 0" class="badge badge-warning navbar-badge">{{ allNotifications.length + 1}}</span>
+            <span v-else class="badge badge-warning navbar-badge">{{ allNotifications.length }}</span>
         </a>
 
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">{{ allProgress.length }} Andamento(s) pendente(s)</span>
+            <div class="dropdown-divider"></div>
             <span class="dropdown-item dropdown-header">{{ allNotifications.length }} Notificações</span>
             <div class="dropdown-divider"></div>
 
@@ -29,14 +32,15 @@ export default {
 
     mounted() {
         this.loadNotifications()
+        this.loadProgresses()
     },
 
     computed: {
-        ...mapGetters(['allNotifications'])
+        ...mapGetters(['allNotifications', 'allProgress'])
     },
 
     methods: {
-        ...mapActions(['loadNotifications', 'markAllAsRead']),
+        ...mapActions(['loadNotifications', 'loadProgresses', 'markAllAsRead']),
     }
 
 }

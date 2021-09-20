@@ -34,11 +34,11 @@ class ProcessMonitorController extends Controller
     public function progresses()
     {
         if (request()->ajax()) {
-            return $this->monitor->getProgresses();
+            return response()->json($this->monitor->getProgresses());
         }
 
 
-        return view('tenants.monitor.progresses');
+        return view('tenants.monitor.progress-vue');
     }
 
     public function start(Process $process)

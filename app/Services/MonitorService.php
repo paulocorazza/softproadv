@@ -69,28 +69,24 @@ class MonitorService
     public function getProgresses()
     {
 
-        $model = ProcessProgress::with(['process.person'])->notPublished()->notArchived();
+       /* $model = ProcessProgress::with(['process.person'])->notPublished()->notArchived();
 
         return Datatables()->eloquent($model)
                                             ->addColumn('action', 'tenants.monitor.partials.acoes')
 
-            ->make(true);
+            ->make(true);*/
+
+        return ProcessProgress::with(['process.person'])->notPublished()->notArchived()->get();
     }
 
     public function published($id)
     {
-        $id = explode(',', $id);
-
         return ProcessProgress::whereIn('id', $id)->update(['published_at' => now()]);
-
     }
-
 
 
     public function archived($id)
     {
-        $id = explode(',', $id);
-
         return ProcessProgress::whereIn('id', $id)->update(['archived_at' => now()]);
     }
 

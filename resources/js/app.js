@@ -13,6 +13,7 @@ Vue.component('chatMessage', require('./components/chat/ChatMessage.vue').defaul
 Vue.component('chatSend', require('./components/chat/ChatSend.vue').default)
 Vue.component('chatContacts', require('./components/chat/ChatContacts.vue').default)
 Vue.component('chatUsersSelected', require('./components/chat/ChatUsersSelected.vue').default)
+Vue.component('progressPending', require('./components/progresses-pending/ProgressesPending').default)
 
 Vue.use(vuetify)
 
