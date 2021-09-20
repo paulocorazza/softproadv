@@ -18,6 +18,9 @@ use App\Http\Controllers\ProcessMonitorController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
 
+
+
+
 Route::view('/404-tenant', 'erros.404-tenant')->name('404.tenant');
 
 /*     * ************************************************ */
@@ -82,7 +85,7 @@ Route::group(['namespace' => 'Site'], function () {
 });
 
 
-Route::any('processes/{id}/monitor', [ProcessMonitorController::class, 'index'])->name('processes.monitor.index');
+
 
 
 /*     * ************************************************ */
