@@ -18,9 +18,7 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, $id)
     {
-        Log::alert('Chegou na requisição', [
-            'request' => $request
-        ]);
+        dd($id, $request->getContent());
 
         if ($request->getContent()) {
             $process = Process::findOrFail($id);
