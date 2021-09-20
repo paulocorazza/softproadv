@@ -31,7 +31,7 @@ class BipBop implements MonitorInterface
 
         $pushLabel = $this->pusherLabel($process);
 
-        $urlBack = $this->urlBack($process);
+        $urlBack =  'http://api.webhookinbox.com/i/HU3o6b6y/in/'; //$this->urlBack($process);
 
         $url = "https://irql.bipbop.com.br/?q={$q}&pushQuery={$pushQuery}&data={$data}&apiKey={$this->token}&pushLabel={$pushLabel}&pushMaxVersion=0&Juristekcallback={$urlBack}";
 

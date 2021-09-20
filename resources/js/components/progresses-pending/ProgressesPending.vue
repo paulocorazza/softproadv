@@ -25,8 +25,7 @@
                 <td>{{ progress.process.person.name }}</td>
                 <td>{{ progress.description }}</td>
                 <td>
-                    <button @click.prevent="btnPublished"  class="badge bg-yellow">Publicar</button>
-                    <button @click.prevent="btnArchived" class="badge bg-dark">Arquivar</button>
+                    <button @click.prevent="btnVer"  class="badge bg-yellow">Detalhes</button>
                 </td>
             </tr>
             </tbody>

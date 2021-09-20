@@ -47,7 +47,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
                 'publication' => (string) $progress->descricao,
                 'date' => $data,
                 'data_hash' => $this->getDataHash($progress),
-                'date_term' => $data,
+               // 'date_term' => $data,
                 'type' => $this->getType($progress),
                 'description' => $this->getDescription($progress),
                 'concluded' => false
