@@ -124,10 +124,10 @@ class BipBop implements MonitorInterface
         $manager = app(ManagerTenant::class);
 
         if (!$manager->domainIsMain()) {
-            return 'http://' .  $manager->subDomain() .  config('app.url_client') . "/processes/{$process->id}/monitor";
+            return 'http://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/{$process->id}/monitor";
         }
 
-        return  config('app.url') . "/processes/{$process->id}/monitor";
+        return  config('app.url') . "/api/processes/{$process->id}/monitor";
 
     }
 }
