@@ -6,6 +6,7 @@ use App\Models\Process;
 use App\Services\MonitorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use function PHPUnit\Framework\isEmpty;
 
 class ProcessMonitorController extends Controller
 {
@@ -18,9 +19,12 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, $id)
     {
-        dd($id, $request->getContent());
+        Log::alert('Chegou na requisição', [
+            'id' => $request,
+            'content'   => $request->getContent()
+        ]);
 
-        if ($request->getContent()) {
+        if (!isEmpty($id)) {
             $process = Process::findOrFail($id);
 
             $xml = $request->getContent();
