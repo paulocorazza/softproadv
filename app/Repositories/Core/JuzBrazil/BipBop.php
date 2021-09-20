@@ -31,7 +31,7 @@ class BipBop implements MonitorInterface
 
         $pushLabel = $this->pusherLabel($process);
 
-        $urlBack =  'http://api.webhookinbox.com/i/HU3o6b6y/in/'; //$this->urlBack($process);
+        $urlBack =  $this->urlBack($process);
 
         $url = "https://irql.bipbop.com.br/?q={$q}&pushQuery={$pushQuery}&data={$data}&apiKey={$this->token}&pushLabel={$pushLabel}&pushMaxVersion=0&Juristekcallback={$urlBack}";
 
@@ -124,7 +124,7 @@ class BipBop implements MonitorInterface
         $manager = app(ManagerTenant::class);
 
         if (!$manager->domainIsMain()) {
-            return 'https://' .  $manager->subDomain() .  config('app.url_client') . "/processes/{$process->id}/monitor";
+            return 'http://' .  $manager->subDomain() .  config('app.url_client') . "/processes/{$process->id}/monitor";
         }
 
         return  config('app.url') . "/processes/{$process->id}/monitor";
