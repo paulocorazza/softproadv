@@ -68,14 +68,6 @@ class MonitorService
 
     public function getProgresses()
     {
-
-       /* $model = ProcessProgress::with(['process.person'])->notPublished()->notArchived();
-
-        return Datatables()->eloquent($model)
-                                            ->addColumn('action', 'tenants.monitor.partials.acoes')
-
-            ->make(true);*/
-
         return ProcessProgress::with(['process.person'])->notPublished()->notArchived()->get();
     }
 
