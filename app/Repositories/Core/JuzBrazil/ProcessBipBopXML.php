@@ -6,6 +6,7 @@ use App\Jobs\createProgress;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Repositories\Contracts\XMLIntegrationProcessInterface;
+use Illuminate\Support\Facades\Log;
 
 
 class ProcessBipBopXML implements XMLIntegrationProcessInterface
@@ -26,6 +27,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
     public function processesIterate() : void
     {
+        Log::debug('processesIterate');
         foreach ($this->xml->processo as $processo) {
             $this->progressGenerate($processo);
         }
@@ -38,6 +40,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
      */
     private function progressGenerate(mixed $processo) : void
     {
+        Log::debug('progressGenerate');
         foreach ($processo->andamentos->andamento as $progress) {
 
             $data = (string) $progress->data;
@@ -95,6 +98,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
     private function createProgress(array $progress)
     {
+        Log::debug('createProgress');
         dispatch(new createProgress($progress));
     }
 }

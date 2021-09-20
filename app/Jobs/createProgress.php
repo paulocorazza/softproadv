@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class createProgress implements ShouldQueue
 {
@@ -33,6 +34,7 @@ class createProgress implements ShouldQueue
     public function handle()
     {
         if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
+            Log::debug('handle queue');
             ProcessProgress::create($this->progress);
         }
     }

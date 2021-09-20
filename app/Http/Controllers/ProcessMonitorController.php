@@ -26,6 +26,7 @@ class ProcessMonitorController extends Controller
 
 
         if (!$process = Process::findOrFail($id)) {
+            Log::alert('Processo não encontrado');
             return response()->json('Processo não encontrado');
         }
 
