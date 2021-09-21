@@ -23,7 +23,6 @@ class ProcessMonitorController extends Controller
             return response()->json('Processo não encontrado');
         }
 
-
         $xml = simplexml_load_string($request->getContent());
 
         $this->monitor->pusher($process, $xml->body);

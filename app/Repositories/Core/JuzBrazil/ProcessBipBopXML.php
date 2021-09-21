@@ -21,6 +21,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
     public function execute()
     {
+        Log::debug('Iniciou a importação do XML');
         $this->processesIterate();
     }
 
@@ -102,6 +103,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
     private function createProgress(array $progress)
     {
         dispatch(new createProgress($progress));
+        Log::debug('Finalizou a importação do andamento');
     }
 
 
