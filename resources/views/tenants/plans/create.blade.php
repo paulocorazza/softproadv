@@ -3,6 +3,7 @@
 @section('title_postfix', ' - Cadastrar Novo Plano')
 
 @section('adminlte_css')
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
 @stop

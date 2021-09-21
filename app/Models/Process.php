@@ -71,7 +71,6 @@ class Process extends Model
 
             'progresses.*.date' => 'required',
             'progresses.*.description' => 'required|min:3|max:120',
-            'progresses.*.date_term' => 'required',
             'progresses.*.publication' => 'required',
 
         ];

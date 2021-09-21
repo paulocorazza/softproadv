@@ -1,18 +1,35 @@
 <template>
     <div>
         <div class="btns">
-            <button @click.prevent="btnPublished" class="btn bg-yellow text-white" id="btnPublished">Publicar Selecionados</button>
+            <button @click.prevent="btnPublished" class="btn bg-yellow text-white" id="btnPublished">Publicar
+                Selecionados
+            </button>
             <button @click.prevent="btnArchived" class="btn bg-dark" id="btnArchved">Arquivar Selecionados</button>
         </div>
+
+        <vodal :show="showModal"
+               animation="zoom"
+               @hide="hideModal"
+               :width="800"
+               :height="500">
+            <progress-form
+                :progress="this.progress"
+                @hide="hideModal"
+            >
+
+            </progress-form>
+        </vodal>
 
         <table id="tabela" class="table table-hover  table-responsive-sm" style="width:100%">
             <thead class="thead-dark">
             <tr>
                 <th><input type="checkbox" @click="selectAll" v-model="allSelected"></th>
                 <th scope="col">Data</th>
+                <th scope="col">Categoria</th>
                 <th scope="col">Processo</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Descrição</th>
+                <th scope="col">Prazo</th>
                 <th width="50px" scope="col"></th>
             </tr>
             </thead>
@@ -21,11 +38,13 @@
             <tr v-for="(progress, index) in this.allProgress" :key="index">
                 <td><input type="checkbox" v-model="Ids" @click="select" :value="progress.id"></td>
                 <td>{{ progress.date_br }}</td>
+                <td>{{ progress.category }}</td>
                 <td>{{ progress.process.number_process }}</td>
                 <td>{{ progress.process.person.name }}</td>
                 <td>{{ progress.description }}</td>
+                <td>{{ progress.date_term_br }}</td>
                 <td>
-                    <button @click.prevent="btnVer"  class="badge bg-yellow">Detalhes</button>
+                    <button @click.prevent="detail(progress.id)" class="badge bg-yellow">Detalhes</button>
                 </td>
             </tr>
             </tbody>
@@ -42,7 +61,23 @@ export default {
     data() {
         return {
             allSelected: false,
-            Ids: []
+            Ids: [],
+            showModal: false,
+            progress: {
+                id: '',
+                description: 'teste',
+                publication: '',
+                date: '',
+                date_term: '',
+                concluded: false,
+                category: '',
+                process: {
+                    number_process : '',
+                    person: {
+                        name: ''
+                    }
+                }
+            }
         }
     },
 
@@ -56,23 +91,23 @@ export default {
     },
 
     methods: {
-        ...mapActions(['loadProgresses', 'published', 'archived']),
+        ...mapActions(['loadProgresses', 'getProgress', 'published', 'archived']),
 
         async btnPublished() {
             if (this.Ids.length > 0) {
-                await  this.published({id: this.Ids})
+                await this.published({id: this.Ids})
                 this.loadProgresses()
             }
         },
 
         async btnArchived() {
             if (this.Ids.length > 0) {
-              await this.archived({id: this.Ids})
-              this.loadProgresses()
+                await this.archived({id: this.Ids})
+                this.loadProgresses()
             }
         },
 
-        selectAll: function() {
+        selectAll: function () {
             this.Ids = [];
 
             if (!this.allSelected) {
@@ -81,15 +116,30 @@ export default {
                 }
             }
         },
-        select: function() {
+        select: function () {
             this.allSelected = false;
+        },
+
+         detail(id) {
+             this.getProgress(id)
+             .then((response) => {
+                 this.progress = response.data
+                 this.showModal = true
+             })
+
+        },
+
+        hideModal() {
+            this.showModal = false
         }
     },
+
+
 }
 </script>
 
 <style scoped>
-    .btns {
-        margin-bottom: 5px;
-    }
+.btns {
+    margin-bottom: 5px;
+}
 </style>

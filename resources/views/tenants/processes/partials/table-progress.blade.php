@@ -2,7 +2,8 @@
     <thead>
     <tr>
         <th>Data</th>
-        <th>Publicação</th>
+        <th>Categoria</th>
+        <th>Descrição</th>
         <th>Prazo</th>
         <th>Concluído</th>
         <th width="50px" scope="col"></th>
@@ -30,6 +31,12 @@
                            name="progresses[{{ $progress['id']  }}][date]"
                            id="progresses[{{ $progress['id']  }}][date]"
                            value="{{ $progress['date_br']  }}">
+                </td>
+
+                <td>
+                    <select class="form-control" readonly name="[{{ $progress['id']  }}][category]">' +
+                        <option value="{{ $progress['category']  }}">{{ $progress['category']  }}</option>
+                        </select>
                 </td>
 
                 <td>

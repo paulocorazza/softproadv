@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Process;
 use App\Models\ProcessProgress;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,6 +37,12 @@ class ProgressController extends Controller
         $progress = $this->progress->findOrFail($id);
 
         $data = $request->all();
+        $data['date'] = Carbon::createFromFormat('d/m/Y', $data['date'])->format('Y-m-d');
+
+        if (isset($data['date_term'])) {
+            $data['date_term'] = Carbon::createFromFormat('d/m/Y', $data['date_term'])->format('Y-m-d');
+        }
+
         $data['concluded'] = (!empty($data['concluded'])) ? true : false;
 
         $progress->update($data);
@@ -59,6 +67,13 @@ class ProgressController extends Controller
 
         $data['concluded'] = (!empty($data['concluded'])) ? true : false;
         $data['published_at'] = now();
+        $data['date'] = Carbon::createFromFormat('d/m/Y', $data['date'])->format('Y-m-d');
+
+        if (isset($data['date_term'])) {
+            $data['date_term'] = Carbon::createFromFormat('d/m/Y', $data['date_term'])->format('Y-m-d');
+        }
+
+
         $process->progresses()->create($data);
 
         session()->flash('success', 'Registro realizado com sucesso!');

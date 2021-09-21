@@ -41,7 +41,6 @@
     @endif
 
 
-
     <!-- favicon icon -->
     <link rel="shortcut icon" href="assets/images/icon-adv.ico" />
 </head>

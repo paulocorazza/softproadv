@@ -101,6 +101,7 @@
                                                 <i class="fas {{ $progress->concluded ? 'fa-envelope' : 'fa-clock' }}   bg-blue"></i>
                                                 <div class="timeline-item">
                                                     <span class="time"><i class="fas fa-clock"></i>  Prazo: {{ \App\Helpers\Helper::formatDateTime($progress->date_term, 'd/m/Y') }}</span>
+                                                    <span class="time">{{ $progress->category }}</span>
                                                     <h3 class="timeline-header">
                                                         <strong>{{ $progress->description }}</strong> {{ $progress->concluded ? 'Concluído' : 'Pendente' }}
                                                     </h3>

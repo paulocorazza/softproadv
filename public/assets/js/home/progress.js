@@ -16,6 +16,7 @@ function reset() {
 
 function limparAndamento() {
     $('#process_id').val(null).trigger('change');
+    $('#process_category').val('Outros').trigger('change');
     $('#progress_date').val('');
     $('#progress_description').val('');
     $('#progress_date_term').val('');
@@ -106,6 +107,7 @@ function editDetailProgress(obj) {
         $('#progress_description').val(data.description);
         $('#progress_date_term').val(data.date_term);
         $('#progress_publication').val(data.publication);
+        $('#process_category').val(data.category);
 
         let process = {
             id: data.process_id,
@@ -156,6 +158,7 @@ $(document).ready(function () {
         var date_term =  moment($('#progress_date_term').val()).format("DD/MM/YYYY")
         var publication = $('#progress_publication').val();
         var concluded = ($("#progress_concluded").prop('checked') == true) ? "checked" : '';
+        var category =   $('#process_category').val();
 
         if (process_id == '') {
             alertify.error('Processo é de preenchimento obrigatório!')
@@ -173,10 +176,6 @@ $(document).ready(function () {
         }
 
 
-        if (date_term == 'Invalid date') {
-            alertify.error('Prazo é de preenchimento obrigatório!')
-            return false
-        }
 
         if (publication == '') {
             alertify.error('Publicação é de preenchimento obrigatório!')
@@ -186,9 +185,13 @@ $(document).ready(function () {
 
         let dados = new FormData()
         dados.append('process_id', process_id)
+        dados.append('category', category)
         dados.append('date', date)
         dados.append('description', description)
-        dados.append('date_term', date_term)
+
+        if (date_term !== 'Invalid date') {
+            dados.append('date_term', date_term)
+        }
         dados.append('publication', publication)
         dados.append('concluded', concluded)
 

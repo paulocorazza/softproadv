@@ -104,6 +104,7 @@ class HomeController extends Controller
     {
         return $this->progress
             ->with('process.person')
+            ->withDateTerm()
             ->pending()
             ->published()
             ->notArchived()

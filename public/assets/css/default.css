@@ -52,4 +52,9 @@ label:not(.form-check-label):not(.custom-file-label) {
     color: #3951b2;
 }
 
+input {
+    background-color: transparent;
+    border-style: solid; !important;
+}
+
 

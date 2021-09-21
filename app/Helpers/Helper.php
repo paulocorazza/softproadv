@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
+use DateTime;
 
 /**
  * .class [ TIPO ]
@@ -228,5 +229,16 @@ class Helper
     public static function roundTo($value, $precision = 2)
     {
         return round($value, $precision);
+    }
+
+    public static function hasDateFormat($date, $format = 'Y-m-d')
+    {
+        $parse = DateTime::createFromFormat($format, $date);
+
+        if ($parse && $parse->format($format) != $date) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -19,14 +19,7 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, $id)
     {
-        Log::alert('Chegou na requisição', [
-            'id' => $id,
-            'content' => $request->getContent()
-        ]);
-
-
         if (!$process = Process::findOrFail($id)) {
-            Log::alert('Processo não encontrado');
             return response()->json('Processo não encontrado');
         }
 
@@ -35,6 +28,7 @@ class ProcessMonitorController extends Controller
 
         $this->monitor->pusher($process, $xml->body);
 
+        return response()->json('OK');
     }
 
     public function progresses()

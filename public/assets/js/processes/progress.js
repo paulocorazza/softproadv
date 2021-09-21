@@ -15,6 +15,7 @@ function reset() {
 }
 
 function limparAndamento() {
+    $('#process_category').val('Outros').trigger('change');
     $('#progress_date').val('');
     $('#progress_description').val('');
     $('#progress_date_term').val('');
@@ -31,18 +32,16 @@ function editDetail(obj) {
     var description = $('input[type=text][name="progresses[' + id + '][description]"]').val();
     var dateTerm = $('input[type=text][name="progresses[' + id + '][date_term]"]').val();
     var publication = $('input[type=hidden][name="progresses[' + id + '][publication]"]').val();
-
-
     var concluded = ($('input[type=checkbox][name="progresses[' + id + '][concluded]"]').prop('checked') == true) ? true : false;
+    var category = $('select[name="progresses[' + id + '][category]"]').val();
 
 
     $('#progress_date').val(moment(created, "DD/MM/YYYY").format("YYYY-MM-DD"));
     $('#progress_description').val(description);
     $('#progress_date_term').val(moment(dateTerm, "DD/MM/YYYY").format("YYYY-MM-DD"));
     $('#progress_publication').val(publication);
-
     $('#progress_concluded').prop("checked", concluded);
-
+    $('#process_category').val(category);
     $('#modalProgress').modal('show');
 }
 
@@ -108,17 +107,17 @@ $(document).ready(function () {
         if (id != '')
             count = id
 
-       // var date = $('#progress_date').val();
+        // var date = $('#progress_date').val();
 
 
-        var date =  moment($('#progress_date').val()).format("DD/MM/YYYY")
+        var date = moment($('#progress_date').val()).format("DD/MM/YYYY")
         var description = $('#progress_description').val();
-        var date_term =  moment($('#progress_date_term').val()).format("DD/MM/YYYY")
+        var date_term = moment($('#progress_date_term').val()).format("DD/MM/YYYY")
         var publication = $('#progress_publication').val();
         var concluded = ($("#progress_concluded").prop('checked') == true) ? "checked" : '';
+        var category =  $('#process_category').val();
 
-
-        if (date == '') {
+        if (date === 'Invalid date') {
             alertify.error('Data é de preenchimento obrigatório!')
             return false
         }
@@ -128,11 +127,6 @@ $(document).ready(function () {
             return false
         }
 
-
-        if (date_term == '') {
-            alertify.error('Prazo é de preenchimento obrigatório!')
-            return false
-        }
 
         if (publication == '') {
             alertify.error('Publicação é de preenchimento obrigatório!')
@@ -149,26 +143,41 @@ $(document).ready(function () {
             '</td>' +
 
             '<td>' +
+                '<select class="form-control" readonly name="progresses[' + count + '][category]">' +
+                '<option value="' + category + '">' + category + '</option>' +
+                '</select>' +
+            '</td>' +
+
+            '<td>' +
             '<input class="form-control" type="text" readonly id="description' + count + '" name="progresses[' + count + '][description]"  value="' + description + '"> ' +
-            '</td>' +
+            '</td>'
 
-            '<td>' +
-            '<input class="form-control" type="text" readonly  id="term' + count + '" name="progresses[' + count + '][date_term]"  value="' + date_term + '"> ' +
-            '</td>' +
+        if (date_term === 'Invalid date') {
+            td +=
+                '<td>' +
+                '<input class="form-control" type="text" readonly  id="term' + count + '" name="progresses[' + count + '][date_term]"> ' +
+                '</td>';
+        } else {
+            td +=
+                '<td>' +
+                '<input class="form-control" type="text" readonly  id="term' + count + '" name="progresses[' + count + '][date_term]"  value="' + date_term + '"> ' +
+                '</td>';
+        }
 
-            '<td>' +
-            '<input class="form-control" type="checkbox" id="concluded' + count + '" name="progresses[' + count + '][concluded]"' +  concluded +' >' +
-            '</td>' +
+        td +=
 
-            '<td>' +
-            '<a rel="' + count + '" class="badge bg-yellow" href="javascript:;" onclick="editDetail(this)" >Editar</a>' +
+        '<td>' +
+        '<input class="form-control" type="checkbox" id="concluded' + count + '" name="progresses[' + count + '][concluded]"' + concluded + ' >' +
+        '</td>' +
 
-            '<a rel="' + count + '" class="badge bg-danger" href="javascript:;" onclick="removeDetail(this)">Excluir</a>' +
-            '</td>';
+        '<td>' +
+        '<a rel="' + count + '" class="badge bg-yellow" href="javascript:;" onclick="editDetail(this)" >Editar</a>' +
+
+        '<a rel="' + count + '" class="badge bg-danger" href="javascript:;" onclick="removeDetail(this)">Excluir</a>' +
+        '</td>';
 
 
         if (id != '') {
-            console.log(td)
             $('#progress_table').find('.j_list').find('#progresses' + id).html(td);
 
         } else if (id == '') {

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+
 @stop
 
 @section('title_postfix', ' - Vincular Varas a Comarca')

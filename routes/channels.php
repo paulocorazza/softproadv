@@ -20,3 +20,9 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('notification-created.{id}', function ($user, $uuid) {
     return $user->uuid === $uuid;
 });
+
+Broadcast::channel('progresses.{uuid}', function ($user, $uuid) {
+    $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
+    return $companyUuid === $uuid;
+});
+

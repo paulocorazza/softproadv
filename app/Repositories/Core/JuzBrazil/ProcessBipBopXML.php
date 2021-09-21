@@ -27,7 +27,6 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
     public function processesIterate() : void
     {
-        Log::debug('processesIterate');
         foreach ($this->xml->processo as $processo) {
             $this->progressGenerate($processo);
         }
@@ -40,7 +39,6 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
      */
     private function progressGenerate(mixed $processo) : void
     {
-        Log::debug('progressGenerate');
         foreach ($processo->andamentos->andamento as $progress) {
 
             $data = (string) $progress->data;
@@ -50,10 +48,10 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
                 'publication' => (string) $progress->descricao,
                 'date' => $data,
                 'data_hash' => $this->getDataHash($progress),
-               // 'date_term' => $data,
                 'type' => $this->getType($progress),
                 'description' => $this->getDescription($progress),
-                'concluded' => false
+                'concluded' => false,
+                'category'  => $this->getCategory($progress)
             ];
 
             $this->createProgress($progress);
@@ -96,9 +94,15 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
         }
     }
 
+    private function getCategory(mixed $progress)
+    {
+        return (string) $progress->attributes()['categoria'];
+    }
+
     private function createProgress(array $progress)
     {
-        Log::debug('createProgress');
         dispatch(new createProgress($progress));
     }
+
+
 }

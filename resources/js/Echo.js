@@ -21,6 +21,12 @@ if (window.Laravel.user) {
         })
 }
 
+window.Echo.private(`progresses.${window.Laravel.company}`)
+    .listen('CreateProgressIntegration', function (progress) {
+        console.log(progress)
+        store.commit('ADD_PROGRESS', progress.progress)
+    })
+
 
 
 

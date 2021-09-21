@@ -44,12 +44,18 @@ class EloquentProcessRepository extends BaseEloquentRepository
     private function saveProgresses(array $data, $process)
     {
         if (isset($data['progresses'])) {
+
             foreach ($data['progresses'] as $progress) {
                 $id = ($progress['id'] > 0) ? $progress['id'] : 0;
 
-                $progress['concluded'] = (isset($progress['concluded'])) ? true : false;
-                $process['published_at'] = now();
+                $progress['date'] = Carbon::createFromFormat('d/m/Y', $progress['date'])->format('Y-m-d');
 
+                if (isset($progress['date_term'])) {
+                    $progress['date_term'] = Carbon::createFromFormat('d/m/Y', $progress['date_term'])->format('Y-m-d');
+                }
+
+                $progress['concluded'] = (isset($progress['concluded'])) ? true : false;
+                $progress['published_at'] = now();
                 $process->progresses()->updateOrCreate(['id' => $id], $progress);
             }
         }
@@ -215,6 +221,7 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
 
             if (!$process || !$progresses || !$files || !$users || !$state || !$audiences) {
+
                 DB::rollBack();
 
                 return [

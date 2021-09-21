@@ -6,17 +6,13 @@ use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use function PHPUnit\Framework\isEmpty;
 
 class ProcessProgress extends Model
 {
     protected $table = 'process_progresses';
 
-    protected $appends = ['date_br', 'description_limit'];
-
-    protected $casts = [
-        'date_br' => 'date',
-        'date_term_br' => 'date',
-    ];
+    protected $appends = ['date_br', 'date_term_br', 'description_limit'];
 
     protected $fillable = [
         'date',
@@ -28,7 +24,8 @@ class ProcessProgress extends Model
         'published_at',
         'archived_at',
         'type',
-        'data_hash'
+        'data_hash',
+        'category'
     ];
 
     public function rules($id = '')
@@ -36,7 +33,6 @@ class ProcessProgress extends Model
         return [
             'date' => 'required',
             'description' => 'required|min:3|max:120',
-            'date_term' => 'required',
             'publication' => 'required',
         ];
     }
@@ -48,6 +44,12 @@ class ProcessProgress extends Model
     {
         return $this->belongsTo(Process::class);
     }
+
+    public function scopeWithDateTerm($query)
+    {
+        return $query->whereNotNull('date_term');
+    }
+
 
     public function scopeConcluded($query)
     {
@@ -75,18 +77,16 @@ class ProcessProgress extends Model
     }
 
 
-    public function setDateAttribute($input)
+    public function getDateAttribute($value)
     {
-        $this->attributes['date'] =
-            Carbon::createFromFormat('d/m/Y', $input)->format('Y-m-d');
+        return Helper::formatDateTime($value, 'Y-m-d');
     }
 
-    public function setDateTermAttribute($input)
-    {
-        $this->attributes['date_term'] =
-            Carbon::createFromFormat('d/m/Y', $input)->format('Y-m-d');
-    }
 
+    public function getDateTermAttribute($value)
+    {
+        return Helper::formatDateTime($value, 'Y-m-d');
+    }
 
     public function getDateBrAttribute()
     {
@@ -95,7 +95,9 @@ class ProcessProgress extends Model
 
     public function getDateTermBrAttribute($value)
     {
-        return Helper::formatDateTime($this->date_term, 'd/m/Y');
+      if (!empty($this->date_term)) {
+          return Helper::formatDateTime($this->date_term, 'd/m/Y');
+      }
     }
 
     public function getDescriptionLimitAttribute()
@@ -120,5 +122,10 @@ class ProcessProgress extends Model
             $days <= 10 => 'badge-warning',
             default => 'badge-info',
         };
+    }
+
+    public function isIntegration()
+    {
+        return !isEmpty($this->data_hash);
     }
 }

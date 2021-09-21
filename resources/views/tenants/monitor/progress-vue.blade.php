@@ -18,9 +18,6 @@
 @stop
 
 @section('content')
-
-    @include('tenants.includes.alerts')
-
     <div class="content">
         <progress-pending />
     </div>

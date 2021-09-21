@@ -1,12 +1,9 @@
 @extends('adminlte::page')
 
 @section('adminlte_css')
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
     <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
     <style type="text/css">
         .table td, .table th {
             padding: 0.30rem;
