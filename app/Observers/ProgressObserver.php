@@ -12,17 +12,4 @@ class ProgressObserver
     {
         $progress->category = $progress->category ?? 'Outros';
     }
-
-    public function created(ProcessProgress $progress)
-    {
-        Log::debug('processo', [
-            'progresso' => $progress
-        ]);
-
-        if ($progress->isIntegration()) {
-            Log::debug('broadcast');
-            $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
-            broadcast(new CreateProgressIntegration($progress, $companyUuid));
-        }
-    }
 }

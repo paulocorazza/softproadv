@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\CreateProgressIntegration;
 use App\Models\ProcessProgress;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
@@ -34,7 +35,10 @@ class createProgress implements ShouldQueue
     public function handle()
     {
         if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
-            ProcessProgress::create($this->progress);
+            $progress = ProcessProgress::create($this->progress);
+
+            $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
+            broadcast(new CreateProgressIntegration($progress, $companyUuid));
         }
     }
 }
