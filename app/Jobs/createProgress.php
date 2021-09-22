@@ -34,7 +34,6 @@ class createProgress implements ShouldQueue
     public function handle()
     {
         if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
-            Log::debug('handle queue');
             ProcessProgress::create($this->progress);
         }
     }

@@ -126,6 +126,6 @@ class ProcessProgress extends Model
 
     public function isIntegration()
     {
-        return !isEmpty($this->data_hash);
+        return !empty($this->data_hash);
     }
 }
