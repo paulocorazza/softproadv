@@ -6,6 +6,7 @@ use App\Jobs\createProgress;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Repositories\Contracts\XMLIntegrationProcessInterface;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 
@@ -21,7 +22,6 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
     public function execute()
     {
-        Log::debug('Iniciou a importação do XML');
         $this->processesIterate();
     }
 
@@ -43,6 +43,7 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
         foreach ($processo->andamentos->andamento as $progress) {
 
             $data = (string) $progress->data;
+            $data = Carbon::createFromFormat('d/m/Y', $data)->format('Y-m-d');
 
             $progress = [
                 'process_id' => $this->process->id,
@@ -103,7 +104,6 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
     private function createProgress(array $progress)
     {
         dispatch(new createProgress($progress));
-        Log::debug('Finalizou a importação do andamento');
     }
 
 
