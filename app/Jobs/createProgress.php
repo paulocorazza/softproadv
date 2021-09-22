@@ -5,7 +5,9 @@ namespace App\Jobs;
 use App\Events\CreateProgressIntegration;
 use App\Models\ProcessProgress;
 use GuzzleHttp\Client;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -13,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class createProgress implements ShouldQueue
+class createProgress implements ShouldQueue, ShouldBroadcast
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,7 +24,9 @@ class createProgress implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(private array $progress)
+    public function __construct(
+        private array $progress,
+        private string $uuidCompany)
     {
         //
     }
@@ -37,8 +41,10 @@ class createProgress implements ShouldQueue
         if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
             $progress = ProcessProgress::create($this->progress);
 
-            $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
-            broadcast(new CreateProgressIntegration($progress, $companyUuid));
+            $this->progress = $progress->load('process.person');
+
+            broadcast(new CreateProgressIntegration($progress, $this->uuidCompany));
         }
     }
+
 }

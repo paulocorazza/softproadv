@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 
 class CreateProgressIntegration implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets;
 
     /**
      * Create a new event instance.

@@ -103,7 +103,9 @@ class ProcessBipBopXML implements XMLIntegrationProcessInterface
 
     private function createProgress(array $progress)
     {
-        dispatch(new createProgress($progress));
+        $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
+
+        dispatch(new createProgress($progress, $companyUuid));
     }
 
 
