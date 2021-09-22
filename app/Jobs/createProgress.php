@@ -39,7 +39,7 @@ class createProgress implements ShouldQueue
         if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
             $progress = ProcessProgress::create($this->progress);
 
-            $this->progress = $progress->load('process.person');
+            $progress = $progress->load('process.person');
 
             broadcast(new CreateProgressIntegration($progress, $this->uuidCompany));
         }
