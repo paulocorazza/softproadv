@@ -19,6 +19,8 @@ class ProcessMonitorController extends Controller
 
     public function index(Request $request, $id)
     {
+        Log::debug('Requisição do processo - ' . $id);
+
         if (!$process = Process::findOrFail($id)) {
             return response()->json('Processo não encontrado');
         }

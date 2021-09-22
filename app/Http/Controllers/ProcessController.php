@@ -89,6 +89,18 @@ class ProcessController extends ControllerStandard
         $this->contractModel = $contractModel;
     }
 
+    public function index(Request $request)
+    {
+        if (request()->ajax()) {
+            return $this->model->dataTables('action', $this->view . '.partials.acoes', $request);
+        }
+
+        $users = $this->users->getAdvogados();
+
+        $title = "Gestão de {$this->title}s";
+        return view("{$this->view}.index", compact('title', 'users'));
+    }
+
     public function create()
     {
         $person = [];

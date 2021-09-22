@@ -9,4 +9,9 @@
 @endcan
 
 
+@if($monitoring == 1)
+    <i class="fas fa-wifi"></i>
+@endif
+
+
 

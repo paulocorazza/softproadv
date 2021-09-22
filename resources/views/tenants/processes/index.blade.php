@@ -25,6 +25,9 @@
         </p>
         @endcan
 
+
+       @include('tenants.processes.partials.search')
+
         <!--TABELA -->
             @include('tenants.processes.partials.table')
         <!--TABELA -->
@@ -52,7 +55,7 @@
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     </script>
-    <script type="text/javascript" src={{ asset('assets/js/all/table-default.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/processes/table.js') }}></script>
 @stop
 
 

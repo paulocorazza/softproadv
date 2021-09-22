@@ -145,6 +145,26 @@ class EloquentProcessRepository extends BaseEloquentRepository
                 'users',
             ]);
 
+
+        $model->where(function ($query) use ($request) {
+            if (!empty($request->get('status'))) {
+              $query->where('status', $request->get('status'));
+            }
+
+            if (!empty($request->get('users'))) {
+                $users = $request->get('users');
+
+                $query->whereHas('users', function ($query) use ($users) {
+                    $query->whereIn('users.id', $users);
+                });
+            }
+
+             if ($request->get('monitoring') === 'true') {
+                $query->where('monitoring', true);
+            }
+        });
+
+
         return Datatables()
             ->eloquent($model)
             ->addColumn('listAdv', ' ')

@@ -10,7 +10,7 @@
                 <th scope="col">Progresso</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Status</th>
-                <th width="190px" scope="col"></th>
+                <th width="180px" scope="col"></th>
             </tr>
             </thead>
         </table>

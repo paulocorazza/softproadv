@@ -70,7 +70,7 @@ class Process extends Model
             'type_process' => 'required|in:Ajuizado,Não Ajuizado',
 
             'progresses.*.date' => 'required',
-            'progresses.*.description' => 'required|min:3|max:120',
+            'progresses.*.description' => 'required|min:3|max:191',
             'progresses.*.publication' => 'required',
 
         ];
