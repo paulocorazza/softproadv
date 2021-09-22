@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Process;
+use App\Models\ProcessProgress;
 use App\Services\MonitorService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\isEmpty;
 
 class ProcessMonitorController extends Controller
@@ -113,5 +116,18 @@ class ProcessMonitorController extends Controller
 
         return redirect()->back()
             ->with('success', 'Andamento arquivado com sucesso!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $progress = ProcessProgress::findOrFail($id);
+
+        $data = $request->all();
+        $data['concluded'] = (!empty($data['concluded'])) ? true : false;
+
+        $progress->update($data);
+
+
+        return '1';
     }
 }

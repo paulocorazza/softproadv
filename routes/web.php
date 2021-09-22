@@ -290,6 +290,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('monitor/progresses', [ProcessMonitorController::class, 'progresses'])->name('monitor.progresses');
     Route::post('monitor/published', [ProcessMonitorController::class, 'published'])->name('monitor.published');
     Route::post('monitor/archived', [ProcessMonitorController::class, 'archived'])->name('monitor.archived');
+    Route::post('monitor/progress/{id}', [ProcessMonitorController::class, 'update']);
 
 
 

@@ -33,7 +33,7 @@ export default {
 
         updateProgress(context, params) {
             return new Promise((resolve, reject) => {
-                axios.post(`/progresses/${params.id}`, params)
+                axios.post(`/monitor/progress/${params.id}`, params)
                     .then(response => resolve(response))
                     .catch(error => reject(error))
             })

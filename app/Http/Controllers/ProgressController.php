@@ -12,18 +12,17 @@ use Illuminate\Support\Facades\Validator;
 class ProgressController extends Controller
 {
     public function __construct(
-        private Process $process,
+        private Process         $process,
         private ProcessProgress $progress
-    ) {
-
+    )
+    {
     }
-
 
     public function edit($process)
     {
-       $progress = $this->progress->with('process.person')->findOrFail($process);
+        $progress = $this->progress->with('process.person')->findOrFail($process);
 
-       return response()->json($progress);
+        return response()->json($progress);
     }
 
     public function update(Request $request, $id)
@@ -37,6 +36,7 @@ class ProgressController extends Controller
         $progress = $this->progress->findOrFail($id);
 
         $data = $request->all();
+
         $data['date'] = Carbon::createFromFormat('d/m/Y', $data['date'])->format('Y-m-d');
 
         if (isset($data['date_term'])) {
