@@ -14,7 +14,7 @@ class AddTokenJuzbrasilToCompanies extends Migration
     public function up()
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->string('token_juzbrasil')->nullable();
+            $table->string('token_juzbrazil')->nullable();
         });
     }
 

@@ -25,7 +25,7 @@ class MonitorService
 
     public function start(Process $process)
     {
-        return $this->createOrEnable($process);
+        return $this->createOrEnabled($process);
 
     }
 
@@ -105,7 +105,7 @@ class MonitorService
      * @param Process $process
      * @return mixed
      */
-    private function createOrEnable(Process $process)
+    private function createOrEnabled(Process $process)
     {
         if (!empty($process->id_pusher)) {
             $response = $this->monitor->enablePusher($process);

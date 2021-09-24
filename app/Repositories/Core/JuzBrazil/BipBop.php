@@ -32,7 +32,7 @@ class BipBop implements MonitorInterface
     {
         $token = config('jusbrazil.token');
 
-        $q = "SELECT FROM 'BIPBOPAPIKEY'.'GENERATE' WHERE 'ALIAS' = 'name'";
+        $q = "SELECT FROM 'BIPBOPAPIKEY'.'GENERATE' WHERE 'ALIAS' = '{$company->name}'";
 
         $url = "https://irql.bipbop.com.br/?q={$q}&apiKey={$token}&username={$company->name}";
 
