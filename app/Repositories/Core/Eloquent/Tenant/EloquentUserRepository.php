@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\Profile;
 use App\Models\State;
 use App\Models\User;
+use App\Models\UserStateMonitor;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Core\BaseEloquentRepository;
 use Illuminate\Support\Arr;
@@ -19,87 +20,6 @@ use Illuminate\Support\Facades\DB;
 class EloquentUserRepository extends BaseEloquentRepository
     implements UserRepositoryInterface
 {
-    /*     * ************************************************ */
-    /*     * ************* METODOS PRIVADOS ***************** */
-    /*     * ************************************************ */
-    /**
-     * @param array $data
-     * @param $user
-     * @return bool
-     */
-    private function saveAddress(array $data, $user)
-    {
-
-        if (isset($data['addresses'])) {
-            foreach ($data['addresses'] as $item) {
-
-                $id = ($item['id'] > 0) ? $item['id'] : 0;
-                $item['state_id'] = State::where('iso', $item['iso'])->first()->id;
-                $item['city_id'] = City::where('iso', $item['city_iso'])->first()->id;
-
-                $insert = $user->addresses()->updateOrCreate(['id' => $id], $item);
-
-                if (!$insert) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param array $data
-     * @param $user
-     * @return bool
-     */
-    private function saveContacts(array $data, $user)
-    {
-        if (isset($data['contacts'])) {
-            foreach ($data['contacts'] as $item) {
-
-                $id = ($item['id'] > 0) ? $item['id'] : 0;
-
-                $insert = $user->contacts()->updateOrCreate(['id' => $id], $item);
-
-                if (!$insert) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        return true;
-    }
-
-
-    /**
-     * @param array $data
-     * @param $user
-     * @return bool
-     */
-    private function saveUsers(array $data, $user)
-    {
-         if (isset($data['userViews'])) {
-
-           foreach ($data['userViews'] as $userView)
-            $user->userViews()->updateOrCreate(['user_id_view' => $userView], [
-                'user_id' => $user->id,
-                'user_id_view' => $userView
-            ]);
-        }
-
-        return true;
-    }
-
-
-
-    /*     * ************************************************ */
-    /*     * ************* METODOS PUBLICOS ***************** */
-    /*     * ************************************************ */
     public function model()
     {
         return User::class;
@@ -214,7 +134,6 @@ class EloquentUserRepository extends BaseEloquentRepository
 
         $profiles = $user->profiles;
 
-
         return Datatables()->collection($profiles)->addColumn('action', function ($profiles) use ($id) {
             return '<a href="/users/' . $id . '/profile/' . $profiles->id . '/delete"' . 'class="badge bg-danger j_link_delete">Deletar</a>';
         })
@@ -281,5 +200,117 @@ class EloquentUserRepository extends BaseEloquentRepository
         return $this->model->where('id', '<>', $id)
                            ->get()
                            ->pluck('name', 'id');
+    }
+
+    public function getStatesMonitors($id)
+    {
+        $user = $this->relationships('userStateMonitors')->find($id);
+
+        $states = $user->userStateMonitors;
+
+        return Datatables()->collection($states)->addColumn('action', function ($states) use ($id) {
+
+            $actions = '<a href="/users/' . $id . '/monitors/' . $states->id . '/delete"' . 'class="badge bg-danger j_link_delete">Deletar</a>';
+
+            if ($states->pivot->monitoring == true)
+             $actions .= '<i class="fas fa-wifi"></i>';
+
+            return $actions;
+        })
+            ->make(true);
+    }
+
+    public function getStatesNotIn($user)
+    {
+        return State::WhereNotIn('id', function ($query) use ($user) {
+            $query->select('user_state_monitors.state_id');
+            $query->from('user_state_monitors');
+            $query->whereRaw("user_state_monitors.user_id = {$user->id}");
+        })->get();
+    }
+
+    public function saveStates(User $user, array $dataform)
+    {
+        foreach ($dataform as $state) {
+            UserStateMonitor::create([
+                    'user_id'   => $user->id,
+                    'state_id'  => $state
+                ]
+            );
+        }
+    }
+
+
+    /**
+     * @param array $data
+     * @param $user
+     * @return bool
+     */
+    private function saveAddress(array $data, $user)
+    {
+
+        if (isset($data['addresses'])) {
+            foreach ($data['addresses'] as $item) {
+
+                $id = ($item['id'] > 0) ? $item['id'] : 0;
+                $item['state_id'] = State::where('iso', $item['iso'])->first()->id;
+                $item['city_id'] = City::where('iso', $item['city_iso'])->first()->id;
+
+                $insert = $user->addresses()->updateOrCreate(['id' => $id], $item);
+
+                if (!$insert) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @param $user
+     * @return bool
+     */
+    private function saveContacts(array $data, $user)
+    {
+        if (isset($data['contacts'])) {
+            foreach ($data['contacts'] as $item) {
+
+                $id = ($item['id'] > 0) ? $item['id'] : 0;
+
+                $insert = $user->contacts()->updateOrCreate(['id' => $id], $item);
+
+                if (!$insert) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * @param array $data
+     * @param $user
+     * @return bool
+     */
+    private function saveUsers(array $data, $user)
+    {
+        if (isset($data['userViews'])) {
+
+            foreach ($data['userViews'] as $userView)
+                $user->userViews()->updateOrCreate(['user_id_view' => $userView], [
+                    'user_id' => $user->id,
+                    'user_id_view' => $userView
+                ]);
+        }
+
+        return true;
     }
 }

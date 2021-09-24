@@ -1,10 +1,13 @@
 <?php
 namespace App\Repositories\Contracts;
 
-use App\Models\Process;
+use App\Models\{Company, Process};
+
 
 interface MonitorInterface
 {
+    public function createApiKey(Company $company);
+
     public function createPusher(Process $process);
 
     public function enablePusher(Process $process);
@@ -15,7 +18,7 @@ interface MonitorInterface
 
     public function pusherDocument(Process $process);
 
-    public function searchOAB(string $oab);
+    public function createPusherOab(string $oab, string $uf);
 
     public function searchCNJ(Process $process);
 

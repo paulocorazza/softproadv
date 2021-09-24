@@ -32,7 +32,7 @@ class Helper
      */
     public static function domainIsMain()
     {
-        return (request()->getHost() == config('tenant.domain_main'));
+        return in_array(request()->getHost(), config('tenant.domain_main'));
     }
 
     /**

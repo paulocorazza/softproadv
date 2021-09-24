@@ -225,6 +225,12 @@ class User extends Authenticatable
         return $this->hasMany(UserView::class, 'user_id', 'id');
     }
 
+    public function userStateMonitors()
+    {
+        return $this->belongsToMany(State::class, 'user_state_monitors')
+                    ->withPivot(['monitoring', 'id_pusher']);
+    }
+
     /**
      * @param Permission $permission
      * @return bool

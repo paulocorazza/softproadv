@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Models\Process;
 use App\Models\ProcessProgress;
+use App\Models\UserStateMonitor;
 use App\Repositories\Contracts\MonitorInterface;
-use App\Repositories\Core\JuzBrazil\ProcessBipBopXML;
+use App\Repositories\Contracts\XMLIntegrationProcessInterface;
+use App\Repositories\Core\JuzBrazil\ProgressBipBopXML;
 
 class MonitorService
 {
@@ -16,9 +18,9 @@ class MonitorService
     }
 
 
-    public function pusher(Process $process, $xml)
+    public function importXML(XMLIntegrationProcessInterface $integration)
     {
-        $this->processXML($process, $xml);
+        $this->processXML($integration);
     }
 
     public function start(Process $process)
@@ -55,15 +57,25 @@ class MonitorService
     public function document(Process $process)
     {
         $xml = $this->monitor->pusherDocument($process);
-
-        $this->processXML($process, $xml);
+        $this->processXML(new ProgressBipBopXML($process, $xml));
     }
 
     public function searchCNJ(Process $process)
     {
         $xml = $this->monitor->searchCNJ($process);
 
-        $this->processXML($process, $xml);
+        $this->processXML(new ProgressBipBopXML($process, $xml));
+    }
+
+    public function createPusherUserState(UserStateMonitor $stateMonitor)
+    {
+        $response = $this->monitor->createPusherOab($stateMonitor->user->oab, $stateMonitor->state->letter);
+
+        if ($response) {
+            $stateMonitor->id_pusher = (string)$response->getHeaders()['X-BIPBOP-Document-ID']['0'];
+            $stateMonitor->monitoring = true;
+            $stateMonitor->save();
+        }
     }
 
     public function getProgresses()
@@ -82,10 +94,11 @@ class MonitorService
         return ProcessProgress::whereIn('id', $id)->update(['archived_at' => now()]);
     }
 
-    private function processXML(Process $process, $xml)
+
+    private function processXML(XMLIntegrationProcessInterface $integration)
     {
         $processXML = new ProcessXMLMonitor();
-        $processXML->execute(new ProcessBipBopXML($process, $xml));
+        $processXML->execute($integration);
     }
 
     /**

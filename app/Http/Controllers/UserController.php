@@ -230,7 +230,6 @@ class UserController extends ControllerStandard
     {
         $user = $this->model->find($id);
 
-        //$users = User::doesntHave('profiles')->get();
         $profiles = $this->model->getProfilesNotIn($user);
 
         $title = 'Vincular perfil ao usuário: ' . $user->name;
@@ -249,5 +248,51 @@ class UserController extends ControllerStandard
 
         return redirect()->route('users.profiles', $user->id);
     }
+
+    public function monitors($id)
+    {
+        if (request()->ajax()) {
+            return $this->model->getStatesMonitors($id);
+        }
+
+        $user = $this->model->find($id);
+
+        $title = 'Estados Monitorados: ' . $user->name;
+
+        return view('tenants.users.states', compact('title', 'user'));
+    }
+
+    public function userDeleteMonitor($id, $monitorId)
+    {
+        $user = $this->model->find($id);
+
+        $user->userStateMonitors()->detach($monitorId);
+
+        return redirect()->route('users.monitors', $user->id)
+            ->with('success', 'Monitoramento removido com sucesso!');
+    }
+
+    public function listStatesAdd($id)
+    {
+        $user = $this->model->find($id);
+
+        $states = $this->model->getStatesNotIn($user);
+
+        $title = 'Vincular estados ao usuário: ' . $user->name;
+
+        return view('tenants.users.states-add', compact('states', 'user', 'title'));
+    }
+
+    public function userAddStates(Request $request, $id)
+    {
+        $dataForm = $request->get('states');
+
+        $user = $this->model->find($id);
+
+        $this->model->saveStates($user, $dataForm);
+
+        return redirect()->route('users.monitors', $user->id);
+    }
+
 
 }

@@ -26,7 +26,8 @@ class Company extends Model
         'db_host',
         'db_username',
         'db_password',
-        'dns_status'
+        'dns_status',
+        'token_juzbrazil'
     ];
 
     protected static function boot()

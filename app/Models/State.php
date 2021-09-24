@@ -25,6 +25,11 @@ class State extends Model
         return $this->hasMany(City::class);
     }
 
+    public function usersStateMonitors()
+    {
+        return $this->belongsToMany(User::class, 'user_state_monitors');
+    }
+
     public function rules($id = '')
     {
         return [

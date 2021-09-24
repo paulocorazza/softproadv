@@ -2,6 +2,12 @@
 
 @section('title_postfix', ' - Cadastrar Nova Empresa')
 
+@section('adminlte_css')
+    <link rel="stylesheet" href="{{ asset('assets/css/default.css') }}">
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.core.css') }} />
+    <link rel="stylesheet" href={{ asset('vendor/alertify/css/alertify.default.css') }} />
+@stop
+
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -47,6 +53,11 @@
         </div>
         <!-- /.card-body -->
     </div>
+@stop
+
+@section('js')
+    <script type="text/javascript" src={{ asset('vendor/alertify/js/alertify.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('assets/js/companies/script.js') }}></script>
 @stop
 
 

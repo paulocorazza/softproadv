@@ -96,7 +96,7 @@ $(document).ready(function () {
     $("#btnKeyPayPal").on('click', function (e) {
         e.preventDefault();
 
-        id = $(this).attr('data-id');
+        let id = $(this).attr('data-id');
 
         generatePayPal(id)
     })

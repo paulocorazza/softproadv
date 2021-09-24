@@ -7,7 +7,10 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">{{ allProgress.length }} Andamento(s) pendente(s)</span>
+            <a href="/monitor/progresses">
+                <span class="dropdown-item dropdown-header">{{ allProgress.length }} Andamento(s) pendente(s)</span>
+            </a>
+
             <div class="dropdown-divider"></div>
             <span class="dropdown-item dropdown-header">{{ allNotifications.length }} Notificações</span>
             <div class="dropdown-divider"></div>

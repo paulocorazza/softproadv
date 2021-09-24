@@ -9,3 +9,8 @@
 @can('view_user_profile')
 <a href="{{route('users.profiles', $id)}}" class="badge bg-blue">Perfis</a>
 @endcan
+
+@if(!empty($oab))
+    <a href="{{ route('users.monitors', $id) }}" class="badge bg-cyan">Monitorar</a>
+@endif
+

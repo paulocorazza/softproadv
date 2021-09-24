@@ -6,7 +6,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail</th>
-                <th width="150px" scope="col"></th>
+                <th width="200px" scope="col"></th>
             </tr>
             </thead>
         </table>

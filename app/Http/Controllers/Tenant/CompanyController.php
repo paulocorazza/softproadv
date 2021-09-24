@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tenant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCompanyFormRequest;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
+use App\Repositories\Contracts\MonitorInterface;
 use Illuminate\Http\Request;
 use View;
 
@@ -141,6 +142,16 @@ class CompanyController extends Controller
     {
         if (request()->ajax()) {
             return response()->json($this->repository->subDomainExists($request->get('subdomain')));
+        }
+    }
+
+    public function tokenJuzBrazil(Request $request, MonitorInterface $monitor)
+    {
+        if($company = $this->repository->find($request->get('id'))) {
+            $token = $monitor->createApiKey($company);
+
+
+            return response()->json($token);
         }
     }
 

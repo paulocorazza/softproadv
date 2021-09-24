@@ -14,7 +14,7 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageNotificationController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ProcessMonitorController;
+use App\Http\Controllers\MonitorProgressController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
 
@@ -140,8 +140,15 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************      USERS      ***************** */
     /*     * ************************************************ */
+    Route::get('users/{id}/monitors', 'UserController@monitors')->name('users.monitors');
+    Route::get('users/{id}/monitors/register', 'UserController@listStatesAdd')->name('users.monitors.list');
+    Route::post('users/{id}/monitors/register', 'UserController@userAddStates')->name('users.monitors.add');
+    Route::get('users/{id}/monitors/{stateId}/delete', 'UserController@userDeleteMonitor')->name('users.monitors.delete');
+
+
     Route::get('users/{id}/profile', 'UserController@profiles')->name('users.profiles');
     Route::get('users/{id}/profile/{profileId}/delete', 'UserController@userDeleteProfile')->name('users.profile.delete');
+
 
     Route::get('users/{id}/profile/register', 'UserController@listProfileAdd')->name('users.profiles.list');
     Route::post('users/{id}/profile/register', 'UserController@userAddProfile')->name('users.profiles.add');
@@ -287,18 +294,18 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * ************  PROCESS MONITOR  ***************** */
     /*     * ************************************************ */
-    Route::get('monitor/progresses', [ProcessMonitorController::class, 'progresses'])->name('monitor.progresses');
-    Route::post('monitor/published', [ProcessMonitorController::class, 'published'])->name('monitor.published');
-    Route::post('monitor/archived', [ProcessMonitorController::class, 'archived'])->name('monitor.archived');
-    Route::post('monitor/progress/{id}', [ProcessMonitorController::class, 'update']);
+    Route::get('monitor/progresses', [MonitorProgressController::class, 'progresses'])->name('monitor.progresses');
+    Route::post('monitor/published', [MonitorProgressController::class, 'published'])->name('monitor.published');
+    Route::post('monitor/archived', [MonitorProgressController::class, 'archived'])->name('monitor.archived');
+    Route::post('monitor/progress/{id}', [MonitorProgressController::class, 'update']);
 
 
 
-    Route::get('processes/{process}/monitor/start', [ProcessMonitorController::class, 'start'])->name('processes.monitor.start');
-    Route::get('processes/{process}/monitor/stop', [ProcessMonitorController::class, 'stop'])->name('processes.monitor.stop');
-    Route::get('processes/{process}/monitor/delete', [ProcessMonitorController::class, 'delete'])->name('processes.monitor.delete');
-    Route::get('processes/{process}/monitor/cnj', [ProcessMonitorController::class, 'searchCNJ'])->name('processes.monitor.cnj');
-    Route::get('processes/{process}/monitor/document', [ProcessMonitorController::class, 'document'])->name('processes.monitor.document');
+    Route::get('processes/{process}/monitor/start', [MonitorProgressController::class, 'start'])->name('processes.monitor.start');
+    Route::get('processes/{process}/monitor/stop', [MonitorProgressController::class, 'stop'])->name('processes.monitor.stop');
+    Route::get('processes/{process}/monitor/delete', [MonitorProgressController::class, 'delete'])->name('processes.monitor.delete');
+    Route::get('processes/{process}/monitor/cnj', [MonitorProgressController::class, 'searchCNJ'])->name('processes.monitor.cnj');
+    Route::get('processes/{process}/monitor/document', [MonitorProgressController::class, 'document'])->name('processes.monitor.document');
 
 
 

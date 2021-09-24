@@ -3,6 +3,7 @@
 namespace App\Repositories\Core\JuzBrazil;
 
 use App\Jobs\createProgress;
+use App\Models\Company;
 use App\Models\Process;
 use App\Repositories\Contracts\MonitorInterface;
 use App\Tenant\ManagerTenant;
@@ -17,8 +18,33 @@ class BipBop implements MonitorInterface
 
     public function __construct()
     {
-        $this->token = config('jusbrazil.token');
-        $this->company = session()->has('company') ? session('company')['uuid'] : 'master';
+        if (session()->has('company')) {
+            $this->company = session('company')['uuid'];
+            $this->token = session('company')['token_juzbrazil'];
+        } else {
+            $this->company = 'master';
+            $this->token = config('jusbrazil.token');
+        }
+    }
+
+
+    public function createApiKey(Company $company)
+    {
+        $token = config('jusbrazil.token');
+
+        $q = "SELECT FROM 'BIPBOPAPIKEY'.'GENERATE' WHERE 'ALIAS' = 'name'";
+
+        $url = "https://irql.bipbop.com.br/?q={$q}&apiKey={$token}&username={$company->name}";
+
+        $client = new Client();
+
+        $request = $client->post($url);
+
+        $response = $request->getBody()->getContents();
+
+        $xml = simplexml_load_string($response);
+
+        return (string) $xml->body->company->apiKey;
     }
 
     public function createPusher(Process $process)
@@ -31,7 +57,7 @@ class BipBop implements MonitorInterface
 
         $pushLabel = $this->pusherLabel($process);
 
-        $urlBack =  $this->urlBack($process);
+        $urlBack =  $this->urlCallBackProcess($process);
 
         $url = "https://irql.bipbop.com.br/?q={$q}&pushQuery={$pushQuery}&data={$data}&apiKey={$this->token}&pushLabel={$pushLabel}&pushMaxVersion=0&Juristekcallback={$urlBack}";
 
@@ -81,6 +107,7 @@ class BipBop implements MonitorInterface
 
         $url = "https://irql.bipbop.com.br/?q={$q}&apiKey={$this->token}&id={$process->id_pusher}&pushMaxVersion=pushMaxVersion";
 
+
         $client = new Client();
 
         $request = $client->post($url);
@@ -92,9 +119,17 @@ class BipBop implements MonitorInterface
         return $xml->body;
     }
 
-    public function searchOAB(string $oab)
+    public function createPusherOab(string $oab, string $uf)
     {
-        // TODO: Implement searchOAB() method.
+        $q = "SELECT FROM 'OABPROCESSO'.'PROCESSOS'";
+
+        $callback = $this->urlCallBackOab($oab, $uf);
+
+        $url = "https://irql.bipbop.com.br/?q={$q}&numero_oab={$oab}&uf={$uf}&apiKey={$this->token}&pushcallback={$callback}";
+
+        $client = new Client();
+
+        return $client->get($url);
     }
 
     public function searchCNJ(Process $process)
@@ -119,7 +154,7 @@ class BipBop implements MonitorInterface
         return $this->company . '-' . $process->number_process;
     }
 
-    private function urlBack(Process $process)
+    private function urlCallBackProcess(Process $process)
     {
         $manager = app(ManagerTenant::class);
 
@@ -128,6 +163,19 @@ class BipBop implements MonitorInterface
         }
 
         return  config('app.url') . "/api/processes/{$process->id}/monitor";
-
     }
+
+    private function urlCallBackOab(string $oab, string $uf)
+    {
+        $manager = app(ManagerTenant::class);
+
+        if (!$manager->domainIsMain()) {
+            return 'http://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";
+        }
+
+        return  config('app.url') . "/api/process/oab/{$oab}/uf/{$uf}/monitor";
+    }
+
+
+
 }

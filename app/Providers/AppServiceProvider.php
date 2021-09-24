@@ -8,12 +8,14 @@ use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Models\ProcessUsers;
 use App\Models\User;
+use App\Models\UserStateMonitor;
 use App\Observers\EventObserver;
 use App\Observers\EventUsersObserver;
 use App\Observers\ProcessObserver;
 use App\Observers\ProcessUsersObserver;
 use App\Observers\ProgressObserver;
 use App\Observers\UserObserver;
+use App\Observers\UserStateMonitorObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -71,5 +73,6 @@ class AppServiceProvider extends ServiceProvider
         Process::observe(ProcessObserver::class);
         ProcessUsers::observe(ProcessUsersObserver::class);
         ProcessProgress::observe(ProgressObserver::class);
+        UserStateMonitor::observe(UserStateMonitorObserver::class);
     }
 }

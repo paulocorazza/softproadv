@@ -83,6 +83,7 @@ class TenantMiddleware
                 'name',
                 'uuid',
                 'subdomain',
+                'token_juzbrazil'
             ]));
 
 

@@ -92,6 +92,23 @@
            value="{{ $company->db_password ?? old('db_password') }}" id="db_password">
 </div>
 
+
+    <div class="form-group">
+        {!! Form::label('token_juzbrazil', 'Token Juz Brasil', ['class' => 'control-label']); !!}
+
+        <div class="input-group">
+            {!! Form::text('token_juzbrazil', null, ['class' => 'form-control', 'placeholder' => 'Token Juz Brasil', 'id' => 'token_juzbrazil',
+            'aria-label' =>"Token Juz Brasil", 'aria-describedby' => "basic-addon2"]) !!}
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="btnJuzBrasil" data-id="{{ $company->id }}">
+                    Gerar Token
+                </button>
+            </div>
+            @include('tenants.includes.load')
+        </div>
+</div>
+
 @if (!isset($company))
     <div class="form-group">
         {!! Form::checkbox('create_database', null, true) !!}

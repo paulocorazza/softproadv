@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\CreateUpdateEvent;
+use App\Events\CreateUserStateMonitor;
+use App\Listeners\CreatePusherUserState;
 use App\Listeners\IntegrationGoogleCalendar;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
 
         CreateUpdateEvent::class => [
           IntegrationGoogleCalendar::class
+        ],
+
+        CreateUserStateMonitor::class => [
+          CreatePusherUserState::class
         ],
 
         'App\Events\Tenant\CompanyCreated' => [
