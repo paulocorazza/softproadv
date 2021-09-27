@@ -7,7 +7,7 @@ use App\Services\MonitorService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class CreatePusherUserState implements ShouldQueue
+class CreatePusherUserState
 {
     /**
      * Create the event listener.

@@ -248,4 +248,9 @@ class Process extends Model
         return $query->where('monitoring', true);
     }
 
+    public function hasPusher()
+    {
+        return !empty($this->id_pusher);
+    }
+
 }

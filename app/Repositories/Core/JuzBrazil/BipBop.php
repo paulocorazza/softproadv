@@ -159,7 +159,7 @@ class BipBop implements MonitorInterface
         $manager = app(ManagerTenant::class);
 
         if (!$manager->domainIsMain()) {
-            return 'http://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/{$process->id}/monitor";
+            return 'https://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/{$process->id}/monitor";
         }
 
         return  config('app.url') . "/api/processes/{$process->id}/monitor";
@@ -170,10 +170,10 @@ class BipBop implements MonitorInterface
         $manager = app(ManagerTenant::class);
 
         if (!$manager->domainIsMain()) {
-            return 'http://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";
+            return 'https://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";
         }
 
-        return  config('app.url') . "/api/process/oab/{$oab}/uf/{$uf}/monitor";
+        return  config('app.url') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";
     }
 
 

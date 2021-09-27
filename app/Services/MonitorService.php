@@ -107,7 +107,7 @@ class MonitorService
      */
     private function createOrEnabled(Process $process)
     {
-        if (!empty($process->id_pusher)) {
+        if ($process->hasPusher()) {
             $response = $this->monitor->enablePusher($process);
             $process->monitoring = true;
             $process->save();
