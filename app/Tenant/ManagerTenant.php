@@ -23,6 +23,12 @@ class ManagerTenant
         return $piecesHost[0];
     }
 
+    public function getCompany() : Company
+    {
+        return Company::where('subdomain', '=', $this->subDomain())->first();
+    }
+
+
 
     public function setConnection($company)
     {

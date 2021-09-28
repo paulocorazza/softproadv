@@ -18,7 +18,7 @@ interface MonitorInterface
 
     public function pusherDocument(Process $process);
 
-    public function createPusherOab(string $oab, string $uf);
+    public function createPusherOab(string $oab, string $uf, ?array $company);
 
     public function searchCNJ(Process $process);
 

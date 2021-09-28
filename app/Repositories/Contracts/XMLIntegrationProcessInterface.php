@@ -6,5 +6,5 @@ use App\Models\Process;
 
 interface XMLIntegrationProcessInterface
 {
-    public function execute();
+    public function importXML();
 }

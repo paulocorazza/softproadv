@@ -9,6 +9,12 @@ class UserStateMonitorObserver
 {
     public function created(UserStateMonitor $stateMonitor)
     {
-        event(new CreateUserStateMonitor($stateMonitor));
+        $company = [];
+
+        if (session()->has('company')) {
+            $company = session('company');
+        }
+
+        event(new CreateUserStateMonitor($stateMonitor, $company));
     }
 }

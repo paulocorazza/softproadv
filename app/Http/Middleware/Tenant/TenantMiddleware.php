@@ -10,18 +10,7 @@ use Closure;
 
 class TenantMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @return mixed
-     * Registrar o middleware em Kernel.php
-     */
-    private function getCompany($subdomain)
-    {
-        return Company::where('subdomain', '=', $subdomain)->first();
-    }
+    private const DAYS_TESTING = 7;
 
     /**
      * @param Company $company
@@ -29,9 +18,9 @@ class TenantMiddleware
      */
     private function testExpired(Company $company)
     {
-        $value = Carbon::now()->diffInDays($company->created_at);
+        $daysAfterRegister = Carbon::now()->diffInDays($company->created_at);
 
-        if ($value >= 7 && $company->payment_status == 'testing') {
+        if ($daysAfterRegister >= self::DAYS_TESTING && $company->isTesting()) {
             return true;
         }
 
@@ -69,7 +58,7 @@ class TenantMiddleware
         }
 
         //se for um subdominio
-        $company = $this->getCompany($manager->subDomain());
+        $company = $manager->getCompany();
 
 
         if (!$company && $request->url() != route('404.tenant')) {

@@ -9,14 +9,19 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 {
 
     public function __construct(
-        private string $xml
+        private string $xml,
+        private string $oab,
+        private string $uf
     )
     {
     }
 
-    public function execute()
+    public function importXML()
     {
-        $this->processGenerate();
+       if ($this->hasProcess()) {
+            $this->processGenerate();
+       }
+
     }
 
     private function processGenerate()
@@ -24,7 +29,9 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
         foreach ($this->xml->advogado->processos as $processo) {
             $newProcess = [
                 'number_process' => (string) $processo->numero_processo,
-                'tribunal'       => (string) $processo->tribunal_nome
+                'tribunal'       => (string) $processo->tribunal_nome,
+                'oab'            => $this->oab,
+                'uf'             => $this->uf
             ];
 
             $this->createProcess($newProcess);
@@ -36,5 +43,13 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
         $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
 
         dispatch(new createMonitorProcessOAB($newProcess, $companyUuid));
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasProcess(): bool
+    {
+        return isset($this->xml->advogado->processos);
     }
 }

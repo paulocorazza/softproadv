@@ -119,13 +119,13 @@ class BipBop implements MonitorInterface
         return $xml->body;
     }
 
-    public function createPusherOab(string $oab, string $uf)
+    public function createPusherOab(string $oab, string $uf, ?array $company)
     {
         $q = "SELECT FROM 'OABPROCESSO'.'PROCESSOS'";
 
-        $callback = $this->urlCallBackOab($oab, $uf);
+        $callback = $this->urlCallBackOab($oab, $uf, $company);
 
-        $url = "https://irql.bipbop.com.br/?q={$q}&numero_oab={$oab}&uf={$uf}&apiKey={$this->token}&pushcallback={$callback}";
+        $url = "https://irql.bipbop.com.br/?q={$q}&numero_oab={$oab}&uf={$uf}&apiKey={$company['token_juzbrazil']}&pushcallback={$callback}";
 
         $client = new Client();
 
@@ -165,12 +165,10 @@ class BipBop implements MonitorInterface
         return  config('app.url') . "/api/processes/{$process->id}/monitor";
     }
 
-    private function urlCallBackOab(string $oab, string $uf)
+    private function urlCallBackOab(string $oab, string $uf, ?array $company)
     {
-        $manager = app(ManagerTenant::class);
-
-        if (!$manager->domainIsMain()) {
-            return 'https://' .  $manager->subDomain() .  config('app.url_client') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";
+        if (count($company) > 0) {
+            return 'https://' .  $company['subdomain'] .  config('app.url_client') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";
         }
 
         return  config('app.url') . "/api/processes/oab/{$oab}/uf/{$uf}/monitor";

@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Repositories\Core\JuzBrazil\ProgressBipBopXML;
-use App\Services\MonitorService;
+use App\Services\MonitorProgressService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class MonitorProgressController extends Controller
 {
-    public function __construct(private MonitorService $monitor)
+    public function __construct(private MonitorProgressService $monitor)
     {
         $this->middleware('can:monitor_start')->only(['start']);
         $this->middleware('can:monitor_stop')->only(['stop']);
@@ -41,12 +41,12 @@ class MonitorProgressController extends Controller
         }
 
 
-        return view('tenants.monitor.progress-vue');
+        return view('tenants.monitor.progresses');
     }
 
     public function start(Process $process)
     {
-        $monitor = $this->monitor->start($process);
+        $monitor = $this->monitor->startMonitorProcess($process);
 
         if ($monitor) {
             return redirect()->back()
@@ -56,7 +56,7 @@ class MonitorProgressController extends Controller
 
     public function stop(Process $process)
     {
-        $monitor = $this->monitor->stop($process);
+        $monitor = $this->monitor->stopMonitorProcess($process);
 
         if ($monitor) {
             return redirect()->back()
@@ -67,7 +67,7 @@ class MonitorProgressController extends Controller
 
     public function delete(Process $process)
     {
-        $monitor = $this->monitor->delete($process);
+        $monitor = $this->monitor->deleteMonitorProcess($process);
 
         if ($monitor) {
             return redirect()->back()
@@ -77,7 +77,7 @@ class MonitorProgressController extends Controller
 
     public function document(Process $process)
     {
-        $this->monitor->document($process);
+        $this->monitor->importProgressesFromDocument($process);
 
         return redirect()->route('home');
     }
@@ -93,7 +93,7 @@ class MonitorProgressController extends Controller
     {
         $id = $request->get('id');
 
-        $response = $this->monitor->published($id);
+        $response = $this->monitor->publishedProgress($id);
 
         if ($request->ajax()) {
             return response()->json($response);
@@ -107,7 +107,7 @@ class MonitorProgressController extends Controller
     {
         $id = $request->get('id');
 
-        $response = $this->monitor->archived($id);
+        $response = $this->monitor->archivedProgress($id);
 
         if ($request->ajax()) {
             return response()->json($response);

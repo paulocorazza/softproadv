@@ -65,4 +65,9 @@ class Company extends Model
     {
         $this->notify(new RegisterNotification($company, $password));
     }
+
+    public function isTesting(): bool
+    {
+        return $this->payment_status == 'testing';
+    }
 }

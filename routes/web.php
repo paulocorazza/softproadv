@@ -13,12 +13,11 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageNotificationController;
+use App\Http\Controllers\MonitorOABController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\MonitorProgressController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
-
-
 
 
 Route::view('/404-tenant', 'erros.404-tenant')->name('404.tenant');
@@ -153,7 +152,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{id}/profile/register', 'UserController@listProfileAdd')->name('users.profiles.list');
     Route::post('users/{id}/profile/register', 'UserController@userAddProfile')->name('users.profiles.add');
 
-
+    Route::get('users/advogados/search', 'ExtraAction\Advogados');
     Route::resource('users', 'UserController');
 
     Route::get('profile', 'UserController@showProfile')->name('profile');
@@ -275,7 +274,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * *************      PROCESS     ***************** */
     /*     * ************************************************ */
     Route::get('process/processSelect', 'ExtraAction\PersonProcess')->name('processes.select');
-    Route::get('process/search', 'ExtraAction\Process');
+    Route::any('process/search', 'ExtraAction\Process');
     Route::get('process/file/{id}/download', 'ExtraAction\ProcessFileDownload')->name('fileDownload');
 
     Route::get('process/file/{id}', 'ExtraAction\ProcessFileView')->name('fileView');
@@ -289,15 +288,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('processes/{id}/preview', 'ProcessContractController@preview')->name('processes.contract.preview');
     Route::get('processes/{id}/contract', 'ProcessContractController@contract')->name('processes.contract');
     Route::put('processes/{id}/contract', 'ProcessContractController@updateContract')->name('processes.contract.update');
+
+    Route::put('processes/{process}/sync', 'ExtraAction\ProcessSync');
     Route::resource('processes', 'ProcessController');
 
     /*     * ************************************************ */
     /*     * ************  PROCESS MONITOR  ***************** */
     /*     * ************************************************ */
+    Route::get('monitor/processes', [MonitorOABController::class, 'processes']);
+    Route::get('monitor/processes/{id}', [MonitorOABController::class, 'show']);
+    Route::post('monitor/processes/archived', [MonitorOABController::class, 'archived'])->name('monitor.process.archived');
+    Route::post('monitor/processes/published', [MonitorOABController::class, 'published'])->name('monitor.process.published');
+
+
     Route::get('monitor/progresses', [MonitorProgressController::class, 'progresses'])->name('monitor.progresses');
-    Route::post('monitor/published', [MonitorProgressController::class, 'published'])->name('monitor.published');
-    Route::post('monitor/archived', [MonitorProgressController::class, 'archived'])->name('monitor.archived');
-    Route::post('monitor/progress/{id}', [MonitorProgressController::class, 'update']);
+    Route::post('monitor/progresses/published', [MonitorProgressController::class, 'published'])->name('monitor.published');
+    Route::post('monitor/progresses/archived', [MonitorProgressController::class, 'archived'])->name('monitor.archived');
+    Route::post('monitor/progresses/{id}', [MonitorProgressController::class, 'update']);
 
 
 
@@ -306,9 +313,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('processes/{process}/monitor/delete', [MonitorProgressController::class, 'delete'])->name('processes.monitor.delete');
     Route::get('processes/{process}/monitor/cnj', [MonitorProgressController::class, 'searchCNJ'])->name('processes.monitor.cnj');
     Route::get('processes/{process}/monitor/document', [MonitorProgressController::class, 'document'])->name('processes.monitor.document');
-
-
-
 
 
     /*     * ************************************************ */

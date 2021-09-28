@@ -20,7 +20,7 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
     {
     }
 
-    public function execute()
+    public function importXML()
     {
         $this->processesIterate();
     }
@@ -87,6 +87,8 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
         if (isset($progress->tipo_incidente)) {
             return (string) $progress->tipo_incidente;
         }
+
+        return 'Andamento';
     }
 
     private function getDataHash(mixed $progress)

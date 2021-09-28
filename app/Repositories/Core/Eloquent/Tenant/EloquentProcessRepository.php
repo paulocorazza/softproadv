@@ -99,9 +99,9 @@ class EloquentProcessRepository extends BaseEloquentRepository
 
     private function saveFiles(array $data, $process)
     {
-        $files = $data['files'];
+        if (isset( $data['files'])) {
+            $files = $data['files'];
 
-        if ($files) {
             $filesUploaded = [];
 
             foreach ($files as $file) {

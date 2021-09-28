@@ -14,7 +14,6 @@ class Process extends Controller
             $data = [];
 
             if ($request->has('person_id') && !empty($request->person_id)) {
-
                 $search = $request->q;
                 $person_id = $request->person_id;
 
@@ -26,6 +25,20 @@ class Process extends Controller
                               ->orWhere('number_process', 'LIKE', "%$search%");
                     }
                 })->get();
+            }
+
+
+
+            if ($request->has('searchPending')) {
+                $search = $request->searchPending;
+
+                $data = $process->with('counterPart')
+                ->whereHas('person', function ($query) use ($search) {
+                    $query->where('name', 'like', "%$search%")
+                        ->orWhere('cpf', 'like', "%$search%")
+                        ->orWhere('cnpj', 'like', "%$search%");
+                })->whereNull('number_process')
+                  ->paginate();
             }
 
             return response()->json($data);

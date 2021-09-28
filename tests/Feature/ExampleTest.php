@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Company;
 use App\Models\Process;
 use App\Repositories\Core\JuzBrazil\BipBop;
-use App\Services\MonitorService;
+use App\Services\MonitorProgressService;
 use App\Tenant\ManagerTenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -29,9 +29,9 @@ class ExampleTest extends TestCase
 
         $manager->setConnectionMain();
 
-        $monitor = new MonitorService(new BipBop());
+        $monitor = new MonitorProgressService(new BipBop());
 
-        $xml = $monitor->document($process);
+        $xml = $monitor->importProgressesFromDocument($process);
 
 
         $response = Http::withHeaders(["Content-Type" => "text/xml;charset=utf-8"])

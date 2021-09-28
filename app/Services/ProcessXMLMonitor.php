@@ -7,8 +7,8 @@ use App\Repositories\Contracts\XMLIntegrationProcessInterface;
 
 class ProcessXMLMonitor
 {
-    public function execute(XMLIntegrationProcessInterface $integration)
+    public function importXML(XMLIntegrationProcessInterface $integration)
     {
-        $integration->execute();
+        $integration->importXML();
     }
 }

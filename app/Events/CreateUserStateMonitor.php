@@ -20,7 +20,10 @@ class CreateUserStateMonitor
      *
      * @return void
      */
-    public function __construct(public UserStateMonitor $stateMonitor)
+    public function __construct(
+        public UserStateMonitor $stateMonitor,
+        public ?array $company
+    )
     {
         //
     }

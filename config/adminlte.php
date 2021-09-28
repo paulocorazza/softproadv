@@ -91,7 +91,7 @@ return [
     */
 
     'sidebar_mini' => true,
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -219,6 +219,12 @@ return [
                     'icon' => 'fas fa-th-list',
                     //'can' => 'monitor_progress'
                 ],
+
+                [
+                    'text' => 'OAB',
+                    'url' => 'monitor/processes',
+                    'icon' => 'fas fa-balance-scale',
+                ]
             ]
         ],
 

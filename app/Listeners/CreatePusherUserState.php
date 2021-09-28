@@ -3,18 +3,18 @@
 namespace App\Listeners;
 
 use App\Events\CreateUserStateMonitor;
-use App\Services\MonitorService;
+use App\Services\MonitorProgressService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class CreatePusherUserState
+class CreatePusherUserState implements ShouldQueue
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(private MonitorService $monitorService)
+    public function __construct(private MonitorProgressService $monitorService)
     {
         //
     }
@@ -28,7 +28,8 @@ class CreatePusherUserState
     public function handle(CreateUserStateMonitor $event)
     {
         $userState = $event->stateMonitor->load('user', 'state');
+        $company = $event->company;
 
-        $this->monitorService->createPusherUserState($userState);
+        $this->monitorService->createPusherUserState($userState, $company);
     }
 }
