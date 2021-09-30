@@ -11,6 +11,7 @@
 |
 */
 
+use App\Events\CreateProcessIntegration;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageNotificationController;
 use App\Http\Controllers\MonitorOABController;
@@ -18,7 +19,6 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\MonitorProgressController;
 use App\Http\Controllers\Reports\FinancialProcessController;
 use App\Http\Controllers\Reports\HonoraryController;
-
 
 Route::view('/404-tenant', 'erros.404-tenant')->name('404.tenant');
 
@@ -398,4 +398,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('fetchMessages', [ChatController::class, 'fetchMessages']);
     Route::get('chat-contacts', [ChatController::class, 'contacts']);
     Route::any('sendMessage', [ChatController::class, 'sendMessage']);
+});
+
+Route::get('/test', function () {
+  $monitor =  \App\Models\MonitorProcess::create([
+       'number_process' => '9859548',
+       'tribunal'   => 'TJSP',
+       'oab'    => '999',
+       'uf' => 'SP'
+   ]) ;
+
+    $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
+
+    broadcast(new CreateProcessIntegration($monitor, $companyUuid));
 });

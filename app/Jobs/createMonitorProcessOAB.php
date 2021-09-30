@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\CreateProcessIntegration;
 use App\Models\MonitorProcess;
 use App\Models\Process;
 use Illuminate\Bus\Queueable;
@@ -42,6 +43,8 @@ class createMonitorProcessOAB implements ShouldQueue
 
         if (!$process && !$monitorOAB) {
            $newMonitorOAB = MonitorProcess::create($this->process);
+
+            broadcast(new CreateProcessIntegration($newMonitorOAB, $this->uuidCompany));
         }
     }
 }

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <vue-snotify></vue-snotify>
         <div class="btns">
             <button @click.prevent="btnPublished" class="btn bg-yellow text-white" id="btnPublished">Publicar
                 Selecionados
@@ -95,15 +96,46 @@ export default {
 
         async btnPublished() {
             if (this.Ids.length > 0) {
-                await this.published({id: this.Ids})
-                this.loadProgresses()
+                const toast = this.$snotify.confirm('Confirma o publicação dos andamentos selecionados?', 'Confirmação', {
+                    timeout: 5000,
+                    showProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    buttons: [
+                        {
+                            text: 'Sim', action: () => {
+                                this.published({id: this.Ids})
+                                    .then(() => this.loadProgresses())
+
+                                this.$snotify.remove(toast.id)
+
+                            }, bold: false
+                        },
+                        {text: 'Não', action: () => this.$snotify.remove(toast.id)},
+                    ]
+                });
             }
+
         },
 
         async btnArchived() {
             if (this.Ids.length > 0) {
-                await this.archived({id: this.Ids})
-                this.loadProgresses()
+                const toast = this.$snotify.confirm('Confirma o arquivamento dos andamentos selecionados?', 'Confirmação', {
+                    timeout: 5000,
+                    showProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    buttons: [
+                        {
+                            text: 'Sim', action: () => {
+                                this.archived({id: this.Ids})
+                                    .then(() => this.loadProgresses())
+                                this.$snotify.remove(toast.id)
+                            }, bold: false
+                        },
+                        {text: 'Não', action: () => this.$snotify.remove(toast.id)},
+                    ]
+                })
             }
         },
 

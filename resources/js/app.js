@@ -4,7 +4,7 @@ import Vue from "vue";
 import store from './vuex/store'
 import Vuetify from 'vuetify';
 import "vuetify/dist/vuetify.min.css";
-
+import Snotify from 'vue-snotify';
 
 
 import Vodal from 'vodal';
@@ -28,6 +28,8 @@ Vue.component(Vodal.name, Vodal);
 Vue.use(Vuetify, {
     iconfont: 'fa'
 })
+
+Vue.use(Snotify)
 
 const app = new Vue({
     el: '#app',

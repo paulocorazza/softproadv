@@ -2,18 +2,27 @@
     <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span v-if="this.allProgress.length > 0" class="badge badge-warning navbar-badge">{{ allNotifications.length + 1}}</span>
+            <span v-if="(this.allProgress.length > 0) || (this.allProcesses.length > 0)"
+                  class="badge badge-warning navbar-badge">{{ allNotifications.length + 1 }}</span>
             <span v-else class="badge badge-warning navbar-badge">{{ allNotifications.length }}</span>
         </a>
 
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="/monitor/progresses">
+            <a v-if="allProgress.length > 0" href="/monitor/progresses">
                 <span class="dropdown-item dropdown-header">{{ allProgress.length }} Andamento(s) pendente(s)</span>
+            </a>
+
+            <a v-if="allProcesses.length > 0" href="/monitor/processes">
+                <span
+                    class="dropdown-item dropdown-header">{{
+                        allProcesses.length
+                    }} Processo(s) por OAB pendente(s)</span>
             </a>
 
             <div class="dropdown-divider"></div>
             <span class="dropdown-item dropdown-header">{{ allNotifications.length }} Notificações</span>
             <div class="dropdown-divider"></div>
+
 
             <notification v-for="(notification, index) in allNotifications"
                           :key="index"
@@ -35,15 +44,17 @@ export default {
 
     mounted() {
         this.loadNotifications()
+        this.loadProcesses()
         this.loadProgresses()
     },
 
     computed: {
-        ...mapGetters(['allNotifications', 'allProgress'])
+        ...mapGetters(['allNotifications', 'allProgress', 'allProcesses']),
+
     },
 
     methods: {
-        ...mapActions(['loadNotifications', 'loadProgresses', 'markAllAsRead']),
+        ...mapActions(['loadNotifications', 'loadProgresses', 'loadProcesses', 'markAllAsRead']),
     }
 
 }

@@ -90,21 +90,35 @@ export default {
         },
 
         sync(process) {
-            let params = {
-                id : process,
-                number_process: this.process.number_process
-            }
+          const toast =  this.$snotify.confirm('Confirmar o vinculo com o processo?', 'Confirmação', {
+                timeout: 5000,
+                showProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                buttons: [
+                    {text: 'Sim', action: () => {
+                            let params = {
+                                id : process,
+                                number_process: this.process.number_process
+                            }
 
-            this.updateProcess(params)
-                .then((resp) => {
-                    if (resp.status == '200') {
-                        this.publishedProcess({id: [this.process.id]})
-                            .then(() => {
-                                this.loadProcesses()
-                                this.close()
-                            })
-                    }
-                })
+                            this.updateProcess(params)
+                                .then((resp) => {
+                                    if (resp.status == '200') {
+                                        this.publishedProcess({id: [this.process.id]})
+                                            .then(() => {
+                                                this.loadProcesses()
+                                                this.close()
+                                            })
+                                    }
+                                })
+
+                            this.$snotify.remove(toast.id)
+
+                        }, bold: false},
+                    {text: 'Não', action: () =>  this.$snotify.remove(toast.id)},
+                ]
+            });
         },
 
         close()  {

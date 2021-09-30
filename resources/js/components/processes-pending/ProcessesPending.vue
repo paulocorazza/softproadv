@@ -1,5 +1,6 @@
 <template>
     <div>
+        <vue-snotify></vue-snotify>
         <div class="btns">
             <button @click.prevent="btnArchived" class="btn bg-dark" id="btnArchved">Arquivar Selecionados</button>
         </div>
@@ -94,10 +95,26 @@ export default {
     methods: {
         ...mapActions(['loadProcesses', 'getProcess',  'archivedProcess']),
 
-        async btnArchived() {
+        btnArchived() {
             if (this.Ids.length > 0) {
-                await this.archivedProcess({id: this.Ids})
-                this.loadProcesses()
+                const toast = this.$snotify.confirm('Confirma o arquivamento dos processos selecionados?', 'Confirmação', {
+                    timeout: 5000,
+                    showProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    buttons: [
+                        {
+                            text: 'Sim', action: () => {
+                                this.archivedProcess({id: this.Ids})
+                                    .then(() => this.loadProcesses())
+
+                                this.$snotify.remove(toast.id)
+
+                            }, bold: false
+                        },
+                        {text: 'Não', action: () => this.$snotify.remove(toast.id)},
+                    ]
+                })
             }
         },
 

@@ -26,3 +26,8 @@ Broadcast::channel('progresses.{uuid}', function ($user, $uuid) {
     return $companyUuid === $uuid;
 });
 
+Broadcast::channel('processes.{uuid}', function ($user, $uuid) {
+    $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
+    return $companyUuid === $uuid;
+});
+

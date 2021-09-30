@@ -26,6 +26,12 @@ window.Echo.private(`progresses.${window.Laravel.company}`)
         store.commit('ADD_PROGRESS', progress.progress)
     })
 
+window.Echo.private(`processes.${window.Laravel.company}`)
+    .listen('CreateProcessIntegration', function (process) {
+        console.log(process)
+        store.commit('ADD_PROCESS', process.process)
+    })
+
 
 
 

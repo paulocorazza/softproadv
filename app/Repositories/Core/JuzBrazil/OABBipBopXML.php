@@ -18,10 +18,9 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-       if ($this->hasProcess()) {
+       if ($this->hasProcesses()) {
             $this->processGenerate();
        }
-
     }
 
     private function processGenerate()
@@ -48,7 +47,7 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     /**
      * @return bool
      */
-    private function hasProcess(): bool
+    private function hasProcesses(): bool
     {
         return isset($this->xml->advogado->processos);
     }
