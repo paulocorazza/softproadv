@@ -20,13 +20,15 @@ class MonitorProgressController extends Controller
 
     public function index(Request $request, $id)
     {
-        Log::debug('Requisição do processo - ' . $id);
-
         if (!$process = Process::findOrFail($id)) {
             return response()->json('Processo não encontrado');
         }
 
         $xml = simplexml_load_string($request->getContent());
+
+        Log::debug('xml progresso', [
+            'xml do progresso ' => $xml
+        ]);
 
         $this->monitor->importXML(new ProgressBipBopXML($process, $xml->body));
 

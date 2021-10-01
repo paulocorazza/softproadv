@@ -17,7 +17,6 @@ class MonitorOABController extends Controller
     {
         Log::debug("Requisição OAB {$oab} / {$uf}");
 
-
         $xml = simplexml_load_string($request->getContent());
 
         Log::debug('getContent', [

@@ -19,10 +19,6 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-        Log::debug('XML', [
-            'xml' => $this->xml
-        ]);
-
        if ($this->hasProcesses()) {
            Log::debug('tem processos');
             $this->processGenerate();
