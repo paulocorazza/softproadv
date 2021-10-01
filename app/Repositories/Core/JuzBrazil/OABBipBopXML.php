@@ -20,7 +20,6 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     public function importXML()
     {
        if ($this->hasProcesses()) {
-           Log::debug('tem processos');
             $this->processGenerate();
        }
     }
@@ -29,8 +28,8 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     {
         foreach ($this->xml->advogado->processos as $processo) {
             $newProcess = [
-                'number_process' => $processo->numero_processo,
-                'tribunal'       => (string) $processo->tribunal_nome,
+                'number_process' => (string) $processo[0]->numero_processo,
+                'tribunal'       => (string) $processo[0]->tribunal_nome,
                 'oab'            => $this->oab,
                 'uf'             => $this->uf
             ];
