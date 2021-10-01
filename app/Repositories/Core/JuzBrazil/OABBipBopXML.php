@@ -4,6 +4,7 @@ namespace App\Repositories\Core\JuzBrazil;
 
 use App\Jobs\createMonitorProcessOAB;
 use App\Repositories\Contracts\XMLIntegrationProcessInterface;
+use Illuminate\Support\Facades\Log;
 
 class OABBipBopXML implements XMLIntegrationProcessInterface
 {
@@ -19,6 +20,7 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     public function importXML()
     {
        if ($this->hasProcesses()) {
+           Log::debug('tem processos');
             $this->processGenerate();
        }
     }
