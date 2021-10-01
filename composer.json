@@ -29,7 +29,8 @@
         "paypal/rest-api-sdk-php": "^1.14",
         "predis/predis": "^1.0",
         "spatie/laravel-google-calendar": "^3.3",
-        "yajra/laravel-datatables-oracle": "^9.7"
+        "yajra/laravel-datatables-oracle": "^9.7",
+        "ext-simplexml": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
