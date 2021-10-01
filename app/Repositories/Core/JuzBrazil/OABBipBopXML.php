@@ -10,7 +10,7 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 {
 
     public function __construct(
-        private string $xml,
+        private $xml,
         private string $oab,
         private string $uf
     )
@@ -19,9 +19,9 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-   //    if ($this->hasProcesses()) {
+       if ($this->hasProcesses()) {
             $this->processGenerate();
-    //   }
+       }
     }
 
     private function processGenerate()

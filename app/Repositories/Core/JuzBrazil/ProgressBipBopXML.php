@@ -22,7 +22,6 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-        dd($this->xml);
         $this->processesIterate();
     }
 
