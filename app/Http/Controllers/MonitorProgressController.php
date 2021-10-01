@@ -26,12 +26,7 @@ class MonitorProgressController extends Controller
 
         $xml = simplexml_load_string($request->getContent());
 
-        Log::debug('xml progresso', [
-            'xml do progresso ' => $xml
-        ]);
-
         $this->monitor->importXML(new ProgressBipBopXML($process, $xml->body));
-
 
         return response()->json('OK');
     }

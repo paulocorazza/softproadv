@@ -19,10 +19,9 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-       if ($this->hasProcesses()) {
-           Log::debug('tem processos');
+   //    if ($this->hasProcesses()) {
             $this->processGenerate();
-       }
+    //   }
     }
 
     private function processGenerate()
@@ -42,7 +41,7 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     private function createProcess(array $newProcess)
     {
         $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
-
+        Log::debug('tem processos');
         dispatch(new createMonitorProcessOAB($newProcess, $companyUuid));
     }
 

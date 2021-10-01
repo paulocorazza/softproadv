@@ -19,10 +19,6 @@ class MonitorOABController extends Controller
 
         $xml = simplexml_load_string($request->getContent());
 
-        Log::debug('getContent', [
-            'getContent' => $request->getContent()
-        ]);
-
         $this->monitor->importXML(new OABBipBopXML($xml->body, $oab, $uf));
 
         return response()->json('OK');
