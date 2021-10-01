@@ -30,12 +30,12 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     {
         foreach ($this->xml['advogado']['processos'] as $processo) {
             Log::debug('processo', [
-                'processo' => $processo
+                'processo' => $processo->numero_processo,
             ]);
 
             $newProcess = [
-                'number_process' => $processo['numero_processo'],
-                'tribunal'       => $processo['tribunal_nome'],
+                'number_process' => $processo->numero_processo,
+                'tribunal'       => $processo->tribunal_nome,
                 'oab'            => $this->oab,
                 'uf'             => $this->uf
             ];
