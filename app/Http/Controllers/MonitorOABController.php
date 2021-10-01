@@ -16,11 +16,13 @@ class MonitorOABController extends Controller
     public function index(Request $request, $oab, $uf)
     {
         Log::debug("Requisição OAB {$oab} / {$uf}");
-        Log::debug('getContent', [
-            'getContent' => $request
-        ]);
+
 
         $xml = simplexml_load_string($request->getContent());
+
+        Log::debug('getContent', [
+            'getContent' => $xml->body
+        ]);
 
         $this->monitor->importXML(new OABBipBopXML($xml->body, $oab, $uf));
 
