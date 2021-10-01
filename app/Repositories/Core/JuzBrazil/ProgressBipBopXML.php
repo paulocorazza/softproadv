@@ -107,6 +107,8 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
     {
         $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
 
+        Log::debug('create progress');
+
         dispatch(new createProgress($progress, $companyUuid));
     }
 
