@@ -22,10 +22,7 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-        Log::debug('xml dos andamentos', [
-            'xml' => $this->xml
-        ]);
-
+        dd($this->xml);
         $this->processesIterate();
     }
 
