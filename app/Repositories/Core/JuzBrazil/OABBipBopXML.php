@@ -29,9 +29,6 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     {
         foreach ($this->xml->advogado->processos as $processo) {
 
-            $json_string = json_encode($processo);
-            $processo = json_decode($json_string);
-
             Log::debug('processo', [
                $processo,
             ]);
