@@ -42,6 +42,7 @@ class createMonitorProcessOAB implements ShouldQueue
         $process = Process::where('number_process', $numberProcess)->first();
         $monitorOAB = MonitorProcess::where('number_process', $numberProcess)->first();
 
+
         if (!$process && !$monitorOAB) {
            $newMonitorOAB = MonitorProcess::create($this->process);
            broadcast(new CreateProcessIntegration($newMonitorOAB, $this->uuidCompany));
