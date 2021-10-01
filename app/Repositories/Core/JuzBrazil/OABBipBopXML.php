@@ -34,8 +34,8 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
             ]);
 
             $newProcess = [
-                'number_process' => (string) $processo->numero_processo,
-                'tribunal'       => (string) $processo->tribunal_nome,
+                'number_process' => $processo['numero_processo']->__toString(),
+                'tribunal'       => (string) $processo->tribunal_nome->__toString(),
                 'oab'            => $this->oab,
                 'uf'             => $this->uf
             ];
