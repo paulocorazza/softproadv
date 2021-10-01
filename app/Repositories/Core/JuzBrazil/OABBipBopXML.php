@@ -17,11 +17,6 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     {
         $json_string = json_encode($xml);
         $this->xml = json_decode($json_string, true);
-
-        Log::debug('xml', [
-            'xml' => $this->xml
-        ]);
-
     }
 
     public function importXML()
@@ -33,7 +28,7 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 
     private function processGenerate()
     {
-        foreach ($this->xml->advogado->processos as $processo) {
+        foreach ($this->xml['advogado']['processos'] as $processo) {
             $newProcess = [
                 'number_process' => $processo['numero_processo'],
                 'tribunal'       => $processo['tribunal_nome'],
