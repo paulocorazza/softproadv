@@ -41,7 +41,6 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     private function createProcess(array $newProcess)
     {
         $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
-        Log::debug('tem processos');
         dispatch(new createMonitorProcessOAB($newProcess, $companyUuid));
     }
 
