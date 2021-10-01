@@ -29,6 +29,10 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
     private function processGenerate()
     {
         foreach ($this->xml['advogado']['processos'] as $processo) {
+            Log::debug('processo', [
+                'processo' => $processo
+            ]);
+
             $newProcess = [
                 'number_process' => $processo['numero_processo'],
                 'tribunal'       => $processo['tribunal_nome'],
