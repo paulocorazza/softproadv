@@ -55,6 +55,7 @@
                     @endif
                 </div>
             </div>
+
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
@@ -187,6 +188,13 @@
                         <p class="text-muted">{{ $data->description}}</p>
                         <br>
                         <div class="text-muted">
+                            <p class="text-sm">Status
+                                <b class="d-block">{{ $data->status }}</b>
+                                @if($data->isCanceled())
+                                    <b class="d-block">Em: {{ $data->canceled_at_br }}</b>
+                                @endif
+                            </p>
+
                             <p class="text-sm">Cliente
                                 <b class="d-block"><a
                                         href="{{ route('people.show', $data->person_id) }}">{{ $data->person->name }}</a></b>

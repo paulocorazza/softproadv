@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Process extends Model
 {
+    use SoftDeletes;
+
     public const STATUS = [
       'Em Andamento' => 'Em Andamento',
       'Concluído'   => 'Concluído',
@@ -18,8 +20,6 @@ class Process extends Model
       'Ajuizado' => 'Ajuizado',
       'Não Ajuizado' => 'Não Ajuizado'
     ];
-
-    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -45,11 +45,12 @@ class Process extends Model
         'type_process',
         'contract',
         'monitoring',
-        'id_pusher'
+        'id_pusher',
+        'canceled_at'
     ];
 
 
-    protected $appends = ['process_person',];
+    protected $appends = ['process_person', 'canceled_at_br'];
 
     public function rules($id = '')
     {
@@ -238,6 +239,11 @@ class Process extends Model
         return Helper::formatDecimal($value, 2);
     }
 
+    public function getCanceledAtBrAttribute()
+    {
+        return Helper::formatDateTime($this->attributes['canceled_at']);
+    }
+
     public function scopeInProgress($query)
     {
         return $query->where('status', 'Em Andamento');
@@ -251,6 +257,11 @@ class Process extends Model
     public function hasPusher()
     {
         return !empty($this->id_pusher);
+    }
+
+    public function isCanceled()
+    {
+        return $this->status == self::STATUS['Cancelado'];
     }
 
 }
