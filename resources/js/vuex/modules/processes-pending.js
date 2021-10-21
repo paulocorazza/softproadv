@@ -1,6 +1,7 @@
 export default {
     state: {
         items: [],
+        states: []
     },
 
     mutations: {
@@ -10,12 +11,20 @@ export default {
 
         ADD_PROCESS(state, progress) {
             state.items.unshift(progress)
+        },
+
+        LOAD_STATES(state, states) {
+            state.states = states
         }
     },
 
     getters: {
         allProcesses(state) {
             return state.items
+        },
+
+        allStates(state) {
+            return state.states
         }
     },
 
@@ -24,6 +33,13 @@ export default {
             axios.get('/monitor/processes')
                 .then(response => {
                     context.commit('LOAD_PROCESSES', response.data)
+                })
+        },
+
+        loadStates(context) {
+            axios.get('/all-states-monitors')
+                .then(response => {
+                    context.commit('LOAD_STATES', response.data)
                 })
         },
 
@@ -47,7 +63,10 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.put(`/processes/${params.id}/sync`, params)
                     .then(response => resolve(response))
-                    .catch(error => reject(error))
+                    .catch((error) =>  {
+                        reject(error)
+
+                    })
             })
         },
 
@@ -57,7 +76,16 @@ export default {
 
         archivedProcess(context, params) {
             axios.post('/monitor/processes/archived', params)
-        }
+        },
+
+        startMonitorOAB(context, params) {
+            return new Promise((resolve, reject) => {
+                axios.post('/monitor/oab/create', params)
+                    .then(response => resolve(response))
+                    .catch(error => reject(error.response.data.errors))
+            })
+        },
+
     }
 
 }

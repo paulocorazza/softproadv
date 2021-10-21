@@ -73,7 +73,7 @@ export default {
                 concluded: false,
                 category: '',
                 process: {
-                    number_process : '',
+                    number_process: '',
                     person: {
                         name: ''
                     }
@@ -105,9 +105,11 @@ export default {
                         {
                             text: 'Sim', action: () => {
                                 this.published({id: this.Ids})
-                                    .then(() => this.loadProgresses())
+                                    .then(() => {
+                                        this.$snotify.remove(toast.id)
+                                        this.loadProgresses()
+                                    })
 
-                                this.$snotify.remove(toast.id)
 
                             }, bold: false
                         },
@@ -129,8 +131,12 @@ export default {
                         {
                             text: 'Sim', action: () => {
                                 this.archived({id: this.Ids})
-                                    .then(() => this.loadProgresses())
-                                this.$snotify.remove(toast.id)
+                                    .then(() => {
+                                            this.$snotify.remove(toast.id)
+                                            this.loadProgresses()
+                                        }
+                                    )
+
                             }, bold: false
                         },
                         {text: 'Não', action: () => this.$snotify.remove(toast.id)},
@@ -152,12 +158,12 @@ export default {
             this.allSelected = false;
         },
 
-         detail(id) {
-             this.getProgress(id)
-             .then((response) => {
-                 this.progress = response.data
-                 this.showModal = true
-             })
+        detail(id) {
+            this.getProgress(id)
+                .then((response) => {
+                    this.progress = response.data
+                    this.showModal = true
+                })
 
         },
 

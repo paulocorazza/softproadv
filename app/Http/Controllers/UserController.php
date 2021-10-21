@@ -49,8 +49,6 @@ class UserController extends ControllerStandard
 
     public function create()
     {
-
-
         $title = "Cadastrar {$this->title}";
 
         $type_addresses = $this->typeAddress->get();

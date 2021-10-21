@@ -5,12 +5,13 @@ namespace App\Repositories\Core\JuzBrazil;
 use App\Jobs\createProgress;
 use App\Models\Process;
 use App\Models\ProcessProgress;
-use App\Repositories\Contracts\XMLIntegrationProcessInterface;
+use App\Repositories\Contracts\XMLImportInterface;
+use App\Repositories\Core\JuzBrazil\Record\ProgressRecord;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 
-class ProgressBipBopXML implements XMLIntegrationProcessInterface
+class ProgressBipBopXML implements XMLImportInterface
 {
 
     public function __construct(
@@ -45,18 +46,16 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
             $data = (string) $progress->data;
             $data = Carbon::createFromFormat('d/m/Y', $data)->format('Y-m-d');
 
-            $newProgress = [
-                'process_id' => $this->process->id,
-                'publication' => (string) $progress->descricao,
-                'date' => $data,
-                'data_hash' => $this->getDataHash($progress),
-                'type' => $this->getType($progress),
-                'description' => $this->getDescription($progress),
-                'concluded' => false,
-                'category'  => $this->getCategory($progress)
-            ];
-
-            $this->createProgress($newProgress);
+            $this->createProgress(new ProgressRecord(
+                process_id: $this->process->id,
+                publication: (string) $progress->descricao,
+                date: $data,
+                data_hash: $this->getDataHash($progress),
+                type: $this->getType($progress),
+                description: $this->getDescription($progress),
+                concluded: false,
+                category: $this->getCategory($progress)
+            ));
         }
     }
 
@@ -103,7 +102,7 @@ class ProgressBipBopXML implements XMLIntegrationProcessInterface
         return (string) $progress->attributes()['categoria'];
     }
 
-    private function createProgress(array $progress)
+    private function createProgress(ProgressRecord $progress)
     {
         $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
 

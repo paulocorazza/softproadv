@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Company;
 use App\Models\Process;
 use App\Repositories\Core\JuzBrazil\BipBop;
-use App\Services\MonitorProgressService;
+use App\Services\MonitorPusherService;
 use App\Tenant\ManagerTenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -29,7 +29,7 @@ class ExampleTest extends TestCase
 
         $manager->setConnectionMain();
 
-        $monitor = new MonitorProgressService(new BipBop());
+        $monitor = new MonitorPusherService(new BipBop());
 
         $xml = $monitor->importProgressesFromDocument($process);
 

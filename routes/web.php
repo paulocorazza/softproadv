@@ -85,8 +85,6 @@ Route::group(['namespace' => 'Site'], function () {
 
 
 
-
-
 /*     * ************************************************ */
 /*     * *************      SYSTEM      ***************** */
 /*     * ************************************************ */
@@ -139,6 +137,8 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * *************      USERS      ***************** */
     /*     * ************************************************ */
+    Route::get('all-states-monitors', 'ExtraAction\StateMonitorController');
+
     Route::get('users/{id}/monitors', 'UserController@monitors')->name('users.monitors');
     Route::get('users/{id}/monitors/register', 'UserController@listStatesAdd')->name('users.monitors.list');
     Route::post('users/{id}/monitors/register', 'UserController@userAddStates')->name('users.monitors.add');
@@ -295,21 +295,19 @@ Route::group(['middleware' => 'auth'], function () {
     /*     * ************************************************ */
     /*     * ************  PROCESS MONITOR  ***************** */
     /*     * ************************************************ */
+    Route::post('monitor/oab/create', [MonitorOABController::class, 'createPusherOabByStates']);
     Route::get('monitor/processes', [MonitorOABController::class, 'processes']);
     Route::get('monitor/processes/{id}', [MonitorOABController::class, 'show']);
     Route::post('monitor/processes/archived', [MonitorOABController::class, 'archived'])->name('monitor.process.archived');
     Route::post('monitor/processes/published', [MonitorOABController::class, 'published'])->name('monitor.process.published');
-
 
     Route::get('monitor/progresses', [MonitorProgressController::class, 'progresses'])->name('monitor.progresses');
     Route::post('monitor/progresses/published', [MonitorProgressController::class, 'published'])->name('monitor.published');
     Route::post('monitor/progresses/archived', [MonitorProgressController::class, 'archived'])->name('monitor.archived');
     Route::post('monitor/progresses/{id}', [MonitorProgressController::class, 'update']);
 
-
-
-    Route::get('processes/{process}/monitor/start', [MonitorProgressController::class, 'start'])->name('processes.monitor.start');
-    Route::get('processes/{process}/monitor/stop', [MonitorProgressController::class, 'stop'])->name('processes.monitor.stop');
+    Route::post('processes/{process}/monitor/start', [MonitorProgressController::class, 'start'])->name('processes.monitor.start');
+    Route::post('processes/{process}/monitor/stop', [MonitorProgressController::class, 'stop'])->name('processes.monitor.stop');
     Route::get('processes/{process}/monitor/delete', [MonitorProgressController::class, 'delete'])->name('processes.monitor.delete');
     Route::get('processes/{process}/monitor/cnj', [MonitorProgressController::class, 'searchCNJ'])->name('processes.monitor.cnj');
     Route::get('processes/{process}/monitor/document', [MonitorProgressController::class, 'document'])->name('processes.monitor.document');

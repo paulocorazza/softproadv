@@ -32,19 +32,25 @@
                 <div class="card-tools">
                     @if($data->monitoring == true)
                         @can('monitor_stop')
-                            <a type="button" class="btn btn-danger text-white"
-                               href="{{ route('processes.monitor.stop', $data->id)  }}">
-                                <i class="fas fa-stop-circle"></i>
-                                Monitorando
-                            </a>
+                            <form action="{{route('processes.monitor.stop', $data->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                <button type="submit" class="btn btn-danger text-white">
+                                    <i class="fas fa-stop-circle"></i>
+                                    Monitorando
+                                </button>
+                            </form>
                         @endcan
                     @else
                         @can('monitor_start')
-                            <a type="button" class="btn btn-info"
-                               href="{{ route('processes.monitor.start', $data->id)  }}">
-                                <i class="fas fa-play-circle"></i>
-                                Monitorar
-                            </a>
+                             <form action="{{route('processes.monitor.start', $data->id)}}" method="post">
+                                 @csrf
+                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                <button type="submit" class="btn btn-danger text-white">
+                                    <i class="fas fa-play-circle"></i>
+                                    Monitorar
+                                </button>
+                            </form>
                         @endcan
                     @endif
                 </div>

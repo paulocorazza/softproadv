@@ -22,7 +22,7 @@ class CreateUserStateMonitor
      */
     public function __construct(
         public UserStateMonitor $stateMonitor,
-        public ?array $company
+        public string $tokenJusBrazil
     )
     {
         //

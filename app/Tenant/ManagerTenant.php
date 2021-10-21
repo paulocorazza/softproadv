@@ -25,10 +25,14 @@ class ManagerTenant
 
     public function getCompany() : Company
     {
-        return Company::where('subdomain', '=', $this->subDomain())->first();
+        return Company::with('plan')->where('subdomain', '=', $this->subDomain())->first();
     }
 
+    public function getTokenJuzBrazil()
+    {
+        return session()->has('company') ? session('company')['token_juzbrazil'] : config('jusbrazil.token');
 
+    }
 
     public function setConnection($company)
     {

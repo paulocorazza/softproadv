@@ -18,10 +18,6 @@ use PayPal\Exception\PayPalConnectionException;
 
 class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
 {
-    /*     * ************************************************ */
-    /*     * ************* METODOS PRIVADOS ***************** */
-    /*     * ************************************************ */
-
     /**
      * @param $id
      * @return Plan
@@ -73,7 +69,7 @@ class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
 
         $agreement->setPlan($this->plan($id));
         $agreement->setPayer($this->payer());
-       // $agreement->setShippingAddress($this->shippingAddress());
+      //  $agreement->setShippingAddress($this->shippingAddress());
 
         $agreement = $agreement->create($this->apiContext);
 
@@ -103,11 +99,13 @@ class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
         try {
 
             $url_paypal = $this->agreement($id);
+            $token = $this->getTokenPayment($url_paypal);
 
             return [
                 'status'     => true,
                 'url_paypal' => $url_paypal,
-                'identify'   => $this->identify
+                'identify'   => $this->identify,
+                'token'      => $token
             ];
 
         } catch (PayPalConnectionException  $ex) {
@@ -151,17 +149,24 @@ class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
         return $agreement;
     }
 
-    public function updateCompany(Company $company, $id)
+    public function updateCompany(Company $company, array $agreement)
     {
-        $plan = \App\Models\Plan::where('key_paypal', $id)->first();
+        $plan = \App\Models\Plan::where('key_paypal', $agreement['id'])->first();
 
         $company->identify =  $this->identify;
         $company->plan_id = $plan->id;
+        $company->token_payment = $agreement['token'];
         $company->save();
 
         return [
             'status' => true
         ];
+    }
+
+    private function getTokenPayment(string $url_paypal) : string
+    {
+        $url = explode('&token=', $url_paypal);
+        return $url[1];
     }
 
 

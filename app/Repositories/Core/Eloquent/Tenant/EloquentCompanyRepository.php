@@ -23,15 +23,6 @@ class EloquentCompanyRepository extends BaseEloquentRepository
     implements CompanyRepositoryInterface
 
 {
-    /*     * ************************************************ */
-    /*     * ************* METODOS PRIVADOS ***************** */
-    /*     * ************************************************ */
-
-
-    /*     * ************************************************ */
-    /*     * ************* METODOS PUBLICOS ***************** */
-    /*     * ************************************************ */
-
     /**
      * @return string
      */
@@ -42,29 +33,15 @@ class EloquentCompanyRepository extends BaseEloquentRepository
 
     public function create(array $data)
     {
-        DB::beginTransaction();
+        $company = parent::create($data);
 
-        try {
+        $this->createDNSCloudFlare($company);
 
-            $company = parent::create($data);
+        $createDataBase = ($data['create_database']) ? true : false;
 
-            $this->createDNSCloudFlare($company);
+        $this->databaseGenerator($company, $createDataBase);
 
-            $createDataBase = ($data['create_database']) ? true : false;
-
-            $this->databaseGenerator($company, $createDataBase);
-
-            DB::commit();
-
-            return $company;
-        } catch (\Exception $e) {
-
-            dd($e);
-            DB::rollBack();
-
-            redirect()->back()
-                ->withErrors('Erro ao criar a empresa: ' . $e->getMessage());
-        }
+        return $company;
     }
 
 

@@ -27,7 +27,7 @@ class TenantGoogleCalendarConfig
 
     private function setConfig()
     {
-        $path =  config('filesystems.disks.tenant.root')  . '/' . Auth::user()->google_service_account_credentials;
+        $path = storage_path('app/public/tenants') . '/' . Auth::user()->google_service_account_credentials;
 
         config()->set([
             'google-calendar.auth_profiles.service_account.credentials_json' => $path,

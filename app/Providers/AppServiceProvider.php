@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Company;
 use App\Models\Event;
 use App\Models\EventUsers;
 use App\Models\Process;
@@ -9,6 +10,7 @@ use App\Models\ProcessProgress;
 use App\Models\ProcessUsers;
 use App\Models\User;
 use App\Models\UserStateMonitor;
+use App\Observers\CompanyObserver;
 use App\Observers\EventObserver;
 use App\Observers\EventUsersObserver;
 use App\Observers\ProcessObserver;
@@ -67,12 +69,13 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Observers
          */
+        Company::observe(CompanyObserver::class);
         User::observe(UserObserver::class);
         Event::observe(EventObserver::class);
         EventUsers::observe(EventUsersObserver::class);
         Process::observe(ProcessObserver::class);
         ProcessUsers::observe(ProcessUsersObserver::class);
         ProcessProgress::observe(ProgressObserver::class);
-        UserStateMonitor::observe(UserStateMonitorObserver::class);
+       // UserStateMonitor::observe(UserStateMonitorObserver::class);
     }
 }

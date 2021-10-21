@@ -138,9 +138,9 @@ class PlanController extends Controller
     {
         $plans = $this->repository
                       ->relationships('plan_details')
-                      ->where('state_paypal', '=', 'active');
+                      ->where('state_paypal', '=', 'active')->get();
 
-        return view('plans', compact('plans'));
+        return view('site.plans', compact('plans'));
     }
 
     /**

@@ -96,9 +96,7 @@ class PersonController extends ControllerStandard
             'contacts'
         ])->find($id);
 
-
         $data->type_person = json_decode($data->type_person);
-
 
         $title = "Detalhes {$this->title}: {$data->name}";
 
@@ -122,9 +120,7 @@ class PersonController extends ControllerStandard
             'contacts'
         ])->find($id);
 
-
         $data->type_person = json_decode($data->type_person);
-
 
         $title = "Editar {$this->title}: {$data->name}";
 

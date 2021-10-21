@@ -42,8 +42,8 @@ class AgreementPlanRepository implements AgreementRepositoryInterface
         return $this->agreement->detailAgreement($id);
     }
 
-    public function updateCompany(Company $company, $id)
+    public function updateCompany(Company $company, $agreement)
     {
-       return $this->agreement->updateCompany($company, $id);
+       return $this->agreement->updateCompany($company, $agreement);
     }
 }

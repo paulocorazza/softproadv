@@ -2,24 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PusherOABRequest;
 use App\Repositories\Core\JuzBrazil\OABBipBopXML;
-use App\Services\MonitorProgressService;
+use App\Services\ImportXmlService;
+use App\Services\MonitorPusherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class MonitorOABController extends Controller
 {
-    public function __construct(private MonitorProgressService $monitor)
+    public function __construct(
+        private MonitorPusherService $monitor,
+        private ImportXmlService $importXmlService
+    )
     {
     }
 
     public function index(Request $request, $oab, $uf)
     {
-        Log::debug("Requisição OAB {$oab} / {$uf}");
-
         $xml = simplexml_load_string($request->getContent());
 
-        $this->monitor->importXML(new OABBipBopXML($xml->body, $oab, $uf));
+        $this->importXmlService->import(new OABBipBopXML($xml->body, $oab, $uf));
+
+        return response()->json('OK');
+    }
+
+    public function createPusherOabByStates(PusherOABRequest $request)
+    {
+        $states = $request->get('ids');
+
+        $this->monitor->createPusherOabByStates($states);
 
         return response()->json('OK');
     }

@@ -20,40 +20,40 @@
     <!--== bootstrap -->
 
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    <link href="assets/site/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== animate -->
-    <link href="assets/site/css/animate.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/animate.css') }} " rel="stylesheet" type="text/css"/>
 
     <!--== fontawesome -->
-    <link href="assets/site/css/fontawesome-all.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== line-awesome -->
-    <link href="assets/site/css/line-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/line-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== magnific-popup -->
-    <link href="assets/site/css/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== owl-carousel -->
-    <link href="assets/site/css/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/owl-carousel/owl.carousel.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== base -->
-    <link href="assets/site/css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/base.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== shortcodes -->
-    <link href="assets/site/css/shortcodes.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/shortcodes.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== default-theme -->
-    <link href="assets/site/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/style.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== responsive -->
-    <link href="assets/site/css/responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/responsive.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== responsive -->
-    <link href="assets/site/css/responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/site/css/responsive.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--== color-customizer -->
-    <link href="assets/site/css/theme-color/color-5.css" data-style="styles" rel="stylesheet">
+    <link href="{{ asset('assets/site/css/theme-color/color-5.css') }}" data-style="styles" rel="stylesheet">
 
     <!-- inject css end -->
 
@@ -102,35 +102,35 @@
 <!-- inject js start -->
 
 <!--== jquery -->
-<script src="assets/site/js/theme.js"></script>
+<script src="{{ asset('assets/site/js/theme.js') }} "></script>
 
 <!--== owl-carousel -->
-<script src="assets/site/js/owl-carousel/owl.carousel.min.js"></script>
+<script src="{{ asset('assets/site/js/owl-carousel/owl.carousel.min.js') }}"></script>
 
 <!--== magnific-popup -->
-<script src="assets/site/js/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="{{ asset('assets/site/js/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 
 <!--== counter -->
-<script src="assets/site/js/counter/counter.js"></script>
+<script src="{{ asset('assets/site/js/counter/counter.js') }}"></script>
 
 <!--== countdown -->
-<script src="assets/site/js/countdown/jquery.countdown.min.js"></script>
+<script src="{{ asset('assets/site/js/countdown/jquery.countdown.min.js') }}"></script>
 
 <!--== canvas -->
-<script src="assets/site/js/canvas.js"></script>
+<script src="{{ asset('assets/site/js/canvas.js') }}"></script>
 
 <!--== confetti -->
-<script src="assets/site/js/confetti.js"></script>
+<script src="{{ asset('assets/site/js/confetti.js') }}"></script>
 
 <!--== step animation -->
-<script src="assets/site/js/snap.svg.js"></script>
-<script src="assets/site/js/step.js"></script>
+<script src="{{ asset('assets/site/js/snap.svg.js') }}"></script>
+<script src="{{ asset("assets/site/js/step.js") }}"></script>
 
 <!--== wow -->
-<script src="assets/site/js/wow.min.js"></script>
+<script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
 
 <!--== theme-script -->
-<script src="assets/site/js/theme-script.js"></script>
+<script src="{{ asset('assets/site/js/theme-script.js') }}"></script>
 
 @yield('java-script')
 

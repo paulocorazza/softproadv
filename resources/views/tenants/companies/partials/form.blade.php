@@ -92,7 +92,7 @@
            value="{{ $company->db_password ?? old('db_password') }}" id="db_password">
 </div>
 
-
+@if (isset($company))
     <div class="form-group">
         {!! Form::label('token_juzbrazil', 'Token Juz Brasil', ['class' => 'control-label']); !!}
 
@@ -107,7 +107,10 @@
             </div>
             @include('tenants.includes.load')
         </div>
-</div>
+    </div>
+@endif
+
+
 
 @if (!isset($company))
     <div class="form-group">

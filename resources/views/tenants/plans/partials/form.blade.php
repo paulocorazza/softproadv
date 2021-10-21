@@ -35,7 +35,7 @@
 
     <div class="col-md-4 form-group">
         {!! Form::label('cycles', 'Ciclos', ['class' => 'control-label']); !!}
-        {!! Form::text('cycles', null, ['class' => 'form-control', 'placeholder' => 'Ciclos']) !!}
+        {!! Form::select('cycles', ['0' => 'Infinito', '1' => 'Fixo'], null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -48,7 +48,9 @@
             'aria-label' =>"Key PayPal", 'aria-describedby' => "basic-addon2"]) !!}
 
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="btnKeyPayPal" data-id="{{ $plan->id }}">Gerar Key-PayPal</button>
+                <button class="btn btn-outline-secondary" type="button" id="btnKeyPayPal" data-id="{{ $plan->id }}">
+                    Gerar Key-PayPal
+                </button>
             </div>
             @include('tenants.includes.load')
         </div>
@@ -58,6 +60,26 @@
 @endif
 
 <br>
+
+
+<div class="card card-blue">
+    <div class="card-header">
+        <h3 class="card-title">Monitoramento</h3>
+    </div>
+    <div class="card-body">
+        <div class="row form-group">
+            <div class="col-md-4 form-group">
+                {!! Form::label('oab_count_search', 'Número de consultas OAB / Mês', ['class' => 'control-label']); !!}
+                {!! Form::number('oab_count_search', null, ['class' => 'form-control', 'placeholder' => ' ']) !!}
+            </div>
+
+            <div class="col-md-4 form-group">
+                {!! Form::label('processes_count_search', 'Número de processos monitorados', ['class' => 'control-label']); !!}
+                {!! Form::number('processes_count_search', null, ['class' => 'form-control', 'placeholder' => ' ']) !!}
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="card card-danger">

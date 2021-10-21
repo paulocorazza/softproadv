@@ -1,8 +1,9 @@
 <template>
     <div>
         <vue-snotify></vue-snotify>
-        <div class="btns">
+        <div class="btns d-flex justify-content-between">
             <button @click.prevent="btnArchived" class="btn bg-dark" id="btnArchved">Arquivar Selecionados</button>
+            <button @click.prevent="btnSearchProcess" class="btn bg-primary" id="btnArchved">Buscar Processos</button>
         </div>
 
         <vodal :show="showFormCreate"
@@ -27,6 +28,17 @@
                 @hideList="hideModalProcess"
             >
             </process-list>
+        </vodal>
+
+        <vodal :show="showStates"
+               animation="zoom"
+               @hide="hideModalStates"
+               :width="800"
+               :height="400">
+            <states-monitor
+                @hideMonitorStates="hideModalStates"
+            >
+            </states-monitor>
         </vodal>
 
         <table id="tabela" class="table table-hover  table-responsive-sm" style="width:100%">
@@ -72,6 +84,7 @@ export default {
             Ids: [],
             showFormCreate: false,
             showProcesses: false,
+            showStates : false,
             process: {
                 id: '',
                 created_at_br: '',
@@ -93,7 +106,12 @@ export default {
     },
 
     methods: {
-        ...mapActions(['loadProcesses', 'getProcess',  'archivedProcess']),
+        ...mapActions(['loadProcesses', 'loadStates', 'getProcess',  'archivedProcess']),
+
+        btnSearchProcess() {
+            this.loadStates()
+            this.showStates = true
+        },
 
         btnArchived() {
             if (this.Ids.length > 0) {
@@ -153,6 +171,10 @@ export default {
 
         hideModalProcess() {
             this.showProcesses = false
+        },
+
+        hideModalStates() {
+            this.showStates = false
         }
     },
 

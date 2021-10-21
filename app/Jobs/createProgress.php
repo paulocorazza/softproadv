@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Events\CreateProgressIntegration;
 use App\Models\ProcessProgress;
+use App\Repositories\Core\JuzBrazil\Record\ProgressRecord;
 use GuzzleHttp\Client;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
@@ -23,7 +24,7 @@ class createProgress implements ShouldQueue
      * @return void
      */
     public function __construct(
-        private array $progress,
+        private ProgressRecord $progress,
         private string $uuidCompany)
     {
         //
@@ -36,8 +37,8 @@ class createProgress implements ShouldQueue
      */
     public function handle()
     {
-        if (!ProcessProgress::where('data_hash', $this->progress['data_hash'])->first()) {
-            $progress = ProcessProgress::create($this->progress);
+        if (!ProcessProgress::where('data_hash', $this->progress->getDataHash())->first()) {
+            $progress = ProcessProgress::create($this->progress->toArray());
 
             $progress = $progress->load('process.person');
 

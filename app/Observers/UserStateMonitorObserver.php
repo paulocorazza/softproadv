@@ -4,17 +4,14 @@ namespace App\Observers;
 
 use App\Events\CreateUserStateMonitor;
 use App\Models\UserStateMonitor;
+use App\Tenant\ManagerTenant;
 
 class UserStateMonitorObserver
 {
     public function created(UserStateMonitor $stateMonitor)
     {
-        $company = [];
+       $manager = app(ManagerTenant::class);
 
-        if (session()->has('company')) {
-            $company = session('company');
-        }
-
-        event(new CreateUserStateMonitor($stateMonitor, $company));
+       event(new CreateUserStateMonitor($stateMonitor, $manager->getTokenJuzBrazil()));
     }
 }

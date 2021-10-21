@@ -3,14 +3,15 @@
 namespace App\Repositories\Core\JuzBrazil;
 
 use App\Jobs\createMonitorProcessOAB;
-use App\Repositories\Contracts\XMLIntegrationProcessInterface;
-use Illuminate\Support\Facades\Log;
+use App\Repositories\Contracts\XMLImportInterface;
+use App\Repositories\Core\JuzBrazil\Record\ProcessOABRecord;
 
-class OABBipBopXML implements XMLIntegrationProcessInterface
+
+class OABBipBopXML implements XMLImportInterface
 {
 
     public function __construct(
-        private $xml,
+        private        $xml,
         private string $oab,
         private string $uf
     )
@@ -20,30 +21,28 @@ class OABBipBopXML implements XMLIntegrationProcessInterface
 
     public function importXML()
     {
-       if ($this->hasProcesses()) {
+        if ($this->hasProcesses()) {
             $this->processGenerate();
-       }
+        }
     }
 
     private function processGenerate()
     {
         foreach ($this->xml->advogado->processos->processo as $processo) {
-            $newProcess = [
-                'number_process' => (string) $processo->numero_processo,
-                'tribunal'       => (string) $processo->tribunal_nome,
-                'oab'            => $this->oab,
-                'uf'             => $this->uf
-            ];
-
-            $this->createProcess($newProcess);
+            $this->createProcess(new ProcessOABRecord(
+                number_process: (string) $processo->numero_processo,
+                tribunal: (string) $processo->tribunal_nome,
+                oab: $this->oab,
+                uf: $this->uf
+            ));
         }
     }
 
-    private function createProcess(array $newProcess)
+    private function createProcess(ProcessOABRecord $processOABRecord)
     {
         $companyUuid = session()->has('company') ? session('company')['uuid'] : '';
 
-        dispatch(new createMonitorProcessOAB($newProcess, $companyUuid));
+        dispatch(new createMonitorProcessOAB($processOABRecord, $companyUuid));
     }
 
     /**

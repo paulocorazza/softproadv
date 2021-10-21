@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Process;
-use App\Services\MonitorProgressService;
+use App\Services\MonitorPusherService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -19,7 +19,7 @@ class SendXMLBipBop extends TestCase
     {
         $process = Process::find(90);
 
-        $monitor = new MonitorProgressService();
+        $monitor = new MonitorPusherService();
 
         $xml = $monitor->importProgressesFromDocument($process);
 

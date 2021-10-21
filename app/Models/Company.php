@@ -21,6 +21,7 @@ class Company extends Model
         'qtd_processes',
         'email',
         'payment_status',
+        'token_payment',
         'subdomain',
         'db_database',
         'db_host',
@@ -56,7 +57,7 @@ class Company extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function Plan()
+    public function plan()
     {
         return $this->belongsTo(Plan::class);
     }

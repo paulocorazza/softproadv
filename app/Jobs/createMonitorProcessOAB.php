@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Events\CreateProcessIntegration;
 use App\Models\MonitorProcess;
 use App\Models\Process;
+use App\Repositories\Core\JuzBrazil\Record\ProcessOABRecord;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -23,7 +24,7 @@ class createMonitorProcessOAB implements ShouldQueue
      * @return void
      */
     public function __construct(
-        private array $process,
+        private ProcessOABRecord $process,
         private string $uuidCompany)
     {
         //
@@ -37,14 +38,14 @@ class createMonitorProcessOAB implements ShouldQueue
      */
     public function handle()
     {
-        $numberProcess =  $this->process['number_process'];
+        $numberProcess =  $this->process->getNumberProcess();
 
         $process = Process::where('number_process', $numberProcess)->first();
         $monitorOAB = MonitorProcess::where('number_process', $numberProcess)->first();
 
 
         if (!$process && !$monitorOAB) {
-           $newMonitorOAB = MonitorProcess::create($this->process);
+           $newMonitorOAB = MonitorProcess::create($this->process->toArray());
            broadcast(new CreateProcessIntegration($newMonitorOAB, $this->uuidCompany));
         }
     }

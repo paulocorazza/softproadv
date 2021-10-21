@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class RunMigrationsTenant
+class RunMigrationsTenant implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -41,14 +41,7 @@ class RunMigrationsTenant
 
 
         if ($migration === 0) {
-            //usuário será criado no momento em que for propagado o dns do subdominio
-/*            $password = Str::random(8);
-
-            $this->createUser($company, $password);*/
-
             $this->createLocations();
-
-            //Mail::to($company->email)->send(new SendMailCompany($company, $password));
         }
 
 

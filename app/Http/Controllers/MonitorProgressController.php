@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StartMonitorProcessRequest;
 use App\Models\Process;
 use App\Models\ProcessProgress;
 use App\Repositories\Core\JuzBrazil\ProgressBipBopXML;
-use App\Services\MonitorProgressService;
+use App\Services\ImportXmlService;
+use App\Services\MonitorPusherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class MonitorProgressController extends Controller
 {
-    public function __construct(private MonitorProgressService $monitor)
+    public function __construct(
+        private MonitorPusherService $monitor,
+        private ImportXmlService $importXmlService
+    )
     {
         $this->middleware('can:monitor_start')->only(['start']);
         $this->middleware('can:monitor_stop')->only(['stop']);
@@ -26,7 +31,8 @@ class MonitorProgressController extends Controller
 
         $xml = simplexml_load_string($request->getContent());
 
-        $this->monitor->importXML(new ProgressBipBopXML($process, $xml->body));
+        $this->importXmlService->import(new ProgressBipBopXML($process, $xml->body));
+        $this->monitor->createLogMonitor(oab: null, uf: null, process: $process);
 
         return response()->json('OK');
     }
@@ -37,13 +43,12 @@ class MonitorProgressController extends Controller
             return response()->json($this->monitor->getProgresses());
         }
 
-
         return view('tenants.monitor.progresses');
     }
 
-    public function start(Process $process)
+    public function start(StartMonitorProcessRequest $request, Process $process)
     {
-        $monitor = $this->monitor->startMonitorProcess($process);
+       $monitor = $this->monitor->startMonitorProcess($process);
 
         if ($monitor) {
             return redirect()->back()

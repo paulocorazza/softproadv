@@ -72,7 +72,8 @@ class TenantMiddleware
                 'name',
                 'uuid',
                 'subdomain',
-                'token_juzbrazil'
+                'token_juzbrazil',
+                'plan'
             ]));
 
 

@@ -21,9 +21,6 @@ class PayPalSubscription extends PayPal implements SubscriptionRepositoryInterfa
     protected $plano;
     protected $type;
 
-    /*     * ************************************************ */
-    /*     * ************* METODOS PRIVADOS ***************** */
-    /*     * ************************************************ */
     /**
      * @return Plan
      */

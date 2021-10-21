@@ -150,7 +150,6 @@ class CompanyController extends Controller
         if($company = $this->repository->find($request->get('id'))) {
             $token = $monitor->createApiKey($company);
 
-
             return response()->json($token);
         }
     }

@@ -22,6 +22,7 @@ Vue.component('progressForm', require('./components/progresses-pending/ProgressF
 Vue.component('processPending', require('./components/processes-pending/ProcessesPending.vue').default)
 Vue.component('processForm', require('./components/processes-pending/ProcessForm.vue').default)
 Vue.component('processList', require('./components/processes-pending/ProcessList.vue').default)
+Vue.component('statesMonitor', require('./components/processes-pending/StatesMonitor.vue').default)
 
 Vue.component(Vodal.name, Vodal);
 
