@@ -17,6 +17,7 @@ use App\Repositories\Contracts\FinancialCategoryRepositoryInterface;
 use App\Repositories\Contracts\FinancialRepositoryInterface;
 use App\Repositories\Contracts\ForumRepositoryInterface;
 use App\Repositories\Contracts\GroupActionRepositoryInterface;
+use App\Repositories\Contracts\MeetRepositoryInterface;
 use App\Repositories\Contracts\MonitorInterface;
 use App\Repositories\Contracts\OriginRepositoryInterface;
 use App\Repositories\Contracts\PermissionRepositoryInterface;
@@ -49,6 +50,7 @@ use App\Repositories\Core\Eloquent\Tenant\EloquentFinancialCategoryRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentFinancialRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentForumRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentGroupActionRepository;
+use App\Repositories\Core\Eloquent\Tenant\EloquentMeetRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentOriginRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPermissionRepository;
 use App\Repositories\Core\Eloquent\Tenant\EloquentPersonRepository;
@@ -214,5 +216,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(MonitorInterface::class,
         BipBop::class);
 
+        $this->app->bind(MeetRepositoryInterface::class,
+        EloquentMeetRepository::class);
     }
 }

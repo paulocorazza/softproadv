@@ -78,7 +78,7 @@
         <div class="form-group">
             {!! Form::select('status', \App\Models\Process::STATUS, isset($data) ? $data->status : 'Em Andamento' , ['placeholder' => '', 'class' => 'form-control', 'id' => 'status']) !!}
 
-            @if($data->isCanceled())
+            @if(isset($data) && $data->isCanceled())
                 <span>Cancelado em: {{ $data->canceled_at_br }}</span>
             @endif
         </div>

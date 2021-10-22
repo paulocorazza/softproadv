@@ -244,6 +244,14 @@ return [
             'can' => 'events'
         ],
 
+        [
+            'text' => 'Atendimentos',
+            'url' => 'meets',
+            'icon' => 'fas fa-handshake',
+            'label_color' => 'success',
+            'can' => 'meets'
+        ],
+
 
         [
             'text' => 'Financeiro',

@@ -204,6 +204,13 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'monitor_delete',        'label' => 'Excluir o monitoramento de um processo'],
             ['name' => 'monitor_progress',      'label' => 'Menu de monitoramento de andamentos'],
             ['name' => 'monitor_oab',           'label' => 'Menu de monitoramento de OAB'],
+
+            /** MEETS */
+            ['name' => 'meets',       'label' => 'Gestão de Atendimentos'],
+            ['name' => 'create_meet', 'label' => 'Criar uma novo Atendimento'],
+            ['name' => 'update_meet', 'label' => 'Alterar um Atendimento'],
+            ['name' => 'view_meet',   'label' => 'Visualizar um Atendimento'],
+            ['name' => 'delete_meet', 'label' => 'Excluir um Atendimento'],
         ]);
     }
 }
