@@ -109,6 +109,7 @@ class PayPalAgreement extends PayPal implements AgreementRepositoryInterface
             ];
 
         } catch (PayPalConnectionException  $ex) {
+            dd($ex->getMessage(), $ex->getTraceAsString());
             return [
                 'status'    => false,
                 'message'   => $ex->getMessage()
